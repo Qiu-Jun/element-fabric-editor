@@ -1,8 +1,8 @@
 <!--
  * @Author: 秦少卫
  * @Date: 2024-05-11 13:23:48
- * @LastEditors: 秦少卫
- * @LastEditTime: 2024-05-30 18:49:59
+ * @LastEditors: June
+ * @LastEditTime: 2024-07-24 20:24:38
  * @Description: 文件名称
 -->
 
@@ -32,7 +32,6 @@ import { useRoute, useRouter } from 'vue-router'
 import useSelect from '@/hooks/select'
 import { getTmplList } from '@/api/user'
 
-// const APIHOST = import.meta.env.APP_APIHOST;
 import qs from 'qs'
 import { onMounted } from 'vue'
 const router = useRouter()

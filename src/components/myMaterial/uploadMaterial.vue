@@ -2,14 +2,15 @@
  * @Author: 秦少卫
  * @Date: 2024-04-25 15:30:54
  * @LastEditors: June
- * @LastEditTime: 2024-07-24 19:49:31
+ * @LastEditTime: 2024-07-24 20:24:53
  * @Description: 我的素材
 -->
 
 <template>
   <div class="my-material">
     <el-button
-      icon="md-cloud-upload"
+      class="w-full"
+      :icon="UploadFilled"
       @click="uploadImgHandule"
       long
       type="primary"
@@ -46,7 +47,7 @@
 </template>
 
 <script setup name="ImportTmpl">
-import { Delete } from '@element-plus/icons-vue'
+import { Delete, UploadFilled } from '@element-plus/icons-vue'
 import {
   getFileList,
   uploadImg,
@@ -54,7 +55,8 @@ import {
   removeMaterial
 } from '@/api/user'
 import { Utils } from '@/lib/core'
-const APP_APIHOST = import.meta.env.VITE_APP_APIHOST
+import { apiHost } from '@/constants/app'
+
 const { selectFiles } = Utils
 const canvasEditor = inject('canvasEditor')
 
@@ -68,7 +70,7 @@ const getFileListHandle = () => {
         return {
           id: item.id,
           name: item.attributes.name,
-          imgUrl: APP_APIHOST + item.attributes.img.data.attributes.url
+          imgUrl: apiHost + item.attributes.img.data.attributes.url
         }
       })
       isLogin.value = true

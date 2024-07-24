@@ -1,8 +1,8 @@
 <!--
  * @Author: 秦少卫
  * @Date: 2024-06-11 16:17:17
- * @LastEditors: 秦少卫
- * @LastEditTime: 2024-06-12 15:43:54
+ * @LastEditors: June
+ * @LastEditTime: 2024-07-24 20:25:21
  * @Description: 列表组件
 -->
 
@@ -11,7 +11,9 @@
     <div class="item" v-for="item in materialTypeList" :key="item.id">
       <div class="top">
         <h3>{{ item.name }}</h3>
-        <el-button link size="small" @click="emit('selectType', item.id)">查看更多</el-button>
+        <el-button link size="small" @click="emit('selectType', item.id)"
+          >查看更多</el-button
+        >
       </div>
       <div class="img-box">
         <div
@@ -21,7 +23,6 @@
           @click="(e) => emit('click', { info, e })"
           @dragend="(e) => emit('dragend', { info, e })"
         >
-     
           <el-image
             lazy
             :src="info.src"
@@ -37,66 +38,64 @@
 </template>
 
 <script name="ImportJson" setup>
-const baseURL = import.meta.env.VITE_APP_APIHOST;
-
-const emit = defineEmits(['click', 'dragend']);
+const emit = defineEmits(['click', 'dragend'])
 
 const props = defineProps({
   typeApi: {
-    type: Function,
+    type: Function
   },
   typeListApi: {
-    type: Function,
+    type: Function
   },
   typeKey: {
-    type: String,
+    type: String
   },
   formatData: {
-    type: Function,
-  },
-});
+    type: Function
+  }
+})
 
 // 素材分类
-const materialTypeList = ref([]);
+const materialTypeList = ref([])
 const getMaterialTypesHandler = async () => {
-  const res = await props.typeApi();
+  const res = await props.typeApi()
   materialTypeList.value = res.data.data.map((item) => {
     return {
       name: item.attributes.name,
       id: item.id,
-      list: [],
-    };
-  });
-};
+      list: []
+    }
+  })
+}
 
 const getMaterialsByTypeHandler = async () => {
-  materialTypeList;
-  let i = 0;
+  materialTypeList
+  let i = 0
   for (const item of materialTypeList.value) {
     const res = await props.typeListApi({
       populate: {
-        img: '*',
+        img: '*'
       },
       filters: {
         [props.typeKey]: {
-          $eq: item.id,
-        },
+          $eq: item.id
+        }
       },
       pagination: {
         page: 1,
-        pageSize: 8,
-      },
-    });
-    materialTypeList.value[i].list = props.formatData(res.data.data);
+        pageSize: 8
+      }
+    })
+    materialTypeList.value[i].list = props.formatData(res.data.data)
 
-    i++;
+    i++
   }
-};
+}
 
 onMounted(async () => {
-  await getMaterialTypesHandler();
-  await getMaterialsByTypeHandler();
-});
+  await getMaterialTypesHandler()
+  await getMaterialsByTypeHandler()
+})
 </script>
 <style scoped lang="scss">
 h3 {

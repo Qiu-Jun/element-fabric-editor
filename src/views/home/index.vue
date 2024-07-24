@@ -196,10 +196,10 @@ import MyMaterial from '@/components/myMaterial/index.vue'
 // hooks
 import useSelectListen from '@/hooks/useSelectListen'
 import { useI18n } from 'vue-i18n'
-
+import { apiHost } from '@/constants/app'
 const { t } = useI18n()
 
-const APIHOST = import.meta.env.VITE_APP_APIHOST
+const APIHOST = apiHost
 
 import Editor, {
   DringPlugin,

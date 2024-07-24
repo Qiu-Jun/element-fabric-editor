@@ -1,107 +1,110 @@
-import qs from 'qs';
+import qs from 'qs'
+import { apiHost } from '@/constants/app'
 
-const APIHOST = import.meta.env.VITE_APP_APIHOST;
+const APIHOST = apiHost
 export default function usePageList({
   el,
   apiClient,
   filters = {},
   sort = [],
   formatData,
-  fields = [],
+  fields = []
 }) {
   //  滚动条根据页面适应
-  const showScroll = ref(false);
-  const scrollHeight = ref(0);
+  const showScroll = ref(false)
+  const scrollHeight = ref(0)
   const startPage = async () => {
     // 滚动
-    const myTemplBox = document.querySelector(el);
-    scrollHeight.value = myTemplBox.offsetHeight;
-    showScroll.value = true;
+    const myTemplBox = document.querySelector(el)
+    scrollHeight.value = myTemplBox.offsetHeight
+    showScroll.value = true
 
-    await startGetList();
-  };
+    await startGetList()
+  }
 
   // 素材列表
-  const pageData = ref([]) as any;
-  const page = ref(1);
+  const pageData = ref([]) as any
+  const page = ref(1)
   const pagination = reactive({
     page: 0,
     pageCount: 0,
     pageSize: 20,
-    total: 0,
-  });
+    total: 0
+  })
 
   // 是否到达底部
   const isDownBottom = computed(() => {
-    return pagination.page === page.value && pagination.page >= pagination.pageCount;
-  });
+    return (
+      pagination.page === page.value && pagination.page >= pagination.pageCount
+    )
+  })
 
-  const pageLoading = ref(false);
+  const pageLoading = ref(false)
   const getPageData = async () => {
-    pageLoading.value = true;
+    pageLoading.value = true
     try {
       const query = {
         populate: {
-          img: '*',
+          img: '*'
         },
         filters: {},
         sort: sort,
         fields,
         pagination: {
           page: page.value,
-          pageSize: pagination.pageSize,
-        },
-      };
-      const params = addFilterParams(query, filters);
-      const res = await apiClient(qs.stringify(params));
-      const list = formatData ? formatData(res.data.data) : res.data.data;
+          pageSize: pagination.pageSize
+        }
+      }
+      const params = addFilterParams(query, filters)
+      const res = await apiClient(qs.stringify(params))
+      const list = formatData ? formatData(res.data.data) : res.data.data
       Object.keys(res.data.meta.pagination).forEach((key) => {
-        pagination[key] = res.data.meta.pagination[key];
-      });
-      pageData.value = [...pageData.value, ...list];
+        pagination[key] = res.data.meta.pagination[key]
+      })
+      pageData.value = [...pageData.value, ...list]
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
     // Spin.hide();
-    pageLoading.value = false;
-  };
+    pageLoading.value = false
+  }
 
   const startGetList = () => {
-    pageData.value = [];
-    page.value = 1;
-    getPageData();
-  };
+    pageData.value = []
+    page.value = 1
+    getPageData()
+  }
 
   const nextPage = () => {
-    if (page.value >= pagination.pageCount) return;
-    page.value++;
+    if (page.value >= pagination.pageCount) return
+    page.value++
     setTimeout(() => {
-      getPageData();
-    }, 1000);
-  };
+      getPageData()
+    }, 1000)
+  }
 
   const addFilterParams = (query, filters) => {
     Object.keys(filters).forEach((key) => {
-      const itemFilter = {};
+      const itemFilter = {}
       Object.keys(filters[key]).forEach((myKey) => {
-        const skip = ['$eq', '$contains'];
-        const isNone = !filters[key][myKey];
-        const isSkip = skip.includes(myKey) && isNone;
+        const skip = ['$eq', '$contains']
+        const isNone = !filters[key][myKey]
+        const isSkip = skip.includes(myKey) && isNone
         // 不好包含跳过条件
         if (!isSkip) {
-          itemFilter[myKey] = filters[key][myKey];
+          itemFilter[myKey] = filters[key][myKey]
         } else {
           // 跳过条件下 判断是否过滤 默认过滤
-          const isFilterEmpty = filters[key].filterEmpty;
+          const isFilterEmpty = filters[key].filterEmpty
           if (!isFilterEmpty) {
-            itemFilter[myKey] = filters[key][myKey];
+            itemFilter[myKey] = filters[key][myKey]
           }
         }
-      });
-      query.filters[key] = itemFilter;
-    });
-    return query;
-  };
+      })
+      query.filters[key] = itemFilter
+    })
+    return query
+  }
 
   return {
     pageData, // 分页数据
@@ -112,18 +115,21 @@ export default function usePageList({
     startPage, // 开始分页
     getPageData, // 获取分页数据
     startGetList, // 从第一个开始
-    nextPage, // 下一页
-  };
+    nextPage // 下一页
+  }
 }
 
 const getMaterialInfoUrl = (info) => {
-  const imgUrl = info?.data?.attributes?.url || '';
-  return APIHOST + imgUrl;
-};
+  const imgUrl = info?.data?.attributes?.url || ''
+  return APIHOST + imgUrl
+}
 
 const getMaterialPreviewUrl = (info) => {
-  const imgUrl = info?.data?.attributes?.formats?.small?.url || info?.data?.attributes?.url || '';
-  return APIHOST + imgUrl;
-};
+  const imgUrl =
+    info?.data?.attributes?.formats?.small?.url ||
+    info?.data?.attributes?.url ||
+    ''
+  return APIHOST + imgUrl
+}
 
-export { getMaterialInfoUrl, getMaterialPreviewUrl };
+export { getMaterialInfoUrl, getMaterialPreviewUrl }

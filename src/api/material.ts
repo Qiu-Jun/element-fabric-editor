@@ -2,14 +2,15 @@
  * @Author: 秦少卫
  * @Date: 2024-04-24 14:07:06
  * @LastEditors: June
- * @LastEditTime: 2024-07-24 18:41:47
+ * @LastEditTime: 2024-07-24 20:23:46
  * @Description: 用户接口登录
  */
 
+import { apiHost } from '@/constants/app'
 import qs from 'qs'
 import axios from 'axios'
 
-const baseURL = import.meta.env.APP_APIHOST
+const baseURL = apiHost
 
 const instance = axios.create({ baseURL })
 

@@ -1,24 +1,19 @@
 <!--
  * @Author: 秦少卫
  * @Date: 2022-09-03 19:16:55
- * @LastEditors: 秦少卫
- * @LastEditTime: 2024-05-11 15:49:01
+ * @LastEditors: June
+ * @LastEditTime: 2024-07-24 20:28:36
  * @LastEditors: 秦少卫
  * @LastEditTime: 2023-04-10 14:33:18
  * @Description: 保存文件
 -->
 
 <template>
-  <div class="asa-save-box">
-    <el-button
-      style="margin-left: 10px"
-      link
-      type="primary"
-      @click="beforeClear"
-    >
+  <div class="f-center pr-10px">
+    <el-button class="ml-10px" link type="primary" @click="beforeClear">
       {{ $t('save.empty') }}
     </el-button>
-    <el-dropdown style="margin-left: 10px" @command="saveWith">
+    <el-dropdown class="ml-10px" @command="saveWith">
       <el-button type="primary">
         {{ $t('save.down') }}
         <el-icon class="el-icon--right"><ArrowDown /></el-icon>
@@ -128,12 +123,3 @@ const beforeClear = () => {
   }).then(clear)
 }
 </script>
-
-<style scoped lang="scss">
-.asa-save-box {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-right: 10px;
-}
-</style>

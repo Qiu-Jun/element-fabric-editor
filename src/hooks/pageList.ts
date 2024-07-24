@@ -1,31 +1,33 @@
 /*
  * @Author: 秦少卫
  * @Date: 2024-05-17 11:00:14
- * @LastEditors: 秦少卫
- * @LastEditTime: 2024-06-09 17:02:23
+ * @LastEditors: June
+ * @LastEditTime: 2024-07-24 20:25:51
  * @Description: 分页通用
  */
 
-const repoSrc = import.meta.env.VITE_APP_APIHOST;
-import axios from 'axios';
-import qs from 'qs';
-
+import { apiHost } from '@/constants/app'
+import axios from 'axios'
+import qs from 'qs'
+const repoSrc = apiHost
 // 分类API
-const typeApi = (url) => axios.get(`${repoSrc}/api/${url}?pagination[pageSize]=200`);
+const typeApi = (url) =>
+  axios.get(`${repoSrc}/api/${url}?pagination[pageSize]=200`)
 
 // 分页API
-const pageApi = (url, queryParams) => axios.get(`${repoSrc}/api/${url}?${queryParams}`);
+const pageApi = (url, queryParams) =>
+  axios.get(`${repoSrc}/api/${url}?${queryParams}`)
 
-const getInfo = (id) => axios.get(`${repoSrc}/api/templs/${id}`);
+const getInfo = (id) => axios.get(`${repoSrc}/api/templs/${id}`)
 
 function getQueryParams(option, filters) {
   filters.forEach((item) => {
-    const { key, value, type } = item;
+    const { key, value, type } = item
     if (value) {
-      option.filters[key] = { [type]: value };
+      option.filters[key] = { [type]: value }
     }
-  });
-  return qs.stringify(option);
+  })
+  return qs.stringify(option)
 }
 
 function getPageParams(
@@ -39,39 +41,42 @@ function getPageParams(
 ) {
   const query = {
     populate: {
-      img: '*',
+      img: '*'
     },
     filters: {},
     fields,
     pagination: {
       page: page,
-      pageSize: pageSize,
-    },
-  };
+      pageSize: pageSize
+    }
+  }
 
   const queryParams = getQueryParams(query, [
     {
       key: searchTypeKey,
       value: typeValue,
-      type: '$eq',
+      type: '$eq'
     },
     {
       key: searchWordKey,
       value: searchKeyWord,
-      type: '$contains',
-    },
-  ]);
-  return queryParams;
+      type: '$contains'
+    }
+  ])
+  return queryParams
 }
 
 function getMaterialInfoUrl(info) {
-  const imgUrl = info?.data?.attributes?.url || '';
-  return repoSrc + imgUrl;
+  const imgUrl = info?.data?.attributes?.url || ''
+  return repoSrc + imgUrl
 }
 
 function getMaterialPreviewUrl(info) {
-  const imgUrl = info?.data?.attributes?.formats?.small?.url || info?.data?.attributes?.url || '';
-  return repoSrc + imgUrl;
+  const imgUrl =
+    info?.data?.attributes?.formats?.small?.url ||
+    info?.data?.attributes?.url ||
+    ''
+  return repoSrc + imgUrl
 }
 
 export default function usePageList({
@@ -81,60 +86,62 @@ export default function usePageList({
   searchWordKey,
   scrollElement,
   pageSize,
-  fields = [],
+  fields = []
 }) {
-  const pageLoading = ref(false);
+  const pageLoading = ref(false)
 
   // 关键词
-  const searchKeyWord = ref('');
+  const searchKeyWord = ref('')
   // 分类
-  const typeValue = ref('');
-  const typeList = ref([]);
+  const typeValue = ref('')
+  const typeList = ref([])
   const typeText = computed(() => {
-    const info = typeList.value.find((item) => item.value === typeValue.value);
-    return info?.lable || '全部';
-  });
+    const info = typeList.value.find((item) => item.value === typeValue.value)
+    return info?.lable || '全部'
+  })
 
   // 素材列表
-  const pageData = ref([]);
-  const page = ref(1);
+  const pageData = ref([])
+  const page = ref(1)
   const pagination = reactive({
     page: 0,
     pageCount: 0,
     pageSize: 10,
-    total: 0,
-  });
+    total: 0
+  })
 
   // 是否到达底部
   const isDownBottm = computed(() => {
-    return pagination.page === page.value && pagination.page >= pagination.pageCount;
-  });
+    return (
+      pagination.page === page.value && pagination.page >= pagination.pageCount
+    )
+  })
   // 获取分类列表
   const getTypeList = async () => {
-    pageLoading.value = true;
+    pageLoading.value = true
     try {
-      const res = await typeApi(typeUrl);
+      const res = await typeApi(typeUrl)
       const list = res.data.data.map((item) => {
         return {
           value: item.id,
-          label: item.attributes.name,
-        };
-      });
+          label: item.attributes.name
+        }
+      })
       typeList.value = [
         {
           label: '全部',
-          value: '',
+          value: ''
         },
-        ...list,
-      ];
+        ...list
+      ]
     } catch (error) {
-      typeList.value = [];
+      typeList.value = []
     }
-    pageLoading.value = false;
-  };
+    pageLoading.value = false
+  }
 
   const getPageData = async () => {
-    pageLoading.value = true;
+    pageLoading.value = true
     try {
       const params = getPageParams(
         page.value,
@@ -144,8 +151,8 @@ export default function usePageList({
         searchWordKey,
         pageSize,
         fields
-      );
-      const res = await pageApi(listUrl, params);
+      )
+      const res = await pageApi(listUrl, params)
       const list = res.data.data.map((item) => {
         return {
           id: item.id,
@@ -153,45 +160,45 @@ export default function usePageList({
           desc: item.attributes.desc,
           json: item.attributes?.json,
           src: getMaterialInfoUrl(item.attributes.img),
-          previewSrc: getMaterialPreviewUrl(item.attributes.img),
-        };
-      });
+          previewSrc: getMaterialPreviewUrl(item.attributes.img)
+        }
+      })
       Object.keys(res.data.meta.pagination).forEach((key) => {
-        pagination[key] = res.data.meta.pagination[key];
-      });
-      pageData.value = [...pageData.value, ...list];
+        pagination[key] = res.data.meta.pagination[key]
+      })
+      pageData.value = [...pageData.value, ...list]
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-    pageLoading.value = false;
-  };
+    pageLoading.value = false
+  }
 
   const startGetList = () => {
-    pageData.value = [];
-    page.value = 1;
-    getPageData();
-  };
+    pageData.value = []
+    page.value = 1
+    getPageData()
+  }
 
   const nextPage = () => {
     console.log('-----------------')
-    if (page.value >= pagination.pageCount) return;
-    page.value++;
+    if (page.value >= pagination.pageCount) return
+    page.value++
     setTimeout(() => {
-      getPageData();
-    }, 1000);
-  };
+      getPageData()
+    }, 1000)
+  }
 
-  const showScroll = ref(false);
-  const scrollHeight = ref(0);
+  const showScroll = ref(false)
+  const scrollHeight = ref(0)
   const startPage = async () => {
     // 滚动
-    const myTemplBox = document.querySelector(scrollElement);
-    scrollHeight.value = myTemplBox.offsetHeight;
-    showScroll.value = true;
+    const myTemplBox = document.querySelector(scrollElement)
+    scrollHeight.value = myTemplBox.offsetHeight
+    showScroll.value = true
 
-    await getTypeList();
-    await getPageData();
-  };
+    await getTypeList()
+    await getPageData()
+  }
 
   return {
     startPage,
@@ -206,6 +213,6 @@ export default function usePageList({
     nextPage,
     scrollHeight,
     showScroll,
-    getInfo,
-  };
+    getInfo
+  }
 }
