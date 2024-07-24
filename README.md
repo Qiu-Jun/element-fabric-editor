@@ -2,19 +2,13 @@
  * @Description: md
  * @Author: June
  * @Date: 2024-04-24 09:32:13
- * @FilePath: /mine-pro/README.md
- * @LastEditTime: 2024-06-02 09:47:13
+ * @FilePath: /element-fabric-editor/README.md
+ * @LastEditTime: 2024-07-24 20:00:43
  * @LastEditors: June
 -->
 
-## mini-pro
-
-#### 目录说明
-
-- packages
-  - admin 后台
-  - weapp 移动端
-  - server 服务端
+#### 同步情况
++ fix(plugin): 注释蒙版操作   e131a833ada9ea24bcbd72c522848d632f784a9b
 
 #### 使用
 
