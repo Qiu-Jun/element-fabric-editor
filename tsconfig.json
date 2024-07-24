@@ -13,7 +13,13 @@
     "useDefineForClassFields": true,
     "resolveJsonModule": true,
     "lib": ["esnext", "dom"],
-    "types": ["node", "vite/client"]
+    "types": ["node", "vite/client"],
+    "baseUrl": "./",
+    "paths": {
+      "@": ["src"],
+      "@/*": ["src/*"]
+    }
   },
-  
+  "exclude": ["node_modules", "dist", "**/*.js"],
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
 }
