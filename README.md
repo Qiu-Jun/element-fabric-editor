@@ -3,7 +3,7 @@
  * @Author: June
  * @Date: 2024-04-24 09:32:13
  * @FilePath: /element-fabric-editor/README.md
- * @LastEditTime: 2024-07-24 20:00:43
+ * @LastEditTime: 2024-07-24 23:50:34
  * @LastEditors: June
 -->
 
@@ -70,3 +70,12 @@ pnpm commit # 使用此命令编写commit
   "LastEditors": "Your Name"
 },
 ```
+
+## 管理员
+
+<!-- readme: collaborators -start -->
+<!-- readme: collaborators -end -->
+
+## 贡献者
+<!-- readme: collaborators,contributors -start -->
+<!-- readme: collaborators,contributors -end -->
