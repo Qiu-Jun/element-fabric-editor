@@ -1,8 +1,8 @@
 <!--
  * @Author: 秦少卫
  * @Date: 2022-09-03 19:16:55
- * @LastEditors: June 1601745371@qq.com
- * @LastEditTime: 2024-06-12 14:20:11
+ * @LastEditors: June
+ * @LastEditTime: 2024-07-25 23:45:33
  * @Description: 导入模板
 -->
 
@@ -31,7 +31,7 @@
         v-model="filters.name.$contains"
         search
         :disabled="pageLoading"
-        @search="startGetList"
+        @keyup.enter="startGetList"
       />
     </div>
 
@@ -48,12 +48,11 @@
 
     <!-- 列表 -->
     <div style="height: calc(100vh - 160px)" id="myFileTemplBox">
-      <Scroll
+      <el-scrollbar
         key="myFileTemplBox"
         v-if="showScroll"
         :on-reach-bottom="nextPage"
         :height="scrollHeight"
-        :distance-to-edge="[-1, -1]"
       >
         <!-- 列表 -->
         <div v-for="info in pageData" :key="info.name" class="item">
@@ -77,7 +76,7 @@
           ></file>
         </div>
         <el-divider plain v-if="isDownBottom">已经到底了</el-divider>
-      </Scroll>
+      </el-scrollbar>
     </div>
 
     <!-- 创建设计 -->
@@ -90,7 +89,6 @@
 </template>
 
 <script setup name="ImportTmpl">
-import { ElMessageBox, ElMessage } from 'element-plus'
 import { Plus } from '@element-plus/icons-vue'
 // 组件
 import fileType from './components/fileType.vue'
@@ -169,14 +167,24 @@ const modalSizeRef = ref(null)
 const createType = (type) => {
   if (type === 'fileType') {
     fileTypeName.value = ''
-    ElMessageBox.confirm({
-      title: '新建文件夹',
-      message: (h) => {
-        return h(Input, {
+    ElMessageBox.confirm('新建文件夹', {
+      confirmButtonText: '确认',
+      cancelButtonText: '取消',
+      message: () => {
+        return h(ElInput, {
+          ...ElInput.$el,
+          ...ElInput.$attrs,
           size: 'large',
-          modelValue: fileTypeName,
+          modelValue: fileTypeName.value,
           autofocus: true,
-          placeholder: '请输入文件夹名称'
+          style: {
+            margin: '10px 0',
+            width: '400px'
+          },
+          placeholder: '请输入文件夹名称',
+          'onUpdate:modelValue': ($event) => {
+            fileTypeName.value = $event
+          }
         })
       }
     }).then(async () => {
@@ -240,7 +248,7 @@ const toFile = (id, i) => {
   display: flex;
 }
 
-:deep(.ivu-scroll-content) {
+:deep(.el-scrollbar__view) {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -248,11 +256,5 @@ const toFile = (id, i) => {
 }
 .item {
   margin-bottom: 10px;
-}
-:deep(.ivu-breadcrumb-item-link) {
-  cursor: pointer;
-  &:hover {
-    color: #57a3f3;
-  }
 }
 </style>

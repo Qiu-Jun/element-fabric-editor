@@ -1,8 +1,8 @@
 <!--
  * @Author: 秦少卫
  * @Date: 2024-05-21 10:35:12
- * @LastEditors: 秦少卫
- * @LastEditTime: 2024-05-21 15:43:48
+ * @LastEditors: June
+ * @LastEditTime: 2024-07-25 23:31:14
  * @Description: 字体属性
 -->
 
@@ -183,7 +183,6 @@ const baseAttr = reactive({
 const fontsList = ref([])
 canvasEditor.getFontList().then((list) => {
   fontsList.value = list
-  console.log(fontsList)
 })
 
 // 字体对齐方式

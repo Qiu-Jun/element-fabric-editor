@@ -1,8 +1,8 @@
 <!--
  * @Author: 秦少卫
  * @Date: 2024-05-30 10:03:30
- * @LastEditors: 秦少卫
- * @LastEditTime: 2024-05-30 18:39:13
+ * @LastEditors: June
+ * @LastEditTime: 2024-07-25 23:45:16
  * @Description: 文件夹
 -->
 
@@ -12,14 +12,16 @@
     <span>{{ props.name }}</span>
     <div class="click-bg" @click="emit('select')"></div>
     <div class="more">
-      <el-dropdown trigger="click" @on-click="operation">
+      <el-dropdown trigger="click" @command="operation">
         <el-button size="small" shape="circle" text>
-          <Icon type="ios-more" :size="24" />
+          <el-icon size="18px">
+            <Plus />
+          </el-icon>
         </el-button>
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item name="reName">重命名</el-dropdown-item>
-            <el-dropdown-item name="delete">删除</el-dropdown-item>
+            <el-dropdown-item command="reName">重命名</el-dropdown-item>
+            <el-dropdown-item command="delete">删除</el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
@@ -30,11 +32,9 @@
 <script setup name="ImportTmpl">
 import fileTypeIcon from '../../../assets/icon/fileType.png'
 import useMaterial from '@/hooks/useMaterial'
+import { Plus } from '@element-plus/icons-vue'
 
 const { reNameFileType, removeFileType } = useMaterial()
-
-import { ElMessageBox, ElMessage } from 'element-plus'
-
 const props = defineProps({
   name: {
     type: String,
@@ -59,14 +59,26 @@ const fileName = ref('')
 
 const reNameFile = () => {
   fileName.value = props.name
-  ElMessageBox.confirm({
-    title: '重命名文件夹',
-    message: h(Input, {
-      size: 'large',
-      modelValue: fileName,
-      autofocus: true,
-      placeholder: '请输入文件夹名称'
-    })
+  ElMessageBox.confirm('重命名文件夹', {
+    confirmButtonText: '确认',
+    cancelButtonText: '取消',
+    message: () => {
+      return h(ElInput, {
+        ...ElInput.$el,
+        ...ElInput.$attrs,
+        size: 'large',
+        modelValue: fileName.value,
+        autofocus: true,
+        style: {
+          margin: '10px 0',
+          width: '400px'
+        },
+        placeholder: '请输入文件夹名称',
+        'onUpdate:modelValue': ($event) => {
+          fileName.value = $event
+        }
+      })
+    }
   }).then(async () => {
     if (fileName.value === '') {
       ElMessage.warning('文件夹名称不能为空')

@@ -1,8 +1,8 @@
 <!--
  * @Author: 秦少卫
  * @Date: 2024-05-30 10:48:00
- * @LastEditors: 秦少卫
- * @LastEditTime: 2024-06-09 17:08:48
+ * @LastEditors: June
+ * @LastEditTime: 2024-07-25 23:16:55
  * @Description: 模板文件
 -->
 <template>
@@ -41,7 +41,7 @@
     title="请选择迁移目录"
     @on-ok="transferRequest"
   >
-    <el-tree-select v-model="fileTypeId" :data="treeData" v-width="200" />
+    <el-tree-select v-model="fileTypeId" :data="treeData" width="200px" />
     <template #footer>
       <div class="dialog-footer">
         <el-button @click="modalVisable = false">取消</el-button>

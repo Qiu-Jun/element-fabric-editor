@@ -2,7 +2,7 @@
  * @Author: 秦少卫
  * @Date: 2024-04-25 15:30:54
  * @LastEditors: June
- * @LastEditTime: 2024-07-24 20:24:53
+ * @LastEditTime: 2024-07-25 23:39:56
  * @Description: 我的素材
 -->
 
@@ -17,14 +17,14 @@
     >
       {{ $t('myMaterial.uploadBtn') }}
     </el-button>
-    <div class="img-group" v-if="fileList.length">
+    <div class="img-group flex justify-start flex-wrap" v-if="fileList.length">
       <el-tooltip
         :content="info.name"
         v-for="(info, i) in fileList"
         :key="`${i}-bai1-button`"
         placement="top"
       >
-        <div class="tmpl-img-box">
+        <div class="relative tmpl-img-box">
           <el-icon
             class="del-btn"
             color="red"
@@ -66,16 +66,18 @@ const getFileListHandle = () => {
   // 获取素材列表
   getFileList()
     .then((res) => {
-      fileList.value = res.data.data.map((item) => {
+      fileList.value = res.data.data?.map((item) => {
         return {
           id: item.id,
-          name: item.attributes.name,
-          imgUrl: apiHost + item.attributes.img.data.attributes.url
+          name: item?.attributes?.name,
+          imgUrl: apiHost + item.attributes.img?.data?.attributes?.url
         }
       })
+      console.log(fileList.value)
       isLogin.value = true
     })
-    .catch(() => {
+    .catch((err) => {
+      console.log(err)
       isLogin.value = false
     })
 }
@@ -132,7 +134,8 @@ const removeMaterialHandle = (id) => {
   margin-top: 10px;
 }
 .tmpl-img-box {
-  width: 134px;
+  box-sizing: border-box;
+  width: 132px;
   height: 180px;
   padding: 5px;
   cursor: pointer;
