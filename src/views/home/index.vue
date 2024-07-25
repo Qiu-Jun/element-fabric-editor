@@ -3,7 +3,7 @@
     <el-container>
       <!-- 头部区域 -->
       <el-header>
-        <div class="left">
+        <div class="flex items-center">
           <Logo />
           <el-divider direction="vertical" />
           <ImportJson />
@@ -26,13 +26,13 @@
               v-model="state.ruler"
               @change="rulerSwitch"
               size="small"
-              class="switch"
+              class="mx-10px"
             />
           </el-tooltip>
           <el-divider direction="vertical" />
           <History />
         </div>
-        <div class="right">
+        <div class="flex items-center">
           <PreviewCurrent />
           <el-divider direction="vertical" />
           <Save />
@@ -58,7 +58,7 @@
               :index="item.key"
             >
               <template #title>
-                <span style="margin-top: 10px">
+                <span class="mt-10px">
                   <SvgIcon
                     :style="{ width: '20px', height: '20px' }"
                     :name="item.icon"
@@ -69,7 +69,7 @@
             </el-menu-item>
           </el-menu>
           <!-- 左侧组件 -->
-          <div class="content" v-show="state.toolsBarShow">
+          <div class="flex-1 px-10px h-full overflow-y-auto" v-show="state.toolsBarShow">
             <div class="left-panel">
               <KeepAlive>
                 <component :is="leftBarComponent[menuActive]"></component>
@@ -84,10 +84,11 @@
         </div>
 
         <!-- 画布区域 -->
-        <div id="workspace">
-          <div class="canvas-box">
-            <div class="inside-shadow"></div>
+        <div class="flex-1 w-full relative overflow-hidden" id="workspace">
+          <div class="relative">
+            <div class="absolute w-full z-2 inside-shadow"></div>
             <canvas
+              class="w-300px h-300px mx-auto"
               id="canvas"
               :class="state.ruler ? 'design-stage-grid' : ''"
             ></canvas>
@@ -419,59 +420,16 @@ provide('mixinState', mixinState)
     line-height: 20px;
   }
 
-  .left,
-  .right {
-    display: flex;
-    align-items: center;
-    img {
-      display: block;
-      margin-right: 10px;
-    }
-  }
-
-  .icon {
-    display: block;
-  }
-
-  .canvas-box {
-    position: relative;
-  }
   // 画布内阴影
   .inside-shadow {
-    position: absolute;
-    width: 100%;
-    height: 100%;
     box-shadow: inset 0 0 9px 2px #0000001f;
-    z-index: 2;
     pointer-events: none;
   }
 
-  #canvas {
-    width: 300px;
-    height: 300px;
-    margin: 0 auto;
-  }
-
   #workspace {
-    flex: 1;
-    width: 100%;
-    position: relative;
     background: #f1f1f1;
-    overflow: hidden;
   }
 
-  .content {
-    flex: 1;
-    width: 220px;
-    padding: 0 10px;
-    height: 100%;
-    overflow-y: auto;
-  }
-
-  // 标尺
-  .switch {
-    margin-right: 10px;
-  }
   // 网格背景
   .design-stage-grid {
     --offsetX: 0px;
@@ -556,18 +514,5 @@ provide('mixinState', mixinState)
       right: 304px;
     }
   }
-}
-
-// 属性面板样式
-:deep(.attr-item) {
-  position: relative;
-  margin-bottom: 12px;
-  height: 40px;
-  padding: 0 10px;
-  background: #f6f7f9;
-  border: none;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
 }
 </style>

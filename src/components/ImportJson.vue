@@ -1,7 +1,7 @@
 <template>
-  <div class="asa-json-box">
+  <div class="f-center">
     <el-dropdown @command="clickHandler">
-      <el-button style="margin-left: 10px" link type="primary">
+      <el-button link type="primary">
         {{ $t('importFiles.file') }}
         <el-icon class="el-icon--right"><ArrowDown /></el-icon>
       </el-button>
@@ -69,11 +69,3 @@ const customSizeCreate = async (w, h) => {
   ElMessage.success('创建成功')
 }
 </script>
-
-<style scoped lang="scss">
-.asa-json-box {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-</style>

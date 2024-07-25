@@ -1,7 +1,7 @@
 <template>
-  <div class="asa-file-box">
+  <div class="f-center">
     <el-dropdown transfer-class-name="fix" @command="insertTypeHand">
-      <el-button style="margin-left: 10px" link type="primary">
+      <el-button link type="primary">
         {{ $t('insertFile.insert') }}
         <el-icon class="el-icon--right"><ArrowDown /></el-icon>
       </el-button>
@@ -127,11 +127,3 @@ function insertSvgFile(svgFile) {
   })
 }
 </script>
-
-<style scoped lang="scss">
-.asa-file-box {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-</style>

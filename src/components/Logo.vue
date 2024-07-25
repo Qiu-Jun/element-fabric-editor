@@ -35,11 +35,11 @@ const getWebInfoFun = async () => {
 
 getWebInfoFun()
 </script>
+
 <style scoped lang="scss">
 .logo {
   width: 117px;
   height: 44px;
-  margin-left: 2px;
   a {
     img {
       height: 80%;
