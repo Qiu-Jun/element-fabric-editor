@@ -3,12 +3,12 @@
  * @Author: June
  * @Date: 2024-04-24 09:32:13
  * @FilePath: /element-fabric-editor/README.md
- * @LastEditTime: 2024-07-25 11:07:17
+ * @LastEditTime: 2024-07-25 23:47:01
  * @LastEditors: June
 -->
 
 #### 差异
-> 整体功能是基本一致的，只是更换了`Element UI`，供大家更多的选择。后面更新仍以`vue-fabric-editor`为主，此项目不定期同步更新。项目存在一定的差异，大概如下
+> 整体功能是基本一致的，只是更换了`Element Plus`，供大家更多的选择。后面更新仍以`vue-fabric-editor`为主，此项目不定期同步更新。项目存在一定的差异，大概如下
 + 自动导入Commonts 在home组件减少了组件的导入 清晰
 + svg处理采用了不同的插件，但功能是一致的
 + 加入了`unocss`，后续会对样式进行优化
