@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2024-07-24 17:34:22
  * @LastEditors: June
- * @LastEditTime: 2024-07-24 18:28:55
+ * @LastEditTime: 2024-07-25 10:36:31
  * @FilePath: /element-fabric-editor/vite.config.mts
  */
 
@@ -41,13 +41,13 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
     css: {
       postcss: {
         plugins: [autoprefixer]
+      },
+      preprocessorOptions: {
+        less: {
+          javascriptEnabled: true,
+          additionalData: `@import "${resolve(__dirname, 'src/styles/variable.scss')}";`
+        }
       }
-      // preprocessorOptions: {
-      //   less: {
-      //     javascriptEnabled: true,
-      //     additionalData: `@import "${path.resolve(__dirname, 'src/render/styles/variable.less')}";`
-      //   }
-      // }
     },
     envPrefix,
     resolve: {

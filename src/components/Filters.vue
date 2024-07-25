@@ -2,7 +2,7 @@
  * @Author: 秦少卫
  * @Date: 2023-04-06 23:04:38
  * @LastEditors: June
- * @LastEditTime: 2024-07-24 19:45:25
+ * @LastEditTime: 2024-07-25 10:54:54
  * @Description: 图片滤镜
 -->
 
@@ -17,9 +17,7 @@
     <el-collapse>
       <el-collapse-item name="1">
         <template #title>
-          <el-button text>
-            {{ $t('filters.simple') }}
-          </el-button>
+          {{ $t('filters.simple') }}
         </template>
 
         <div class="filter-box">

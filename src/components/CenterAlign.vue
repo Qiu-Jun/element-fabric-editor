@@ -1,14 +1,13 @@
 <!--
  * @Author: 秦少卫
  * @Date: 2022-09-03 19:16:55
- * @LastEditors: 秦少卫
- * @LastEditTime: 2024-05-21 15:46:21
+ * @LastEditors: June
+ * @LastEditTime: 2024-07-25 10:52:59
  * @Description: 多元素或单元素对齐方式
 -->
 
 <template>
-  <div v-if="mixinState.mSelectMode" class="attr-item-box">
-    <!-- <h3>{{ $t('attrSeting.centerAlign.name') }}</h3> -->
+  <div class="attr-item-box" v-if="mixinState.mSelectMode">
     <el-divider content-position="left">
       <h4>{{ $t('attrSeting.centerAlign.name') }}</h4>
     </el-divider>
@@ -92,7 +91,6 @@
         </el-button>
       </el-tooltip>
     </div>
-    <!-- <Divider plain></Divider> -->
   </div>
 </template>
 
