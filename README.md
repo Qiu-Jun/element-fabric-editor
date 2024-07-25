@@ -3,9 +3,16 @@
  * @Author: June
  * @Date: 2024-04-24 09:32:13
  * @FilePath: /element-fabric-editor/README.md
- * @LastEditTime: 2024-07-24 23:50:34
+ * @LastEditTime: 2024-07-25 11:07:17
  * @LastEditors: June
 -->
+
+#### 差异
+> 整体功能是基本一致的，只是更换了`Element UI`，供大家更多的选择。后面更新仍以`vue-fabric-editor`为主，此项目不定期同步更新。项目存在一定的差异，大概如下
++ 自动导入Commonts 在home组件减少了组件的导入 清晰
++ svg处理采用了不同的插件，但功能是一致的
++ 加入了`unocss`，后续会对样式进行优化
++ 因为ui库风格不一，所以有些风格可能不同，如主题色，边距等
 
 #### 同步情况
 + fix(plugin): 注释蒙版操作   e131a833ada9ea24bcbd72c522848d632f784a9b
@@ -20,39 +27,10 @@ pnpm install
 
 # 启动uniapp
 pnpm dev:weapp
-# tabbar 图标样式 #bfbfbf   active #2074FF
 
 # 提交代码
 git add . # 添加需要提交的文件
 pnpm commit # 使用此命令编写commit
-```
-
-#### 使用说明
-
-- 已集成AutoImport, 对于vue的组合api无需手动import
-- 环境变量目前只有dev和pro，可以手动添加处理
-
-#### vscode setting
-
-> 正常情况会根据.vscode下的extendsions提示安装插件,没有的话重新打开项目或手动安装配置
-
-- vscode 插件
-  - Prettier - Code formatter
-  - eslint
-  - volar
-
-```json
-{
-  // 开启自动修复
-  "editor.codeActionsOnSave": {
-    "source.fixAll": false,
-    "source.fixAll.eslint": true
-  },
-  // 保存的时候自动格式化
-  "editor.formatOnSave": true,
-  // 默认格式化工具选择prettier
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
-}
 ```
 
 #### 自动注释说明
