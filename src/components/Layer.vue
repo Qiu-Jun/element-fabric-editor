@@ -1,13 +1,13 @@
 <!--
  * @Author: 秦少卫
  * @Date: 2022-09-03 19:16:55
- * @LastEditors: 秦少卫
- * @LastEditTime: 2024-07-06 17:59:51
+ * @LastEditors: June
+ * @LastEditTime: 2024-07-26 21:16:34
  * @Description: 图层面板
 -->
 
 <template>
-  <div class="box">
+  <div class="w-full">
     <template v-if="list.length">
       <el-divider content-position="left">{{ $t('layers') }}</el-divider>
       <div class="layer-box">
@@ -44,7 +44,7 @@
       </div>
       <!-- 层级调整按钮 -->
       <div class="btn-box">
-        <el-button-group v-show="mixinState.mSelectMode === 'one'" size="small">
+        <el-button-group v-show="mixinState.mSelectMode === 'one'">
           <el-button @click="up"
             ><span v-html="btnIconType('up')"></span
           ></el-button>
@@ -189,21 +189,14 @@ onMounted(() => {
 })
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-:deep(.ivu-tooltip-inner) {
-  white-space: normal;
-}
-
-:deep(.ivu-tooltip) {
-  display: block;
-}
-
-// :deep(.ivu-tooltip-rel) {
-//   display: block;
-// }
-.box {
-  width: 100%;
+:deep(.el-button-group) {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  .el-button {
+    flex: 1;
+  }
 }
 .layer-box {
   height: calc(100vh - 170px);

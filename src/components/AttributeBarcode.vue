@@ -1,14 +1,14 @@
 <!--
  * @Author: 秦少卫
  * @Date: 2024-06-06 16:27:21
- * @LastEditors: 秦少卫
- * @LastEditTime: 2024-06-07 21:26:22
+ * @LastEditors: June
+ * @LastEditTime: 2024-07-26 21:13:06
  * @Description: 条形码插件
 -->
 
 <template>
   <div
-    class="box attr-item-box"
+    class="attr-item-box"
     v-if="
       mixinState.mSelectMode === 'one' &&
       textType.includes(mixinState.mSelectOneType) &&
@@ -86,7 +86,7 @@
           </div>
         </div>
         <div :span="12" class="flex-item" v-if="baseAttr.displayValue">
-          <div class="content number-content">
+          <div class="content f-center">
             <InputNumber
               v-model="baseAttr.fontSize"
               @on-change="changeCommon"
@@ -108,7 +108,7 @@
           </div>
         </div>
         <div class="flex-item">
-          <span class="label" style="margin-left: 10px">类型</span>
+          <span class="label mr-10px">类型</span>
           <div class="content">
             <el-select
               v-model="baseAttr.format"
@@ -221,16 +221,8 @@ onBeforeUnmount(() => {
 :deep(.el-color-picker__trigger) {
   width: 88px;
 }
-.number-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.font-selector {
-  :deep(.ivu-select-item) {
-    padding: 1px 4px;
-  }
 
+.font-selector {
   .font-item {
     height: 40px;
     width: 330px;
@@ -249,48 +241,35 @@ onBeforeUnmount(() => {
   justify-content: space-between;
   border-radius: 5px;
   background: #f6f7f9;
-}
-.flex-item {
-  display: inline-flex;
-  flex: 1;
-  .label {
-    width: 32px;
-    height: 32px;
-    line-height: 32px;
-    display: inline-block;
-    font-size: 14px;
-    // color: #333333;
-  }
-  .content {
+  .flex-item {
+    display: inline-flex;
     flex: 1;
-    align-content: center;
-    // width: 60px;
-  }
-  .button-group {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    .el-radio-button {
+    .label {
+      width: 32px;
+      height: 32px;
+      line-height: 32px;
+      display: inline-block;
+      font-size: 14px;
+    }
+    .content {
       flex: 1;
-      :deep(.el-radio-button__inner) {
-        width: 100%;
+      align-content: center;
+    }
+    .button-group {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .el-radio-button {
+        flex: 1;
+        :deep(.el-radio-button__inner) {
+          width: 100%;
+        }
       }
     }
-  }
-  .slider-box {
-    width: calc(100% - 50px);
-    margin-left: 10px;
-  }
-  .left {
-    flex: 1;
-  }
-  .right {
-    flex: 1;
-    margin-left: 10px;
-    :deep(.ivu-input-number) {
-      display: block;
-      width: 100%;
+    .slider-box {
+      width: calc(100% - 50px);
+      margin-left: 10px;
     }
   }
 }

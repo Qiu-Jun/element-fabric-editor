@@ -1,13 +1,13 @@
 <!--
  * @Author: 秦少卫
  * @Date: 2024-05-21 10:18:57
- * @LastEditors: 秦少卫
- * @LastEditTime: 2024-05-26 22:59:26
+ * @LastEditors: June
+ * @LastEditTime: 2024-07-26 21:12:56
  * @Description: 边框
 -->
 <template>
   <div
-    class="box attr-item-box"
+    class="attr-item-box"
     v-if="mixinState.mSelectMode === 'one' && !isGroup"
   >
     <!-- <h3>边框</h3> -->
