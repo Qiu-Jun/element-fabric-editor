@@ -1,14 +1,14 @@
 /*
  * @Author: 秦少卫
  * @Date: 2023-06-27 12:26:41
- * @LastEditors: 秦少卫
- * @LastEditTime: 2024-06-30 20:00:37
+ * @LastEditors: June
+ * @LastEditTime: 2024-07-26 09:01:19
  * @Description: 画布区域插件
  */
 
 import { fabric } from 'fabric';
-import Editor from '../Editor';
 import { throttle } from 'lodash-es';
+import Editor from '../Editor';
 type IEditor = Editor;
 
 class WorkspacePlugin implements IPluginTempl {
@@ -59,8 +59,10 @@ class WorkspacePlugin implements IPluginTempl {
         workspace.set('selectable', false);
         workspace.set('hasControls', false);
         workspace.set('evented', false);
-        this.setSize(workspace.width, workspace.height);
-        this.editor.emit('sizeChange', workspace.width, workspace.height);
+        if (workspace.width && workspace.height) {
+          this.setSize(workspace.width, workspace.height);
+          this.editor.emit('sizeChange', workspace.width, workspace.height);
+        }
       }
       resolve('');
     });
@@ -134,7 +136,7 @@ class WorkspacePlugin implements IPluginTempl {
     this.resizeObserver.observe(this.workspaceEl);
   }
 
-  setSize(width: number | undefined, height: number | undefined) {
+  setSize(width: number, height: number) {
     this._initBackground();
     this.option.width = width;
     this.option.height = height;

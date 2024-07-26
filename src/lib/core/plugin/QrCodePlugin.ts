@@ -1,14 +1,14 @@
 /*
  * @Author: 秦少卫
  * @Date: 2024-06-06 19:58:26
- * @LastEditors: 秦少卫
- * @LastEditTime: 2024-06-15 09:34:36
+ * @LastEditors: June
+ * @LastEditTime: 2024-07-26 09:00:53
  * @Description: 二维码生成工具
  */
 
 import { fabric } from 'fabric';
-import Editor from '../Editor';
 import QRCodeStyling from 'qr-code-styling';
+import Editor from '../Editor';
 import { blobToBase64 } from '../utils/utils';
 
 type IEditor = Editor;
@@ -55,11 +55,11 @@ class QrCodePlugin implements IPluginTempl {
     }
   }
 
-  async _getBase64Str(options: any) {
+  async _getBase64Str(options: any): Promise<string> {
     const qrCode = new QRCodeStyling(options);
     const blob = await qrCode.getRawData('png');
     if (!blob) return '';
-    const base64Str = await blobToBase64(blob);
+    const base64Str = (await blobToBase64(blob)) as string;
     return base64Str || '';
   }
 
@@ -69,11 +69,11 @@ class QrCodePlugin implements IPluginTempl {
       width: 300,
       margin: 10,
       errorCorrectionLevel: 'M',
-      dotsColor: '#000000',
+      dotsColor: 'black',
       dotsType: 'rounded',
-      cornersSquareColor: '#000000',
+      cornersSquareColor: 'black',
       cornersSquareType: 'square',
-      cornersDotColor: '#000000',
+      cornersDotColor: 'black',
       cornersDotType: 'square',
       background: '#ffffff',
     };

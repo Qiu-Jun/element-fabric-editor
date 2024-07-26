@@ -1,12 +1,12 @@
 /*
  * @Author: 秦少卫
  * @Date: 2022-09-05 22:21:55
- * @LastEditors: 秦少卫
- * @LastEditTime: 2024-06-15 10:34:55
+ * @LastEditors: June
+ * @LastEditTime: 2024-07-26 09:02:25
  * @Description: 工具文件
  */
+import { useBase64, useClipboard, useFileDialog } from '@vueuse/core';
 import { v4 as uuid } from 'uuid';
-import { useClipboard, useFileDialog, useBase64 } from '@vueuse/core';
 
 /**
  * @description: 图片文件转字符串
@@ -130,7 +130,7 @@ export function blobToBase64(blob: Blob) {
   return new Promise((resolve) => {
     const reader = new FileReader();
     reader.addEventListener('load', () => {
-      resolve(reader.result);
+      resolve(reader.result as string);
     });
     reader.readAsDataURL(blob);
   });
@@ -141,7 +141,7 @@ export function base64ToBlob(base64Data: string) {
     return null;
   }
   const dataArr = base64Data.split(',');
-  const imageType = dataArr[0].match(/:(.*?);/)[1];
+  const imageType = dataArr[0]?.match(/:(.*?);/)[1];
   const textData = window.atob(dataArr[1]);
   const arrayBuffer = new ArrayBuffer(textData.length);
   const uint8Array = new Uint8Array(arrayBuffer);

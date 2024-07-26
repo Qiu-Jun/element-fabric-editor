@@ -1,15 +1,16 @@
 /*
  * @Author: 秦少卫
  * @Date: 2023-06-22 16:11:40
- * @LastEditors: 秦少卫
- * @LastEditTime: 2024-04-10 17:33:22
+ * @LastEditors: June
+ * @LastEditTime: 2024-07-26 09:19:35
  * @Description: 组内文字编辑
  */
 
 import { fabric } from 'fabric';
+import { pick } from 'lodash-es';
+import { v4 as uuid } from 'uuid';
 import Editor from '../Editor';
 import { isGroup } from '../utils/utils';
-import { v4 as uuid } from 'uuid';
 type IEditor = Editor;
 
 class GroupTextEditorPlugin implements IPluginTempl {
@@ -116,8 +117,18 @@ class GroupTextEditorPlugin implements IPluginTempl {
     tempText.selectAll();
 
     tempText.on('editing:exited', () => {
+      const attrs = tempText.toObject();
+
       // 进入编辑模式时触发
       textObject.set({
+        ...pick(attrs, [
+          'fill',
+          'fontSize',
+          'fontStyle',
+          'fontFamily',
+          'lineHeight',
+          'backgroundColor',
+        ]),
         text: tempText.text,
         visible: true,
       });

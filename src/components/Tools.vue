@@ -203,7 +203,7 @@
           ></path>
         </svg>
       </span>
-      <span
+      <!-- <span
         @click="drawPathText"
         :class="
           state.isDrawingLineMode && state.lineType === 'pathText' && 'bg'
@@ -213,7 +213,7 @@
           :style="{ width: '20px', height: '20px' }"
           name="editor-tumblr"
         />
-      </span>
+      </span> -->
       <span
         @click="freeDraw"
         :class="
@@ -399,19 +399,19 @@ const drawPolygon = () => {
   }
 }
 
-const drawPathText = () => {
-  if (state.lineType === LINE_TYPE.pathText) {
-    state.lineType = false
-    state.isDrawingLineMode = false
-    canvasEditor.endTextPathDraw()
-  } else {
-    endConflictTools()
-    endDrawingLineMode()
-    state.lineType = LINE_TYPE.pathText
-    state.isDrawingLineMode = true
-    canvasEditor.startTextPathDraw()
-  }
-}
+// const drawPathText = () => {
+//   if (state.lineType === LINE_TYPE.pathText) {
+//     state.lineType = false
+//     state.isDrawingLineMode = false
+//     canvasEditor.endTextPathDraw()
+//   } else {
+//     endConflictTools()
+//     endDrawingLineMode()
+//     state.lineType = LINE_TYPE.pathText
+//     state.isDrawingLineMode = true
+//     canvasEditor.startTextPathDraw()
+//   }
+// }
 
 const freeDraw = () => {
   if (state.lineType === LINE_TYPE.freeDraw) {

@@ -3,8 +3,8 @@
  * @Description: 
  * @Date: 2024-07-24 18:36:42
  * @LastEditors: June
- * @LastEditTime: 2024-07-24 20:18:42
- * @FilePath: /element-fabric-editor/src/views/template/index.vue
+ * @LastEditTime: 2024-07-26 08:55:40
+ * @FilePath: \element-fabric-editor\src\views\template\index.vue
 -->
 <template>
   <div class="home">
@@ -166,7 +166,8 @@ const getTmplListHandel = async () => {
   const loadingInstance = ElLoading.service()
   try {
     const res = await getTmplList(qs.stringify(params))
-
+    templList.value = []
+    await nextTick()
     total.value = res.data.meta.pagination.total
     templList.value = res.data.data.map((item) => ({
       id: item.id,

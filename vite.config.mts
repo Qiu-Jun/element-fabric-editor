@@ -3,8 +3,8 @@
  * @Description:
  * @Date: 2024-07-24 17:34:22
  * @LastEditors: June
- * @LastEditTime: 2024-07-25 10:36:31
- * @FilePath: /element-fabric-editor/vite.config.mts
+ * @LastEditTime: 2024-07-26 09:13:33
+ * @FilePath: \element-fabric-editor\vite.config.mts
  */
 
 import { defineConfig } from 'vite'
@@ -12,7 +12,7 @@ import { resolve } from 'path'
 import dotenv from 'dotenv'
 import fs from 'node:fs'
 import { createVitePlugins } from './build/plugins'
-import { wrapperEnv } from './build/getEnv'
+import { wrapperEnv, isProd } from './build/getEnv'
 import autoprefixer from 'autoprefixer'
 import type { UserConfig, ConfigEnv } from 'vite'
 
@@ -24,7 +24,7 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
   const envPrefix = 'APP_'
 
   return {
-    base: './',
+    base: isProd() ? env.APP_BASE_PATH : '/',
     publicDir: 'resources',
     plugins: createVitePlugins(mode, viteEnv),
     server: {

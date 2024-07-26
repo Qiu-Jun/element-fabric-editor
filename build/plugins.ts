@@ -3,20 +3,20 @@
  * @Description:
  * @Date: 2024-07-24 17:38:29
  * @LastEditors: June
- * @LastEditTime: 2024-07-24 19:57:43
- * @FilePath: /element-fabric-editor/build/plugins.ts
+ * @LastEditTime: 2024-07-26 09:29:43
+ * @FilePath: \element-fabric-editor\build\plugins.ts
  */
-import { resolve } from 'path'
-import { PluginOption } from 'vite'
 import Vue from '@vitejs/plugin-vue'
 import VueJsx from '@vitejs/plugin-vue-jsx'
-import { createHtmlPlugin } from 'vite-plugin-html'
-import AutoImport from 'unplugin-auto-import/vite'
-import Components from 'unplugin-vue-components/vite'
-import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+import { resolve } from 'path'
 import UnoCSS from 'unocss/vite'
-import { isProd } from './getEnv'
+import AutoImport from 'unplugin-auto-import/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import Components from 'unplugin-vue-components/vite'
+import { PluginOption } from 'vite'
+import { createHtmlPlugin } from 'vite-plugin-html'
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+import { isProd } from './getEnv'
 
 /**
  * 创建 vite 插件

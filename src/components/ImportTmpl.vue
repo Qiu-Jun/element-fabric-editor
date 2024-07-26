@@ -1,8 +1,8 @@
 <!--
  * @Author: 秦少卫
  * @Date: 2022-09-03 19:16:55
- * @LastEditors: 秦少卫
- * @LastEditTime: 2024-06-12 22:07:28
+ * @LastEditors: June
+ * @LastEditTime: 2024-07-26 09:17:02
  * @Description: 导入模板
 -->
 
@@ -13,7 +13,7 @@
       <el-select
         class="select"
         v-model="typeValue"
-        @change="startGetList"
+        @change="onSelectChange"
         :disabled="pageLoading"
         placeholder="请选择"
       >
@@ -30,7 +30,7 @@
         v-model="searchKeyWord"
         search
         :disabled="pageLoading"
-        @search="startGetList"
+        @keyup.enter="startGetList"
       />
     </div>
     <!-- 列表 -->
@@ -78,7 +78,7 @@ import usePageList from '@/hooks/pageList'
 import { ElLoading, ElMessageBox } from 'element-plus'
 import { useI18n } from 'vue-i18n'
 import { useRouter, useRoute } from 'vue-router'
-import { throttle } from 'lodash-es'
+import { debounce, throttle } from 'lodash-es'
 const router = useRouter()
 const route = useRoute()
 const { t } = useI18n()
@@ -135,6 +135,8 @@ const getTempData = async (info) => {
     loadingInstance?.close()
   )
 }
+
+const onSelectChange = debounce(startGetList, 200)
 
 const getTemplInfo = async () => {
   if (route.query.tempId) {

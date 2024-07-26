@@ -1,16 +1,16 @@
 /*
  * @Author: 秦少卫
  * @Date: 2023-06-20 12:52:09
- * @LastEditors: 秦少卫
- * @LastEditTime: 2024-07-06 17:24:55
+ * @LastEditors: June
+ * @LastEditTime: 2024-07-26 09:29:00
  * @Description: 内部插件
  */
-import { v4 as uuid } from 'uuid';
-import { selectFiles, clipboardText, downFile } from './utils/utils';
 import { fabric } from 'fabric';
+import { v4 as uuid } from 'uuid';
 import Editor from './Editor';
-type IEditor = Editor;
 import { SelectEvent, SelectMode } from './eventType';
+import { clipboardText, downFile, selectFiles } from './utils/utils';
+type IEditor = Editor;
 
 function transformText(objects: any) {
   if (!objects) return;
@@ -175,6 +175,7 @@ class ServersPlugin {
       'editable',
       'extensionType',
       'extension',
+      'verticalAlign',
     ];
   }
 
@@ -301,7 +302,6 @@ class ServersPlugin {
     const workspace = this.canvas
       .getObjects()
       .find((item: fabric.Object) => item.id === 'workspace');
-    console.log('getObjects', this.canvas.getObjects());
     const { left, top, width, height } = workspace as fabric.Object;
     const option = {
       name: 'New Image',
