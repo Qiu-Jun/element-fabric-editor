@@ -3,8 +3,8 @@
  * @Description:
  * @Date: 2024-07-24 17:34:22
  * @LastEditors: June
- * @LastEditTime: 2024-07-26 09:13:33
- * @FilePath: \element-fabric-editor\vite.config.mts
+ * @LastEditTime: 2024-07-26 23:01:27
+ * @FilePath: /element-fabric-editor/vite.config.mts
  */
 
 import { defineConfig } from 'vite'
@@ -24,7 +24,7 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
   const envPrefix = 'APP_'
 
   return {
-    base: isProd() ? env.APP_BASE_PATH : '/',
+    base: isProd(mode) ? env.APP_BASE_PATH : '/',
     publicDir: 'resources',
     plugins: createVitePlugins(mode, viteEnv),
     server: {
