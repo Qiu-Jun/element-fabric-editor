@@ -2,7 +2,7 @@
  * @Author: 秦少卫
  * @Date: 2022-09-03 19:16:55
  * @LastEditors: June
- * @LastEditTime: 2024-07-24 20:28:36
+ * @LastEditTime: 2024-07-26 12:28:23
  * @LastEditors: 秦少卫
  * @LastEditTime: 2023-04-10 14:33:18
  * @Description: 保存文件
@@ -47,14 +47,14 @@
 <script setup name="save-bar">
 import { ArrowDown } from '@element-plus/icons-vue'
 import useSelect from '@/hooks/select'
-// import useMaterial from '@/hooks/useMaterial';
+import useMaterial from '@/hooks/useMaterial'
 import { debounce } from 'lodash-es'
 import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
-import { ElMessage, ElMessageBox } from 'element-plus'
+
 const route = useRoute()
 
-// const { createTmplByCommon, updataTemplInfo, routerToId } = useMaterial();
+const { createTmplByCommon, updataTemplInfo, routerToId } = useMaterial()
 
 const { t } = useI18n()
 
@@ -84,21 +84,23 @@ const cbMap = {
     } catch (error) {
       ElMessage.error('复制失败')
     }
-  }
-  //   async saveMyClould() {
-  //     try {
-  //       Spin.show();
-  //       if (route?.query?.id) {
-  //         await updataTemplInfo(route?.query?.id);
-  //       } else {
-  //         const res = await createTmplByCommon();
-  //         routerToId(res.data.data.id);
-  //       }
-  //     } catch (error) {
-  //       ElMessage.warning('请登录');
-  //     }
-  //     Spin.hide();
-  //   },
+  },
+  async saveMyClould() {
+    const loadingInstance = ElLoading.service()
+    try {
+      if (route?.query?.id) {
+        await updataTemplInfo(route?.query?.id)
+      } else {
+        const res = await createTmplByCommon()
+        routerToId(res.data.data.id)
+      }
+    } catch (error) {
+      console.log(error)
+      ElMessage.warning('请登录')
+      
+    }
+    loadingInstance.close()
+  },
 }
 
 const saveWith = debounce(function (type) {
