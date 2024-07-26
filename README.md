@@ -2,10 +2,12 @@
  * @Description: md
  * @Author: June
  * @Date: 2024-04-24 09:32:13
- * @FilePath: \element-fabric-editor\README.md
- * @LastEditTime: 2024-07-26 09:23:37
+ * @FilePath: /element-fabric-editor/README.md
+ * @LastEditTime: 2024-07-26 23:12:44
  * @LastEditors: June
 -->
+
+[预览地址](https://ikuaitu.github.io/element-fabric-editor/#/)
 
 #### 差异
 > 整体功能是基本一致的，只是更换了`Element Plus`，供大家更多的选择。后面更新仍以`vue-fabric-editor`为主，此项目不定期同步更新。项目存在一定的差异，大概如下
