@@ -6,6 +6,8 @@
  * @LastEditTime: 2024-07-24 18:21:50
  * @FilePath: /element-fabric-editor/build/getEnv.ts
  */
+import dotenv from "dotenv"
+import fs from 'node:fs'
 import path from 'path'
 
 export function isDev(mode: string): boolean {
@@ -14,13 +16,6 @@ export function isDev(mode: string): boolean {
 
 export function isProd(mode: string): boolean {
   return mode === 'production'
-}
-
-/**
- * Whether to generate package preview
- */
-export function isReportMode(): boolean {
-  return process.env.VITE_REPORT === 'true'
 }
 
 // Read all environment variable configuration files to process.env
@@ -48,4 +43,25 @@ export function wrapperEnv(envConf: Recordable): ViteEnv {
  */
 export function getRootPath(...dir: string[]) {
   return path.resolve(process.cwd(), ...dir)
+}
+
+
+export function loadEnv(mode: string, envDir: string) {
+  const envPath = `${envDir}/.env`
+  const localEnvPath = `${envDir}/.env.${mode}`
+
+  const _loadEnv = (envPath) => {
+    const env = dotenv.config({ path: envPath })
+    if (env.error) {
+      throw new Error(`Failed to load env from ${envPath}: ${env.error}`)
+    }
+    return env.parsed
+  }
+
+  const env = [localEnvPath, envPath]
+    .filter((path) => fs.existsSync(path))
+    .map((path) => _loadEnv(path))
+
+  // 将加载的环境变量合并，并添加到Vite配置中
+  return env.reduce((acc, envs) => ({ ...acc, ...envs }), {})
 }

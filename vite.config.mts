@@ -7,21 +7,18 @@
  * @FilePath: /element-fabric-editor/vite.config.mts
  */
 
-import { defineConfig } from 'vite'
-import { resolve } from 'path'
-import dotenv from 'dotenv'
-import fs from 'node:fs'
-import { createVitePlugins } from './build/plugins'
-import { wrapperEnv, isProd } from './build/getEnv'
-import { include, exclude } from './build/optimize'
 import autoprefixer from 'autoprefixer'
-import type { UserConfig, ConfigEnv } from 'vite'
+import { resolve } from 'path'
+import type { ConfigEnv, UserConfig } from 'vite'
+import { defineConfig } from 'vite'
+import { isProd, loadEnv, wrapperEnv } from './build/getEnv'
+import { exclude, include } from './build/optimize'
+import { createVitePlugins } from './build/plugins'
 
 export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
   const root = process.cwd()
   const env = loadEnv(mode, `${root}/env`)!
   const viteEnv = wrapperEnv(env)
-  dotenv.config(env)
   const envPrefix = 'APP_'
 
   return {
@@ -86,23 +83,3 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
     }
   }
 })
-
-function loadEnv(mode: string, envDir: string) {
-  const envPath = `${envDir}/.env`
-  const localEnvPath = `${envDir}/.env.${mode}`
-
-  const _loadEnv = (envPath) => {
-    const env = dotenv.config({ path: envPath })
-    if (env.error) {
-      throw new Error(`Failed to load env from ${envPath}: ${env.error}`)
-    }
-    return env.parsed
-  }
-
-  const env = [localEnvPath, envPath]
-    .filter((path) => fs.existsSync(path))
-    .map((path) => _loadEnv(path))
-
-  // 将加载的环境变量合并，并添加到Vite配置中
-  return env.reduce((acc, envs) => ({ ...acc, ...envs }), {})
-}
