@@ -13,6 +13,7 @@ import dotenv from 'dotenv'
 import fs from 'node:fs'
 import { createVitePlugins } from './build/plugins'
 import { wrapperEnv, isProd } from './build/getEnv'
+import { include, exclude } from './build/optimize'
 import autoprefixer from 'autoprefixer'
 import type { UserConfig, ConfigEnv } from 'vite'
 
@@ -25,7 +26,7 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
 
   return {
     base: isProd(mode) ? env.APP_BASE_PATH : '/',
-    publicDir: 'resources',
+    publicDir: 'public',
     plugins: createVitePlugins(mode, viteEnv),
     server: {
       port: 3000,
@@ -50,6 +51,7 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
       }
     },
     envPrefix,
+    optimizeDeps: { include, exclude },
     resolve: {
       alias: {
         '@': resolve(__dirname, 'src'),
