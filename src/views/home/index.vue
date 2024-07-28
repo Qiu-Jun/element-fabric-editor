@@ -33,6 +33,16 @@
           <History />
         </div>
         <div class="flex items-center">
+          <a
+            class="mr-10px"
+            href="https://github.com/ikuaitu/element-fabric-editor"
+            target="_blank"
+          >
+            <img
+              src="https://img.shields.io/badge/GitHub-ElementFbricEditor-blue"
+              alt="element-fbric-editor"
+            />
+          </a>
           <PreviewCurrent />
           <el-divider direction="vertical" />
           <Save />
@@ -69,7 +79,10 @@
             </el-menu-item>
           </el-menu>
           <!-- 左侧组件 -->
-          <div class="flex-1 px-10px h-full overflow-y-auto" v-show="state.toolsBarShow">
+          <div
+            class="flex-1 px-10px h-full overflow-y-auto"
+            v-show="state.toolsBarShow"
+          >
             <div class="left-panel">
               <KeepAlive>
                 <component :is="leftBarComponent[menuActive]"></component>
