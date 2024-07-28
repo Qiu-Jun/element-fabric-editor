@@ -6,18 +6,18 @@
  * @LastEditTime: 2024-07-25 10:44:49
  * @FilePath: /element-fabric-editor/src/main.ts
  */
-import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router'
-import VueLazyLoad from 'vue3-lazyload'
-import { VueMasonryPlugin } from 'vue-masonry'
-import i18n from './language/index'
-// 自定义字体文件
-import '@/styles/reset.css'
 import '@/assets/fonts/font.css'
 import '@/styles/index.scss'
-import 'virtual:uno.css'
+// 自定义字体文件
+import '@/styles/reset.scss'
 import 'virtual:svg-icons-register'
+import 'virtual:uno.css'
+import { createApp } from 'vue'
+import { VueMasonryPlugin } from 'vue-masonry'
+import VueLazyLoad from 'vue3-lazyload'
+import App from './App.vue'
+import i18n from './language/index'
+import router from './router'
 
 async function bootstrap() {
   const app = createApp(App)
