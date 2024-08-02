@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <el-button @click="test">测试</el-button>
     <el-container>
       <!-- 头部区域 -->
       <el-header>
@@ -69,7 +70,10 @@
             </el-menu-item>
           </el-menu>
           <!-- 左侧组件 -->
-          <div class="flex-1 px-10px h-full overflow-y-auto" v-show="state.toolsBarShow">
+          <div
+            class="flex-1 px-10px h-full overflow-y-auto"
+            v-show="state.toolsBarShow"
+          >
             <div class="left-panel">
               <KeepAlive>
                 <component :is="leftBarComponent[menuActive]"></component>
@@ -199,7 +203,15 @@ import useSelectListen from '@/hooks/useSelectListen'
 import { useI18n } from 'vue-i18n'
 import { apiHost } from '@/constants/app'
 const { t } = useI18n()
+import { useModal } from '@/hooks/useModal'
+const { Modal } = useModal()
 
+const test = () => {
+  Modal.show({
+    title: '我是hook纯函数式模态框',
+    content: 'hello'
+  })
+}
 const APIHOST = apiHost
 
 import Editor, {

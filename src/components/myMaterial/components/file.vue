@@ -36,11 +36,7 @@
     </div>
   </el-tooltip>
   <!-- 迁移文件夹 -->
-  <el-dialog
-    v-model="modalVisable"
-    title="请选择迁移目录"
-    @on-ok="transferRequest"
-  >
+  <el-dialog v-model="modalVisable" title="请选择迁移目录">
     <el-tree-select v-model="fileTypeId" :data="treeData" width="200px" />
     <template #footer>
       <div class="dialog-footer">

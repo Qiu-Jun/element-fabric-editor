@@ -89,6 +89,7 @@ declare module 'vue' {
     Login: typeof import('./../src/components/Login.vue')['default']
     Logo: typeof import('./../src/components/Logo.vue')['default']
     Material: typeof import('./../src/components/Material.vue')['default']
+    Modal: typeof import('./../src/components/Modal/index.vue')['default']
     ModalSize: typeof import('./../src/components/common/ModalSize.vue')['default']
     MyMaterial: typeof import('./../src/components/myMaterial/index.vue')['default']
     MyTempl: typeof import('./../src/components/myMaterial/myTempl.vue')['default']
