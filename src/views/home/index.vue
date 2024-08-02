@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <el-button @click="test">测试</el-button>
+    <!-- <el-button @click="test">测试</el-button> -->
     <el-container>
       <!-- 头部区域 -->
       <el-header>
@@ -203,15 +203,15 @@ import useSelectListen from '@/hooks/useSelectListen'
 import { useI18n } from 'vue-i18n'
 import { apiHost } from '@/constants/app'
 const { t } = useI18n()
-import { useModal } from '@/hooks/useModal'
-const { Modal } = useModal()
+// import { useModal } from '@/hooks/useModal'
+// const { Modal } = useModal()
 
-const test = () => {
-  Modal.show({
-    title: '我是hook纯函数式模态框',
-    content: 'hello'
-  })
-}
+// const test = () => {
+//   Modal.show({
+//     title: '我是hook纯函数式模态框',
+//     content: 'hello'
+//   })
+// }
 const APIHOST = apiHost
 
 import Editor, {
