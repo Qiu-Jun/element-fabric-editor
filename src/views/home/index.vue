@@ -34,6 +34,16 @@
           <History />
         </div>
         <div class="flex items-center">
+          <a
+            class="mr-10px"
+            href="https://github.com/ikuaitu/element-fabric-editor"
+            target="_blank"
+          >
+            <img
+              src="https://img.shields.io/badge/GitHub-ElementFbricEditor-blue"
+              alt="element-fbric-editor"
+            />
+          </a>
           <PreviewCurrent />
           <el-divider direction="vertical" />
           <Save />
