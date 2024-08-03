@@ -23,18 +23,21 @@
       </template>
     </el-dropdown>
     <!-- 插入字符串svg元素 -->
-    <el-dialog
-      v-model="state.showModal"
-      :title="$t('insertFile.modal_tittle')"
-      @on-ok="insertTypeHand('insertSvgStr')"
-      @on-cancel="showModal = false"
-    >
+    <el-dialog v-model="state.showModal" :title="$t('insertFile.modal_tittle')">
       <el-input
         v-model="state.svgStr"
         show-word-limit
         type="textarea"
         :placeholder="$t('insertFile.insert_SVGStr_placeholder')"
       />
+      <template #footer>
+        <div class="dialog-footer">
+          <el-button @click="state.showModal = false">取消</el-button>
+          <el-button type="primary" @click="insertTypeHand('insertSvgStr')">
+            确认
+          </el-button>
+        </div>
+      </template>
     </el-dialog>
   </div>
 </template>
@@ -88,6 +91,7 @@ const HANDLEMAP = {
       canvasEditor.addBaseType(item, {
         scale: true
       })
+      state.showModal = false
     })
   }
 }
