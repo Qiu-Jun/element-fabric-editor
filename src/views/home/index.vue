@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <!-- <el-button @click="test">测试</el-button> -->
+    <!-- <el-button @click="test">测试UseModal</el-button> -->
     <el-container>
       <!-- 头部区域 -->
       <el-header>
@@ -219,7 +219,7 @@ const { t } = useI18n()
 // const test = () => {
 //   Modal.show({
 //     title: '我是hook纯函数式模态框',
-//     content: 'hello'
+//     content: 'Tools'
 //   })
 // }
 const APIHOST = apiHost

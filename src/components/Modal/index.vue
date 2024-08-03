@@ -1,10 +1,20 @@
 <template>
-  <teleport :to="props?.getContainer || 'body'">
+  <teleport to="body">
     <el-dialog
       v-bind="omit(props, ['open', 'onCancel', 'onOk', 'onUpdate:open'])"
       v-model="openModel"
+      :title="String($attrs.title)"
+      destroy-on-close
+      center
+      @close="handleCancel"
     >
-      <slot> 222 </slot>
+      <template v-if="typeof $attrs.content === 'string'">
+        <slot />
+      </template>
+      <template v-else>
+        <component :is="$attrs.content" />
+      </template>
+
       <template #footer>
         <div class="dialog-footer">
           <el-button @click="handleCancel">取消</el-button>
@@ -17,17 +27,16 @@
 
 <script lang="ts" name="Modal" setup>
 import { omit, debounce } from 'lodash-es'
-const emits = defineEmits(['update:open', 'update:fullscreen', 'ok', 'cancel'])
-const attr = useAttrs()
+const emits = defineEmits(['update:open', 'ok', 'cancel'])
 
 const props = defineProps({})
+
 const openModel = defineModel<boolean>('open')
 
 const handleCancel = debounce(function () {
   emits('cancel', false)
 }, 250)
 const handleConfirm = debounce(function () {
-  console.log('ok')
+  emits('ok')
 }, 250)
-console.log(openModel)
 </script>

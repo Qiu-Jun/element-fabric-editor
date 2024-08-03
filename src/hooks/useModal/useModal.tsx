@@ -15,8 +15,10 @@ export const useModal = () => {
   const setProps = async (_props: any) => {
     const instance = await getModalInstance()
     if (Object.is(instance, modalRef.value)) {
+      // @ts-ignore
       instance?.setProps?.(_props)
     } else {
+      // @ts-ignore
       instance?.exposed?.setProps?.(_props)
     }
   }

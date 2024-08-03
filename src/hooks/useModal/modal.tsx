@@ -25,7 +25,7 @@ export const CModal = defineComponent({
       const _props = unref(getProps)
 
       return {
-        ...omit(_props, ['onCancel', 'onOk', 'closeModal', 'content']),
+        ...omit(_props, ['onCancel', 'onOk', 'closeModal']),
         open: _props.open,
         // confirmLoading: confirmLoading.value,
         onCancel: handleCancel,
@@ -38,13 +38,10 @@ export const CModal = defineComponent({
     }
 
     const setProps = (props: HookModalProps) => {
-      console.log(props)
       propsRef.value = {
         ...unref(getProps),
         ...props
       }
-
-      console.log('bindValues', bindValues.value)
     }
 
     watch(
