@@ -76,6 +76,20 @@ pnpm commit # 使用此命令编写commit
             <br />
             <sub><b>Qiu-Jun</b></sub>
         </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/NoahCodeGG">
+            <img src="https://avatars.githubusercontent.com/u/51156988?v=4" width="80;" alt="NoahCodeGG"/>
+            <br />
+            <sub><b>NoahCodeGG</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/nihaojob">
+            <img src="https://avatars.githubusercontent.com/u/13534626?v=4" width="80;" alt="nihaojob"/>
+            <br />
+            <sub><b>nihaojob</b></sub>
+        </a>
     </td></tr>
 </table>
 <!-- readme: collaborators,contributors -end -->
