@@ -126,9 +126,9 @@ const getTempData = async (info) => {
   })
   const infoRes = await getInfo(info.id)
   if (route.query.admin) {
-    router.replace('/design/editor?tempId=' + info.id + '&admin=true')
+    router.replace('/?tempId=' + info.id + '&admin=true')
   } else {
-    router.replace('/design/editor?tempId=' + info.id)
+    router.replace('/?tempId=' + info.id)
   }
   canvasEditor.loadJSON(
     JSON.stringify(infoRes.data.data.attributes.json),
