@@ -1,10 +1,3 @@
-<!--
- * @Author: 秦少卫
- * @Date: 2024-05-30 10:48:00
- * @LastEditors: June
- * @LastEditTime: 2024-07-25 23:16:55
- * @Description: 模板文件
--->
 <template>
   <el-tooltip :content="props.name" placement="top">
     <div class="file-type-box">
@@ -57,8 +50,7 @@ import { getUserFileTypeTree, updataTempl } from '@/api/user'
 import { ElMessageBox, ElLoading, ElMessage } from 'element-plus'
 const { t } = useI18n()
 const { canvasEditor } = useSelect()
-const { reNameFileType, removeTemplInfo, routerToId, getTemplInfo } =
-  useMaterial()
+const { reNameFileType, removeTemplInfo, routerToId, getTemplInfo } = useMaterial()
 
 const props = defineProps({
   name: {
@@ -99,11 +91,16 @@ const reNameFile = () => {
   fileName.value = props.name
   ElMessageBox.confirm({
     title: '重命名',
-    message: h(Input, {
+    message: h(ElInput, {
+      ...ElInput.$el,
+      ...ElInput.$attrs,
       size: 'large',
-      modelValue: fileName,
+      modelValue: fileName.value,
       autofocus: true,
-      placeholder: '请输入文件名称'
+      placeholder: '请输入文件名称',
+      'onUpdate:modelValue': ($event) => {
+        fileName.value = $event
+      }
     })
   }).then(async () => {
     if (fileName.value === '') {
@@ -121,12 +118,12 @@ const deleteFile = async () => {
 }
 
 const beforeClearTip = () => {
-  Modal.confirm({
-    title: t('tip'),
-    content: `<p>${t('replaceTip')}</p>`,
-    okText: t('ok'),
-    cancelText: t('cancel'),
-    onOk: () => getTempData()
+  ElMessageBox.confirm(t('replaceTip'), t('tip'), {
+    confirmButtonText: t('ok'),
+    cancelButtonText: t('cancel'),
+    type: 'warning'
+  }).then(() => {
+    getTempData()
   })
 }
 
@@ -137,10 +134,7 @@ const getTempData = async () => {
   })
   const data = await getTemplInfo(props.itemId)
   routerToId(props.itemId)
-  canvasEditor.loadJSON(
-    JSON.stringify(data.data.attributes.json),
-    loadingInstance.close
-  )
+  canvasEditor.loadJSON(JSON.stringify(data.data.attributes.json), loadingInstance.close)
 }
 
 const modalVisable = ref(false)
