@@ -21,7 +21,7 @@
           <div class="left font-selector">
             <el-select
               v-model="baseAttr.fontFamily"
-              @on-change="changeFontFamily"
+              @change="changeFontFamily"
             >
               <el-option
                 v-for="item in fontsList"
