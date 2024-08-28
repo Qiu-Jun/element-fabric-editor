@@ -27,7 +27,7 @@
           v-model="baseAttr.linkData[0]"
           filterable
           allow-create
-          @on-change="changeCommon('linkData', baseAttr.linkData)"
+          @change="changeCommon('linkData', baseAttr.linkData)"
         >
           <el-option value="src"></el-option>
           <el-option value="text"></el-option>
