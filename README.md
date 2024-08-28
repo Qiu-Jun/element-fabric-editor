@@ -85,6 +85,13 @@ pnpm commit # 使用此命令编写commit
         </a>
     </td>
     <td align="center">
+        <a href="https://github.com/ijry">
+            <img src="https://avatars.githubusercontent.com/u/3102798?v=4" width="80;" alt="ijry"/>
+            <br />
+            <sub><b>ijry</b></sub>
+        </a>
+    </td>
+    <td align="center">
         <a href="https://github.com/nihaojob">
             <img src="https://avatars.githubusercontent.com/u/13534626?v=4" width="80;" alt="nihaojob"/>
             <br />
