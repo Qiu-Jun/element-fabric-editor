@@ -2,8 +2,8 @@
  * @Description: md
  * @Author: June
  * @Date: 2024-04-24 09:32:13
- * @FilePath: /element-fabric-editor/README.md
- * @LastEditTime: 2024-07-26 23:12:44
+ * @FilePath: \element-fabric-editor\README.md
+ * @LastEditTime: 2024-08-30 09:56:03
  * @LastEditors: June
 -->
 
@@ -17,7 +17,7 @@
 + 因为ui库风格不一，所以有些风格可能不同，如主题色，边距等
 
 #### 同步情况
-+ fix(数字): 增加上下标自定义属性  63481c48313fb6726d444fc86f56e0945973d866
++ Update README.md  09fcdc1fba98c21cea9b09209d81df7a9158ee25(md update)
 
 #### 使用
 

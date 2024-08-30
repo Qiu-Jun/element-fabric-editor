@@ -1,14 +1,14 @@
 /*
  * @Author: June
- * @Description: 
+ * @Description:
  * @Date: 2024-07-25 14:39:41
- * @LastEditTime: 2024-07-26 12:15:29
+ * @LastEditTime: 2024-08-30 09:45:02
  * @LastEditors: June
  * @FilePath: \element-fabric-editor\src\hooks\select.ts
  */
-import Editor from '@/lib/core';
-import { useI18n } from 'vue-i18n';
-import { Selector } from './useSelectListen';
+import Editor from '@/lib/core'
+import { useI18n } from 'vue-i18n'
+import { Selector } from './useSelectListen'
 
 // interface Selector {
 //   mSelectMode: (typeof SelectMode)[keyof typeof SelectMode];
@@ -19,15 +19,15 @@ import { Selector } from './useSelectListen';
 // }
 
 export default function useSelect() {
-  const fabric = inject('fabric');
-  const { t } = useI18n();
-  const canvasEditor = inject('canvasEditor') as Editor;
-  const mixinState = inject('mixinState') as Selector;
+  const fabric = inject('fabric')
+  const { t } = useI18n()
+  const canvasEditor = inject('canvasEditor') as Editor
+  const mixinState = inject('mixinState') as Selector
 
   return {
     fabric,
     canvasEditor,
     mixinState,
-    t,
-  };
+    t
+  }
 }
