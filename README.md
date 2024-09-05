@@ -3,7 +3,7 @@
  * @Author: June
  * @Date: 2024-04-24 09:32:13
  * @FilePath: \element-fabric-editor\README.md
- * @LastEditTime: 2024-08-30 09:56:03
+ * @LastEditTime: 2024-09-05 13:30:18
  * @LastEditors: June
 -->
 
@@ -17,7 +17,7 @@
 + 因为ui库风格不一，所以有些风格可能不同，如主题色，边距等
 
 #### 同步情况
-+ Update README.md  09fcdc1fba98c21cea9b09209d81df7a9158ee25(md update)
++ perf: 优化插件use方法  c3ca1a9e3b8a805099f17566140285ec013a3784
 
 #### 使用
 
