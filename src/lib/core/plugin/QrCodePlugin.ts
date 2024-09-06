@@ -2,16 +2,16 @@
  * @Author: 秦少卫
  * @Date: 2024-06-06 19:58:26
  * @LastEditors: June
- * @LastEditTime: 2024-07-26 09:00:53
+ * @LastEditTime: 2024-09-06 12:16:37
  * @Description: 二维码生成工具
  */
 
-import { fabric } from 'fabric';
-import QRCodeStyling from 'qr-code-styling';
-import Editor from '../Editor';
-import { blobToBase64 } from '../utils/utils';
+import { fabric } from 'fabric'
+import QRCodeStyling from 'qr-code-styling'
+import Editor from '../Editor'
+import { blobToBase64 } from '../utils/utils'
 
-type IEditor = Editor;
+type IEditor = Editor
 
 // 二维码生成参数
 
@@ -21,46 +21,49 @@ enum DotsType {
   classy = 'classy',
   classy_rounded = 'classy-rounded',
   square = 'square',
-  extra_rounded = 'extra-rounded',
+  extra_rounded = 'extra-rounded'
 }
 
 enum CornersType {
   dot = 'dot',
   square = 'square',
-  extra_rounded = 'extra-rounded',
+  extra_rounded = 'extra-rounded'
 }
 
 enum cornersDotType {
   dot = 'dot',
-  square = 'square',
+  square = 'square'
 }
 
 enum errorCorrectionLevelType {
   L = 'L',
   M = 'M',
   Q = 'Q',
-  H = 'H',
+  H = 'H'
 }
 
 class QrCodePlugin implements IPluginTempl {
-  static pluginName = 'QrCodePlugin';
-  static apis = ['addQrCode', 'setQrCode', 'getQrCodeTypes'];
-  constructor(public canvas: fabric.Canvas, public editor: IEditor) {}
+  static pluginName = 'QrCodePlugin'
+  static apis = ['addQrCode', 'setQrCode', 'getQrCodeTypes']
+  constructor(
+    public canvas: fabric.Canvas,
+    public editor: IEditor
+  ) {}
 
   async hookTransform(object: any) {
     if (object.extensionType === 'qrcode') {
-      const paramsOption = this._paramsToOption(object.extension);
-      const url = await this._getBase64Str(paramsOption);
-      object.src = url;
+      const paramsOption = this._paramsToOption(object.extension)
+      const url = await this._getBase64Str(paramsOption)
+      object.src = url
     }
   }
 
   async _getBase64Str(options: any): Promise<string> {
-    const qrCode = new QRCodeStyling(options);
-    const blob = await qrCode.getRawData('png');
-    if (!blob) return '';
-    const base64Str = (await blobToBase64(blob)) as string;
-    return base64Str || '';
+    const qrCode = new QRCodeStyling(options)
+    const blob = await qrCode.getRawData('png')
+    if (!blob) return ''
+    const base64Str = (await blobToBase64(blob)) as string
+    return base64Str || ''
   }
 
   _defaultBarcodeOption() {
@@ -69,14 +72,14 @@ class QrCodePlugin implements IPluginTempl {
       width: 300,
       margin: 10,
       errorCorrectionLevel: 'M',
-      dotsColor: 'black',
+      dotsColor: '#000000',
       dotsType: 'rounded',
-      cornersSquareColor: 'black',
+      cornersSquareColor: '#000000',
       cornersSquareType: 'square',
-      cornersDotColor: 'black',
+      cornersDotColor: '#000000',
       cornersDotType: 'square',
-      background: '#ffffff',
-    };
+      background: '#ffffff'
+    }
   }
 
   _paramsToOption(option: any) {
@@ -87,55 +90,55 @@ class QrCodePlugin implements IPluginTempl {
       data: option.data,
       margin: option.margin,
       qrOptions: {
-        errorCorrectionLevel: option.errorCorrectionLevel,
+        errorCorrectionLevel: option.errorCorrectionLevel
       },
       // 点
       dotsOptions: {
         color: option.dotsColor,
-        type: option.dotsType,
+        type: option.dotsType
       },
       // 三个角
       cornersSquareOptions: {
         color: option.cornersSquareColor,
-        type: option.cornersSquareType,
+        type: option.cornersSquareType
       },
       // 圆点选项
       cornersDotOptions: {
         color: option.cornersDotColor,
-        type: option.cornersDotType,
+        type: option.cornersDotType
       },
       // 背景
       backgroundOptions: {
-        color: option.background,
-      },
-    };
+        color: option.background
+      }
+    }
   }
 
   async addQrCode() {
-    const option = this._defaultBarcodeOption();
-    const paramsOption = this._paramsToOption(option);
-    const url = await this._getBase64Str(paramsOption);
+    const option = this._defaultBarcodeOption()
+    const paramsOption = this._paramsToOption(option)
+    const url = await this._getBase64Str(paramsOption)
     fabric.Image.fromURL(
       url,
       (imgEl) => {
         imgEl.set({
           extensionType: 'qrcode',
-          extension: option,
-        });
-        imgEl.scaleToWidth(this.editor.getWorkspase().getScaledWidth() / 2);
-        this.canvas.add(imgEl);
-        this.canvas.setActiveObject(imgEl);
-        this.editor.position('center');
+          extension: option
+        })
+        imgEl.scaleToWidth(this.editor.getWorkspase().getScaledWidth() / 2)
+        this.canvas.add(imgEl)
+        this.canvas.setActiveObject(imgEl)
+        this.editor.position('center')
       },
       { crossOrigin: 'anonymous' }
-    );
+    )
   }
 
   async setQrCode(option: any) {
     try {
-      const paramsOption = this._paramsToOption(option);
-      const url = await this._getBase64Str(paramsOption);
-      const activeObject = this.canvas.getActiveObjects()[0];
+      const paramsOption = this._paramsToOption(option)
+      const url = await this._getBase64Str(paramsOption)
+      const activeObject = this.canvas.getActiveObjects()[0]
       fabric.Image.fromURL(
         url,
         (imgEl) => {
@@ -143,17 +146,17 @@ class QrCodePlugin implements IPluginTempl {
             left: activeObject.left,
             top: activeObject.top,
             extensionType: 'qrcode',
-            extension: { ...option },
-          });
-          imgEl.scaleToWidth(activeObject.getScaledWidth());
-          this.editor.del();
-          this.canvas.add(imgEl);
-          this.canvas.setActiveObject(imgEl);
+            extension: { ...option }
+          })
+          imgEl.scaleToWidth(activeObject.getScaledWidth())
+          this.editor.del()
+          this.canvas.add(imgEl)
+          this.canvas.setActiveObject(imgEl)
         },
         { crossOrigin: 'anonymous' }
-      );
+      )
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   }
 
@@ -162,13 +165,13 @@ class QrCodePlugin implements IPluginTempl {
       DotsType: Object.values(DotsType),
       CornersType: Object.values(CornersType),
       cornersDotType: Object.values(cornersDotType),
-      errorCorrectionLevelType: Object.values(errorCorrectionLevelType),
-    };
+      errorCorrectionLevelType: Object.values(errorCorrectionLevelType)
+    }
   }
 
   destroy() {
-    console.log('pluginDestroy');
+    console.log('pluginDestroy')
   }
 }
 
-export default QrCodePlugin;
+export default QrCodePlugin
