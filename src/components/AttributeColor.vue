@@ -1,8 +1,8 @@
 <!--
  * @Author: 秦少卫
  * @Date: 2024-05-21 10:59:48
- * @LastEditors: June 1601745371@qq.com
- * @LastEditTime: 2024-06-20 17:46:45
+ * @LastEditors: June
+ * @LastEditTime: 2024-09-06 12:28:44
  * @Description: 渐变
 -->
 
@@ -50,7 +50,7 @@ const { fabric, mixinState, canvasEditor } = useSelect()
 const angleKey = 'gradientAngle'
 // 属性值
 const baseAttr = reactive({
-  fill: '#ffffffff'
+  fill: ''
 })
 
 // 属性获取
