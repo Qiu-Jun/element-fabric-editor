@@ -1,13 +1,13 @@
 <!--
  * @Author: 秦少卫
  * @Date: 2024-04-25 15:30:54
- * @LastEditors: 秦少卫
- * @LastEditTime: 2024-05-30 11:53:28
+ * @LastEditors: June
+ * @LastEditTime: 2024-09-12 10:36:56
  * @Description: 我的素材
 -->
 
 <template>
-  <div class="my-material" v-if="isLogin">
+  <div class="box-border p-10px my-material" v-if="isLogin">
     <el-tabs v-model="type">
       <el-tab-pane label="模板" name="templ">
         <myTempl v-if="type === 'templ'"></myTempl>

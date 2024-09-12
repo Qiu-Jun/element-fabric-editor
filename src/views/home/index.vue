@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="editor-wrap">
     <!-- <el-button @click="test">测试UseModal</el-button> -->
     <el-container>
       <!-- 头部区域 -->
@@ -53,52 +53,45 @@
       </el-header>
       <el-main>
         <!-- 左侧区域 -->
-        <div
-          v-if="state.show"
-          :class="`left-bar ${state.toolsBarShow && 'show-tools-bar'}`"
-        >
-          <!-- 左侧菜单 -->
-          <el-menu
-            :default-active="menuActive"
-            @select="showToolsBar"
-            width="65px"
+        <section class="flex justify-start max-w-384px">
+          <ul
+            class="w-72px flex flex-col items-center pt-10px box-border border-r-#eef2f8 border-r-solid border-r-1px"
           >
-            <el-menu-item
-              v-for="item in leftBar"
-              :key="item.key"
-              :index="item.key"
+            <li
+              class="flex flex-col items-center mb-20px cursor-pointer"
+              v-for="tab in tabList"
+              :key="tab.type"
+              @click="tabChange(tab.type)"
             >
-              <template #title>
-                <span class="mt-10px">
-                  <SvgIcon
-                    :style="{ width: '20px', height: '20px' }"
-                    :name="item.icon"
-                  />
-                </span>
-                <span> {{ item.name }} </span>
-              </template>
-            </el-menu-item>
-          </el-menu>
-          <!-- 左侧组件 -->
-          <div
-            class="flex-1 px-10px h-full overflow-y-auto"
-            v-show="state.toolsBarShow"
-          >
-            <div class="left-panel">
-              <KeepAlive>
-                <component :is="leftBarComponent[menuActive]"></component>
-              </KeepAlive>
-            </div>
+              <div
+                class="px-10px f-center py-4px rounded-10px tab-item editor-item"
+                :class="[currentTab === tab.type ? 'tab-item_active' : '']"
+              >
+                <SvgIcon
+                  :style="{ width: '24px', height: '24px' }"
+                  :name="tab.icon"
+                  :color="currentTab === tab.type ? '#000' : '#333'"
+                />
+              </div>
+              <span
+                class="text-12px"
+                :class="[currentTab === tab.type ? 'font-bold' : '']"
+                >{{ tab.name }}</span
+              >
+            </li>
+          </ul>
+          <div class="w-312px relative">
+            <component :is="tabComMap[currentTab]" />
+            <!-- 关闭按钮 -->
+            <!-- <div
+              :class="`close-btn left-btn ${toolsBarShow && 'left-btn-open'}`"
+              @click="hideToolsBar"
+            ></div> -->
           </div>
-          <!-- 关闭按钮 -->
-          <div
-            :class="`close-btn left-btn ${state.toolsBarShow && 'left-btn-open'}`"
-            @click="hideToolsBar"
-          ></div>
-        </div>
+        </section>
 
         <!-- 画布区域 -->
-        <div class="flex-1 w-full relative overflow-hidden" id="workspace">
+        <section class="flex-1 w-full relative overflow-hidden" id="workspace">
           <div class="relative">
             <div class="absolute w-full z-2 inside-shadow"></div>
             <canvas
@@ -109,10 +102,13 @@
             <DragMode v-if="state.show" />
             <Zoom />
           </div>
-        </div>
+        </section>
 
         <!-- 属性区域 380-->
-        <div class="right-bar" v-show="state.attrBarShow">
+        <section
+          class="right-bar flex-basis-304px box-border overflow-hidden p-10px"
+          v-show="state.attrBarShow"
+        >
           <div v-if="state.show" style="padding-top: 10px">
             <!-- 未选择元素时 展示背景设置 -->
             <div v-show="!mixinState.mSelectMode">
@@ -187,43 +183,20 @@
               >
             </div>
           </div>
-        </div>
-
-        <!-- 右侧关闭按钮 -->
-        <div
-          :class="`close-btn right-btn ${state.attrBarShow && 'right-btn-open'}`"
-          @click="switchAttrBar"
-        ></div>
+        </section>
       </el-main>
     </el-container>
   </div>
 </template>
 
-<script name="Home" setup>
+<script lang="ts" setup>
 import { useRoute } from 'vue-router'
 import { fabric } from 'fabric'
-import ImportTmpl from '@/components/ImportTmpl.vue'
-import Tools from '@/components/Tools.vue'
-import Material from '@/components/Material.vue'
-import FontStyle from '@/components/FontStyle.vue'
-import Layer from '@/components/Layer.vue'
-import MyMaterial from '@/components/myMaterial/index.vue'
+import { debounce } from 'lodash-es'
 // hooks
 import useSelectListen from '@/hooks/useSelectListen'
 import { useI18n } from 'vue-i18n'
 import { apiHost } from '@/constants/app'
-const { t } = useI18n()
-// import { useModal } from '@/hooks/useModal'
-// const { Modal } = useModal()
-
-// const test = () => {
-//   Modal.show({
-//     title: '我是hook纯函数式模态框',
-//     content: 'Tools'
-//   })
-// }
-const APIHOST = apiHost
-
 import Editor, {
   DringPlugin,
   AlignGuidLinePlugin,
@@ -257,6 +230,37 @@ import Editor, {
   LockPlugin,
   AddBaseTypePlugin
 } from '@/lib/core'
+import { Add, Template, Element, Ai, Text, Image, Mine } from './components'
+import { editorTabs } from '@/enums/editor'
+import { tabList } from '@/constants/editor'
+import { useEditorStore } from '@/store/modules/editor'
+
+defineOptions({
+  name: 'Home'
+})
+
+const editorStore = useEditorStore()
+const { t } = useI18n()
+
+// 左侧tab相关
+const currentTab = ref(editorTabs.template)
+const tabChange = debounce(function (type: editorTabs) {
+  currentTab.value = type
+}, 250)
+const tabComMap: Record<editorTabs, any> = {
+  [editorTabs.add]: Add,
+  [editorTabs.template]: Template,
+  [editorTabs.element]: Element,
+  [editorTabs.ai]: Ai,
+  [editorTabs.text]: Text,
+  [editorTabs.image]: Image,
+  [editorTabs.mine]: Mine
+}
+
+// import { useModal } from '@/hooks/useModal'
+// const { Modal } = useModal()
+
+const APIHOST = apiHost
 
 // 创建编辑器
 const canvasEditor = new Editor()
@@ -271,14 +275,14 @@ const state = reactive({
 
 // 左侧菜单渲染
 const menuActive = ref('ImportTmpl')
-const leftBarComponent = {
-  ImportTmpl,
-  Tools,
-  Material,
-  FontStyle,
-  Layer,
-  MyMaterial
-}
+// const leftBarComponent = {
+//   ImportTmpl,
+//   Tools,
+//   Material,
+//   FontStyle,
+//   Layer,
+//   MyMaterial
+// }
 
 // fix: 修复vue-i18n function "t" not reactive inside ref object
 // https://github.com/intlify/vue-i18n/issues/1396#issuecomment-1716123143
@@ -370,6 +374,7 @@ onMounted(() => {
     .use(LockPlugin)
     .use(AddBaseTypePlugin)
 
+  editorStore.setEditor(canvasEditor)
   state.show = true
   // 默认打开标尺
   if (state.ruler) {
@@ -417,7 +422,12 @@ provide('mixinState', mixinState)
 </script>
 
 <style lang="scss" scoped>
-.home {
+.editor-wrap {
+  .tab-item {
+    &_active {
+      background-color: #e8eaec !important;
+    }
+  }
   :deep(.el-header) {
     --height: 45px;
     padding: 0 10px;
@@ -442,7 +452,9 @@ provide('mixinState', mixinState)
     height: 60px;
     line-height: 20px;
   }
-
+  .editor-item:hover {
+    background: rgba(0, 0, 0, 0.12);
+  }
   // 画布内阴影
   .inside-shadow {
     box-shadow: inset 0 0 9px 2px #0000001f;
@@ -493,7 +505,7 @@ provide('mixinState', mixinState)
     }
   }
   // 右侧容器
-  .right-bar {
+  .right-bar flex-basis-264px box-border overflow-hidden p-10px {
     box-sizing: border-box;
     width: 304px;
     height: 100%;
@@ -524,17 +536,6 @@ provide('mixinState', mixinState)
     &.left-btn-open {
       background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAACACAMAAABOb9vcAAAAhFBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8AAADHx8cODg50dHTx8fF2dnZ1dXWWlpZHR0c4ODhQpkZ5AAAAIXRSTlMA9t+/upkRAnPq5NXDfDEsKQjMeGlRThkMsquljTwzIWhBHpjgAAABJElEQVRYw+3YyW7CQBCEYbxig8ELGJyQkJRJyPb+75dj3zy/lD7kMH3+ZEuzSFO1mlZwhjOE2uwhVHJYMygNVwilhz2EUvNaMigledUFoE1anKYAtA9nVRuANpviOQBt0t2ZQSnZ9QxK6Qih9LSGUHkJobYlhGp6CPW4hlAVhckLhMop1InCjEK1FBYU1hSqo/BI4YXCjMIthTWFijDCCB3g7fuO4O1t/rkvQXPz/LUIzX0oAM0tQHOfCkBzC9DcuwLQXACao9Dv1yb9lsek2xaaxMcMH1x6Ff79dY0wwgj/DGv3p2tG4cX9wd55h4rCO/hk3uEs9w6QlXPIbXrfIJ6XrmVBOtJCA1YkXqVLkh1aUgyNk1fV1BxLxzpsuNLKzrME/AWr0ywwvyj83AAAAABJRU5ErkJggg==);
       transform: rotateY(360deg);
-    }
-
-    &.right-btn {
-      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAACACAYAAAB5sSvuAAAAAXNSR0IArs4c6QAAAFBlWElmTU0AKgAAAAgAAgESAAMAAAABAAEAAIdpAAQAAAABAAAAJgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAKKADAAQAAAABAAAAgAAAAAAobJzlAAABWWlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iWE1QIENvcmUgNi4wLjAiPgogICA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPgogICAgICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgICAgICAgICB4bWxuczp0aWZmPSJodHRwOi8vbnMuYWRvYmUuY29tL3RpZmYvMS4wLyI+CiAgICAgICAgIDx0aWZmOk9yaWVudGF0aW9uPjE8L3RpZmY6T3JpZW50YXRpb24+CiAgICAgIDwvcmRmOkRlc2NyaXB0aW9uPgogICA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgoZXuEHAAADf0lEQVR4Ae2cvYsTQRjGE7FQkICFB1pZRyzEJkUKmzOpBEHwX9DCQkmChf4JahewsLpWFOQUzwMRPEgEy0PLpPADvEISDrVyfZ6cK0tIZrI7u7MPMi+8mb35uPnlmXczyeXmrURRdKyibAB8Dz8pywg42if4OUnIGd7Bww8Ut+GHpEATgPEll/y8DGRMtaB8hrryl30B2HzVW1Rcgx8vQ9UqaVac+Cf67cC34C+q1erHFcc5dUsDOD/RGBWv4M/hrwG8jzJ3cwFMwlDdd/BN+BZgd5ONLtd5Ac4zfEYFld0ALMMisxUFmAQa44dHdMB+TTasdM2bxJNxI7gDP7ISWNzJE1xymhF+uBzPbyvL2NZOA+oJIO/BrfP7iEGTSNtovIrY/L6sU9mA5PoAby6DtEq87JnlWF/H7+K+v/DmUQDkc23CNxbFpAogIa/Ab/IiaQoxmOThlnkG8TiKK5UUJNNR+MMYjqUaIJnWEYuXeEFTBCTXv1hUi0HCxXYWsbirqiAhb/BBWcE9KLimDEgB68pLTMAL6oBNdcBT6oBr6oAn1O9i2a2Od/DM1Jc4KBivVOYyLHFm6f4ODAoGBV0VcB0fYjAo6KqA6/gQg0FBVwVcx4cYDAq6KuA6/v+Mwel0Wmm325XhcOgqkH08/h6cyiaTSdRoNPhvBFGtVosGg0Gq8Wk7V9IO6Pf7MzgC+oBMDcgn1Ov1vEFmAvQJmRmQkN1ut3AlnQB9QDoDErLT6RSmZC6ARULmBlgUpPxWl5uCRcVhLoBFwTFsnAGLfi10AiwazklBX/txJgV9wWVSUP7tlvwbVspOyFarVfi7ac4Vvquzfyoy95DfiwOgeQHtrUFBu0bmHkFBsz721qCgXSNzj6CgWR97a1DQrpG5R1DQrI+9NSho18jcIyho1sfauqeuoDzgN3UFv6gD7qh/cK8rA84OGygv8VO+CCkrKH3g5Q1P41BB1SV+QDia4hJvQ72LB3h6gPIH/+5CvVGsntoSPwYQzxr/VgRkJoF1wP1KwvFa4SaRPgDNI+RLT2dTwTJfB+9j/jaWden5dgIe5oNnG2O+WwCb7bXWuflliSfLlAjCh4JULHMqjaIAc0tGkhdgnM6FyXI2EV+5pXNxAeTSMSHOSzg3+H2UuVsaQKq0A/eaUmiVb9yZlOk6vJSkTCZA2bRWsonBpFOrySan+wNoJmOM0LyBGwAAAABJRU5ErkJggg==);
-      transform: rotateY(180deg);
-      right: 0px;
-    }
-
-    &.right-btn-open {
-      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAACACAMAAABOb9vcAAAAhFBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8AAADHx8cODg50dHTx8fF2dnZ1dXWWlpZHR0c4ODhQpkZ5AAAAIXRSTlMA9t+/upkRAnPq5NXDfDEsKQjMeGlRThkMsquljTwzIWhBHpjgAAABJElEQVRYw+3YyW7CQBCEYbxig8ELGJyQkJRJyPb+75dj3zy/lD7kMH3+ZEuzSFO1mlZwhjOE2uwhVHJYMygNVwilhz2EUvNaMigledUFoE1anKYAtA9nVRuANpviOQBt0t2ZQSnZ9QxK6Qih9LSGUHkJobYlhGp6CPW4hlAVhckLhMop1InCjEK1FBYU1hSqo/BI4YXCjMIthTWFijDCCB3g7fuO4O1t/rkvQXPz/LUIzX0oAM0tQHOfCkBzC9DcuwLQXACao9Dv1yb9lsek2xaaxMcMH1x6Ff79dY0wwgj/DGv3p2tG4cX9wd55h4rCO/hk3uEs9w6QlXPIbXrfIJ6XrmVBOtJCA1YkXqVLkh1aUgyNk1fV1BxLxzpsuNLKzrME/AWr0ywwvyj83AAAAABJRU5ErkJggg==);
-      right: 304px;
     }
   }
 }

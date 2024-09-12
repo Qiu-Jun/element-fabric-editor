@@ -1,13 +1,13 @@
 <!--
- * @Author: 秦少卫
- * @Date: 2022-09-03 19:16:55
+ * @Author: June
+ * @Description: 
+ * @Date: 2024-09-03 12:05:38
+ * @LastEditTime: 2024-09-12 10:22:03
  * @LastEditors: June
- * @LastEditTime: 2024-08-30 09:53:23
- * @Description: 导入模板
+ * @FilePath: \element-fabric-editor\src\views\home\components\Template.vue
 -->
-
 <template>
-  <div>
+  <div class="box-border p-10px">
     <!-- 搜索组件 -->
     <div class="search-box">
       <el-select

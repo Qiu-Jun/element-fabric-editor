@@ -1,5 +1,13 @@
+<!--
+ * @Author: June
+ * @Description: 
+ * @Date: 2024-09-03 12:12:47
+ * @LastEditTime: 2024-09-12 10:37:40
+ * @LastEditors: June
+ * @FilePath: \element-fabric-editor\src\views\home\components\Element.vue
+-->
 <template>
-  <div>
+  <div class="box-border p-10px">
     <el-divider content-position="left">{{ $t('common_elements') }}</el-divider>
     <div class="tool-box">
       <span @click="() => addText()" :draggable="true" @dragend="addText">
@@ -281,7 +289,7 @@
 </template>
 
 <script setup name="Tools">
-import { getPolygonVertices } from '../utils/math'
+import { getPolygonVertices } from '@/utils/math'
 import useSelect from '@/hooks/select'
 import { useI18n } from 'vue-i18n'
 
