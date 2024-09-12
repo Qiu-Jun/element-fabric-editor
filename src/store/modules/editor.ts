@@ -2,7 +2,7 @@
  * @Author: June
  * @Description:
  * @Date: 2024-09-12 10:06:32
- * @LastEditTime: 2024-09-12 10:07:17
+ * @LastEditTime: 2024-09-13 01:19:01
  * @LastEditors: June
  * @FilePath: \element-fabric-editor\src\store\modules\editor.ts
  */
@@ -14,6 +14,7 @@ interface IState {
   editor: any
   canvas: fabric.Canvas | null
   zoom: number
+  rulerEnable: boolean
 }
 
 export const useEditorStore = defineStore({
@@ -21,7 +22,8 @@ export const useEditorStore = defineStore({
   state: (): IState => ({
     editor: null,
     canvas: null,
-    zoom: 1 // 缩放比例
+    zoom: 1, // 缩放比例
+    rulerEnable: true // 是否开启标尺
   }),
   actions: {
     setEditor(editor: any) {
@@ -32,6 +34,9 @@ export const useEditorStore = defineStore({
     },
     setScale(val: number) {
       this.zoom = val
+    },
+    updateRulerEnable(val: boolean) {
+      this.rulerEnable = val
     }
   }
 })

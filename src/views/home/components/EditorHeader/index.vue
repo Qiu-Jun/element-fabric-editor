@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-12 18:51:45
- * @LastEditTime: 2024-09-13 01:13:12
+ * @LastEditTime: 2024-09-13 01:19:41
  * @LastEditors: June
  * @FilePath: \element-fabric-editor\src\views\home\components\EditorHeader\index.vue
 -->
@@ -57,13 +57,14 @@ import { useEditorStore } from '@/store/modules/editor'
 
 const editorStore = useEditorStore()
 // 标尺
-const rulerEnable = ref(false)
+const rulerEnable = computed(() => editorStore.rulerEnable)
 const onRulerEnable = (val: string | number | boolean) => {
   if (val) {
     editorStore.editor.rulerEnable()
   } else {
     editorStore.editor.rulerDisable()
   }
+  editorStore.updateRulerEnable(val as boolean)
   // 使标尺开关组件失焦，避免响应键盘的空格事件
   // @ts-ignore
   document.activeElement.blur()

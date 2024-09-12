@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-12 19:09:34
- * @LastEditTime: 2024-09-12 20:25:13
+ * @LastEditTime: 2024-09-13 01:25:44
  * @LastEditors: June
  * @FilePath: \element-fabric-editor\src\views\home\components\EditorContent\PanelMiddle\index.vue
 -->
@@ -27,7 +27,7 @@
         />
       </div>
 
-      <!-- <DragMode v-if="state.show" /> -->
+      <DragMode />
       <Zoom />
     </div>
   </section>
@@ -35,11 +35,10 @@
 
 <script lang="ts" setup>
 import { debounce } from 'lodash-es'
+import { useEditorStore } from '@/store/modules/editor'
 
-const rulerEnable = defineModel('rulerEnable', {
-  type: Boolean,
-  default: true
-})
+const editorStore = useEditorStore()
+const rulerEnable = computed(() => editorStore.rulerEnable)
 // 暂放 待分离组件
 const handleLayer = debounce(function () {
   //   currentTab.value = ''

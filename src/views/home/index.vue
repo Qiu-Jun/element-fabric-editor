@@ -66,37 +66,10 @@ defineOptions({
 })
 
 const editorStore = useEditorStore()
-const { t } = useI18n()
-
-// 二级菜单
-const showSub = ref(true)
-const subType = ref<panels>(panels.canvas)
-const handleHideSubMenu = debounce(function () {
-  showSub.value = false
-}, 250)
-// 左侧tab相关
-const currentTab = ref<editorTabs | ''>(editorTabs.template)
-const tabChange = debounce(function (type: editorTabs, _subType: panels) {
-  currentTab.value = type
-  !unref(showSub) && (showSub.value = true)
-  unref(subType) !== panels.canvas && (subType.value = _subType)
-}, 250)
-
-// import { useModal } from '@/hooks/useModal'
-// const { Modal } = useModal()
-
 const APIHOST = apiHost
 
 // 创建编辑器
 const canvasEditor = new Editor()
-
-const state = reactive({
-  show: false,
-  toolsBarShow: true,
-  attrBarShow: true,
-  select: null,
-  ruler: true
-})
 
 onMounted(() => {
   // 初始化fabric
@@ -148,9 +121,8 @@ onMounted(() => {
     .use(AddBaseTypePlugin)
 
   editorStore.setEditor(canvasEditor)
-  state.show = true
   // 默认打开标尺
-  if (state.ruler) {
+  if (editorStore.rulerEnable) {
     canvasEditor.rulerEnable()
   }
 
