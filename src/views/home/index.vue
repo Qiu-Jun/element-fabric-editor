@@ -81,7 +81,7 @@
             </li>
           </ul>
           <div
-            class="relative h-full transition-all transition-ease"
+            class="relative h-full border-r-#eef2f8 border-r-solid border-r-1px transition-all transition-ease"
             :class="[
               !showSub ? '-ml-312px' : '',
               subType === panels.canvas ? 'w-312px' : 'w-224px'
@@ -89,7 +89,13 @@
           >
             <template v-if="showSub && subType === panels.canvas">
               <KeepAlive>
-                <component :is="tabComMap[currentTab]" />
+                <component
+                  :is="
+                    currentTab
+                      ? tabComMap[currentTab]
+                      : tabComMap[editorTabs.template]
+                  "
+                />
               </KeepAlive>
               <div
                 class="inline-block absolute -right-14px top-50% -translate-y-50% z-1 cursor-pointer"
