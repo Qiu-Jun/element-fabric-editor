@@ -1,3 +1,11 @@
+<!--
+ * @Author: June
+ * @Description: 
+ * @Date: 2024-09-12 09:52:22
+ * @LastEditTime: 2024-09-12 11:08:55
+ * @LastEditors: June
+ * @FilePath: \element-fabric-editor\src\views\home\components\Panel.vue
+-->
 <template>
   <div class="w-full relative">
     <div
@@ -33,19 +41,15 @@
       </template>
     </div>
     <div class="w-full pt-48px box-border p-20px">
-      <template v-if="tabType === 'workspace'">
-        <Workspace />
-      </template>
-      <template v-else-if="tabType === 'layer'">
-        <Layer />
-      </template>
+      <template v-if="tabType === 'workspace'"> Workspace </template>
+      <template v-else-if="tabType === 'layer'"> layer </template>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { Plus, Search } from '@element-plus/icons-vue'
-import { Workspace, Layer } from './index'
+// import { Workspace, Layer } from './index'
 import { debounce } from 'lodash-es'
 
 const props = defineProps({

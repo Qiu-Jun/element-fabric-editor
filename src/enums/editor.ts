@@ -2,7 +2,7 @@
  * @Author: June
  * @Description:
  * @Date: 2024-09-12 09:43:14
- * @LastEditTime: 2024-09-12 09:43:27
+ * @LastEditTime: 2024-09-12 10:45:11
  * @LastEditors: June
  * @FilePath: \element-fabric-editor\src\enums\editor.ts
  */
@@ -14,6 +14,11 @@ export enum editorTabs {
   image = 'IMAGE',
   ai = 'AI',
   mine = 'MINE'
+}
+
+export enum panels {
+  canvas = 'CANVASLIST',
+  layer = 'LAYER'
 }
 
 export enum texts {
