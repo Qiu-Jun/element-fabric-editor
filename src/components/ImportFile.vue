@@ -2,33 +2,36 @@
   <div class="f-center">
     <el-dropdown transfer-class-name="fix" @command="insertTypeHand">
       <el-button link type="primary">
-        {{ $t('insertFile.insert') }}
+        {{ $t('editor.insertFile.insert') }}
         <el-icon class="el-icon--right"><ArrowDown /></el-icon>
       </el-button>
       <template #dropdown>
         <el-dropdown-menu>
           <!-- 图片 -->
           <el-dropdown-item command="insertImg">{{
-            $t('insertFile.insert_picture')
+            $t('editor.insertFile.insert_picture')
           }}</el-dropdown-item>
           <!-- SVG -->
           <el-dropdown-item command="insertSvg">{{
-            $t('insertFile.insert_SVG')
+            $t('editor.insertFile.insert_SVG')
           }}</el-dropdown-item>
           <!-- SVG 字符串 -->
           <el-dropdown-item command="insertSvgStrModal">{{
-            $t('insertFile.insert_SVGStr')
+            $t('editor.insertFile.insert_SVGStr')
           }}</el-dropdown-item>
         </el-dropdown-menu>
       </template>
     </el-dropdown>
     <!-- 插入字符串svg元素 -->
-    <el-dialog v-model="state.showModal" :title="$t('insertFile.modal_tittle')">
+    <el-dialog
+      v-model="state.showModal"
+      :title="$t('editor.insertFile.modal_tittle')"
+    >
       <el-input
         v-model="state.svgStr"
         show-word-limit
         type="textarea"
-        :placeholder="$t('insertFile.insert_SVGStr_placeholder')"
+        :placeholder="$t('editor.insertFile.insert_SVGStr_placeholder')"
       />
       <template #footer>
         <div class="dialog-footer">

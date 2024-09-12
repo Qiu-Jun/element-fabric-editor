@@ -2,7 +2,7 @@
  * @Author: 秦少卫
  * @Date: 2024-05-11 13:23:48
  * @LastEditors: June
- * @LastEditTime: 2024-07-24 20:24:38
+ * @LastEditTime: 2024-09-13 01:00:09
  * @Description: 文件名称
 -->
 
@@ -17,7 +17,6 @@
       :loading="loading"
     />
     <el-button link @click="saveTempl" :loading="loading">
-      222
       <!-- <Icon type="ios-cloud-done" :color="loading ? '#ff9900' : '#19be6b'" /> -->
     </el-button>
     <el-divider type="vertical" />
@@ -31,9 +30,10 @@ import useMaterial from '@/hooks/useMaterial'
 import { useRoute, useRouter } from 'vue-router'
 import useSelect from '@/hooks/select'
 import { getTmplList } from '@/api/user'
-
 import qs from 'qs'
-import { onMounted } from 'vue'
+import { useEditorStore } from '@/store/modules/editor'
+
+const editorStore = useEditorStore()
 const router = useRouter()
 const { getTemplInfo, updataTemplInfo } = useMaterial()
 
@@ -128,7 +128,7 @@ const changeFileName = debounce(() => {
 // 自动保存优化
 
 onMounted(() => {
-  canvasEditor.canvas?.on('object:modified', changeFileName)
+  editorStore.canvas?.on('object:modified', changeFileName)
 })
 </script>
 <style scoped lang="scss">

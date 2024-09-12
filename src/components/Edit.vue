@@ -1,6 +1,14 @@
+<!--
+ * @Author: June
+ * @Description: 
+ * @Date: 2024-09-06 00:14:35
+ * @LastEditTime: 2024-09-06 11:32:46
+ * @LastEditors: June
+ * @FilePath: \ai-desing\src\views\editor\components\Edit.vue
+-->
 <template>
   <el-tooltip
-    :content="$t('quick.editPoly')"
+    :content="$t('editor.quick.editPoly')"
     v-if="mixinState.mSelectOneType === 'polygon'"
   >
     <el-button @click="onEditPolygon" link>
@@ -10,14 +18,15 @@
 </template>
 
 <script setup lang="ts">
-import useSelect from '@/hooks/select'
-import { ElMessage } from 'element-plus'
+import { Selector } from '@/hooks/useSelectListen'
+import { useEditorStore } from '@/store/modules/editor'
 
-const { mixinState, canvasEditor } = useSelect()
+const mixinState = inject('mixinState') as Selector
+const editorStore = useEditorStore()
 const onEditPolygon = () => {
-  const obj = canvasEditor.fabricCanvas?.getActiveObject()
+  const obj = editorStore.editor.fabricCanvas?.getActiveObject()
   if (obj && obj.type === 'polygon') {
-    canvasEditor.activeEdit()
+    editorStore.editor.activeEdit()
   } else {
     ElMessage.warning('请检查选择polygon')
   }

@@ -1,11 +1,3 @@
-<!--
- * @Author: 秦少卫
- * @Date: 2024-06-06 20:04:48
- * @LastEditors: 秦少卫
- * @LastEditTime: 2024-06-07 20:56:55
- * @Description: 二维码组件
--->
-
 <template>
   <div
     class="box attr-item-box"
@@ -180,12 +172,14 @@
   </div>
 </template>
 
-<script setup name="AttrBute">
-import useSelect from '@/hooks/select'
+<script lang="ts" setup>
 import InputNumber from './InputNumber'
+import { Selector } from '@/hooks/useSelectListen'
+import { useEditorStore } from '@/store/modules/editor'
 
+const mixinState = inject('mixinState') as Selector
+const editorStore = useEditorStore()
 const update = getCurrentInstance()
-const { mixinState, canvasEditor } = useSelect()
 
 // 文字元素
 const textType = ['image']
@@ -194,7 +188,7 @@ const extensionType = ref('')
 const isQrcode = computed(() => extensionType.value === 'qrcode')
 
 // 属性值
-const baseAttr = reactive({
+const baseAttr = reactive<Record<string, any>>({
   data: '',
   width: 300,
   margin: 10,
@@ -209,8 +203,8 @@ const baseAttr = reactive({
 })
 
 // 属性获取
-const getObjectAttr = (e) => {
-  const activeObject = canvasEditor.canvas.getActiveObject()
+const getObjectAttr = (e: any) => {
+  const activeObject: any = editorStore.canvas?.getActiveObject()
   // 不是当前obj，跳过
   if (e && e.target && e.target !== activeObject) return
   extensionType.value = activeObject?.extensionType || ''
@@ -223,14 +217,13 @@ const getObjectAttr = (e) => {
     Object.keys(extension).forEach((key) => {
       baseAttr[key] = extension[key]
     })
-    console.log(baseAttr)
   }
 }
 
 // 通用属性改变
 const changeCommon = () => {
-  canvasEditor.setQrCode(toRaw(baseAttr))
-  canvasEditor.canvas.renderAll()
+  editorStore.editor.setQrCode(toRaw(baseAttr))
+  editorStore.canvas?.renderAll()
 }
 
 const selectCancel = () => {
@@ -240,20 +233,27 @@ const selectCancel = () => {
 
 // 容错率
 
-const res = canvasEditor.getQrCodeTypes()
-const optionsList = reactive(res)
+const optionsList = reactive({
+  CornersType: [],
+  DotsType: [],
+  cornersDotType: [],
+  errorCorrectionLevelType: []
+})
 
 onMounted(() => {
-  getObjectAttr()
-  canvasEditor.on('selectCancel', selectCancel)
-  canvasEditor.on('selectOne', getObjectAttr)
-  canvasEditor.canvas.on('object:modified', getObjectAttr)
+  nextTick(() => {
+    const res = editorStore.editor?.getQrCodeTypes()
+    res && Object.assign(optionsList, res)
+    editorStore.editor?.on('selectCancel', selectCancel)
+    editorStore.editor?.on('selectOne', getObjectAttr)
+    editorStore.canvas?.on('object:modified', getObjectAttr)
+  })
 })
 
 onBeforeUnmount(() => {
-  canvasEditor.off('selectCancel', selectCancel)
-  canvasEditor.off('selectOne', getObjectAttr)
-  canvasEditor.canvas.off('object:modified', getObjectAttr)
+  editorStore.editor?.off('selectCancel', selectCancel)
+  editorStore.editor?.off('selectOne', getObjectAttr)
+  editorStore.canvas?.off('object:modified', getObjectAttr)
 })
 </script>
 

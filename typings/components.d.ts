@@ -7,6 +7,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    ActiveMenu: typeof import('./../src/components/ActiveMenu.vue')['default']
     Align: typeof import('./../src/components/Align.vue')['default']
     AngleHandle: typeof import('./../src/components/ColorPicker/comps/AngleHandle.vue')['default']
     AttributeBarcode: typeof import('./../src/components/AttributeBarcode.vue')['default']
@@ -22,16 +23,20 @@ declare module 'vue' {
     AttributeTextFloat: typeof import('./../src/components/AttributeTextFloat.vue')['default']
     BgBar: typeof import('./../src/components/BgBar.vue')['default']
     CenterAlign: typeof import('./../src/components/CenterAlign.vue')['default']
+    Clear: typeof import('./../src/components/Clear.vue')['default']
     ClipImage: typeof import('./../src/components/ClipImage.vue')['default']
     Clone: typeof import('./../src/components/Clone.vue')['default']
     ColorPicker: typeof import('./../src/components/ColorPicker/index.vue')['default']
     Delete: typeof import('./../src/components/Delete.vue')['default']
+    Download: typeof import('./../src/components/Download.vue')['default']
     DragMode: typeof import('./../src/components/DragMode.vue')['default']
     Edit: typeof import('./../src/components/Edit.vue')['default']
     ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
     ElBreadcrumbItem: typeof import('element-plus/es')['ElBreadcrumbItem']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElButtonGroup: typeof import('element-plus/es')['ElButtonGroup']
+    ElCarousel: typeof import('element-plus/es')['ElCarousel']
+    ElCarouselItem: typeof import('element-plus/es')['ElCarouselItem']
     ElCascader: typeof import('element-plus/es')['ElCascader']
     ElCheckbox: typeof import('element-plus/es')['ElCheckbox']
     ElCol: typeof import('element-plus/es')['ElCol']
@@ -44,6 +49,7 @@ declare module 'vue' {
     ElDropdown: typeof import('element-plus/es')['ElDropdown']
     ElDropdownItem: typeof import('element-plus/es')['ElDropdownItem']
     ElDropdownMenu: typeof import('element-plus/es')['ElDropdownMenu']
+    Element: typeof import('./../src/components/Element.vue')['default']
     ElForm: typeof import('element-plus/es')['ElForm']
     ElFormItem: typeof import('element-plus/es')['ElFormItem']
     ElHeader: typeof import('element-plus/es')['ElHeader']
@@ -89,7 +95,7 @@ declare module 'vue' {
     Logo: typeof import('./../src/components/Logo.vue')['default']
     Material: typeof import('./../src/components/Material.vue')['default']
     Modal: typeof import('./../src/components/Modal/index.vue')['default']
-    ModalSize: typeof import('./../src/components/common/ModalSize.vue')['default']
+    ModalSize: typeof import('./../src/components/ModalSize.vue')['default']
     MyMaterial: typeof import('./../src/components/myMaterial/index.vue')['default']
     MyTempl: typeof import('./../src/components/myMaterial/myTempl.vue')['default']
     MyTemplName: typeof import('./../src/components/MyTemplName.vue')['default']
@@ -108,6 +114,7 @@ declare module 'vue' {
     Tools: typeof import('./../src/components/Tools.vue')['default']
     TypeList: typeof import('./../src/components/common/TypeList.vue')['default']
     UploadMaterial: typeof import('./../src/components/myMaterial/uploadMaterial.vue')['default']
+    Workspace: typeof import('./../src/components/Workspace.vue')['default']
     Zoom: typeof import('./../src/components/Zoom.vue')['default']
   }
   export interface ComponentCustomProperties {

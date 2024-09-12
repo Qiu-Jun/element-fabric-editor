@@ -1,17 +1,9 @@
-<!--
- * @Author: 秦少卫
- * @Date: 2024-05-21 10:35:12
- * @LastEditors: June
- * @LastEditTime: 2024-07-25 23:31:14
- * @Description: 字体属性
--->
-
 <template>
   <div
     class="box attr-item-box"
     v-if="
       mixinState.mSelectMode === 'one' &&
-      textType.includes(mixinState.mSelectOneType)
+      textType.includes(mixinState.mSelectOneType as string)
     "
   >
     <el-divider content-position="left"><h4>字体属性</h4></el-divider>
@@ -19,10 +11,7 @@
       <div class="flex-view">
         <div class="flex-item">
           <div class="left font-selector">
-            <el-select
-              v-model="baseAttr.fontFamily"
-              @change="changeFontFamily"
-            >
+            <el-select v-model="baseAttr.fontFamily" @change="changeFontFamily">
               <el-option
                 v-for="item in fontsList"
                 :value="item.name"
@@ -56,7 +45,7 @@
           <el-radio-group
             class="button-group"
             v-model="baseAttr.textAlign"
-            @change="(value) => changeCommon('textAlign', value)"
+            @change="(value: any) => changeCommon('textAlign', value)"
             type="button"
           >
             <el-radio-button
@@ -128,25 +117,27 @@
             v-model="baseAttr.lineHeight"
             @on-change="(value) => changeCommon('lineHeight', value)"
             :step="0.1"
-            :append="$t('attributes.line_height')"
+            :append="$t('editor.attributes.line_height')"
           ></InputNumber>
         </div>
         <div class="right">
           <InputNumber
             v-model="baseAttr.charSpacing"
             @on-change="(value) => changeCommon('charSpacing', value)"
-            :append="$t('attributes.char_spacing')"
+            :append="$t('editor.attributes.char_spacing')"
           ></InputNumber>
         </div>
       </div>
 
       <div class="flex-view">
         <div class="flex-item">
-          <span class="label">{{ $t('background') }}</span>
+          <span class="label">{{ $t('editor.background') }}</span>
           <div class="content">
             <el-color-picker
               v-model="baseAttr.textBackgroundColor"
-              @change="(value) => changeCommon('textBackgroundColor', value)"
+              @change="
+                (value: any) => changeCommon('textBackgroundColor', value)
+              "
               show-alpha
             />
           </div>
@@ -156,17 +147,20 @@
   </div>
 </template>
 
-<script setup name="AttrBute">
-import useSelect from '@/hooks/select'
+<script lang="ts" setup>
 import { ElLoading } from 'element-plus'
 import InputNumber from './InputNumber'
+import { Selector } from '@/hooks/useSelectListen'
+import { useEditorStore } from '@/store/modules/editor'
+
+const mixinState = inject('mixinState') as Selector
+const editorStore = useEditorStore()
 const update = getCurrentInstance()
-const { mixinState, canvasEditor } = useSelect()
 
 // 文字元素
 const textType = ['i-text', 'textbox', 'text']
 // 属性值
-const baseAttr = reactive({
+const baseAttr = reactive<Record<string, any>>({
   fontSize: 0,
   fontFamily: '',
   lineHeight: 0,
@@ -180,8 +174,8 @@ const baseAttr = reactive({
   overline: false
 })
 
-const fontsList = ref([])
-canvasEditor.getFontList().then((list) => {
+const fontsList: any = ref([])
+editorStore.editor?.getFontList().then((list: any) => {
   fontsList.value = list
 })
 
@@ -195,31 +189,43 @@ const textAlignListSvg = [
 ]
 
 // 属性获取
-const getObjectAttr = (e) => {
-  const activeObject = canvasEditor.canvas.getActiveObject()
+const getObjectAttr = (e?: any) => {
+  const activeObject = editorStore.canvas?.getActiveObject()
   // 不是当前obj，跳过
   if (e && e.target && e.target !== activeObject) return
+  // @ts-ignore
   if (activeObject && textType.includes(activeObject.type)) {
+    // @ts-ignore
     baseAttr.fontSize = activeObject.get('fontSize')
+    // @ts-ignore
     baseAttr.fontFamily = activeObject.get('fontFamily')
+    // @ts-ignore
     baseAttr.lineHeight = activeObject.get('lineHeight')
+    // @ts-ignore
     baseAttr.textAlign = activeObject.get('textAlign')
+    // @ts-ignore
     baseAttr.underline = activeObject.get('underline')
+    // @ts-ignore
     baseAttr.linethrough = activeObject.get('linethrough')
+    // @ts-ignore
     baseAttr.charSpacing = activeObject.get('charSpacing')
+    // @ts-ignore
     baseAttr.overline = activeObject.get('overline')
+    // @ts-ignore
     baseAttr.fontStyle = activeObject.get('fontStyle')
+    // @ts-ignore
     baseAttr.textBackgroundColor = activeObject.get('textBackgroundColor')
+    // @ts-ignore
     baseAttr.fontWeight = activeObject.get('fontWeight')
   }
 }
 
 // 通用属性改变
-const changeCommon = (key, value) => {
-  const activeObject = canvasEditor.canvas.getActiveObjects()[0]
+const changeCommon = (key: any, value: any) => {
+  const activeObject = editorStore.canvas?.getActiveObjects()[0]
   if (activeObject) {
     activeObject && activeObject.set(key, value)
-    canvasEditor.canvas.renderAll()
+    editorStore.canvas?.renderAll()
   }
 }
 
@@ -227,58 +233,63 @@ const selectCancel = () => {
   update?.proxy?.$forceUpdate()
 }
 
-const changeFontFamily = async (fontName) => {
+const changeFontFamily = async (fontName: string) => {
   if (!fontName) return
   const loadingINstasncdee = ElLoading.service()
-  canvasEditor.loadFont(fontName).finally(() => loadingINstasncdee.close())
+  editorStore.editor
+    .loadFont(fontName)
+    .finally(() => loadingINstasncdee.close())
 }
-const changeFontWeight = (key, value) => {
+const changeFontWeight = (key: any, value: any) => {
   const nValue = value === 'normal' ? 'bold' : 'normal'
   baseAttr.fontWeight = nValue
-  const activeObject = canvasEditor.canvas.getActiveObjects()[0]
+  const activeObject = editorStore.canvas?.getActiveObjects()[0]
   activeObject && activeObject.set(key, nValue)
-  canvasEditor.canvas.renderAll()
+  editorStore.canvas?.renderAll()
 }
 
 // 斜体
-const changeFontStyle = (key, value) => {
+const changeFontStyle = (key: any, value: any) => {
   const nValue = value === 'normal' ? 'italic' : 'normal'
   baseAttr.fontStyle = nValue
-  const activeObject = canvasEditor.canvas.getActiveObjects()[0]
+  const activeObject = editorStore.canvas?.getActiveObjects()[0]
   activeObject && activeObject.set(key, nValue)
-  canvasEditor.canvas.renderAll()
+  editorStore.canvas?.renderAll()
 }
 
 // 中划
-const changeLineThrough = (key, value) => {
+const changeLineThrough = (key: any, value: any) => {
   const nValue = value === false
   baseAttr.linethrough = nValue
-  const activeObject = canvasEditor.canvas.getActiveObjects()[0]
+  const activeObject = editorStore.canvas?.getActiveObjects()[0]
   activeObject && activeObject.set(key, nValue)
-  canvasEditor.canvas.renderAll()
+  editorStore.canvas?.renderAll()
 }
 
 // 下划
-const changeUnderline = (key, value) => {
+const changeUnderline = (key: any, value: any) => {
   const nValue = value === false
   baseAttr.underline = nValue
-  const activeObject = canvasEditor.canvas.getActiveObjects()[0]
+  const activeObject = editorStore.canvas?.getActiveObjects()[0]
   activeObject && activeObject.set(key, nValue)
-  canvasEditor.canvas.renderAll()
+  editorStore.canvas?.renderAll()
 }
 
 onMounted(() => {
   // 获取字体数据
-  getObjectAttr()
-  canvasEditor.on('selectCancel', selectCancel)
-  canvasEditor.on('selectOne', getObjectAttr)
-  canvasEditor.canvas.on('object:modified', getObjectAttr)
+
+  nextTick(() => {
+    getObjectAttr()
+    editorStore.editor?.on('selectCancel', selectCancel)
+    editorStore.editor?.on('selectOne', getObjectAttr)
+    editorStore.canvas?.on('object:modified', getObjectAttr)
+  })
 })
 
 onBeforeUnmount(() => {
-  canvasEditor.off('selectCancel', selectCancel)
-  canvasEditor.off('selectOne', getObjectAttr)
-  canvasEditor.canvas.off('object:modified', getObjectAttr)
+  editorStore.editor?.off('selectCancel', selectCancel)
+  editorStore.editor?.off('selectOne', getObjectAttr)
+  editorStore.canvas?.off('object:modified', getObjectAttr)
 })
 </script>
 

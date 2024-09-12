@@ -71,7 +71,9 @@ import { WarningFilled } from '@element-plus/icons-vue'
 import useSelect from '@/hooks/select'
 import { fabric } from 'fabric'
 import { Utils } from '@/lib/core'
+import { useEditorStore } from '@/store/modules/editor'
 
+const editorStore = useEditorStore()
 interface IExtendImage {
   [x: string]: any
   originWidth?: number
@@ -138,11 +140,13 @@ const handleSelectOne = () => {
 }
 
 onMounted(() => {
-  canvasEditor.on('selectOne', handleSelectOne)
+  nextTick(() => {
+    editorStore.editor?.on('selectOne', handleSelectOne)
+  })
 })
 
 onBeforeUnmount(() => {
-  canvasEditor.off('selectOne', handleSelectOne)
+  editorStore.editor.off('selectOne', handleSelectOne)
 })
 </script>
 

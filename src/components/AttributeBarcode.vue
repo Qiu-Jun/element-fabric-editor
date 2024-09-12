@@ -1,11 +1,3 @@
-<!--
- * @Author: 秦少卫
- * @Date: 2024-06-06 16:27:21
- * @LastEditors: June
- * @LastEditTime: 2024-07-26 21:13:06
- * @Description: 条形码插件
--->
-
 <template>
   <div
     class="attr-item-box"
@@ -130,13 +122,14 @@
   </div>
 </template>
 
-<script setup name="AttrBute">
-import useSelect from '@/hooks/select'
-import { toRaw } from 'vue'
+<script setup lang="ts">
 import InputNumber from './InputNumber'
+import { Selector } from '@/hooks/useSelectListen'
+import { useEditorStore } from '@/store/modules/editor'
 
+const mixinState = inject('mixinState') as Selector
+const editorStore = useEditorStore()
 const update = getCurrentInstance()
-const { mixinState, canvasEditor } = useSelect()
 
 // 文字元素
 const textType = ['image']
@@ -167,8 +160,8 @@ const textAlignListSvg = [
 ]
 
 // 属性获取
-const getObjectAttr = (e) => {
-  const activeObject = canvasEditor.canvas.getActiveObject()
+const getObjectAttr = (e?: any) => {
+  const activeObject: any = editorStore.canvas?.getActiveObject()
   // 不是当前obj，跳过
   if (e && e.target && e.target !== activeObject) return
   extensionType.value = activeObject?.extensionType || ''
@@ -191,8 +184,8 @@ const getObjectAttr = (e) => {
 
 // 通用属性改变
 const changeCommon = () => {
-  canvasEditor.setBarcode(toRaw(baseAttr))
-  canvasEditor.canvas.renderAll()
+  editorStore.editor.setBarcode(toRaw(baseAttr))
+  editorStore.canvas?.renderAll()
 }
 
 const selectCancel = () => {
@@ -201,19 +194,21 @@ const selectCancel = () => {
 }
 
 const barcodeTypeList = ref([])
-barcodeTypeList.value = canvasEditor.getBarcodeTypes()
 
 onMounted(() => {
-  getObjectAttr()
-  canvasEditor.on('selectCancel', selectCancel)
-  canvasEditor.on('selectOne', getObjectAttr)
-  canvasEditor.canvas.on('object:modified', getObjectAttr)
+  nextTick(() => {
+    getObjectAttr()
+    barcodeTypeList.value = editorStore.editor?.getBarcodeTypes()
+    editorStore.editor?.on('selectCancel', selectCancel)
+    editorStore.editor?.on('selectOne', getObjectAttr)
+    editorStore.canvas?.on('object:modified', getObjectAttr)
+  })
 })
 
 onBeforeUnmount(() => {
-  canvasEditor.off('selectCancel', selectCancel)
-  canvasEditor.off('selectOne', getObjectAttr)
-  canvasEditor.canvas.off('object:modified', getObjectAttr)
+  editorStore.editor?.off('selectCancel', selectCancel)
+  editorStore.editor?.off('selectOne', getObjectAttr)
+  editorStore.canvas?.off('object:modified', getObjectAttr)
 })
 </script>
 

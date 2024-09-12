@@ -1,19 +1,11 @@
-<!--
- * @Author: 秦少卫
- * @Date: 2022-09-03 19:16:55
- * @LastEditors: June
- * @LastEditTime: 2024-07-25 10:52:59
- * @Description: 多元素或单元素对齐方式
--->
-
 <template>
   <div class="attr-item-box" v-if="mixinState.mSelectMode">
     <el-divider content-position="left">
-      <h4>{{ $t('attrSeting.centerAlign.name') }}</h4>
+      <h4>{{ $t('editor.attrSetting.centerAlign.name') }}</h4>
     </el-divider>
     <div class="bg-item">
       <!-- 水平集中 -->
-      <el-tooltip :content="$t('attrSeting.centerAlign.centerX')">
+      <el-tooltip :content="$t('editor.attrSetting.centerAlign.centerX')">
         <el-button
           :disabled="!mixinState.mSelectMode"
           @click="position('centerH')"
@@ -37,7 +29,7 @@
         </el-button>
       </el-tooltip>
       <!-- 水平垂直居中 -->
-      <el-tooltip :content="$t('attrSeting.centerAlign.center')">
+      <el-tooltip :content="$t('editor.attrSetting.centerAlign.center')">
         <el-button
           :disabled="!mixinState.mSelectMode"
           @click="position('center')"
@@ -67,7 +59,7 @@
         </el-button>
       </el-tooltip>
       <!-- 垂直居中 -->
-      <el-tooltip :content="$t('attrSeting.centerAlign.centerY')">
+      <el-tooltip :content="$t('editor.attrSetting.centerAlign.centerY')">
         <el-button
           :disabled="!mixinState.mSelectMode"
           @click="position('centerV')"
@@ -94,12 +86,14 @@
   </div>
 </template>
 
-<script setup name="CenterAlign">
-import useSelect from '@/hooks/select'
-const { mixinState, canvasEditor } = useSelect()
+<script lang="ts" setup>
+import { Selector } from '@/hooks/useSelectListen'
+import { useEditorStore } from '@/store/modules/editor'
 
+const mixinState = inject('mixinState') as Selector
+const editorStore = useEditorStore()
 const position = (name) => {
-  canvasEditor.position(name)
+  editorStore.editor.position(name)
 }
 </script>
 <style scoped lang="scss">

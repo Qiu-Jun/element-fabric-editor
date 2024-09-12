@@ -1,18 +1,18 @@
 <!--
- * @Author: 秦少卫
- * @Date: 2024-05-21 09:53:33
- * @LastEditors: 秦少卫
- * @LastEditTime: 2024-05-21 15:36:36
- * @Description: file content
+ * @Author: June
+ * @Description: 
+ * @Date: 2024-09-05 23:00:59
+ * @LastEditTime: 2024-09-06 11:18:24
+ * @LastEditors: June
+ * @FilePath: \ai-desing\src\views\editor\components\AttributeId.vue
 -->
-
 <template>
-  <div class="box attr-item-box" v-if="mixinState.mSelectMode === 'one'">
+  <div class="mb-10px attr-item-box" v-if="mixinState.mSelectMode === 'one'">
     <!-- <h3>数据</h3> -->
     <el-divider content-position="left"><h4>数据</h4></el-divider>
 
     <el-form :label-width="40" class="form-wrap">
-      <el-form-item :label="$t('attributes.id')">
+      <el-form-item :label="$t('editor.attributes.id')">
         <el-input
           v-model="baseAttr.id"
           @change="changeCommon('id', baseAttr.id)"
@@ -40,11 +40,14 @@
   </div>
 </template>
 
-<script setup name="AttrBute">
-import useSelect from '@/hooks/select'
+<script lang="ts" setup>
+import { Selector } from '@/hooks/useSelectListen'
+import { useEditorStore } from '@/store/modules/editor'
+
+const mixinState = inject('mixinState') as Selector
+const editorStore = useEditorStore()
 
 const update = getCurrentInstance()
-const { mixinState, canvasEditor } = useSelect()
 
 // 属性值
 const baseAttr = reactive({
@@ -53,8 +56,8 @@ const baseAttr = reactive({
 })
 
 // 属性获取
-const getObjectAttr = (e) => {
-  const activeObject = canvasEditor.canvas.getActiveObject()
+const getObjectAttr = (e?: any) => {
+  const activeObject: any = editorStore.canvas?.getActiveObject()
   // 不是当前obj，跳过
   if (e && e.target && e.target !== activeObject) return
   if (activeObject) {
@@ -64,11 +67,11 @@ const getObjectAttr = (e) => {
 }
 
 // 通用属性改变
-const changeCommon = (key, value) => {
-  const activeObject = canvasEditor.canvas.getActiveObjects()[0]
+const changeCommon = (key: any, value: any) => {
+  const activeObject = editorStore.canvas?.getActiveObjects()[0]
   if (activeObject) {
     activeObject && activeObject.set(key, value)
-    canvasEditor.canvas.renderAll()
+    editorStore.canvas?.renderAll()
   }
 }
 
@@ -77,22 +80,18 @@ const selectCancel = () => {
 }
 
 onMounted(() => {
-  // 获取字体数据
-  getObjectAttr()
-  canvasEditor.on('selectCancel', selectCancel)
-  canvasEditor.on('selectOne', getObjectAttr)
-  canvasEditor.canvas.on('object:modified', getObjectAttr)
+  nextTick(() => {
+    // 获取字体数据
+    getObjectAttr()
+    editorStore.editor?.on('selectCancel', selectCancel)
+    editorStore.editor?.on('selectOne', getObjectAttr)
+    editorStore.canvas?.on('object:modified', getObjectAttr)
+  })
 })
 
 onBeforeUnmount(() => {
-  canvasEditor.off('selectCancel', selectCancel)
-  canvasEditor.off('selectOne', getObjectAttr)
-  canvasEditor.canvas.off('object:modified', getObjectAttr)
+  editorStore.editor?.off('selectCancel', selectCancel)
+  editorStore.editor?.off('selectOne', getObjectAttr)
+  editorStore.canvas?.off('object:modified', getObjectAttr)
 })
 </script>
-
-<style scoped lang="scss">
-.box {
-  margin-bottom: 10px;
-}
-</style>

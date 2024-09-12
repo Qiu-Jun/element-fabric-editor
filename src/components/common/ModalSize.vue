@@ -1,7 +1,7 @@
 <template>
   <el-dialog v-model="modal" :title="props.title" footer-hide>
     <h3>
-      {{ $t('importFiles.createDesign.customSize') }}
+      {{ $t('editor.importFiles.createDesign.customSize') }}
     </h3>
     <section class="asa-size-wrap">
       <div class="asa-size-wrap-item">
@@ -26,13 +26,13 @@
       </div>
       <div :label-width="0">
         <el-button type="primary" @click="customSizeCreate">
-          {{ $t('importFiles.createDesign.create') }}
+          {{ $t('editor.importFiles.createDesign.create') }}
         </el-button>
       </div>
     </section>
     <el-divider direction="horizontal" />
     <h3>
-      {{ $t('importFiles.createDesign.systemSize') }}
+      {{ $t('editor.importFiles.createDesign.systemSize') }}
     </h3>
     <section class="cell-wrap">
       <div

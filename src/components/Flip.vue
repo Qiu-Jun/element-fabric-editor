@@ -1,19 +1,15 @@
 <!--
- * @Author: 秦少卫
- * @Date: 2022-09-03 19:16:55
- * @LastEditors: 秦少卫
- * @LastEditTime: 2024-05-21 15:57:33
- * @Description: 元素翻转
+ * @Author: June
+ * @Description: 
+ * @Date: 2024-09-05 23:16:20
+ * @LastEditTime: 2024-09-06 11:37:53
+ * @LastEditors: June
+ * @FilePath: \ai-desing\src\views\editor\components\Flip.vue
 -->
-
 <template>
   <div v-if="mixinState.mSelectMode === 'one'" class="attr-item-box">
-    <!-- <h3>{{ $t('attrSeting.flip.name') }}</h3> -->
-    <!-- <Divider plain orientation="left">
-      <h4>{{ $t('attrSeting.flip.name') }}</h4>
-    </Divider> -->
     <div class="bg-item">
-      <el-tooltip :content="$t('attrSeting.flip.x')">
+      <el-tooltip :content="$t('editor.attrSetting.flip.x')">
         <el-button :disabled="notSelectOneMode()" @click="flip('X')" link>
           <svg
             t="1650443094178"
@@ -40,7 +36,7 @@
           </svg>
         </el-button>
       </el-tooltip>
-      <el-tooltip :content="$t('attrSeting.flip.y')">
+      <el-tooltip :content="$t('editor.attrSetting.flip.y')">
         <el-button :disabled="notSelectOneMode()" @click="flip('Y')" link>
           <svg
             t="1650443104385"
@@ -73,19 +69,21 @@
   </div>
 </template>
 
-<script setup name="Flip">
-import useSelect from '@/hooks/select'
+<script lang="ts" setup>
+import { Selector } from '@/hooks/useSelectListen'
+import { useEditorStore } from '@/store/modules/editor'
 
-const { mixinState, canvasEditor } = useSelect()
+const mixinState = inject('mixinState') as Selector
+const editorStore = useEditorStore()
 
 // 非单选时，禁止镜像操作
 const notSelectOneMode = () => {
   return mixinState.mSelectMode !== 'one'
 }
-const flip = (type) => {
-  const activeObject = canvasEditor.canvas.getActiveObject()
+const flip = (type: string) => {
+  const activeObject: any = editorStore.canvas?.getActiveObject()
   activeObject.set(`flip${type}`, !activeObject[`flip${type}`]).setCoords()
-  canvasEditor.canvas.requestRenderAll()
+  editorStore.canvas?.requestRenderAll()
 }
 </script>
 

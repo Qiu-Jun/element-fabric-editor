@@ -1,11 +1,3 @@
-<!--
- * @Author: 秦少卫
- * @Date: 2022-09-03 19:16:55
- * @LastEditors: 秦少卫
- * @LastEditTime: 2024-07-06 12:20:00
- * @Description: 锁定元素
--->
-
 <template>
   <el-tooltip
     :content="$t('quick.lock')"
@@ -21,14 +13,17 @@
   </el-tooltip>
 </template>
 
-<script setup name="Lock">
+<script lang="ts" setup>
 import { Lock, Unlock } from '@element-plus/icons-vue'
-import useSelect from '@/hooks/select'
+import { Selector } from '@/hooks/useSelectListen'
+import { useEditorStore } from '@/store/modules/editor'
 
-const { mixinState, canvasEditor } = useSelect()
+const mixinState = inject('mixinState') as Selector
+const editorStore = useEditorStore()
+
 const isLock = ref(false)
 const doLock = (isLock) => {
-  isLock ? canvasEditor.lock() : canvasEditor.unLock()
+  isLock ? editorStore.editor?.lock() : editorStore.editor?.unLock()
 }
 
 const handleSelected = (items) => {
@@ -36,11 +31,13 @@ const handleSelected = (items) => {
 }
 
 onMounted(() => {
-  canvasEditor.on('selectOne', handleSelected)
+  nextTick(() => {
+    editorStore.editor?.on('selectOne', handleSelected)
+  })
 })
 
 onBeforeUnmount(() => {
-  canvasEditor.off('selectOne', handleSelected)
+  editorStore.editor?.off('selectOne', handleSelected)
 })
 </script>
 

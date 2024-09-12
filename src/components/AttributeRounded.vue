@@ -1,16 +1,17 @@
 <!--
- * @Author: 秦少卫
- * @Date: 2024-05-21 10:18:57
- * @LastEditors: 秦少卫
- * @LastEditTime: 2024-05-26 22:59:26
- * @Description: 圆角
+ * @Author: June
+ * @Description: 
+ * @Date: 2024-09-05 23:05:23
+ * @LastEditTime: 2024-09-12 20:12:17
+ * @LastEditors: June
+ * @FilePath: \element-fabric-editor\src\components\AttributeRounded.vue
 -->
 <template>
   <div
     class="box attr-item-box"
     v-if="
       mixinState.mSelectMode === 'one' &&
-      rectType.includes(mixinState.mSelectOneType)
+      rectType.includes(mixinState.mSelectOneType as string)
     "
   >
     <!-- <h3>圆角</h3> -->
@@ -24,7 +25,7 @@
               <el-slider
                 v-model="baseAttr.rx"
                 :max="300"
-                @input="(value) => changeCommon(value)"
+                @input="(value: any) => changeCommon(value)"
               ></el-slider>
             </el-form-item>
           </el-form>
@@ -32,8 +33,8 @@
         <el-col :span="6" flex="1">
           <InputNumber
             v-model="baseAttr.rx"
-            min="0"
-            max="300"
+            :min="0"
+            :max="300"
             @on-change="(value) => changeCommon(value)"
           ></InputNumber>
         </el-col>
@@ -42,12 +43,14 @@
   </div>
 </template>
 
-<script setup name="AttrBute">
-import useSelect from '@/hooks/select'
+<script lang="ts" setup>
 import InputNumber from './InputNumber'
+import { Selector } from '@/hooks/useSelectListen'
+import { useEditorStore } from '@/store/modules/editor'
 
+const mixinState = inject('mixinState') as Selector
+const editorStore = useEditorStore()
 const update = getCurrentInstance()
-const { mixinState, canvasEditor } = useSelect()
 
 // 矩形元素
 const rectType = ['rect']
@@ -59,8 +62,8 @@ const baseAttr = reactive({
 })
 
 // 属性获取
-const getObjectAttr = (e) => {
-  const activeObject = canvasEditor.canvas.getActiveObject()
+const getObjectAttr = (e?: any) => {
+  const activeObject = editorStore.canvas?.getActiveObject()
   // 不是当前obj，跳过
   if (e && e.target && e.target !== activeObject) return
   if (activeObject) {
@@ -71,11 +74,11 @@ const getObjectAttr = (e) => {
 
 // 通用属性改变
 const changeCommon = (value) => {
-  const activeObject = canvasEditor.canvas.getActiveObjects()[0]
+  const activeObject = editorStore.canvas.getActiveObjects()[0]
   if (activeObject) {
     activeObject.set('ry', value)
     activeObject.set('rx', value)
-    canvasEditor.canvas.renderAll()
+    editorStore.canvas.renderAll()
   }
 }
 
@@ -84,17 +87,19 @@ const selectCancel = () => {
 }
 
 onMounted(() => {
-  // 获取圆角数据
-  getObjectAttr()
-  canvasEditor.on('selectCancel', selectCancel)
-  canvasEditor.on('selectOne', getObjectAttr)
-  canvasEditor.canvas.on('object:modified', getObjectAttr)
+  nextTick(() => {
+    // 获取圆角数据
+    getObjectAttr()
+    editorStore.editor?.on('selectCancel', selectCancel)
+    editorStore.editor?.on('selectOne', getObjectAttr)
+    editorStore.canvas?.on('object:modified', getObjectAttr)
+  })
 })
 
 onBeforeUnmount(() => {
-  canvasEditor.off('selectCancel', selectCancel)
-  canvasEditor.off('selectOne', getObjectAttr)
-  canvasEditor.canvas.off('object:modified', getObjectAttr)
+  editorStore.editor?.off('selectCancel', selectCancel)
+  editorStore.editor?.off('selectOne', getObjectAttr)
+  editorStore.canvas?.off('object:modified', getObjectAttr)
 })
 </script>
 

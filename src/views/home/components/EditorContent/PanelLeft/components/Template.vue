@@ -76,7 +76,7 @@
 import useSelect from '@/hooks/select'
 import usePageList from '@/hooks/pageList'
 import { ElLoading, ElMessageBox } from 'element-plus'
-import { useI18n } from 'vue-i18n'
+import { useI18n } from '@/hooks/useI18n'
 import { useRouter, useRoute } from 'vue-router'
 import { debounce, throttle } from 'lodash-es'
 const router = useRouter()

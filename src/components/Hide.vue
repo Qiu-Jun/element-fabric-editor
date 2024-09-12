@@ -1,7 +1,15 @@
+<!--
+ * @Author: June
+ * @Description: 
+ * @Date: 2024-09-05 23:18:42
+ * @LastEditTime: 2024-09-05 23:54:16
+ * @LastEditors: June
+ * @FilePath: \ai-desing\src\views\editor\components\Hide.vue
+-->
 <template>
   <el-button
     text
-    :content="$t('quick.hide')"
+    :content="$t('editor.quick.hide')"
     v-if="mixinState.mSelectMode === 'one'"
   >
     <el-button
@@ -14,32 +22,35 @@
   </el-button>
 </template>
 
-<script setup name="Hide">
-import useSelect from '@/hooks/select'
+<script lang="ts" setup>
 import { View, Hide } from '@element-plus/icons-vue'
+import { Selector } from '@/hooks/useSelectListen'
+import { useEditorStore } from '@/store/modules/editor'
 
-const { mixinState, canvasEditor } = useSelect()
+const mixinState = inject('mixinState') as Selector
+const editorStore = useEditorStore()
 const isHide = ref(false)
 
-const doHide = (hide) => {
+const doHide = (hide: any) => {
   // 修改visible属性
-  const activeObject = canvasEditor.canvas.getActiveObject()
+  const activeObject: any = editorStore.canvas?.getActiveObject()
   activeObject.set('visible', !hide)
-  canvasEditor.canvas.requestRenderAll()
+  editorStore.canvas?.requestRenderAll()
   isHide.value = hide
 }
 
 const handleSelected = () => {
-  const activeObject = canvasEditor.canvas.getActiveObject()
+  const activeObject = editorStore.canvas?.getActiveObject()
+  // @ts-ignore
   isHide.value = !activeObject.visible
 }
 
 onMounted(() => {
-  canvasEditor.on('selectOne', handleSelected)
+  editorStore.editor?.on('selectOne', handleSelected)
 })
 
 onBeforeUnmount(() => {
-  canvasEditor.off('selectOne', handleSelected)
+  editorStore.editor?.off('selectOne', handleSelected)
 })
 </script>
 

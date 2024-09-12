@@ -2,16 +2,16 @@
  * @Author: June
  * @Description:
  * @Date: 2024-09-12 09:43:14
- * @LastEditTime: 2024-09-12 10:45:11
+ * @LastEditTime: 2024-09-13 00:23:28
  * @LastEditors: June
  * @FilePath: \element-fabric-editor\src\enums\editor.ts
  */
 export enum editorTabs {
-  add = 'ADD',
+  create = 'CGRATE',
   template = 'TEMPLATE',
   element = 'ELEMENT',
   text = 'TEXT',
-  image = 'IMAGE',
+  material = 'Material',
   ai = 'AI',
   mine = 'MINE'
 }

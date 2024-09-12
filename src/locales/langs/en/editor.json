@@ -1,0 +1,32 @@
+{
+  "history": {
+    "undo": "revocation",
+    "redo": "redo"
+  },
+  "attrSetting": {
+    "group": "成组",
+    "unGroup": "拆分组",
+    "flip": {
+      "name": "翻转",
+      "x": "水平翻转",
+      "y": "垂直翻转"
+    },
+    "align": {
+      "name": "对齐",
+      "left": "左对齐",
+      "centerX": "水平居中对齐",
+      "right": "右对齐",
+      "top": "上对齐",
+      "bottom": "下对齐",
+      "centerY": "垂直居中对齐",
+      "averageX": "水平分布",
+      "averageY": "垂直分布"
+    },
+    "centerAlign": {
+      "name": "居中",
+      "centerX": "水平居中",
+      "center": "水平垂直居中",
+      "centerY": "垂直居中"
+    }
+  }
+}

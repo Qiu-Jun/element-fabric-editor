@@ -44,13 +44,14 @@
 <script setup name="ImportTmpl">
 import { Plus } from '@element-plus/icons-vue'
 import useMaterial from '@/hooks/useMaterial'
-import { useI18n } from 'vue-i18n'
+import { useI18n } from '@/hooks/useI18n'
 import useSelect from '@/hooks/select'
 import { getUserFileTypeTree, updataTempl } from '@/api/user'
 import { ElMessageBox, ElLoading, ElMessage } from 'element-plus'
 const { t } = useI18n()
 const { canvasEditor } = useSelect()
-const { reNameFileType, removeTemplInfo, routerToId, getTemplInfo } = useMaterial()
+const { reNameFileType, removeTemplInfo, routerToId, getTemplInfo } =
+  useMaterial()
 
 const props = defineProps({
   name: {
@@ -134,7 +135,10 @@ const getTempData = async () => {
   })
   const data = await getTemplInfo(props.itemId)
   routerToId(props.itemId)
-  canvasEditor.loadJSON(JSON.stringify(data.data.attributes.json), loadingInstance.close)
+  canvasEditor.loadJSON(
+    JSON.stringify(data.data.attributes.json),
+    loadingInstance.close
+  )
 }
 
 const modalVisable = ref(false)

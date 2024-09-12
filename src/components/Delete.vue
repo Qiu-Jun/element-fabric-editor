@@ -1,5 +1,5 @@
 <template>
-  <el-tooltip v-if="mixinState.mSelectMode" :content="$t('quick.del')">
+  <el-tooltip v-if="mixinState.mSelectMode" :content="$t('editor.quick.del')">
     <el-button @click="del" icon="ios-trash" link>
       <el-icon>
         <Delete />
@@ -8,14 +8,16 @@
   </el-tooltip>
 </template>
 
-<script setup name="Delete">
+<script lang="ts" setup>
 import { Delete } from '@element-plus/icons-vue'
 import { debounce } from 'lodash-es'
-import useSelect from '@/hooks/select'
+import { Selector } from '@/hooks/useSelectListen'
+import { useEditorStore } from '@/store/modules/editor'
 
-const { mixinState, canvasEditor } = useSelect()
+const mixinState = inject('mixinState') as Selector
+const editorStore = useEditorStore()
 
 const del = debounce(function () {
-  canvasEditor.del()
+  editorStore.editor.del()
 }, 300)
 </script>
