@@ -3,8 +3,8 @@
  * @Description:
  * @Date: 2024-07-24 17:26:12
  * @LastEditors: June
- * @LastEditTime: 2024-07-25 10:44:49
- * @FilePath: /element-fabric-editor/src/main.ts
+ * @LastEditTime: 2024-09-12 10:08:05
+ * @FilePath: \element-fabric-editor\src\main.ts
  */
 import '@/assets/fonts/font.css'
 import '@/styles/index.scss'
@@ -17,12 +17,14 @@ import { VueMasonryPlugin } from 'vue-masonry'
 import VueLazyLoad from 'vue3-lazyload'
 import App from './App.vue'
 import i18n from './language/index'
-import router from './router'
+import { setupRouter, router } from './router'
+import { setupStore } from './store'
 
 async function bootstrap() {
   const app = createApp(App)
+  await setupRouter(app)
+  await setupStore(app)
   app.use(VueMasonryPlugin)
-  app.use(router)
   app.use(i18n)
   app.use(VueLazyLoad, {})
   await router.isReady()

@@ -2,7 +2,7 @@
  * @Author: 秦少卫
  * @Date: 2022-09-03 19:16:55
  * @LastEditors: June
- * @LastEditTime: 2024-07-25 23:45:33
+ * @LastEditTime: 2024-09-12 10:33:27
  * @Description: 导入模板
 -->
 
@@ -93,7 +93,7 @@ import { Plus } from '@element-plus/icons-vue'
 // 组件
 import fileType from './components/fileType.vue'
 import file from './components/file.vue'
-import ModalSzie from '../common/ModalSize.vue'
+import ModalSzie from '@/components/common/ModalSize.vue'
 
 // API
 import { getTmplList, getFileTypeTree } from '@/api/user'

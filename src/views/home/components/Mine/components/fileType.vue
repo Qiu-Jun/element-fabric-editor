@@ -2,7 +2,7 @@
  * @Author: 秦少卫
  * @Date: 2024-05-30 10:03:30
  * @LastEditors: June
- * @LastEditTime: 2024-07-25 23:45:16
+ * @LastEditTime: 2024-09-12 10:36:22
  * @Description: 文件夹
 -->
 
@@ -30,7 +30,7 @@
 </template>
 
 <script setup name="ImportTmpl">
-import fileTypeIcon from '../../../assets/icon/fileType.png'
+import fileTypeIcon from '@/assets/icon/fileType.png'
 import useMaterial from '@/hooks/useMaterial'
 import { Plus } from '@element-plus/icons-vue'
 

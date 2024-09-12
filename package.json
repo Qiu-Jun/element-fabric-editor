@@ -26,6 +26,7 @@
     "jsbarcode": "^3.11.6",
     "lodash-es": "^4.17.21",
     "number-precision": "^1.6.0",
+    "pinia": "^2.2.2",
     "qr-code-styling": "1.6.0-rc.1",
     "qs": "^6.12.3",
     "tapable": "^2.2.1",

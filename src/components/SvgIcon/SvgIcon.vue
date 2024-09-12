@@ -1,6 +1,14 @@
+<!--
+ * @Author: June
+ * @Description: 
+ * @Date: 2024-08-19 12:53:30
+ * @LastEditTime: 2024-09-12 10:18:58
+ * @LastEditors: June
+ * @FilePath: \element-fabric-editor\src\components\SvgIcon\SvgIcon.vue
+-->
 <template>
-  <svg class="svg-icon" :style="iconStyle" aria-hidden="true">
-    <use :xlink:href="symbolId" :fill="color" />
+  <svg class="svg-icon" :style="props.style" aria-hidden="true">
+    <use :xlink:href="symbolId" :fill="props.color" />
   </svg>
 </template>
 
@@ -10,9 +18,13 @@ import { computed, CSSProperties } from 'vue'
 interface SvgProps {
   name: string // 图标的名称 ==> 必传
   prefix?: string // 图标的前缀 ==> 非必传（默认为"icon"）
-  iconStyle?: CSSProperties // 图标的样式 ==> 非必传
+  style?: CSSProperties // 图标的样式 ==> 非必传
   color?: string // 填充颜色
 }
+
+defineOptions({
+  name: 'SvgIcon'
+})
 
 const props = withDefaults(defineProps<SvgProps>(), {
   prefix: 'icon',
