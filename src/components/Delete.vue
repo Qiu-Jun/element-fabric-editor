@@ -1,10 +1,6 @@
 <template>
   <el-tooltip v-if="mixinState.mSelectMode" :content="$t('quick.del')">
-    <el-button @click="del" icon="ios-trash" link>
-      <el-icon>
-        <Delete />
-      </el-icon>
-    </el-button>
+    <el-button @click="del" :icon="Delete" link></el-button>
   </el-tooltip>
 </template>
 
