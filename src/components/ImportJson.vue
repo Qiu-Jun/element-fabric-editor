@@ -2,16 +2,16 @@
   <div class="f-center">
     <el-dropdown @command="clickHandler">
       <el-button link type="primary">
-        {{ $t('importFiles.file') }}
+        {{ $t('editor.importFiles.file') }}
         <el-icon class="el-icon--right"><ArrowDown /></el-icon>
       </el-button>
       <template #dropdown>
         <el-dropdown-menu>
           <el-dropdown-item command="createDesign">
-            {{ $t('importFiles.createDesign.title') }}
+            {{ $t('editor.importFiles.createDesign.title') }}
           </el-dropdown-item>
           <el-dropdown-item command="importFiles">{{
-            $t('importFiles.importFiles')
+            $t('editor.importFiles.importFiles')
           }}</el-dropdown-item>
           <el-dropdown-item command="psd">PSD</el-dropdown-item>
         </el-dropdown-menu>
@@ -20,7 +20,7 @@
 
     <!-- 创建设计 -->
     <ModalSize
-      :title="$t('importFiles.createDesign.title')"
+      :title="$t('editor.importFiles.createDesign.title')"
       ref="modalSizeRef"
       @set="customSizeCreate"
     ></ModalSize>
@@ -33,7 +33,7 @@ import useSelect from '@/hooks/select'
 import useMaterial from '@/hooks/useMaterial'
 import { ElMessage, ElLoading } from 'element-plus'
 import ModalSize from './common/ModalSize.vue'
-import { useI18n } from 'vue-i18n'
+import { useI18n } from '@/hooks/useI18n'
 
 const { t } = useI18n()
 const { canvasEditor } = useSelect()

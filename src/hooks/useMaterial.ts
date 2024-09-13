@@ -8,19 +8,19 @@ import {
   removeTempl
 } from '@/api/user'
 import { ElMessageBox } from 'element-plus'
+import { useEditorStoreWithOut } from '@/store/modules/editor'
+import { useI18n } from '@/hooks/useI18n'
 
-import { useI18n } from 'vue-i18n'
-
+const editorStore = useEditorStoreWithOut()
 export default function useMaterial() {
   const { t } = useI18n()
   const router = useRouter()
   const route = useRoute()
-  const canvasEditor = inject('canvasEditor')
 
   // 创建模板
-  const createTmpl = async (width, height, parentId = '') => {
-    canvasEditor.clear()
-    canvasEditor.setSize(width, height)
+  const createTmpl = async (width: number, height: number, parentId = '') => {
+    editorStore.editor.clear()
+    editorStore.editor.setSize(width, height)
     const name =
       dayjs().format('YYYY[年]MM[月]DD[日]HH[小时]mm[分钟]ss[秒]') +
       '创建的作品'
@@ -68,7 +68,7 @@ export default function useMaterial() {
 
   // 获取画布数据
   const getCanvasCommonData = async () => {
-    const json = canvasEditor.getJson()
+    const json = editorStore.editor.getJson()
     const fileInfo = await uploadFileToInfo()
     return {
       json,

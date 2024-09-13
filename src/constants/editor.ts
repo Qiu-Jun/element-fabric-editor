@@ -4,7 +4,7 @@ export const tabList = [
   {
     name: '添加',
     icon: 'add',
-    type: editorTabs.add
+    type: editorTabs.create
   },
   {
     name: '模板',
@@ -24,7 +24,7 @@ export const tabList = [
   {
     name: '素材',
     icon: 'img',
-    type: editorTabs.image
+    type: editorTabs.material
   },
   {
     name: 'AI',

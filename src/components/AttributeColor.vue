@@ -1,11 +1,3 @@
-<!--
- * @Author: 秦少卫
- * @Date: 2024-05-21 10:59:48
- * @LastEditors: June
- * @LastEditTime: 2024-09-06 12:28:44
- * @Description: 渐变
--->
-
 <template>
   <div
     class="box attr-item-box"
@@ -41,21 +33,24 @@
   </div>
 </template>
 
-<script setup name="AttrBute">
-import useSelect from '@/hooks/select'
-import ColorPicker from './ColorPicker/index.vue'
+<script lang="ts" setup>
+import ColorPicker from '@/components/ColorPicker/index.vue'
+import { Selector } from '@/hooks/useSelectListen'
+import { useEditorStore } from '@/store/modules/editor'
+import { fabric } from 'fabric'
 
+const mixinState = inject('mixinState') as Selector
+const editorStore = useEditorStore()
 const update = getCurrentInstance()
-const { fabric, mixinState, canvasEditor } = useSelect()
 const angleKey = 'gradientAngle'
 // 属性值
-const baseAttr = reactive({
+const baseAttr: any = reactive({
   fill: ''
 })
 
 // 属性获取
-const getObjectAttr = (e) => {
-  const activeObject = canvasEditor.canvas.getActiveObject()
+const getObjectAttr = (e?: any) => {
+  const activeObject: any = editorStore.canvas?.getActiveObject()
   // 不是当前obj，跳过
   if (e && e.target && e.target !== activeObject) return
   if (activeObject && mixinState.mSelectMode === 'one') {
@@ -68,8 +63,8 @@ const getObjectAttr = (e) => {
   }
 }
 
-const colorChange = (value) => {
-  const activeObject = canvasEditor.canvas.getActiveObjects()[0]
+const colorChange = (value: any) => {
+  const activeObject: any = editorStore.canvas?.getActiveObjects()[0]
   if (activeObject) {
     const color = String(value.color).replace('NaN', '')
     if (value.mode === '纯色') {
@@ -84,26 +79,31 @@ const colorChange = (value) => {
       activeObject.set('fill', currentGradient, value.angle)
       activeObject.set(angleKey, value.angle)
     }
-    canvasEditor.canvas.renderAll()
+    editorStore.canvas?.renderAll()
   }
 }
 
-const dropColor = (value) => {
+const dropColor = (value: any) => {
   colorChange(value)
 }
 
-const fabricGradientToCss = (val, activeObject) => {
+const fabricGradientToCss = (val: any, activeObject: any) => {
   // 渐变类型
   if (!val) return
   const angle = activeObject.get(angleKey, val.degree)
-  const colorStops = val.colorStops.map((item) => {
+  const colorStops = val.colorStops.map((item: any) => {
     return item.color + ' ' + item.offset * 100 + '%'
   })
   return `linear-gradient(${angle}deg, ${colorStops})`
 }
 // css转Fabric渐变
-const cssToFabricGradient = (stops, width, height, angle) => {
-  const gradAngleToCoords = (paramsAngle) => {
+const cssToFabricGradient = (
+  stops: any,
+  width: number,
+  height: number,
+  angle: any
+) => {
+  const gradAngleToCoords = (paramsAngle: any) => {
     const anglePI = -parseInt(paramsAngle, 10) * (Math.PI / 180)
     return {
       x1: Math.round(50 + Math.sin(anglePI) * 50) / 100,
@@ -132,17 +132,19 @@ const selectCancel = () => {
 }
 
 onMounted(() => {
-  // 获取字体数据
-  getObjectAttr()
-  canvasEditor.on('selectCancel', selectCancel)
-  canvasEditor.on('selectOne', getObjectAttr)
-  canvasEditor.canvas.on('object:modified', getObjectAttr)
+  nextTick(() => {
+    // 获取字体数据
+    getObjectAttr()
+    editorStore.editor?.on('selectCancel', selectCancel)
+    editorStore.editor?.on('selectOne', getObjectAttr)
+    editorStore.canvas?.on('object:modified', getObjectAttr)
+  })
 })
 
 onBeforeUnmount(() => {
-  canvasEditor.off('selectCancel', selectCancel)
-  canvasEditor.off('selectOne', getObjectAttr)
-  canvasEditor.canvas.off('object:modified', getObjectAttr)
+  editorStore.editor?.off('selectCancel', selectCancel)
+  editorStore.editor?.off('selectOne', getObjectAttr)
+  editorStore.canvas?.off('object:modified', getObjectAttr)
 })
 </script>
 

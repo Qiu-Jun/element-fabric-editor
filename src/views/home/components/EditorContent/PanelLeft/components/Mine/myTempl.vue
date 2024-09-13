@@ -2,7 +2,7 @@
  * @Author: 秦少卫
  * @Date: 2022-09-03 19:16:55
  * @LastEditors: June
- * @LastEditTime: 2024-09-12 10:33:27
+ * @LastEditTime: 2024-09-13 01:07:52
  * @Description: 导入模板
 -->
 
@@ -81,7 +81,7 @@
 
     <!-- 创建设计 -->
     <ModalSzie
-      :title="$t('importFiles.createDesign.title')"
+      :title="$t('editor.importFiles.createDesign.title')"
       ref="modalSizeRef"
       @set="customSizeCreate"
     />

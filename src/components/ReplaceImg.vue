@@ -1,42 +1,48 @@
 <!--
- * @Author: 秦少卫
- * @Date: 2023-04-06 22:26:57
- * @LastEditors: 秦少卫
- * @LastEditTime: 2024-05-21 15:52:16
- * @Description: 图片替换
+ * @Author: June
+ * @Description: 
+ * @Date: 2024-09-06 00:10:51
+ * @LastEditTime: 2024-09-12 20:08:54
+ * @LastEditors: June
+ * @FilePath: \element-fabric-editor\src\components\ReplaceImg.vue
 -->
-
 <template>
   <div
     v-if="mixinState.mSelectMode === 'one' && type === 'image'"
     class="attr-item-box"
   >
     <div class="bg-item">
-      <el-button @click="repleace" text>{{ $t('repleaceImg') }}</el-button>
+      <el-button @click="repleace" text>{{
+        $t('editor.repleaceImg')
+      }}</el-button>
     </div>
   </div>
 </template>
 
-<script setup name="ReplaceImg">
-import useSelect from '@/hooks/select'
+<script lang="ts" setup>
 import { Utils } from '@/lib/core'
+import { Selector } from '@/hooks/useSelectListen'
+import { useEditorStore } from '@/store/modules/editor'
+
+const mixinState = inject('mixinState') as Selector
+const editorStore = useEditorStore()
 const { getImgStr, selectFiles, insertImgFile } = Utils
 
 const update = getCurrentInstance()
-// const canvasEditor = inject('canvasEditor');
-const { mixinState, canvasEditor } = useSelect()
 const type = ref('')
 
 // 替换图片
 const repleace = async () => {
-  const activeObject = canvasEditor.canvas.getActiveObjects()[0]
+  const activeObject: any = editorStore.canvas?.getActiveObjects()[0]
   if (activeObject && activeObject.type === 'image') {
     // 图片
+    // @ts-ignore
     const [file] = await selectFiles({ accept: 'image/*', multiple: false })
     // 转字符串
     const fileStr = await getImgStr(file)
     // 字符串转El
-    const imgEl = await insertImgFile(fileStr)
+    // @ts-ignore
+    const imgEl: any = await insertImgFile(fileStr)
     const width = activeObject.get('width')
     const height = activeObject.get('height')
     const scaleX = activeObject.get('scaleX')
@@ -44,26 +50,29 @@ const repleace = async () => {
     activeObject.setSrc(imgEl.src, () => {
       activeObject.set('scaleX', (width * scaleX) / imgEl.width)
       activeObject.set('scaleY', (height * scaleY) / imgEl.height)
-      canvasEditor.canvas.renderAll()
+      editorStore.canvas?.renderAll()
     })
     imgEl.remove()
   }
 }
 
 const init = () => {
-  const activeObject = canvasEditor.canvas.getActiveObjects()[0]
+  const activeObject = editorStore.canvas?.getActiveObjects()[0]
   if (activeObject) {
+    // @ts-ignore
     type.value = activeObject.type
     update?.proxy?.$forceUpdate()
   }
 }
 
 onMounted(() => {
-  canvasEditor.on('selectOne', init)
+  nextTick(() => {
+    editorStore.editor?.on('selectOne', init)
+  })
 })
 
 onBeforeUnmount(() => {
-  canvasEditor.off('selectOne', init)
+  editorStore.editor?.off('selectOne', init)
 })
 </script>
 <style lang="scss" scoped>

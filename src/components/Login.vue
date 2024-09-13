@@ -130,7 +130,7 @@
 </template>
 
 <script setup name="Login">
-import { useI18n } from 'vue-i18n'
+import { useI18n } from '@/hooks/useI18n'
 import { getUserInfo, setToken, login, register, logout } from '@/api/user'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { User, Lock, Message } from '@element-plus/icons-vue'

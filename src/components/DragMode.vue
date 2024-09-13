@@ -1,3 +1,11 @@
+<!--
+ * @Author: June
+ * @Description: 
+ * @Date: 2024-08-19 12:53:30
+ * @LastEditTime: 2024-09-13 01:28:25
+ * @LastEditors: June
+ * @FilePath: \element-fabric-editor\src\components\DragMode.vue
+-->
 <template>
   <div class="box">
     <el-switch
@@ -13,26 +21,28 @@
 </template>
 
 <script setup name="Drag">
-import useSelect from '@/hooks/select'
+import { useEditorStore } from '@/store/modules/editor'
+const editorStore = useEditorStore()
 const status = ref(false)
-const { canvasEditor } = useSelect()
 
 const switchMode = (val) => {
   if (val) {
-    canvasEditor.startDring()
+    editorStore.editor?.startDring()
   } else {
-    canvasEditor.endDring()
+    editorStore.editor?.endDring()
   }
 }
 
 onMounted(() => {
-  canvasEditor.on('startDring', () => (status.value = true))
-  canvasEditor.on('endDring', () => (status.value = false))
+  nextTick(() => {
+    editorStore.editor?.on('startDring', () => (status.value = true))
+    editorStore.editor?.on('endDring', () => (status.value = false))
+  })
 })
 
 onBeforeUnmount(() => {
-  canvasEditor.off('startDring')
-  canvasEditor.off('endDring')
+  editorStore.editor?.off('startDring')
+  editorStore.editor?.off('endDring')
 })
 </script>
 <style scoped lang="scss">

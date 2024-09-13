@@ -1,12 +1,22 @@
 <!--
- * @Author: 秦少卫
- * @Date: 2022-04-21 20:20:20
- * @LastEditors: 秦少卫
- * @LastEditTime: 2023-08-05 18:44:54
- * @Description: 缩放元素
+ * @Author: June
+ * @Description: 
+ * @Date: 2024-09-05 00:02:31
+ * @LastEditTime: 2024-09-06 00:01:22
+ * @LastEditors: June
+ * @FilePath: \ai-desing\src\views\editor\components\Zoom.vue
 -->
 <template>
-  <div class="box">
+  <div class="absolute right-10px bottom-10px">
+    <el-switch
+      v-model="dragEnable"
+      size="large"
+      class="mr-10px"
+      inline-prompt
+      active-text="拖曳"
+      inactive-text="拖曳"
+      @change="onDragEnable"
+    />
     <el-button-group>
       <el-button @click="big">
         <svg
@@ -66,29 +76,41 @@
   </div>
 </template>
 
-<script setup name="Zoom">
+<script lang="ts" setup>
 import { FullScreen } from '@element-plus/icons-vue'
-import useSelect from '@/hooks/select'
+import { useEditorStore } from '@/store/modules/editor'
 
-const { canvasEditor } = useSelect()
-
+const editorStore = useEditorStore()
+const dragEnable = ref(false)
+const onDragEnable = (val: boolean) => {
+  if (val) {
+    editorStore.editor.startDring()
+  } else {
+    editorStore.editor.endDring()
+  }
+}
 const rSet = () => {
-  canvasEditor.one()
+  editorStore.editor.one()
 }
 const big = () => {
-  canvasEditor.big()
+  editorStore.editor.big()
 }
 const small = () => {
-  canvasEditor.small()
+  editorStore.editor.small()
 }
 const setViewport = () => {
-  canvasEditor.auto()
+  editorStore.editor.auto()
 }
+
+onMounted(() => {
+  nextTick(() => {
+    editorStore.editor?.on('startDring', () => (dragEnable.value = true))
+    editorStore.editor?.on('endDring', () => (dragEnable.value = false))
+  })
+})
+
+onBeforeUnmount(() => {
+  editorStore.editor?.off('startDring')
+  editorStore.editor?.off('endDring')
+})
 </script>
-<style scoped lang="scss">
-.box {
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
-}
-</style>

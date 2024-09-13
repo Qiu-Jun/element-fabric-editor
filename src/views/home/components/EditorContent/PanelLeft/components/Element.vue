@@ -2,13 +2,15 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-03 12:12:47
- * @LastEditTime: 2024-09-12 10:37:40
+ * @LastEditTime: 2024-09-13 01:10:05
  * @LastEditors: June
- * @FilePath: \element-fabric-editor\src\views\home\components\Element.vue
+ * @FilePath: \element-fabric-editor\src\views\home\components\EditorContent\PanelLeft\components\Element.vue
 -->
 <template>
   <div class="box-border p-10px">
-    <el-divider content-position="left">{{ $t('common_elements') }}</el-divider>
+    <el-divider content-position="left">{{
+      $t('editor.common_elements')
+    }}</el-divider>
     <div class="tool-box">
       <span @click="() => addText()" :draggable="true" @dragend="addText">
         <svg
@@ -118,7 +120,9 @@
         </svg>
       </span>
     </div>
-    <el-divider content-position="left">{{ $t('draw_elements') }}</el-divider>
+    <el-divider content-position="left">{{
+      $t('editor.draw_elements')
+    }}</el-divider>
     <div class="tool-box">
       <span
         @click="drawingLineModeSwitch('line')"
@@ -234,7 +238,7 @@
         />
       </span>
     </div>
-    <el-divider content-position="left">{{ $t('code_img') }}</el-divider>
+    <el-divider content-position="left">{{ $t('editor.code_img') }}</el-divider>
     <div class="tool-box">
       <span @click="canvasEditor.addQrCode">
         <svg
@@ -291,7 +295,7 @@
 <script setup name="Tools">
 import { getPolygonVertices } from '@/utils/math'
 import useSelect from '@/hooks/select'
-import { useI18n } from 'vue-i18n'
+import { useI18n } from '@/hooks/useI18n'
 
 const LINE_TYPE = {
   polygon: 'polygon',

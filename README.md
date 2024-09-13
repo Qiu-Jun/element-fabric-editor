@@ -3,18 +3,16 @@
  * @Author: June
  * @Date: 2024-04-24 09:32:13
  * @FilePath: \element-fabric-editor\README.md
- * @LastEditTime: 2024-09-12 10:56:30
+ * @LastEditTime: 2024-09-13 01:45:32
  * @LastEditors: June
 -->
 
 [预览地址](https://ikuaitu.github.io/element-fabric-editor/#/)
 
-#### 差异
-> 整体功能是基本一致的，只是更换了`Element Plus`，供大家更多的选择。后面更新仍以`vue-fabric-editor`为主，此项目不定期同步更新。项目存在一定的差异，大概如下
-+ 自动导入Commonts 在home组件减少了组件的导入 清晰
-+ svg处理采用了不同的插件，但功能是一致的
-+ 加入了`unocss`，后续会对样式进行优化
-+ 因为ui库风格不一，所以有些风格可能不同，如主题色，边距等
+#### 贡献规范
++ 修改代码
++ git add .
++ <span style="color: red">pnpm commit</span>(必须)
 
 #### 同步情况
 + perf: 优化插件use方法  c3ca1a9e3b8a805099f17566140285ec013a3784
@@ -37,8 +35,10 @@ pnpm commit # 使用此命令编写commit
 
 #### undo
 - [ ] ui仿搞定(进行中)
-- [ ] 首页拆分组件
+- [x] 首页拆分组件
 - [ ] 使用store 替换 home的provide
+- [ ] 多画布
+- [ ] 样式优化(对旧的样式，全部使用unocss)
 - [ ] history重构
 
 #### 自动注释说明

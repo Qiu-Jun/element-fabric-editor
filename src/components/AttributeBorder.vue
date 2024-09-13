@@ -1,10 +1,3 @@
-<!--
- * @Author: 秦少卫
- * @Date: 2024-05-21 10:18:57
- * @LastEditors: June
- * @LastEditTime: 2024-07-26 21:12:56
- * @Description: 边框
--->
 <template>
   <div
     class="attr-item-box"
@@ -18,12 +11,12 @@
         <el-col :span="12">
           <div class="asa-number-warp">
             <span class="label" style="margin-right: 10px">{{
-              $t('color')
+              $t('editor.color')
             }}</span>
             <div style="flex: 1">
               <el-color-picker
                 v-model="baseAttr.stroke"
-                @change="(value) => changeCommon('stroke', value)"
+                @change="(value: any) => changeCommon('stroke', value)"
                 show-alpha
               />
             </div>
@@ -33,7 +26,7 @@
           <InputNumber
             v-model="baseAttr.strokeWidth"
             @on-change="(value) => changeCommon('strokeWidth', value)"
-            :append="$t('width')"
+            :append="$t('editor.width')"
             :min="0"
           ></InputNumber>
         </el-col>
@@ -46,7 +39,7 @@
             font-size: var(--el-form-label-font-size);
             color: var(--el-text-color-regular);
           "
-          >{{ $t('attributes.stroke') }}</span
+          >{{ $t('editor.attributes.stroke') }}</span
         >
         <div class="content">
           <el-select v-model="baseAttr.strokeDashArray" @change="borderSet">
@@ -65,12 +58,14 @@
   </div>
 </template>
 
-<script setup name="AttrBute">
-import useSelect from '@/hooks/select'
+<script lang="ts" setup>
 import InputNumber from './InputNumber'
+import { Selector } from '@/hooks/useSelectListen'
+import { useEditorStore } from '@/store/modules/editor'
 
+const mixinState = inject('mixinState') as Selector
+const editorStore = useEditorStore()
 const update = getCurrentInstance()
-const { mixinState, canvasEditor } = useSelect()
 
 const groupType = ['group']
 // 属性值
@@ -158,7 +153,7 @@ const strokeDashList = [
 const isGroup = computed(() => groupType.includes(mixinState.mSelectOneType))
 // 属性获取
 const getObjectAttr = (e) => {
-  const activeObject = canvasEditor.canvas.getActiveObject()
+  const activeObject = editorStore.canvas?.getActiveObject()
 
   // 不是当前obj，跳过
   if (e && e.target && e.target !== activeObject) return
@@ -182,21 +177,21 @@ const getObjectAttr = (e) => {
 
 // 通用属性改变
 const changeCommon = (key, value) => {
-  const activeObject = canvasEditor.canvas.getActiveObjects()[0]
+  const activeObject = editorStore.canvas?.getActiveObjects()[0]
   if (activeObject) {
     activeObject.set(key, value)
     activeObject.set('strokeUniform', true)
-    canvasEditor.canvas.renderAll()
+    editorStore.canvas?.renderAll()
   }
 }
 
 // 边框设置
 const borderSet = (key) => {
-  const activeObject = canvasEditor.canvas.getActiveObjects()[0]
+  const activeObject = editorStore.canvas?.getActiveObjects()[0]
   if (activeObject) {
     const stroke = strokeDashList.find((item) => item.label === key)
     activeObject.set(stroke.value)
-    canvasEditor.canvas.renderAll()
+    editorStore.canvas?.renderAll()
   }
 }
 
@@ -205,17 +200,19 @@ const selectCancel = () => {
 }
 
 onMounted(() => {
-  // 获取字体数据
-  getObjectAttr()
-  canvasEditor.on('selectCancel', selectCancel)
-  canvasEditor.on('selectOne', getObjectAttr)
-  canvasEditor.canvas.on('object:modified', getObjectAttr)
+  nextTick(() => {
+    // 获取字体数据
+    getObjectAttr()
+    editorStore.editor?.on('selectCancel', selectCancel)
+    editorStore.editor?.on('selectOne', getObjectAttr)
+    editorStore.canvas?.on('object:modified', getObjectAttr)
+  })
 })
 
 onBeforeUnmount(() => {
-  canvasEditor.off('selectCancel', selectCancel)
-  canvasEditor.off('selectOne', getObjectAttr)
-  canvasEditor.canvas.off('object:modified', getObjectAttr)
+  editorStore.editor?.off('selectCancel', selectCancel)
+  editorStore.editor?.off('selectOne', getObjectAttr)
+  editorStore.canvas?.off('object:modified', getObjectAttr)
 })
 </script>
 

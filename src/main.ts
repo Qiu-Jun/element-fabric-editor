@@ -16,7 +16,7 @@ import { createApp } from 'vue'
 import { VueMasonryPlugin } from 'vue-masonry'
 import VueLazyLoad from 'vue3-lazyload'
 import App from './App.vue'
-import i18n from './language/index'
+import { setupI18n } from '@/locales'
 import { setupRouter, router } from './router'
 import { setupStore } from './store'
 
@@ -24,8 +24,8 @@ async function bootstrap() {
   const app = createApp(App)
   await setupRouter(app)
   await setupStore(app)
+  setupI18n(app)
   app.use(VueMasonryPlugin)
-  app.use(i18n)
   app.use(VueLazyLoad, {})
   await router.isReady()
   app.mount('#app')

@@ -5,7 +5,7 @@
   >
     <div class="bg-item" style="margin-bottom: 10px">
       <el-dropdown style="width: 270px" @command="addClipPath">
-        <el-button text>{{ $t('createClip') }}</el-button>
+        <el-button text>{{ $t('editor.createClip') }}</el-button>
         <template #dropdown>
           <el-dropdown-menu>
             <el-dropdown-item
@@ -20,74 +20,77 @@
       </el-dropdown>
     </div>
     <div class="bg-item">
-      <el-button @click="removeClip" text>{{ $t('removeClip') }}</el-button>
+      <el-button @click="removeClip" text>{{
+        $t('editor.removeClip')
+      }}</el-button>
     </div>
   </div>
 </template>
 
-<script setup name="ReplaceImg">
-import useSelect from '@/hooks/select'
-import { useI18n } from 'vue-i18n'
+<script lang="ts" setup>
+import { Selector } from '@/hooks/useSelectListen'
+import { useEditorStore } from '@/store/modules/editor'
+import { useI18n } from '@/hooks/useI18n'
 
+const mixinState = inject('mixinState') as Selector
+const editorStore = useEditorStore()
 const update = getCurrentInstance()
-// const canvasEditor = inject('canvasEditor');
-const { mixinState, canvasEditor } = useSelect()
 const { t } = useI18n()
 const type = ref('')
 const options = [
   {
-    label: t('polygonClip'),
+    label: t('edotpr.polygonClip'),
     value: 'polygon'
   },
   {
-    label: t('rectClip'),
+    label: t('edotpr.rectClip'),
     value: 'rect'
   },
   {
-    label: t('circleClip'),
+    label: t('edotpr.circleClip'),
     value: 'circle'
   },
   {
-    label: t('triangleClip'),
+    label: t('edotpr.triangleClip'),
     value: 'triangle'
   },
   {
-    label: t('polygonClipInverted'),
+    label: t('edotpr.polygonClipInverted'),
     value: 'polygon-inverted'
   },
   {
-    label: t('rectClipInverted'),
+    label: t('edotpr.rectClipInverted'),
     value: 'rect-inverted'
   },
   {
-    label: t('circleClipInverted'),
+    label: t('edotpr.circleClipInverted'),
     value: 'circle-inverted'
   },
   {
-    label: t('triangleClipInverted'),
+    label: t('edotpr.triangleClipInverted'),
     value: 'triangle-inverted'
   }
 ]
-const addClipPath = async (name) => {
-  canvasEditor.addClipPathToImage(name)
+const addClipPath = async (name: string) => {
+  editorStore.editor.addClipPathToImage(name)
 }
 const removeClip = () => {
-  canvasEditor.removeClip()
+  editorStore.editor.removeClip()
 }
 const init = () => {
-  const activeObject = canvasEditor.canvas.getActiveObjects()[0]
+  const activeObject = editorStore.canvas?.getActiveObjects()[0]
   if (activeObject) {
-    type.value = activeObject.type
+    type.value = activeObject.type as string
     update?.proxy?.$forceUpdate()
   }
 }
 
 onMounted(() => {
-  canvasEditor.on('selectOne', init)
+  editorStore.editor?.on('selectOne', init)
 })
 
 onBeforeUnmount(() => {
-  canvasEditor.off('selectOne', init)
+  editorStore.editor?.off('selectOne', init)
 })
 </script>
 <style lang="scss" scoped>

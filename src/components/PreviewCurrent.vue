@@ -1,23 +1,25 @@
 <template>
   <el-button link type="primary" @click="preview">
-    {{ $t('preview') }}
+    {{ $t('editor.preview') }}
   </el-button>
 
   <el-image-viewer v-if="showImageViewer" :url-list="url" @close="close" />
 </template>
 
 <script lang="ts" setup>
-const showImageViewer = ref(false);
-const canvasEditor: any = inject("canvasEditor");
-const url = ref([]);
+import { useEditorStore } from '@/store/modules/editor'
+
+const editorStore = useEditorStore()
+const showImageViewer = ref(false)
+const url: any = ref([])
 const close = () => {
-  showImageViewer.value = false;
-  url.value = [];
-};
+  showImageViewer.value = false
+  url.value = []
+}
 const preview = () => {
-  canvasEditor.preview().then((dataUrl: string) => {
-    url.value = [dataUrl];
-    showImageViewer.value = true;
-  });
-};
+  editorStore.editor.preview().then((dataUrl: string) => {
+    url.value = [dataUrl]
+    showImageViewer.value = true
+  })
+}
 </script>

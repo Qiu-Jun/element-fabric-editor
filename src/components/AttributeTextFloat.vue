@@ -1,11 +1,3 @@
-<!--
- * @Author: 秦少卫
- * @Date: 2024-06-10 17:52:40
- * @LastEditors: 秦少卫
- * @LastEditTime: 2024-06-10 19:58:38
- * @Description: 小数点下标上标
--->
-
 <template>
   <div
     v-if="mixinState.mSelectMode === 'one' && isMatchType"
@@ -13,11 +5,11 @@
   >
     <div class="flex-view">
       <div class="flex-item">
-        <span class="label">{{ $t('textFloat') }}</span>
+        <span class="label">{{ $t('editor.textFloat') }}</span>
         <div class="content">
           <el-select
             v-model="baseAttr.verticalAlign"
-            @change="(value) => changeCommon('verticalAlign', value)"
+            @change="(value: any) => changeCommon('verticalAlign', value)"
           >
             <el-option label="无" value="null"></el-option>
             <el-option label="下标" value="bottom"></el-option>
@@ -29,10 +21,12 @@
   </div>
 </template>
 
-<script name="Price" setup>
-import useSelect from '@/hooks/select'
+<script lang="ts" setup>
+import { Selector } from '@/hooks/useSelectListen'
+import { useEditorStore } from '@/store/modules/editor'
 
-const { mixinState, canvasEditor } = useSelect()
+const mixinState = inject('mixinState') as Selector
+const editorStore = useEditorStore()
 
 const baseAttr = reactive({
   verticalAlign: 'null'
@@ -41,23 +35,25 @@ const baseAttr = reactive({
 const matchType = ['i-text', 'textbox', 'text']
 
 const isMatchType = computed(() =>
-  matchType.includes(mixinState.mSelectOneType)
+  matchType.includes(mixinState.mSelectOneType as string)
 )
-const getObjectAttr = (e) => {
-  const activeObject = canvasEditor.canvas.getActiveObject()
+const getObjectAttr = (e?: any) => {
+  const activeObject = editorStore.canvas?.getActiveObject()
   // 不是当前obj，跳过
   if (e && e.target && e.target !== activeObject) return
   if (
     activeObject &&
-    matchType.includes(activeObject.type) &&
+    matchType.includes(activeObject.type as string) &&
+    // @ts-ignore
     activeObject.text.includes('.')
   ) {
+    // @ts-ignore
     baseAttr.verticalAlign = activeObject.get('verticalAlign')
   }
 }
 
-const changeCommon = (key, value) => {
-  const activeObject = canvasEditor.canvas.getActiveObjects()[0]
+const changeCommon = (key: any, value: any) => {
+  const activeObject: any = editorStore.canvas?.getActiveObjects()[0]
   if (activeObject && activeObject.text.includes('.')) {
     const [init] = activeObject.text.split('.')
     const startIndex = init.length + 1
@@ -77,7 +73,7 @@ const changeCommon = (key, value) => {
       )
     }
     activeObject.set(key, value)
-    canvasEditor.canvas.renderAll()
+    editorStore.canvas?.renderAll()
   }
 }
 
@@ -87,17 +83,19 @@ const selectCancel = () => {
 }
 
 onMounted(() => {
-  // 获取字体数据
-  getObjectAttr()
-  canvasEditor.on('selectCancel', selectCancel)
-  canvasEditor.on('selectOne', getObjectAttr)
-  canvasEditor.canvas.on('object:modified', getObjectAttr)
+  nextTick(() => {
+    // 获取字体数据
+    getObjectAttr()
+    editorStore.editor?.on('selectCancel', selectCancel)
+    editorStore.editor?.on('selectOne', getObjectAttr)
+    editorStore.canvas?.on('object:modified', getObjectAttr)
+  })
 })
 
 onBeforeUnmount(() => {
-  canvasEditor.off('selectCancel', selectCancel)
-  canvasEditor.off('selectOne', getObjectAttr)
-  canvasEditor.canvas.off('object:modified', getObjectAttr)
+  editorStore.editor?.off('selectCancel', selectCancel)
+  editorStore.editor?.off('selectOne', getObjectAttr)
+  editorStore.canvas?.off('object:modified', getObjectAttr)
 })
 </script>
 

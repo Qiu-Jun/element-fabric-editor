@@ -2,7 +2,7 @@
  * @Author: 秦少卫
  * @Date: 2024-04-25 15:30:54
  * @LastEditors: June
- * @LastEditTime: 2024-07-25 23:39:56
+ * @LastEditTime: 2024-09-13 00:49:30
  * @Description: 我的素材
 -->
 
@@ -56,9 +56,10 @@ import {
 } from '@/api/user'
 import { Utils } from '@/lib/core'
 import { apiHost } from '@/constants/app'
+import { useEditorStore } from '@/store/modules/editor'
 
 const { selectFiles } = Utils
-const canvasEditor = inject('canvasEditor')
+const editorStore = useEditorStore()
 
 const fileList = ref([])
 const isLogin = ref(false)
@@ -114,8 +115,8 @@ const createdH = (id, fileName) => {
 }
 // 添加素材到画布
 const addImgByElement = async (e) => {
-  const imgItem = await canvasEditor.createImgByElement(e.target)
-  canvasEditor.addBaseType(imgItem, {
+  const imgItem = await editorStore.editor.createImgByElement(e.target)
+  editorStore.editor.addBaseType(imgItem, {
     scale: true
   })
 }

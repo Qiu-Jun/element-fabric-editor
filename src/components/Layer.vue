@@ -1,15 +1,6 @@
-<!--
- * @Author: 秦少卫
- * @Date: 2022-09-03 19:16:55
- * @LastEditors: June
- * @LastEditTime: 2024-07-26 21:16:34
- * @Description: 图层面板
--->
-
 <template>
   <div class="w-full">
     <template v-if="list.length">
-      <el-divider content-position="left">{{ $t('layers') }}</el-divider>
       <div class="layer-box">
         <div
           v-for="item in list"
@@ -66,24 +57,28 @@
   </div>
 </template>
 
-<script setup name="Layer">
+<script lang="ts" setup>
+import { fabric } from 'fabric'
 import { Lock, Unlock } from '@element-plus/icons-vue'
 import { uniqBy } from 'lodash-es'
-import useSelect from '@/hooks/select'
-const { canvasEditor, fabric, mixinState } = useSelect()
+import { Selector } from '@/hooks/useSelectListen'
+import { useEditorStore } from '@/store/modules/editor'
 
-const list = ref([])
+const mixinState = inject('mixinState') as Selector
+const editorStore = useEditorStore()
+
+const list: any = ref([])
 
 // 是否选中元素
-const isSelect = (item) => {
+const isSelect = (item: any) => {
   return (
     item.id === mixinState.mSelectId || mixinState.mSelectIds.includes(item.id)
   )
 }
 
 // 图层类型图标
-const iconType = (type) => {
-  const iconType = {
+const iconType = (type: string) => {
+  const _iconType: Record<string, string> = {
     group:
       '<svg t="1650855307397" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2503" width="16" height="16"><path d="M839.036 130.458h-654.072c-30.102 0-54.506 24.404-54.506 54.506v654.072c0 30.102 24.404 54.506 54.506 54.506h654.072c30.102 0 54.506-24.404 54.506-54.506v-654.072c0-30.102-24.404-54.506-54.506-54.506zM839.036 811.786c0 15.050-12.196 27.249-27.249 27.249h-598.721c-15.050 0-27.249-12.196-27.249-27.249v-598.721c0-15.050 12.196-27.249 27.249-27.249h598.721c15.049 0 27.249 12.196 27.249 27.249v598.721zM730.028 421.639h-127.324v-126.817c0-30.091-24.402-54.499-54.501-54.499h-252.755c-30.098 0-54.501 24.401-54.501 54.499v253.89c0 30.091 24.402 54.499 54.501 54.499h127.324v126.817c0 30.091 24.402 54.499 54.501 54.499h252.755c30.098 0 54.501-24.401 54.501-54.499v-253.89c0-30.091-24.402-54.499-54.501-54.499zM323.36 548.137c-15.050 0-27.251-12.207-27.251-27.26v-197.694c0-15.055 12.201-27.26 27.251-27.26h196.928c15.051 0 27.251 12.207 27.251 27.26v98.458h-70.267c-30.098 0-54.501 24.401-54.501 54.499v71.998h-99.411zM547.539 477.24v43.638c0 15.055-12.202 27.26-27.251 27.26h-42.353v-43.638c0-15.055 12.202-27.26 27.251-27.26h42.353zM729.365 702.193c0 15.055-12.201 27.26-27.251 27.26h-196.928c-15.050 0-27.251-12.207-27.251-27.26v-98.981h70.267c30.098 0 54.501-24.401 54.501-54.499v-71.474h99.411c15.050 0 27.251 12.207 27.251 27.26v197.693z" p-id="2504"></path></svg>',
     textbox:
@@ -102,14 +97,13 @@ const iconType = (type) => {
   }
   const defaultIcon =
     '<svg t="1650855578257" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="17630" width="16" height="16"><path d="M620.606061 0a62.060606 62.060606 0 0 1 62.060606 62.060606v188.943515C874.945939 273.997576 1024 437.651394 1024 636.121212c0 214.217697-173.661091 387.878788-387.878788 387.878788-198.469818 0-362.123636-149.054061-385.117091-341.333333H62.060606a62.060606 62.060606 0 0 1-62.060606-62.060606V62.060606a62.060606 62.060606 0 0 1 62.060606-62.060606h558.545455z m62.060606 297.937455V620.606061a62.060606 62.060606 0 0 1-62.060606 62.060606H297.937455C320.636121 849.159758 463.39103 977.454545 636.121212 977.454545c188.509091 0 341.333333-152.824242 341.333333-341.333333 0-172.730182-128.294788-315.485091-294.787878-338.183757zM620.606061 46.545455H62.060606a15.515152 15.515152 0 0 0-15.406545 13.699878L46.545455 62.060606v558.545455a15.515152 15.515152 0 0 0 13.699878 15.406545L62.060606 636.121212h186.181818c0-214.217697 173.661091-387.878788 387.878788-387.878788V62.060606a15.515152 15.515152 0 0 0-13.699879-15.406545L620.606061 46.545455z m15.515151 248.242424c-188.509091 0-341.333333 152.824242-341.333333 341.333333h325.818182a15.515152 15.515152 0 0 0 15.406545-13.699879L636.121212 620.606061V294.787879z" p-id="17631"></path></svg>'
-  return iconType[type] || defaultIcon
+  return _iconType[type] || defaultIcon
 }
-const textType = (type, item) => {
-  console.log(type, item)
+const textType = (type: string, item: any) => {
   if (type.includes('text')) {
     return item.name || item.text
   }
-  const typeText = {
+  const typeText: Record<string, string> = {
     group: '组合',
     image: '图片',
     rect: '矩形',
@@ -121,16 +115,18 @@ const textType = (type, item) => {
   return typeText[type] || '默认元素'
 }
 // 选中元素
-const select = (id) => {
-  const info = canvasEditor.canvas.getObjects().find((item) => item.id === id)
-  canvasEditor.canvas.discardActiveObject()
-  canvasEditor.canvas.setActiveObject(info)
-  canvasEditor.canvas.requestRenderAll()
+const select = (id: string) => {
+  const info = editorStore.canvas
+    ?.getObjects()
+    .find((item: any) => item.id === id) as fabric.Object
+  editorStore.canvas?.discardActiveObject()
+  editorStore.canvas?.setActiveObject(info)
+  editorStore.canvas?.requestRenderAll()
 }
 
 // 按钮类型
-const btnIconType = (type) => {
-  const iconType = {
+const btnIconType = (type: string) => {
+  const iconType: Record<string, string> = {
     up: '<svg t="1650442206559" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1799" width="12" height="12"><path d="M876.2 434.3L536.7 94.9c-6.6-6.6-15.5-10.3-24.7-10.3-9.3 0-18.2 3.7-24.7 10.3L147.8 434.3c-13.7 13.7-13.7 35.8 0 49.5 13.7 13.7 35.8 13.7 49.5 0L477 204.1v700.2c0 19.3 15.7 35 35 35s35-15.7 35-35V204.1l279.7 279.7c6.8 6.8 15.8 10.3 24.7 10.3s17.9-3.4 24.7-10.3c13.7-13.7 13.7-35.8 0.1-49.5z" p-id="1800"></path></svg>',
     down: '<svg t="1650442229022" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1997" width="12" height="12"><path d="M876.2 589.7L536.7 929.1c-6.6 6.6-15.5 10.3-24.7 10.3-9.3 0-18.2-3.7-24.7-10.3L147.8 589.7c-13.7-13.7-13.7-35.8 0-49.5 13.7-13.7 35.8-13.7 49.5 0L477 819.9V119.6c0-19.3 15.7-35 35-35s35 15.7 35 35v700.2l279.7-279.7c6.8-6.8 15.8-10.3 24.7-10.3s17.9 3.4 24.7 10.3c13.7 13.8 13.7 35.9 0.1 49.6z" p-id="1998" ></path></svg>',
     upTop:
@@ -141,29 +137,28 @@ const btnIconType = (type) => {
   return iconType[type]
 }
 const up = () => {
-  canvasEditor.up()
+  editorStore.editor.up()
 }
 const upTop = () => {
-  canvasEditor.toFront()
+  editorStore.editor.toFront()
 }
 const down = () => {
-  canvasEditor.down()
+  editorStore.editor.down()
 }
 const downTop = () => {
-  canvasEditor.toBack()
+  editorStore.editor.toBack()
 }
 
 const getList = () => {
   // 不改原数组 反转
   list.value = [
-    ...canvasEditor.canvas.getObjects().filter((item) => {
-      // return item;
-      // 过滤掉辅助线
+    ...(editorStore.canvas?.getObjects().filter((item: any) => {
+      //@ts-ignore
       return !(item instanceof fabric.GuideLine || item.id === 'workspace')
-    })
+    }) || [])
   ]
     .reverse()
-    .map((item) => {
+    .map((item: any) => {
       const { type, id, name, text, selectable } = item
       return {
         type,
@@ -174,18 +169,21 @@ const getList = () => {
       }
     })
   list.value = uniqBy(unref(list), 'id')
-  console.log(list)
 }
 
-const doLock = (item) => {
+const doLock = (item: any) => {
   select(item.id)
-  item.isLock ? canvasEditor.unLock() : canvasEditor.lock()
-  canvasEditor.canvas.discardActiveObject()
+  item.isLock ? editorStore.editor.unLock() : editorStore.editor.lock()
+  editorStore.canvas?.discardActiveObject()
 }
 
 onMounted(() => {
   getList()
-  canvasEditor.canvas.on('after:render', getList)
+  editorStore.canvas?.on('after:render', getList)
+})
+
+onBeforeUnmount(() => {
+  editorStore.canvas?.off('after:render', getList)
 })
 </script>
 

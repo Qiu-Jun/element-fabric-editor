@@ -1,47 +1,40 @@
-<!--
- * @Author: 秦少卫
- * @Date: 2024-05-21 09:23:36
- * @LastEditors: 秦少卫
- * @LastEditTime: 2024-05-21 15:37:27
- * @Description: file content
--->
 <template>
   <div class="box attr-item-box" v-if="mixinState.mSelectMode === 'one'">
     <!-- <h3>位置信息</h3> -->
     <el-divider content-position="left"><h4>位置信息</h4></el-divider>
     <!-- 通用属性 -->
-    <div v-show="baseType.includes(mixinState.mSelectOneType)">
+    <div v-show="baseType.includes(mixinState.mSelectOneType as string)">
       <el-row :gutter="10" style="margin-bottom: 10px">
         <el-col :span="12">
           <InputNumber
             v-model="baseAttr.left"
-            :append="$t('attributes.left')"
+            :append="$t('editor.attributes.left')"
             @on-change="(value) => changeCommon('left', value)"
           />
         </el-col>
         <el-col :span="12">
           <InputNumber
-            v-model="baseAttr.top"
-            :append="$t('attributes.top')"
+            v-model="baseAttr.right"
+            :append="$t('editor.attributes.top')"
             @on-change="(value) => changeCommon('top', value)"
           />
         </el-col>
       </el-row>
 
       <div class="asa-number-warp">
-        <span>{{ $t('attributes.angle') }}</span>
+        <span>{{ $t('editor.attributes.angle') }}</span>
         <el-slider
           v-model="baseAttr.angle"
           :max="360"
-          @input="(value) => changeCommon('angle', value)"
+          @input="(value: any) => changeCommon('angle', value)"
         ></el-slider>
       </div>
 
       <div class="asa-number-warp">
-        <span>{{ $t('attributes.opacity') }}</span>
+        <span>{{ $t('editor.attributes.opacity') }}</span>
         <el-slider
           v-model="baseAttr.opacity"
-          @input="(value) => changeCommon('opacity', value)"
+          @input="(value: any) => changeCommon('opacity', value)"
         ></el-slider>
       </div>
     </div>
@@ -49,12 +42,14 @@
   </div>
 </template>
 
-<script setup name="AttrBute">
-import useSelect from '@/hooks/select'
+<script lang="ts" setup>
 import InputNumber from './InputNumber'
+import { Selector } from '@/hooks/useSelectListen'
+import { useEditorStore } from '@/store/modules/editor'
 
+const mixinState = inject('mixinState') as Selector
+const editorStore = useEditorStore()
 const update = getCurrentInstance()
-const { mixinState, canvasEditor } = useSelect()
 
 // 可修改的元素
 const baseType = [
@@ -73,7 +68,7 @@ const baseType = [
 ]
 
 // 属性值
-const baseAttr = reactive({
+const baseAttr = reactive<Record<string, any>>({
   opacity: 0,
   angle: 0,
   left: 0,
@@ -83,12 +78,13 @@ const baseAttr = reactive({
 })
 
 // 属性获取
-const getObjectAttr = (e) => {
-  const activeObject = canvasEditor.canvas.getActiveObject()
+const getObjectAttr = (e?: any) => {
+  const activeObject = editorStore.canvas?.getActiveObject()
   // 不是当前obj，跳过
   if (e && e.target && e.target !== activeObject) return
+  //@ts-ignore
   if (activeObject && baseType.includes(activeObject.type)) {
-    baseAttr.opacity = activeObject.get('opacity') * 100
+    baseAttr.opacity = (activeObject.get('opacity') ?? 0) * 100
     baseAttr.left = activeObject.get('left')
     baseAttr.top = activeObject.get('top')
     baseAttr.angle = activeObject.get('angle') || 0
@@ -96,23 +92,23 @@ const getObjectAttr = (e) => {
 }
 
 // 通用属性改变
-const changeCommon = (key, value) => {
-  const activeObject = canvasEditor.canvas.getActiveObjects()[0]
+const changeCommon = (key: any, value: any) => {
+  const activeObject = editorStore.canvas?.getActiveObjects()[0]
   if (activeObject) {
     // 透明度特殊转换
     if (key === 'opacity') {
       activeObject && activeObject.set(key, value / 100)
-      canvasEditor.canvas.renderAll()
+      editorStore.canvas?.renderAll()
       return
     }
     // 旋转角度适配
     if (key === 'angle') {
       activeObject.rotate(value)
-      canvasEditor.canvas.renderAll()
+      editorStore.canvas?.renderAll()
       return
     }
     activeObject && activeObject.set(key, value)
-    canvasEditor.canvas.renderAll()
+    editorStore.canvas?.renderAll()
   }
 }
 
@@ -121,17 +117,19 @@ const selectCancel = () => {
 }
 
 onMounted(() => {
-  // 获取字体数据
-  getObjectAttr()
-  canvasEditor.on('selectCancel', selectCancel)
-  canvasEditor.on('selectOne', getObjectAttr)
-  canvasEditor.canvas.on('object:modified', getObjectAttr)
+  nextTick(() => {
+    // 获取字体数据
+    getObjectAttr()
+    editorStore.editor?.on('selectCancel', selectCancel)
+    editorStore.editor?.on('selectOne', getObjectAttr)
+    editorStore.canvas?.on('object:modified', getObjectAttr)
+  })
 })
 
 onBeforeUnmount(() => {
-  canvasEditor.off('selectCancel', selectCancel)
-  canvasEditor.off('selectOne', getObjectAttr)
-  canvasEditor.canvas.off('object:modified', getObjectAttr)
+  editorStore.editor?.off('selectCancel', selectCancel)
+  editorStore.editor?.off('selectOne', getObjectAttr)
+  editorStore.canvas?.off('object:modified', getObjectAttr)
 })
 </script>
 

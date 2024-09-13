@@ -1,11 +1,11 @@
 <!--
- * @Author: 秦少卫
- * @Date: 2022-09-03 19:16:55
+ * @Author: June
+ * @Description: 
+ * @Date: 2024-09-05 23:18:00
+ * @LastEditTime: 2024-09-06 11:38:36
  * @LastEditors: June
- * @LastEditTime: 2024-07-25 10:51:55
- * @Description: 组合与拆分组合
+ * @FilePath: \ai-desing\src\views\editor\components\Group.vue
 -->
-
 <template>
   <div v-if="isMultiple || isGroup" class="attr-item-box">
     <div class="bg-item">
@@ -26,7 +26,7 @@
             fill="#303133"
           ></path>
         </svg>
-        {{ $t('attrSeting.group') }}
+        {{ $t('editor.attrSetting.group') }}
       </el-button>
       <!-- 拆分组合按钮，为单选且组元素时可用 -->
       <el-button v-if="isGroup" :disabled="!isGroup" @click="unGroup">
@@ -44,7 +44,7 @@
             p-id="17282"
           ></path>
         </svg>
-        {{ $t('attrSeting.unGroup') }}
+        {{ $t('editor.attrSetting.unGroup') }}
       </el-button>
     </div>
 
@@ -52,10 +52,12 @@
   </div>
 </template>
 
-<script setup name="Group">
-import useSelect from '@/hooks/select'
+<script lang="ts" setup>
+import { Selector } from '@/hooks/useSelectListen'
+import { useEditorStore } from '@/store/modules/editor'
 
-const { mixinState, canvasEditor } = useSelect()
+const mixinState = inject('mixinState') as Selector
+const editorStore = useEditorStore()
 
 // 单选且等于组元素
 let isGroup = computed(
@@ -66,10 +68,10 @@ let isGroup = computed(
 let isMultiple = computed(() => mixinState.mSelectMode === 'multiple')
 // 拆分组
 const unGroup = () => {
-  canvasEditor.unGroup()
+  editorStore.editor.unGroup()
 }
 const group = () => {
-  canvasEditor.group()
+  editorStore.editor.group()
 }
 </script>
 <style scoped lang="scss">
