@@ -2,7 +2,7 @@
  * @Author: June
  * @Description:
  * @Date: 2024-08-07 15:41:56
- * @LastEditTime: 2024-09-12 20:22:26
+ * @LastEditTime: 2024-09-13 11:50:06
  * @LastEditors: June
  * @FilePath: \element-fabric-editor\src\locales\index.ts
  */

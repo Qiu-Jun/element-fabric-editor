@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2024-07-24 17:38:29
  * @LastEditors: June
- * @LastEditTime: 2024-07-26 09:29:43
+ * @LastEditTime: 2024-09-13 12:00:24
  * @FilePath: \element-fabric-editor\build\plugins.ts
  */
 import Vue from '@vitejs/plugin-vue'
@@ -17,6 +17,7 @@ import { PluginOption } from 'vite'
 import { createHtmlPlugin } from 'vite-plugin-html'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import { isProd } from './getEnv'
+import topLevelAwait from 'vite-plugin-top-level-await'
 
 /**
  * 创建 vite 插件
@@ -61,6 +62,7 @@ export const createVitePlugins = (
           title: APP_TITLE
         }
       }
-    })
+    }),
+    topLevelAwait()
   ]
 }
