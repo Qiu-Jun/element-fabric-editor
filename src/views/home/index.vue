@@ -121,6 +121,7 @@ onMounted(() => {
     .use(AddBaseTypePlugin)
 
   editorStore.setEditor(canvasEditor)
+  editorStore.setCanvas(canvas)
   // 默认打开标尺
   if (editorStore.rulerEnable) {
     canvasEditor.rulerEnable()
@@ -137,7 +138,6 @@ onUnmounted(() => canvasEditor.destory())
 
 const { mixinState } = useSelectListen(canvasEditor)
 
-provide('fabric', fabric)
 provide('mixinState', mixinState)
 </script>
 

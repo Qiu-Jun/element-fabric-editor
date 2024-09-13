@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-12 18:51:45
- * @LastEditTime: 2024-09-13 01:19:41
+ * @LastEditTime: 2024-09-13 11:29:12
  * @LastEditors: June
  * @FilePath: \element-fabric-editor\src\views\home\components\EditorHeader\index.vue
 -->
@@ -21,14 +21,16 @@
       <el-divider direction="vertical" />
       <MyTemplName />
 
-      <el-tooltip :content="$t('grid')">
-        <el-switch
-          v-model="rulerEnable"
-          @change="onRulerEnable"
-          size="small"
-          class="mx-10px"
-        />
-      </el-tooltip>
+      <el-switch
+        v-model="rulerEnable"
+        size="large"
+        class="ml-10px"
+        inline-prompt
+        active-text="标尺"
+        inactive-text="标尺"
+        @change="onRulerEnable"
+      />
+
       <el-divider direction="vertical" />
       <History />
     </div>

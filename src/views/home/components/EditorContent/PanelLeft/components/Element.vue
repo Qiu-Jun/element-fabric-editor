@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-03 12:12:47
- * @LastEditTime: 2024-09-13 01:10:05
+ * @LastEditTime: 2024-09-13 11:18:17
  * @LastEditors: June
  * @FilePath: \element-fabric-editor\src\views\home\components\EditorContent\PanelLeft\components\Element.vue
 -->
@@ -296,7 +296,7 @@
 import { getPolygonVertices } from '@/utils/math'
 import useSelect from '@/hooks/select'
 import { useI18n } from '@/hooks/useI18n'
-
+import { fabric } from 'fabric'
 const LINE_TYPE = {
   polygon: 'polygon',
   freeDraw: 'freeDraw',
@@ -306,7 +306,7 @@ const LINE_TYPE = {
 const defaultPosition = { shadow: '', fontFamily: 'arial' }
 
 const { t } = useI18n()
-const { fabric, canvasEditor } = useSelect()
+const { canvasEditor } = useSelect()
 const state = reactive({
   isDrawingLineMode: false,
   lineType: false

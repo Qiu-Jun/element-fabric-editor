@@ -2,7 +2,7 @@
  * @Author: 秦少卫
  * @Date: 2024-05-11 13:23:48
  * @LastEditors: June
- * @LastEditTime: 2024-09-13 01:00:09
+ * @LastEditTime: 2024-09-13 11:43:18
  * @Description: 文件名称
 -->
 
@@ -28,7 +28,6 @@ import { debounce } from 'lodash-es'
 import { ElMessage } from 'element-plus'
 import useMaterial from '@/hooks/useMaterial'
 import { useRoute, useRouter } from 'vue-router'
-import useSelect from '@/hooks/select'
 import { getTmplList } from '@/api/user'
 import qs from 'qs'
 import { useEditorStore } from '@/store/modules/editor'
@@ -36,8 +35,6 @@ import { useEditorStore } from '@/store/modules/editor'
 const editorStore = useEditorStore()
 const router = useRouter()
 const { getTemplInfo, updataTemplInfo } = useMaterial()
-
-const { canvasEditor } = useSelect()
 
 const fileName = ref('')
 const route = useRoute()
@@ -56,26 +53,32 @@ watch(
   }
 )
 
-onMounted(async () => {
-  if (route?.query?.id) {
-    getTemplInfo(route?.query?.id)
-      .then((res) => {
-        fileName.value = res?.data?.attributes?.name
-        canvasEditor.loadJSON(JSON.stringify(res?.data?.attributes?.json))
-      })
-      .catch(() => {
-        window.location.href = '/'
-      })
-  } else if (route?.query?.projectid) {
-    const infoid = await queryTemplIdByProId(route?.query?.projectid)
-    if (infoid) {
-      getTemplInfo(infoid).then((res) => {
-        router.replace(route.fullPath + '&id=' + infoid)
-        fileName.value = res?.data?.attributes?.name
-        canvasEditor.loadJSON(JSON.stringify(res?.data?.attributes?.json))
-      })
+onMounted(() => {
+  nextTick(async () => {
+    if (route?.query?.id) {
+      getTemplInfo(route?.query?.id)
+        .then((res) => {
+          fileName.value = res?.data?.attributes?.name
+          editorStore.editor.loadJSON(
+            JSON.stringify(res?.data?.attributes?.json)
+          )
+        })
+        .catch(() => {
+          window.location.href = '/'
+        })
+    } else if (route?.query?.projectid) {
+      const infoid = await queryTemplIdByProId(route?.query?.projectid)
+      if (infoid) {
+        getTemplInfo(infoid).then((res) => {
+          router.replace(route.fullPath + '&id=' + infoid)
+          fileName.value = res?.data?.attributes?.name
+          editorStore.editor.loadJSON(
+            JSON.stringify(res?.data?.attributes?.json)
+          )
+        })
+      }
     }
-  }
+  })
 })
 
 const queryTemplIdByProId = (projectid) => {

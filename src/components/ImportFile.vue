@@ -50,10 +50,11 @@ import { ArrowDown } from '@element-plus/icons-vue'
 import { Utils } from '@/lib/core'
 import useSelect from '@/hooks/select'
 import { v4 as uuid } from 'uuid'
+import { fabric } from 'fabric'
 
 const { getImgStr, selectFiles } = Utils
 
-const { fabric, canvasEditor } = useSelect()
+const { canvasEditor } = useSelect()
 const state = reactive({
   showModal: false,
   svgStr: ''

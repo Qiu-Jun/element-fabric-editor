@@ -21,12 +21,10 @@ import { useEditorStoreWithOut } from '@/store/modules/editor'
 
 export default function useSelect() {
   const editorStore = useEditorStoreWithOut()
-  const fabric = inject('fabric')
   const { t } = useI18n()
   const mixinState = inject('mixinState') as Selector
 
   return {
-    fabric,
     canvasEditor: editorStore.editor as Editor,
     mixinState,
     t

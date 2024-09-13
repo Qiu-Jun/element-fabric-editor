@@ -45,11 +45,12 @@
 import { Plus } from '@element-plus/icons-vue'
 import useMaterial from '@/hooks/useMaterial'
 import { useI18n } from '@/hooks/useI18n'
-import useSelect from '@/hooks/select'
 import { getUserFileTypeTree, updataTempl } from '@/api/user'
 import { ElMessageBox, ElLoading, ElMessage } from 'element-plus'
+import { useEditorStore } from '@/store/modules/editor'
+
+const editorStore = useEditorStore()
 const { t } = useI18n()
-const { canvasEditor } = useSelect()
 const { reNameFileType, removeTemplInfo, routerToId, getTemplInfo } =
   useMaterial()
 
@@ -135,7 +136,7 @@ const getTempData = async () => {
   })
   const data = await getTemplInfo(props.itemId)
   routerToId(props.itemId)
-  canvasEditor.loadJSON(
+  editorStore.editor.loadJSON(
     JSON.stringify(data.data.attributes.json),
     loadingInstance.close
   )

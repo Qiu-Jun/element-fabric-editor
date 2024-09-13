@@ -2,9 +2,9 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-03 12:05:38
- * @LastEditTime: 2024-09-12 10:22:03
+ * @LastEditTime: 2024-09-13 11:45:39
  * @LastEditors: June
- * @FilePath: \element-fabric-editor\src\views\home\components\Template.vue
+ * @FilePath: \element-fabric-editor\src\views\home\components\EditorContent\PanelLeft\components\Template.vue
 -->
 <template>
   <div class="box-border p-10px">
@@ -79,6 +79,9 @@ import { ElLoading, ElMessageBox } from 'element-plus'
 import { useI18n } from '@/hooks/useI18n'
 import { useRouter, useRoute } from 'vue-router'
 import { debounce, throttle } from 'lodash-es'
+import { useEditorStore } from '@/store/modules/editor'
+
+const editorStore = useEditorStore()
 const router = useRouter()
 const route = useRoute()
 const { t } = useI18n()
@@ -132,7 +135,7 @@ const getTempData = async (info) => {
   } else {
     router.replace('/?tempId=' + info.id)
   }
-  canvasEditor.loadJSON(
+  editorStore.editor.loadJSON(
     JSON.stringify(infoRes.data.data.attributes.json),
     loadingInstance?.close()
   )
@@ -147,7 +150,7 @@ const getTemplInfo = async () => {
         text: t('alert.loading_data')
       })
       const infoRes = await getInfo(route.query.tempId)
-      canvasEditor.loadJSON(
+      editorStore.editor.loadJSON(
         JSON.stringify(infoRes.data.data.attributes.json),
         loadingInstance?.close()
       )

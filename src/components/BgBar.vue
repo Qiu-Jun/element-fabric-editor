@@ -73,16 +73,18 @@ const setThisColor = () => {
   setColor(color.value)
 }
 // 背景颜色设置
-function setColor(c: string) {
+function setColor(_color: string) {
+  if (!_color) return
   // const workspace: any = editorStore.canvas
   //   ?.getObjects()
   //   .find((item: any) => item.id === 'workspace')
   // workspace.set('fill', c)
+  console.log(editorStore.canvas)
   editorStore.canvas?.setBackgroundColor(
-    c,
+    _color,
     editorStore.canvas.renderAll.bind(editorStore.canvas)
   )
-  color.value = c
+  color.value = _color
 }
 
 // 加载模板时回显颜色值
