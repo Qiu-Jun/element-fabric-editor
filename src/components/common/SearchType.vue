@@ -1,8 +1,8 @@
 <!--
  * @Author: 秦少卫
  * @Date: 2024-06-11 16:04:59
- * @LastEditors: 秦少卫
- * @LastEditTime: 2024-06-12 16:37:40
+ * @LastEditors: June
+ * @LastEditTime: 2024-09-20 10:44:04
  * @Description: 搜索组件
 -->
 
@@ -16,8 +16,19 @@
       :icon="ArrowLeftBold"
     ></el-button>
 
-    <el-select class="select" v-model="typeValue" :disabled="loading" @change="change">
-      <el-option v-for="item in typeList" :value="item.value" :label="item.label" :key="item.value" />
+    <el-select
+      class="select"
+      v-model="typeValue"
+      :disabled="loading"
+      placeholder="请选择"
+      @change="change"
+    >
+      <el-option
+        v-for="item in typeList"
+        :value="item.value"
+        :label="item.label"
+        :key="item.value"
+      />
     </el-select>
     <el-input
       class="input"
@@ -33,74 +44,77 @@
 </template>
 
 <script name="ImportJson" setup>
-import { ArrowLeftBold } from '@element-plus/icons-vue';
-import { debounce } from 'lodash-es';
+import { ArrowLeftBold } from '@element-plus/icons-vue'
+import { debounce } from 'lodash-es'
 
 const props = defineProps({
   typeListApi: {
     type: Function,
-    Object: () => ({}),
-  },
-});
-const emit = defineEmits(['change']);
+    Object: () => ({})
+  }
+})
+const emit = defineEmits(['change'])
 
-const loading = ref(false);
+const loading = ref(false)
 
-const typeValue = ref('');
-const searchKeyWord = ref('');
-const typeList = ref([]);
+const typeValue = ref('')
+const searchKeyWord = ref('')
+const typeList = ref([])
 const typeText = computed(() => {
-  const info = typeList.value.find((item) => item.value === typeValue.value);
-  return info?.label || '全部';
-});
+  const info = typeList.value.find((item) => item.value === typeValue.value)
+  return info?.label || '全部'
+})
 
 onMounted(async () => {
-  loading.value = true;
+  loading.value = true
 
   try {
-    const res = await props.typeListApi();
+    const res = await props.typeListApi()
     const list = res.data.data.map((item) => {
       return {
         value: item.id,
-        label: item.attributes.name,
-      };
-    });
+        label: item.attributes.name
+      }
+    })
     typeList.value = [
       {
         label: '全部',
-        value: '',
+        value: ''
       },
-      ...list,
-    ];
+      ...list
+    ]
   } catch (error) {
-    console.log(error);
+    console.log(error)
   }
 
-  loading.value = false;
-});
+  loading.value = false
+})
 
 const change = () => {
-  emit('change', { searchKeyWord: searchKeyWord.value, typeValue: typeValue.value });
-};
+  emit('change', {
+    searchKeyWord: searchKeyWord.value,
+    typeValue: typeValue.value
+  })
+}
 
 // const getValue = () => {
 //   return { type: typeValue.value, searchKeyWord };
 // };
 const clear = () => {
-  typeValue.value = '';
-  searchKeyWord.value = '';
-  change();
-};
+  typeValue.value = ''
+  searchKeyWord.value = ''
+  change()
+}
 
 const setType = (type) => {
-  typeValue.value = type;
-};
+  typeValue.value = type
+}
 
-const inputChange = debounce(change, 300);
+const inputChange = debounce(change, 300)
 
 defineExpose({
-  setType,
-});
+  setType
+})
 </script>
 <style scoped lang="scss">
 .search-box {
