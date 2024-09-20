@@ -14,7 +14,7 @@
         </el-col>
         <el-col :span="12">
           <InputNumber
-            v-model="baseAttr.right"
+            v-model="baseAttr.left"
             :append="$t('editor.attributes.top')"
             @on-change="(value) => changeCommon('top', value)"
           />
@@ -38,7 +38,6 @@
         ></el-slider>
       </div>
     </div>
-    <!-- <Divider plain></Divider> -->
   </div>
 </template>
 
