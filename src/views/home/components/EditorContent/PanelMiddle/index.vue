@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-12 19:09:34
- * @LastEditTime: 2024-09-13 01:25:44
+ * @LastEditTime: 2024-09-21 09:29:33
  * @LastEditors: June
  * @FilePath: \element-fabric-editor\src\views\home\components\EditorContent\PanelMiddle\index.vue
 -->
@@ -16,19 +16,7 @@
         :class="rulerEnable ? 'design-stage-grid' : ''"
       ></canvas>
 
-      <!-- 暂放 -->
-      <div
-        class="absolute left-30px bottom-10px bg-#fff rounded-4px p-4px"
-        @click="handleLayer"
-      >
-        <SvgIcon
-          :style="{ width: '24px', height: '24px' }"
-          name="editor-layer"
-        />
-      </div>
-
-      <DragMode />
-      <Zoom />
+      <Operate />
     </div>
   </section>
 </template>
@@ -36,14 +24,10 @@
 <script lang="ts" setup>
 import { debounce } from 'lodash-es'
 import { useEditorStore } from '@/store/modules/editor'
+import Operate from './components/Operate.vue'
 
 const editorStore = useEditorStore()
 const rulerEnable = computed(() => editorStore.rulerEnable)
-// 暂放 待分离组件
-const handleLayer = debounce(function () {
-  //   currentTab.value = ''
-  //   unref(subType) !== panels.layer && (subType.value = panels.layer)
-}, 250)
 </script>
 
 <style lang="scss" scoped>

@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-08-19 12:53:30
- * @LastEditTime: 2024-09-13 01:28:25
+ * @LastEditTime: 2024-09-21 09:39:06
  * @LastEditors: June
  * @FilePath: \element-fabric-editor\src\components\DragMode.vue
 -->
@@ -45,10 +45,3 @@ onBeforeUnmount(() => {
   editorStore.editor?.off('endDring')
 })
 </script>
-<style scoped lang="scss">
-.box {
-  position: absolute;
-  right: 200px;
-  bottom: 6px;
-}
-</style>
