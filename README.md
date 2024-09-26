@@ -64,6 +64,13 @@ pnpm commit # 使用此命令编写commit
 <table>
 <tr>
     <td align="center">
+        <a href="https://github.com/nihaojob">
+            <img src="https://avatars.githubusercontent.com/u/13534626?v=4" width="80;" alt="nihaojob"/>
+            <br />
+            <sub><b>nihaojob</b></sub>
+        </a>
+    </td>
+    <td align="center">
         <a href="https://github.com/Qiu-Jun">
             <img src="https://avatars.githubusercontent.com/u/24954362?v=4" width="80;" alt="Qiu-Jun"/>
             <br />
@@ -77,6 +84,13 @@ pnpm commit # 使用此命令编写commit
 <!-- readme: collaborators,contributors -start -->
 <table>
 <tr>
+    <td align="center">
+        <a href="https://github.com/nihaojob">
+            <img src="https://avatars.githubusercontent.com/u/13534626?v=4" width="80;" alt="nihaojob"/>
+            <br />
+            <sub><b>nihaojob</b></sub>
+        </a>
+    </td>
     <td align="center">
         <a href="https://github.com/Qiu-Jun">
             <img src="https://avatars.githubusercontent.com/u/24954362?v=4" width="80;" alt="Qiu-Jun"/>
@@ -96,13 +110,6 @@ pnpm commit # 使用此命令编写commit
             <img src="https://avatars.githubusercontent.com/u/3102798?v=4" width="80;" alt="ijry"/>
             <br />
             <sub><b>ijry</b></sub>
-        </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/nihaojob">
-            <img src="https://avatars.githubusercontent.com/u/13534626?v=4" width="80;" alt="nihaojob"/>
-            <br />
-            <sub><b>nihaojob</b></sub>
         </a>
     </td></tr>
 </table>
