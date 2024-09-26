@@ -3,7 +3,7 @@
  * @Author: June
  * @Date: 2024-04-24 09:32:13
  * @FilePath: \element-fabric-editor\README.md
- * @LastEditTime: 2024-09-13 01:45:32
+ * @LastEditTime: 2024-09-26 09:45:29
  * @LastEditors: June
 -->
 
@@ -40,6 +40,7 @@ pnpm commit # 使用此命令编写commit
 - [ ] 多画布
 - [ ] 样式优化(对旧的样式，全部使用unocss)
 - [ ] history重构
+- [ ] layer图层重构
 
 #### 自动注释说明
 
