@@ -3,7 +3,7 @@
  * @Author: June
  * @Date: 2024-04-24 09:32:13
  * @FilePath: \element-fabric-editor\README.md
- * @LastEditTime: 2024-09-26 09:45:29
+ * @LastEditTime: 2024-09-30 17:17:24
  * @LastEditors: June
 -->
 
@@ -15,7 +15,7 @@
 + <span style="color: red">pnpm commit</span>(必须)
 
 #### 同步情况
-+ perf: 优化插件use方法  c3ca1a9e3b8a805099f17566140285ec013a3784
++ fix: 修复两端对齐的缺陷  da841ed68dcd35e80c41feac2c779891128e5e9e
 
 #### 使用
 
