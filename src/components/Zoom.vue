@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-05 00:02:31
- * @LastEditTime: 2024-09-30 16:09:18
+ * @LastEditTime: 2024-09-30 17:25:18
  * @LastEditors: June
  * @FilePath: \element-fabric-editor\src\components\Zoom.vue
 -->
@@ -78,7 +78,7 @@ import { useEditorStore } from '@/store/modules/editor'
 
 const editorStore = useEditorStore()
 const dragEnable = ref(false)
-const onDragEnable = (val: boolean) => {
+const onDragEnable = (val: string | number | boolean) => {
   if (val) {
     editorStore.editor.startDring()
   } else {

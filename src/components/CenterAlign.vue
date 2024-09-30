@@ -90,7 +90,7 @@ import { useEditorStore } from '@/store/modules/editor'
 
 const mixinState = inject('mixinState') as Selector
 const editorStore = useEditorStore()
-const position = (name) => {
+const position = (name: string) => {
   editorStore.editor.position(name)
 }
 </script>
