@@ -1,16 +1,14 @@
 {
+  "css.customData": [".vscode/unocss.json"],
   "fileheader.cursorMode": {
     "description": "",
     "param ": "",
     "return": ""
   },
-  "fileheader.customMade": {
-    "Author": "June", //编辑人
-    "Description": "", //文件内容描述
-    "Date": "Do not edit", //时间
-    "LastEditTime": "Do not edit",
-    "LastEditors": "June",
-    "FilePath": "" // 设置后，默认生成文件相对于项目的路径
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": true,
+    "strings": true
   },
   "fileheader.configObj": {
     "createFileTime": true, //设置为true则为文件新建时候作为date，否则注释生成时间为date
