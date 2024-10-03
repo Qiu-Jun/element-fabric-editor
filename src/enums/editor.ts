@@ -13,7 +13,8 @@ export enum editorTabs {
   text = 'TEXT',
   material = 'Material',
   ai = 'AI',
-  mine = 'MINE'
+  mine = 'MINE',
+  none = ''
 }
 
 export enum panels {

@@ -59,7 +59,7 @@ import { editorTabs, panels } from '@/enums/editor'
 import { useEditorStore } from '@/store/modules/editor'
 
 // 暂放
-import Layer from '@/components/Layer.vue'
+import Layer from '@/views/home/components/EditorContent/PanelLeft/components/Panel/Layer.vue'
 
 defineOptions({
   name: 'Home'

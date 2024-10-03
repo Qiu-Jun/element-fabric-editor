@@ -89,7 +89,6 @@ declare module 'vue' {
     ImportTmpl: typeof import('./../src/components/ImportTmpl.vue')['default']
     InputNumber: typeof import('./../src/components/InputNumber/InputNumber.vue')['default']
     Lang: typeof import('./../src/components/Lang.vue')['default']
-    Layer: typeof import('./../src/components/Layer.vue')['default']
     Lock: typeof import('./../src/components/Lock.vue')['default']
     Login: typeof import('./../src/components/Login.vue')['default']
     Logo: typeof import('./../src/components/Logo.vue')['default']

@@ -2,12 +2,13 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-12 19:09:28
- * @LastEditTime: 2024-10-03 11:59:45
+ * @LastEditTime: 2024-10-03 12:38:00
  * @LastEditors: June
  * @FilePath: \element-fabric-editor\src\views\home\components\EditorContent\PanelLeft\index.vue
 -->
 <template>
   <section class="flex justify-start max-w-384px">
+    <!-- 左侧一级菜单 -->
     <ul
       class="relative bg-#fff z-1 w-72px flex flex-col items-center pt-10px box-border border-r-#eef2f8 border-r-solid border-r-1px"
     >
@@ -34,6 +35,8 @@
         >
       </li>
     </ul>
+
+    <!-- 二级  二级有两个宽度不一样的 -->
     <div
       v-if="panelPositoin === 'left'"
       class="relative h-full transition-all transition-ease left-style-panel"
@@ -43,20 +46,18 @@
       ]"
     >
       <template v-if="showPanel && panelType === panels.menu">
-        <template v-if="currentTab">
-          <KeepAlive>
-            <component :is="tabComMap[currentTab]" />
-          </KeepAlive>
-        </template>
+        <KeepAlive>
+          <component :is="tabComMap[currentTab]" />
+        </KeepAlive>
         <div
-          class="inline-block absolute -right-14px top-50% -translate-y-50% z-1 cursor-pointer"
+          class="inline-block absolute -right-13px top-50% -translate-y-50% z-1 cursor-pointer"
           @click="handleHideSubMenu"
         >
-          <img src="@/assets/svgs/close-btn.svg" />
+          <img src="@/assets/icon/close-btn.svg" />
         </div>
       </template>
       <template v-else>
-        <Layer />
+        <Panel />
       </template>
     </div>
   </section>
@@ -80,7 +81,8 @@ import { useEditorStore } from '@/store/modules/editor'
 import { storeToRefs } from 'pinia'
 
 const editorStore = useEditorStore()
-const { panelType, showPanel, panelPositoin } = storeToRefs(editorStore)
+const { panelType, showPanel, tabType, panelPositoin } =
+  storeToRefs(editorStore)
 const tabComMap: Record<editorTabs, any> = {
   [editorTabs.create]: Create,
   [editorTabs.template]: Template,
@@ -88,21 +90,32 @@ const tabComMap: Record<editorTabs, any> = {
   [editorTabs.ai]: Ai,
   [editorTabs.text]: Text,
   [editorTabs.material]: Material,
-  [editorTabs.mine]: Mine
+  [editorTabs.mine]: Mine,
+  [editorTabs.none]: ''
 }
 
 // 二级菜单
 const handleHideSubMenu = debounce(function () {
   editorStore.setShowPanel(false)
+  currentTab.value = editorTabs.none
 }, 250)
 // 左侧tab相关
-const currentTab = ref<editorTabs | ''>(editorTabs.template)
+const currentTab = ref<editorTabs>(editorTabs.template)
 const tabChange = debounce(function (type: editorTabs, _subType: panels) {
   currentTab.value = type
   !unref(showPanel) && editorStore.setShowPanel(true)
   unref(panelPositoin) === 'bottom' && editorStore.setPanelPositoin('left')
   unref(panelType) !== panels.menu && (panelType.value = _subType)
+  editorStore.setTabType(type)
 }, 250)
+
+watch(
+  () => tabType.value,
+  (val) => {
+    if (unref(currentTab) === val) return
+    currentTab.value = val
+  }
+)
 </script>
 
 <style lang="scss" scoped>

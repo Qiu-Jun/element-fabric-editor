@@ -1,3 +1,10 @@
+/*
+ * @Author: June
+ * @Description: Description
+ * @Date: 2024-09-12 20:07:29
+ * @LastEditTime: 2024-10-03 12:34:22
+ * @LastEditors: June
+ */
 export { default as Download } from './Download.vue'
 export { default as Add } from './Add.vue'
 export { default as Template } from './Template.vue'
@@ -10,8 +17,6 @@ export { default as Clear } from './Clear.vue'
 export { default as History } from './History.vue'
 // @ts-ignore
 export { default as ActiveMenu } from './ActiveMenu.vue'
-export { default as Panel } from './Panel.vue'
-export { default as Layer } from './Layer.vue'
 export { default as Workspace } from './Workspace.vue'
 export { default as Zoom } from './Zoom.vue'
 export { default as ModalSize } from './ModalSize.vue'

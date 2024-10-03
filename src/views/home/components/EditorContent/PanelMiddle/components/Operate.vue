@@ -1,21 +1,27 @@
 <template>
-  <div class="w-full absolute left-0 right-0 bottom-0">
+  <div
+    class="w-full absolute left-0 right-0 bottom-0 box-border pl-20px pr-10px"
+  >
     <div class="main-bottom relative bottom-0">
       <div class="flex justify-between items-start">
         <div class="flex justify-start items-center">
           <div
-            class="f-center p-5px rounded-6px cursor-pointer bg-#fff"
+            class="f-center p-5px rounded-4px cursor-pointer bg-#fff"
             @click.stop="changePanelType(panels.layer)"
           >
-            <SvgIcon icon="editor-layer" extClass="text-20px" />
+            <SvgIcon
+              :style="{ width: '24px', height: '24px' }"
+              color="#333"
+              name="editor-layer"
+            />
           </div>
-          <div
-            class="ml-4px f-center p-4px rounded-6px cursor-pointer bg-#fff panel-canvas"
+          <!-- <div
+            class="ml-4px f-center p-4px rounded-4px cursor-pointer bg-#fff panel-canvas"
             @click="changePanelType(panels.canvas)"
           >
             <div class="text-14px h-24px leading-24px">
               <span class="mr-4px">画板</span>
-              <span>1/1</span>
+              <span>{{ templateIndex + 1 }}/{{ templates.length }}</span>
             </div>
 
             <div
@@ -23,7 +29,7 @@
               :class="[panelPositoin === 'bottom' ? 'rotate-270' : '']"
               @click.stop="bottomToggle"
             >
-              <SvgIcon icon="unfold" extClass="text-16px" />
+              <SvgIcon icon-class="unfold" className="text-16px" />
             </div>
 
             <div
@@ -33,56 +39,44 @@
               <el-divider direction="vertical" />
               <SvgIcon
                 :class="[panelPositoin === 'bottom' ? 'rotate-270' : '']"
-                icon="panel-position"
-                extClass="text-16px"
+                icon-class="panel-position"
+                className="text-16px"
               />
             </div>
-          </div>
+          </div> -->
         </div>
 
         <!-- 比例 -->
-
         <div class="flex justify-end items-center">
           <DragMode />
           <Zoom />
           <!-- <div
-            class="f-center p-4px rounded-6px cursor-pointer bg-#fff flex justify-center items-center h-32px panel-zoom"
+            class="f-center p-4px rounded-4px cursor-pointer bg-#fff flex justify-center items-center h-32px panel-zoom"
           >
             <div class="hidden zoom-position">
               <el-button
                 text
                 style="height: 24px; width: 24px; padding: 0"
                 :icon="Minus"
-                @click="scaleCanvas('-')"
               />
 
               <el-button
                 text
                 style="height: 24px; width: 24px; padding: 0; margin-left: 4px"
                 :icon="Plus"
-                @click="scaleCanvas('+')"
               />
             </div>
-            <Zoom />
-          </div>
-          <div
-            class="w-32px h-32px bg-#fff ml-5px rounded-6px cursor-pointer flex items-center justify-center"
-          >
-            <SvgIcon icon="question-mark" extClass="text-20px" />
           </div> -->
         </div>
       </div>
 
       <!-- 底部画板 -->
-      <div
+      <!-- <div
         v-if="panelPositoin === 'bottom' && showPanel"
-        class="main-panel mt-8px bg-#fff box-border rounded-12px"
+        class="main-panel mt-8px bg-#fff box-border p-8px rounded-12px"
       >
-        <div class="pb-1px mx-6px">
-          1
-          <!-- <Thumb direction="horizontal" class="py-6px" /> -->
-        </div>
-      </div>
+        <Thumb direction="horizontal" />
+      </div> -->
     </div>
   </div>
 </template>
