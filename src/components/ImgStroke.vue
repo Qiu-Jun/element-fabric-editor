@@ -81,14 +81,14 @@ interface IExtendImage {
   originSrc?: string
 }
 
-const { mixinState, canvasEditor } = useSelect()
+const { mixinState } = useSelect()
 const isImage = ref(false)
 const openImgStroke = ref(false)
 const strokeWidth = ref(5)
 const strokeColor = ref('#000')
 const isOnlyStroke = ref(false)
 const getActiveObject = (): (fabric.Image & IExtendImage) | undefined => {
-  const activeObject = canvasEditor.fabricCanvas?.getActiveObject()
+  const activeObject = editorStore.canvas?.getActiveObject()
   if (!activeObject || !Utils.isImage(activeObject)) return
   return activeObject
 }
@@ -103,7 +103,7 @@ const setOrigin = () => {
 
 const updateStroke = () => {
   const strokeType = unref(isOnlyStroke) ? 'destination-out' : 'source-over'
-  canvasEditor.imageStrokeDraw(
+  editorStore.editor.imageStrokeDraw(
     unref(strokeColor),
     unref(strokeWidth),
     strokeType
