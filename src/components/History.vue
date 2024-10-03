@@ -3,7 +3,7 @@
  * @Description: 
  * @Date: 2024-07-22 21:18:05
  * @LastEditors: June
- * @LastEditTime: 2024-09-06 11:56:18
+ * @LastEditTime: 2024-10-03 11:56:44
  * @FilePath: \ai-desing\src\views\editor\components\History.vue
 -->
 
@@ -13,12 +13,9 @@
     <el-tooltip :content="$t('editor.history.undo') + `(${canUndo})`">
       <el-button @click="undo" link size="small" :disabled="!canUndo">
         <SvgIcon
-          :style="{
-            width: '20px',
-            height: '20px',
-            color: canUndo ? '#333' : '#ccc'
-          }"
-          name="ios-undo"
+          extClass="text-20px"
+          :color="canUndo ? '#333' : '#ccc'"
+          icon="ios-undo"
         />
       </el-button>
     </el-tooltip>
@@ -27,12 +24,9 @@
     <el-tooltip :content="$t('editor.history.redo') + `(${canRedo})`">
       <el-button @click="redo" link size="small" :disabled="!canRedo">
         <SvgIcon
-          :style="{
-            width: '20px',
-            height: '20px',
-            color: canRedo ? '#333' : '#ccc'
-          }"
-          name="ios-redo"
+          extClass="text-20px"
+          :color="canRedo ? '#333' : '#ccc'"
+          icon="ios-redo"
         />
       </el-button>
     </el-tooltip>

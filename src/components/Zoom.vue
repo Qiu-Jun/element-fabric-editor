@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-05 00:02:31
- * @LastEditTime: 2024-09-30 17:25:18
+ * @LastEditTime: 2024-10-03 11:58:23
  * @LastEditors: June
  * @FilePath: \element-fabric-editor\src\components\Zoom.vue
 -->
@@ -63,9 +63,9 @@
       <el-button @click="rSet" :icon="FullScreen"></el-button>
       <el-button @click="setViewport">
         <SvgIcon
-          :style="{ width: '18px', height: '18px' }"
+          extClass="text-20px"
           color="var(--color)"
-          name="editor-suoxiao"
+          icon="editor-suoxiao"
         />
       </el-button>
     </el-button-group>

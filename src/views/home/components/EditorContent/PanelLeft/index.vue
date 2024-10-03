@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-12 19:09:28
- * @LastEditTime: 2024-10-03 11:44:26
+ * @LastEditTime: 2024-10-03 11:59:45
  * @LastEditors: June
  * @FilePath: \element-fabric-editor\src\views\home\components\EditorContent\PanelLeft\index.vue
 -->
@@ -22,8 +22,8 @@
           :class="[currentTab === tab.type ? 'tab-item_active' : '']"
         >
           <SvgIcon
-            :style="{ width: '24px', height: '24px' }"
-            :name="tab.icon"
+            extClass="text-20px"
+            :icon="tab.icon"
             :color="currentTab === tab.type ? '#000' : '#333'"
           />
         </div>

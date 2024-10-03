@@ -2,7 +2,7 @@
  * @Author: 秦少卫
  * @Date: 2024-04-24 12:51:24
  * @LastEditors: June
- * @LastEditTime: 2024-07-24 19:37:40
+ * @LastEditTime: 2024-10-03 11:56:26
  * @Description: 登录
 -->
 
@@ -12,7 +12,7 @@
     <el-dropdown v-if="userName" @command="logoutHandle">
       <el-button link>
         {{ userName }}
-        <SvgIcon :style="{ width: '20px', height: '20px' }" name="mine" />
+        <SvgIcon extClass="text-20px" icon="mine" />
       </el-button>
 
       <template #dropdown>

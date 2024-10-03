@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-06 00:14:35
- * @LastEditTime: 2024-09-06 11:32:46
+ * @LastEditTime: 2024-10-03 11:54:25
  * @LastEditors: June
  * @FilePath: \ai-desing\src\views\editor\components\Edit.vue
 -->
@@ -12,7 +12,7 @@
     v-if="mixinState.mSelectOneType === 'polygon'"
   >
     <el-button @click="onEditPolygon" link>
-      <SvgIcon :style="{ width: '20px', height: '20px' }" name="editor-brush" />
+      <SvgIcon extClass="text-20px" icon="editor-brush" />
     </el-button>
   </el-tooltip>
 </template>

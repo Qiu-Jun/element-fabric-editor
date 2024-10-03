@@ -24,7 +24,7 @@
 <script lang="ts" setup>
 import { debounce } from 'lodash-es'
 import { useEditorStore } from '@/store/modules/editor'
-import Operate from './components/Operate.vue'
+import Operate from './components/Operate/index.vue'
 
 const editorStore = useEditorStore()
 const rulerEnable = computed(() => editorStore.rulerEnable)

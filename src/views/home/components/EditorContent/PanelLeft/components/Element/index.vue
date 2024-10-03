@@ -224,10 +224,7 @@
           state.isDrawingLineMode && state.lineType === 'freeDraw' && 'bg'
         "
       >
-        <SvgIcon
-          :style="{ width: '20px', height: '20px' }"
-          name="editor-brush"
-        />
+        <SvgIcon extClass="text-20px" icon="editor-brush" />
       </span>
     </div>
     <el-divider content-position="left">{{ $t('editor.code_img') }}</el-divider>

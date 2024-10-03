@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-04 11:56:54
- * @LastEditTime: 2024-09-04 16:26:11
+ * @LastEditTime: 2024-10-03 11:56:54
  * @LastEditors: June
  * @FilePath: \ai-desing\src\views\editor\components\activeMenu.vue
 -->
@@ -16,18 +16,10 @@
     }"
   >
     <li class="mr-10px f-center cursor-pointer" @click="handleCopy">
-      <SvgIcon
-        :style="{ width: '24px', height: '24px' }"
-        color="#333"
-        name="copy"
-      />
+      <SvgIcon color="#333" extClass="text-24px text-#333" icon="copy" />
     </li>
     <li class="mr-10px f-center cursor-pointer" @click="handleDelete">
-      <SvgIcon
-        :style="{ width: '24px', height: '24px' }"
-        color="#333"
-        name="delete"
-      />
+      <SvgIcon extClass="text-24px text-#333" icon="delete" />
     </li>
     <!-- <li class="mr-10px f-center cursor-pointer">
       <SvgIcon

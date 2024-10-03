@@ -9,11 +9,7 @@
           :key="file.type"
           @click="handleInsertFile(file.type)"
         >
-          <SvgIcon
-            :style="{ width: '24px', height: '24px' }"
-            :name="file.icon"
-            color="#333"
-          />
+          <SvgIcon extClass="text-24px" :icon="file.icon" color="#333" />
           <span class="text-12px mt-10px">{{ file.name }}</span>
         </li>
       </ul>
@@ -27,11 +23,7 @@
           :key="text.type"
           @click="handleAddText(text.type)"
         >
-          <SvgIcon
-            :style="{ width: '24px', height: '24px' }"
-            :name="text.icon"
-            color="#333"
-          />
+          <SvgIcon extClass="text-24px" :icon="text.icon" color="#333" />
           <span class="text-12px mt-10px">{{ text.name }}</span>
         </li>
       </ul>
