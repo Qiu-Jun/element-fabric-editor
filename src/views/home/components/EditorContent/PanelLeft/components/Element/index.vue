@@ -1,11 +1,3 @@
-<!--
- * @Author: June
- * @Description: 
- * @Date: 2024-09-03 12:12:47
- * @LastEditTime: 2024-09-30 17:00:09
- * @LastEditors: June
- * @FilePath: \element-fabric-editor\src\views\home\components\EditorContent\PanelLeft\components\Element.vue
--->
 <template>
   <div class="box-border p-10px">
     <el-divider content-position="left">{{

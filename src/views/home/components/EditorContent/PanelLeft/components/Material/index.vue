@@ -1,11 +1,3 @@
-<!--
- * @Author: June
- * @Description: 
- * @Date: 2024-09-03 12:14:23
- * @LastEditTime: 2024-09-12 10:38:06
- * @LastEditors: June
- * @FilePath: \element-fabric-editor\src\views\home\components\Image.vue
--->
 <template>
   <div class="box-border p-10px">
     <!-- 搜索组件 -->

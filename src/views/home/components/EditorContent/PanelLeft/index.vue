@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-12 19:09:28
- * @LastEditTime: 2024-09-21 09:31:52
+ * @LastEditTime: 2024-10-03 11:44:26
  * @LastEditors: June
  * @FilePath: \element-fabric-editor\src\views\home\components\EditorContent\PanelLeft\index.vue
 -->
@@ -66,13 +66,16 @@
 import { debounce } from 'lodash-es'
 import { tabList } from '@/constants/editor'
 import { editorTabs, panels } from '@/enums/editor'
-import Create from './components/Create.vue'
-import Element from './components/Element.vue'
-import Template from './components/Template.vue'
-import Material from './components/Material.vue'
-import Ai from './components/Ai.vue'
-import Text from './components/Text.vue'
-import Mine from './components/Mine/index.vue'
+import {
+  Create,
+  Element,
+  Template,
+  Material,
+  Ai,
+  Text,
+  Mine,
+  Panel
+} from './components'
 import { useEditorStore } from '@/store/modules/editor'
 import { storeToRefs } from 'pinia'
 

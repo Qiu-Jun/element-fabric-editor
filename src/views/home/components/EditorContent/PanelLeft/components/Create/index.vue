@@ -1,11 +1,3 @@
-<!--
- * @Author: June
- * @Description: 
- * @Date: 2024-09-03 11:53:37
- * @LastEditTime: 2024-09-12 10:09:33
- * @LastEditors: June
- * @FilePath: \element-fabric-editor\src\views\home\components\Add.vue
--->
 <template>
   <div class="w-full h-fullr">
     <section>

@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-12 09:52:22
- * @LastEditTime: 2024-09-12 11:08:55
+ * @LastEditTime: 2024-10-03 11:33:04
  * @LastEditors: June
  * @FilePath: \element-fabric-editor\src\views\home\components\Panel.vue
 -->

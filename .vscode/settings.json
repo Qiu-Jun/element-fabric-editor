@@ -1,24 +1,9 @@
 {
   "css.customData": [".vscode/unocss.json"],
-  "fileheader.cursorMode": {
-    "description": "",
-    "param ": "",
-    "return": ""
-  },
   "editor.quickSuggestions": {
     "other": true,
     "comments": true,
     "strings": true
-  },
-  "fileheader.configObj": {
-    "createFileTime": true, //设置为true则为文件新建时候作为date，否则注释生成时间为date
-    "autoAdd": true, //自动生成注释
-    "annotationStr": {
-      "head": "/*",
-      "middle": " * @",
-      "end": " */",
-      "use": true //设置自定义注释可用
-    }
   },
   "editor.formatOnType": true,
   "editor.formatOnSave": true,
