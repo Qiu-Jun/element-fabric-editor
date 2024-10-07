@@ -2,12 +2,12 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-12 19:09:28
- * @LastEditTime: 2024-10-03 12:38:00
+ * @LastEditTime: 2024-10-07 21:25:01
  * @LastEditors: June
  * @FilePath: \element-fabric-editor\src\views\home\components\EditorContent\PanelLeft\index.vue
 -->
 <template>
-  <section class="flex justify-start max-w-384px">
+  <section class="flex justify-start max-w-384px basis-72px">
     <!-- 左侧一级菜单 -->
     <ul
       class="relative bg-#fff z-1 w-72px flex flex-col items-center pt-10px box-border border-r-#eef2f8 border-r-solid border-r-1px"
