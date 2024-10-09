@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2024-07-24 17:34:22
  * @LastEditors: June
- * @LastEditTime: 2024-10-09 23:01:04
+ * @LastEditTime: 2024-10-09 23:04:44
  * @FilePath: /element-fabric-editor/vite.config.mts
  */
 
@@ -73,11 +73,11 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
       assetsInlineLimit: 8192,
       minify: 'terser',
       terserOptions: {
-        // compress: {
-        //   //生产环境时移除console
-        //   drop_console: true,
-        //   drop_debugger: true
-        // }
+        compress: {
+          //生产环境时移除console
+          drop_console: true,
+          drop_debugger: true
+        }
       },
       // sourcemap: !isProd,
       emptyOutDir: true,

@@ -16,7 +16,8 @@ let options: any = null
 export let i18n: any = null
 
 // setup i18n instance with global
-export function setupI18n(app: App) {
+export async function setupI18n(app: App) {
+  !i18n && (await createI18nOptions)
   app.use(i18n)
 }
 
