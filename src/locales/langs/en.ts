@@ -1,6 +1,6 @@
 import { genMessage } from '../helper'
 
-const modulesFiles = import.meta.glob<Recordable>('./en/**/*.json', {
+const modulesFiles = import.meta.glob<any>('./en/**/*.json', {
   eager: true
 })
 

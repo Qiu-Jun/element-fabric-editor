@@ -3,11 +3,11 @@
  * @Author: June
  * @Date: 2024-04-24 09:32:13
  * @FilePath: \element-fabric-editor\README.md
- * @LastEditTime: 2024-09-30 17:17:24
+ * @LastEditTime: 2024-10-09 11:08:29
  * @LastEditors: June
 -->
 
-[预览地址](https://ikuaitu.github.io/element-fabric-editor/#/)
+[预览地址](https://qiu-jun.github.io/element-fabric-editor/#/)
 
 #### 贡献规范
 + 修改代码
