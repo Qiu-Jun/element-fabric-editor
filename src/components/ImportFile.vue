@@ -48,13 +48,13 @@
 <script name="ImportFile" setup>
 import { ArrowDown } from '@element-plus/icons-vue'
 import { Utils } from '@/lib/core'
-import useSelect from '@/hooks/select'
 import { v4 as uuid } from 'uuid'
 import { fabric } from 'fabric'
+import { useEditorStore } from '@/store/modules/editor'
 
+const editorStore = useEditorStore()
 const { getImgStr, selectFiles } = Utils
 
-const { canvasEditor } = useSelect()
 const state = reactive({
   showModal: false,
   svgStr: ''
@@ -92,7 +92,7 @@ const HANDLEMAP = {
         ...options,
         name: 'defaultSVG'
       })
-      canvasEditor.addBaseType(item, {
+      editorStore.editor.addBaseType(item, {
         scale: true
       })
       state.showModal = false
@@ -112,8 +112,8 @@ function insertImgFile(file) {
   // 插入页面
   document.body.appendChild(imgEl)
   imgEl.onload = async () => {
-    const imgItem = await canvasEditor.createImgByElement(imgEl)
-    canvasEditor.addBaseType(imgItem, {
+    const imgItem = await editorStore.editor.createImgByElement(imgEl)
+    editorStore.editor.addBaseType(imgItem, {
       scale: true
     })
     imgEl.remove()
@@ -129,7 +129,7 @@ function insertSvgFile(svgFile) {
       name: 'defaultSVG',
       id: uuid()
     })
-    canvasEditor.addBaseType(item, {
+    editorStore.editor.addBaseType(item, {
       scale: true
     })
   })

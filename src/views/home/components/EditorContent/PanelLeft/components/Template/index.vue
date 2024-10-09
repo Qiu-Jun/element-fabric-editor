@@ -65,7 +65,6 @@
 </template>
 
 <script name="ImportTmpl" setup>
-import useSelect from '@/hooks/select'
 import usePageList from '@/hooks/pageList'
 import { ElLoading, ElMessageBox } from 'element-plus'
 import { useI18n } from '@/hooks/useI18n'
@@ -77,7 +76,6 @@ const editorStore = useEditorStore()
 const router = useRouter()
 const route = useRoute()
 const { t } = useI18n()
-const { canvasEditor } = useSelect()
 
 const {
   startPage,

@@ -46,7 +46,6 @@
 
 <script setup name="save-bar">
 import { ArrowDown } from '@element-plus/icons-vue'
-import useSelect from '@/hooks/select'
 import useMaterial from '@/hooks/useMaterial'
 import { debounce } from 'lodash-es'
 import { useI18n } from '@/hooks/useI18n'

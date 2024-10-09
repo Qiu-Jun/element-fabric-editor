@@ -93,7 +93,7 @@ import { Plus } from '@element-plus/icons-vue'
 // 组件
 import fileType from './components/fileType.vue'
 import file from './components/file.vue'
-import ModalSzie from '@/components/common/ModalSize.vue'
+import ModalSzie from '@/components/ModalSize.vue'
 
 // API
 import { getTmplList, getFileTypeTree } from '@/api/user'

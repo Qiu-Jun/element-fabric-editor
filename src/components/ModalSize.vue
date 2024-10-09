@@ -1,6 +1,8 @@
 <template>
   <el-dialog v-model="modal" :title="props.title" footer-hide>
-    <h3>自定义尺寸</h3>
+    <h3>
+      {{ $t('editor.importFiles.createDesign.customSize') }}
+    </h3>
     <section class="asa-size-wrap">
       <div class="asa-size-wrap-item">
         <span>宽度</span>
@@ -23,11 +25,15 @@
         ></el-input-number>
       </div>
       <div :label-width="0">
-        <el-button type="primary" @click="customSizeCreate"> 确定 </el-button>
+        <el-button type="primary" @click="customSizeCreate">
+          {{ $t('editor.importFiles.createDesign.create') }}
+        </el-button>
       </div>
     </section>
     <el-divider direction="horizontal" />
-    <h3>系统推荐尺寸</h3>
+    <h3>
+      {{ $t('editor.importFiles.createDesign.systemSize') }}
+    </h3>
     <section class="cell-wrap">
       <div
         :key="item.name"
@@ -49,10 +55,10 @@
 
 <script name="ImportJson" setup>
 import { Plus } from '@element-plus/icons-vue'
+import { ElMessage } from 'element-plus'
 import { useEditorStore } from '@/store/modules/editor'
 
 const editorStore = useEditorStore()
-
 const emit = defineEmits(['set'])
 
 const props = defineProps({
@@ -62,72 +68,17 @@ const props = defineProps({
   }
 })
 
-const modal = defineModel('show', {
-  default: false
-})
+const modal = ref(false)
 const width = ref(null)
 const height = ref(null)
-const sizeList = [
-  {
-    id: 1,
-    name: '小红书配图',
-    height: 1660,
-    width: 1242,
-    unit: 'px'
-  },
-  {
-    id: 2,
-    name: '公众号首图',
-    height: 383,
-    width: 900,
-    unit: 'px'
-  },
-  {
-    id: 3,
-    name: '公众号次图',
-    height: 500,
-    width: 500,
-    unit: 'px'
-  },
-  {
-    id: 4,
-    name: '竖版直播背景',
-    height: 1660,
-    width: 1242,
-    unit: 'px'
-  },
-  {
-    id: 5,
-    name: '竖版视频封面',
-    height: 2208,
-    width: 1242,
-    unit: 'px'
-  },
-  {
-    id: 6,
-    name: '横版视频封面',
-    height: 1080,
-    width: 1920,
-    unit: 'px'
-  },
-  {
-    id: 7,
-    name: '商品主图',
-    height: 800,
-    width: 800,
-    unit: 'px'
-  },
-  {
-    id: 8,
-    name: '电商详情页面',
-    height: 1000,
-    width: 750,
-    unit: 'px'
-  }
-]
+const sizeList = ref([])
 const showSetSize = (w, h) => {
   width.value = w || null
   height.value = h || null
+  // 获取素材
+  editorStore.editor.getSizeList().then((res) => {
+    sizeList.value = res
+  })
   modal.value = true
 }
 const setSize = (itemString) => {

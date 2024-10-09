@@ -29,38 +29,35 @@
 
 <script name="ImportJson" setup>
 import { ArrowDown } from '@element-plus/icons-vue'
-import useSelect from '@/hooks/select'
 import useMaterial from '@/hooks/useMaterial'
-import { ElMessage, ElLoading } from 'element-plus'
-import ModalSize from './common/ModalSize.vue'
+import { ElMessage } from 'element-plus'
+import ModalSize from './ModalSize.vue'
 import { useI18n } from '@/hooks/useI18n'
+import { useEditorStore } from '@/store/modules/editor'
 
-const { t } = useI18n()
-const { canvasEditor } = useSelect()
+const editorStore = useEditorStore()
+
 const { createTmpl, routerToId } = useMaterial()
 const modalSizeRef = ref(null)
 
-const clickHandler = (type) => {
-  const handleMap = {
-    // 导入文件
-    importFiles: canvasEditor.insert,
-    // 创建文件
-    createDesign,
-    // psd
-    psd: async () => {
-      //   const loadingInstance = ElLoading.service({
-      //       fullscreen: true,
-      //       text: t('alert.loading_data')
-      //   })
+const handleMap = {
+  // 导入文件
+  importFiles: editorStore.editor?.insert(),
+  // 创建文件
+  createDesign: () => modalSizeRef.value?.showSetSize(),
+  // psd
+  psd: async () => {
+    //   const loadingInstance = ElLoading.service({
+    //       fullscreen: true,
+    //       text: t('alert.loading_data')
+    //   })
 
-      await canvasEditor.insertPSD()
-    }
+    await editorStore.editor.insertPSD()
   }
-  handleMap[type]?.()
 }
 
-const createDesign = () => {
-  modalSizeRef.value.showSetSize()
+const clickHandler = (type) => {
+  handleMap[type]?.()
 }
 
 const customSizeCreate = async (w, h) => {

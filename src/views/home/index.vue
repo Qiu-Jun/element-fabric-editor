@@ -67,7 +67,6 @@ defineOptions({
 
 const editorStore = useEditorStore()
 const APIHOST = apiHost
-
 // 创建编辑器
 const canvasEditor = new Editor()
 

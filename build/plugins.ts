@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2024-07-24 17:38:29
  * @LastEditors: June
- * @LastEditTime: 2024-10-09 12:32:57
+ * @LastEditTime: 2024-10-09 20:58:53
  * @FilePath: \element-fabric-editor\build\plugins.ts
  */
 import Vue from '@vitejs/plugin-vue'
@@ -71,7 +71,6 @@ export const createVitePlugins = (
     }),
     viteCompression({
       verbose: true, // 是否在控制台输出压缩结果
-      filter: false, // 指定哪些资源不压缩 RegExp or (file: string) => boolean
       disable: false, // 是否禁用 isDev(mode)
       deleteOriginFile: false, // 压缩后是否删除源文件
       threshold: 5120, // 体积大于 threshold 才会被压缩,单位 b

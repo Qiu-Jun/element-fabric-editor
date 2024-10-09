@@ -36,7 +36,6 @@
 import SearchType from '@/components/common/SearchType.vue'
 import TypeList from '@/components/common/TypeList.vue'
 import PageList from '@/components/common/PageList.vue'
-import useSelect from '@/hooks/select'
 import useCalculate from '@/hooks/useCalculate'
 import { getMaterialInfoUrl, getMaterialPreviewUrl } from '@/hooks/usePageList'
 import {
@@ -48,9 +47,10 @@ import { fabric } from 'fabric'
 import { v4 as uuid } from 'uuid'
 import { ElLoading } from 'element-plus'
 import { useI18n } from '@/hooks/useI18n'
-const { t } = useI18n()
+import { useEditorStore } from '@/store/modules/editor'
 
-const { canvasEditor } = useSelect()
+const editorStore = useEditorStore()
+const { t } = useI18n()
 
 const { isOutsideCanvas } = useCalculate()
 
@@ -60,11 +60,11 @@ const dragItem = async ({ e, info: item }) => {
   const loadingInstance = ElLoading.service({
     text: t('alert.loading_data')
   })
-  await canvasEditor.downFontByJSON(JSON.stringify(item.json))
+  await editorStore.editor.downFontByJSON(JSON.stringify(item.json))
   const el = JSON.parse(JSON.stringify(item.json))
   const elType = capitalizeFirstLetter(el.type)
   new fabric[elType].fromObject(el, (fabricEl) => {
-    canvasEditor.addBaseType(fabricEl, { event: e })
+    editorStore.editor.addBaseType(fabricEl, { event: e })
     loadingInstance.close()
   })
 }
@@ -73,12 +73,12 @@ const addItem = async ({ info: item }) => {
   const loadingInstance = ElLoading.service({
     text: t('alert.loading_data')
   })
-  await canvasEditor.downFontByJSON(JSON.stringify(item.json))
+  await editorStore.editor.downFontByJSON(JSON.stringify(item.json))
   const el = JSON.parse(JSON.stringify(item.json))
   el.id = uuid()
   const elType = capitalizeFirstLetter(el.type)
   new fabric[elType].fromObject(el, (fabricEl) => {
-    canvasEditor.addBaseType(fabricEl)
+    editorStore.editor.addBaseType(fabricEl)
     loadingInstance.close()
   })
 }

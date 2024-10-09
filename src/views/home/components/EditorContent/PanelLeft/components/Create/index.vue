@@ -1,3 +1,10 @@
+<!--
+ * @Author: June
+ * @Description: Description
+ * @Date: 2024-10-03 11:37:38
+ * @LastEditTime: 2024-10-09 21:00:11
+ * @LastEditors: June
+-->
 <template>
   <div class="w-full h-fullr">
     <section>
@@ -73,7 +80,7 @@ import { fabric } from 'fabric'
 import { getPolygonVertices } from '@/utils/math'
 import { Utils } from '@/lib/core'
 import { v4 as uuid } from 'uuid'
-import ModalSize from '@/components/common/ModalSize.vue'
+import ModalSize from '@/components/ModalSize.vue'
 
 const { getImgStr, selectFiles } = Utils
 const editorStore = useEditorStore()

@@ -229,7 +229,7 @@
     </div>
     <el-divider content-position="left">{{ $t('editor.code_img') }}</el-divider>
     <div class="tool-box">
-      <span @click="canvasEditor.addQrCode">
+      <span @click="editorStore.editor.addQrCode">
         <svg
           t="1717679888665"
           class="icon"
@@ -254,7 +254,7 @@
           ></path>
         </svg>
       </span>
-      <span @click="canvasEditor.addBarcode">
+      <span @click="editorStore.editor.addBarcode">
         <svg
           t="1717679973041"
           class="icon"
@@ -277,9 +277,11 @@
 
 <script setup name="Tools">
 import { getPolygonVertices } from '@/utils/math'
-import useSelect from '@/hooks/select'
 import { useI18n } from '@/hooks/useI18n'
 import { fabric } from 'fabric'
+import { useEditorStore } from '@/store/modules/editor'
+
+const editorStore = useEditorStore()
 const LINE_TYPE = {
   polygon: 'polygon',
   freeDraw: 'freeDraw',
@@ -289,7 +291,6 @@ const LINE_TYPE = {
 const defaultPosition = { shadow: '', fontFamily: 'arial' }
 
 const { t } = useI18n()
-const { canvasEditor } = useSelect()
 const state = reactive({
   isDrawingLineMode: false,
   lineType: false
@@ -303,7 +304,7 @@ const addText = (event) => {
     fill: '#000000FF'
   })
 
-  canvasEditor.addBaseType(text, { center: true, event })
+  editorStore.editor.addBaseType(text, { center: true, event })
 }
 
 const addTextBox = (event) => {
@@ -316,7 +317,7 @@ const addTextBox = (event) => {
     fill: '#000000FF'
   })
 
-  canvasEditor.addBaseType(text, { center: true, event })
+  editorStore.editor.addBaseType(text, { center: true, event })
 }
 
 const addTriangle = (event) => {
@@ -328,7 +329,7 @@ const addTriangle = (event) => {
     fill: '#92706BFF',
     name: '三角形'
   })
-  canvasEditor.addBaseType(triangle, { center: true, event })
+  editorStore.editor.addBaseType(triangle, { center: true, event })
 }
 
 const addPolygon = (event) => {
@@ -348,7 +349,7 @@ const addPolygon = (event) => {
       y: 0
     }
   })
-  canvasEditor.addBaseType(polygon, { center: true, event })
+  editorStore.editor.addBaseType(polygon, { center: true, event })
 }
 
 const addCircle = (event) => {
@@ -360,7 +361,7 @@ const addCircle = (event) => {
     // id: uuid(),
     name: '圆形'
   })
-  canvasEditor.addBaseType(circle, { center: true, event })
+  editorStore.editor.addBaseType(circle, { center: true, event })
 }
 
 const addRect = (event) => {
@@ -373,7 +374,7 @@ const addRect = (event) => {
     name: '矩形'
   })
 
-  canvasEditor.addBaseType(rect, { center: true, event })
+  editorStore.editor.addBaseType(rect, { center: true, event })
 }
 const drawPolygon = () => {
   const onEnd = () => {
@@ -386,11 +387,11 @@ const drawPolygon = () => {
     endDrawingLineMode()
     state.lineType = LINE_TYPE.polygon
     state.isDrawingLineMode = true
-    canvasEditor.beginDrawPolygon(onEnd)
-    canvasEditor.endDraw()
+    editorStore.editor.beginDrawPolygon(onEnd)
+    editorStore.editor.endDraw()
     ensureObjectSelEvStatus(!state.isDrawingLineMode, !state.isDrawingLineMode)
   } else {
-    canvasEditor.discardPolygon()
+    editorStore.editor.discardPolygon()
   }
 }
 
@@ -398,19 +399,19 @@ const drawPolygon = () => {
 //   if (state.lineType === LINE_TYPE.pathText) {
 //     state.lineType = false
 //     state.isDrawingLineMode = false
-//     canvasEditor.endTextPathDraw()
+//     editorStore.editor.endTextPathDraw()
 //   } else {
 //     endConflictTools()
 //     endDrawingLineMode()
 //     state.lineType = LINE_TYPE.pathText
 //     state.isDrawingLineMode = true
-//     canvasEditor.startTextPathDraw()
+//     editorStore.editor.startTextPathDraw()
 //   }
 // }
 
 const freeDraw = () => {
   if (state.lineType === LINE_TYPE.freeDraw) {
-    canvasEditor.endDraw()
+    editorStore.editor.endDraw()
     state.lineType = false
     state.isDrawingLineMode = false
   } else {
@@ -418,20 +419,20 @@ const freeDraw = () => {
     endDrawingLineMode()
     state.lineType = LINE_TYPE.freeDraw
     state.isDrawingLineMode = true
-    canvasEditor.startDraw({ width: 20 })
+    editorStore.editor.startDraw({ width: 20 })
   }
 }
 
 const endConflictTools = () => {
-  canvasEditor.discardPolygon()
-  canvasEditor.endDraw()
-  canvasEditor.endTextPathDraw()
+  editorStore.editor.discardPolygon()
+  editorStore.editor.endDraw()
+  editorStore.editor.endTextPathDraw()
 }
 const endDrawingLineMode = () => {
   state.isDrawingLineMode = false
   state.lineType = ''
-  canvasEditor.setMode(state.isDrawingLineMode)
-  canvasEditor.setLineType(state.lineType)
+  editorStore.editor.setMode(state.isDrawingLineMode)
+  editorStore.editor.setLineType(state.lineType)
 }
 const drawingLineModeSwitch = (type) => {
   if (
@@ -448,15 +449,13 @@ const drawingLineModeSwitch = (type) => {
     state.isDrawingLineMode = true
     state.lineType = type
   }
-  canvasEditor.setMode(state.isDrawingLineMode)
-  canvasEditor.setLineType(type)
-  // this.canvasEditor.setMode(this.isDrawingLineMode);
-  // this.canvasEditor.setArrow(isArrow);
+  editorStore.editor.setMode(state.isDrawingLineMode)
+  editorStore.editor.setLineType(type)
   ensureObjectSelEvStatus(!state.isDrawingLineMode, !state.isDrawingLineMode)
 }
 
 const ensureObjectSelEvStatus = (evented, selectable) => {
-  canvasEditor.canvas.forEachObject((obj) => {
+  editorStore.editor.canvas.forEachObject((obj) => {
     if (obj.id !== 'workspace') {
       obj.selectable = selectable
       obj.evented = evented
@@ -469,7 +468,7 @@ const cancelDraw = () => {
   if (!state.isDrawingLineMode) return
   state.isDrawingLineMode = false
   state.lineType = ''
-  canvasEditor.setMode(false)
+  editorStore.editor.setMode(false)
   endConflictTools()
   ensureObjectSelEvStatus(true, true)
 }

@@ -68,10 +68,10 @@
 
 <script name="ImgStroke" lang="ts" setup>
 import { WarningFilled } from '@element-plus/icons-vue'
-import useSelect from '@/hooks/select'
 import { fabric } from 'fabric'
 import { Utils } from '@/lib/core'
 import { useEditorStore } from '@/store/modules/editor'
+import useSelect from '@/hooks/select'
 
 const editorStore = useEditorStore()
 interface IExtendImage {

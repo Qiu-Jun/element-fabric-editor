@@ -36,7 +36,6 @@
 import SearchType from '@/components/common/SearchType.vue'
 import TypeList from '@/components/common/TypeList.vue'
 import PageList from '@/components/common/PageList.vue'
-import useSelect from '@/hooks/select'
 import { getMaterialInfoUrl, getMaterialPreviewUrl } from '@/hooks/usePageList'
 import {
   getMaterialTypes,
@@ -46,8 +45,9 @@ import {
 import useCalculate from '@/hooks/useCalculate'
 import { useRoute } from 'vue-router'
 import { Utils } from '@/lib/core'
+import { useEditorStore } from '@/store/modules/editor'
 
-const { canvasEditor } = useSelect()
+const editorStore = useEditorStore()
 
 const { isOutsideCanvas } = useCalculate()
 const selectTypeRef = ref()
@@ -93,16 +93,16 @@ const selectType = async (type) => {
 // 按照类型渲染
 const dragItem = async ({ e }) => {
   if (isOutsideCanvas(e.clientX, e.clientY)) return
-  const imgItem = await canvasEditor.createImgByElement(e.target)
-  canvasEditor.addBaseType(imgItem, {
+  const imgItem = await editorStore.editor.createImgByElement(e.target)
+  editorStore.editor.addBaseType(imgItem, {
     scale: true,
     event: e
   })
 }
 
 const addItem = async ({ e }) => {
-  const imgItem = await canvasEditor.createImgByElement(e.target)
-  canvasEditor.addBaseType(imgItem, {
+  const imgItem = await editorStore.editor.createImgByElement(e.target)
+  editorStore.editor.addBaseType(imgItem, {
     scale: true
   })
 }
