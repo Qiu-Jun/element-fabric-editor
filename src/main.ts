@@ -20,7 +20,6 @@ import { setupI18n } from '@/locales'
 import { setupRouter, router } from './router'
 import { setupStore } from './store'
 
-console.log('-00000000000000000000000000000000000')
 async function bootstrap() {
   const app = createApp(App)
   await setupRouter(app)
@@ -30,8 +29,6 @@ async function bootstrap() {
   app.use(VueLazyLoad, {})
   await router.isReady()
   app.mount('#app')
-  console.log('app', app)
-  console.log('pk=============================')
 }
 
 bootstrap()

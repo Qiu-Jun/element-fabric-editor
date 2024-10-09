@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2024-07-24 17:34:22
  * @LastEditors: June
- * @LastEditTime: 2024-10-09 22:11:02
+ * @LastEditTime: 2024-10-09 23:01:04
  * @FilePath: /element-fabric-editor/vite.config.mts
  */
 
@@ -67,7 +67,7 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
       ]
     },
     build: {
-      target: 'esnext',
+      target: 'es2015',
       outDir: resolve(__dirname, 'dist'),
       assetsDir: 'assets',
       assetsInlineLimit: 8192,

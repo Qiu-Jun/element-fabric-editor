@@ -2,7 +2,7 @@
  * @Author: June
  * @Description:
  * @Date: 2024-08-07 15:41:56
- * @LastEditTime: 2024-10-09 22:55:17
+ * @LastEditTime: 2024-10-09 23:02:35
  * @LastEditors: June
  * @FilePath: \element-fabric-editor\src\locales\index.ts
  */
@@ -20,7 +20,7 @@ export function setupI18n(app: App) {
   app.use(i18n)
 }
 
-;(async function createI18nOptions() {
+async function createI18nOptions() {
   const localeStore = useLocaleStoreWithOut()
   const locale = localeStore.getLocale
   const defaultLocal = await import(`./langs/${locale}.ts`)
@@ -43,4 +43,6 @@ export function setupI18n(app: App) {
     silentFallbackWarn: true
   }
   i18n = createI18n(options)
-})()
+}
+
+createI18nOptions()
