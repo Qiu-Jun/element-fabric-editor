@@ -2,7 +2,7 @@
  * @Author: June
  * @Description:
  * @Date: 2024-08-07 15:41:56
- * @LastEditTime: 2024-10-09 12:19:28
+ * @LastEditTime: 2024-10-09 22:55:17
  * @LastEditors: June
  * @FilePath: \element-fabric-editor\src\locales\index.ts
  */
@@ -12,7 +12,15 @@ import { setHtmlPageLang, setLoadLocalePool } from './helper'
 import { useLocaleStoreWithOut } from '@/store/modules/locale'
 import type { App } from 'vue'
 
-async function createI18nOptions() {
+let options: any = null
+export let i18n: any = null
+
+// setup i18n instance with global
+export function setupI18n(app: App) {
+  app.use(i18n)
+}
+
+;(async function createI18nOptions() {
   const localeStore = useLocaleStoreWithOut()
   const locale = localeStore.getLocale
   const defaultLocal = await import(`./langs/${locale}.ts`)
@@ -22,8 +30,7 @@ async function createI18nOptions() {
   setLoadLocalePool((loadLocalePool) => {
     loadLocalePool.push(locale)
   })
-
-  return {
+  options = {
     locale,
     // legacy: false,
     fallbackLocale: localeMap.zh_CN, // set fallback locale
@@ -35,13 +42,5 @@ async function createI18nOptions() {
     missingWarn: false,
     silentFallbackWarn: true
   }
-}
-
-const options = await createI18nOptions()
-
-export const i18n = createI18n(options)
-
-// setup i18n instance with global
-export function setupI18n(app: App) {
-  app.use(i18n)
-}
+  i18n = createI18n(options)
+})()

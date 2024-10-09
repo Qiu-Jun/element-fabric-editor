@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2024-07-24 17:26:12
  * @LastEditors: June
- * @LastEditTime: 2024-10-09 12:20:40
+ * @LastEditTime: 2024-10-09 21:51:09
  * @FilePath: \element-fabric-editor\src\main.ts
  */
 import '@/assets/fonts/font.css'
@@ -20,6 +20,7 @@ import { setupI18n } from '@/locales'
 import { setupRouter, router } from './router'
 import { setupStore } from './store'
 
+console.log('-00000000000000000000000000000000000')
 async function bootstrap() {
   const app = createApp(App)
   await setupRouter(app)
@@ -29,6 +30,8 @@ async function bootstrap() {
   app.use(VueLazyLoad, {})
   await router.isReady()
   app.mount('#app')
+  console.log('app', app)
+  console.log('pk=============================')
 }
 
 bootstrap()

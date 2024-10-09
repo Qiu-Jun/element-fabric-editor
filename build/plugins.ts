@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2024-07-24 17:38:29
  * @LastEditors: June
- * @LastEditTime: 2024-10-09 20:58:53
+ * @LastEditTime: 2024-10-09 22:44:34
  * @FilePath: \element-fabric-editor\build\plugins.ts
  */
 import Vue from '@vitejs/plugin-vue'
@@ -17,9 +17,7 @@ import { PluginOption } from 'vite'
 import { createHtmlPlugin } from 'vite-plugin-html'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import { isProd } from './getEnv'
-import topLevelAwait from 'vite-plugin-top-level-await'
 import viteCompression from 'vite-plugin-compression'
-import legacy from '@vitejs/plugin-legacy'
 import { isDev } from './getEnv'
 /**
  * 创建 vite 插件
@@ -64,10 +62,6 @@ export const createVitePlugins = (
           title: APP_TITLE
         }
       }
-    }),
-    topLevelAwait(),
-    legacy({
-      targets: ['defaults', 'not IE 11']
     }),
     viteCompression({
       verbose: true, // 是否在控制台输出压缩结果
