@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-09-12 20:07:29
- * @LastEditTime: 2024-10-03 12:34:22
+ * @LastEditTime: 2024-10-09 11:42:20
  * @LastEditors: June
  */
 export { default as Download } from './Download.vue'
@@ -19,7 +19,7 @@ export { default as History } from './History.vue'
 export { default as ActiveMenu } from './ActiveMenu.vue'
 export { default as Workspace } from './Workspace.vue'
 export { default as Zoom } from './Zoom.vue'
-export { default as ModalSize } from './ModalSize.vue'
+export { default as ModalSize } from './common/ModalSize.vue'
 export { default as Align } from './Align.vue'
 export { default as AttributeColor } from './AttributeColor.vue'
 export { default as AttributeFont } from './AttributeFont.vue'

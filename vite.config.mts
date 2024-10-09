@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2024-07-24 17:34:22
  * @LastEditors: June
- * @LastEditTime: 2024-07-26 23:01:27
+ * @LastEditTime: 2024-10-09 12:52:26
  * @FilePath: /element-fabric-editor/vite.config.mts
  */
 
@@ -22,7 +22,7 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
   const envPrefix = 'APP_'
 
   return {
-    base: isProd(mode) ? env.APP_BASE_PATH : '/',
+    base: isProd(mode) ? './' : '/',
     publicDir: 'public',
     plugins: createVitePlugins(mode, viteEnv),
     server: {
@@ -67,10 +67,17 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
       ]
     },
     build: {
-      target: 'es2015',
       outDir: resolve(__dirname, 'dist'),
       assetsDir: 'assets',
       assetsInlineLimit: 8192,
+      minify: 'terser',
+      terserOptions: {
+        compress: {
+          //生产环境时移除console
+          drop_console: true,
+          drop_debugger: true
+        }
+      },
       // sourcemap: !isProd,
       emptyOutDir: true,
       rollupOptions: {

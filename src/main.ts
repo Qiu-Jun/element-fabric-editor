@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2024-07-24 17:26:12
  * @LastEditors: June
- * @LastEditTime: 2024-09-12 10:08:05
+ * @LastEditTime: 2024-10-09 12:20:40
  * @FilePath: \element-fabric-editor\src\main.ts
  */
 import '@/assets/fonts/font.css'
@@ -24,7 +24,7 @@ async function bootstrap() {
   const app = createApp(App)
   await setupRouter(app)
   await setupStore(app)
-  setupI18n(app)
+  await setupI18n(app)
   app.use(VueMasonryPlugin)
   app.use(VueLazyLoad, {})
   await router.isReady()

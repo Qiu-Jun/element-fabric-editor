@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2024-07-24 17:38:29
  * @LastEditors: June
- * @LastEditTime: 2024-09-13 12:00:24
+ * @LastEditTime: 2024-10-09 12:32:57
  * @FilePath: \element-fabric-editor\build\plugins.ts
  */
 import Vue from '@vitejs/plugin-vue'
@@ -18,7 +18,9 @@ import { createHtmlPlugin } from 'vite-plugin-html'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import { isProd } from './getEnv'
 import topLevelAwait from 'vite-plugin-top-level-await'
-
+import viteCompression from 'vite-plugin-compression'
+import legacy from '@vitejs/plugin-legacy'
+import { isDev } from './getEnv'
 /**
  * 创建 vite 插件
  * @param viteEnv
@@ -63,6 +65,18 @@ export const createVitePlugins = (
         }
       }
     }),
-    topLevelAwait()
+    topLevelAwait(),
+    legacy({
+      targets: ['defaults', 'not IE 11']
+    }),
+    viteCompression({
+      verbose: true, // 是否在控制台输出压缩结果
+      filter: false, // 指定哪些资源不压缩 RegExp or (file: string) => boolean
+      disable: false, // 是否禁用 isDev(mode)
+      deleteOriginFile: false, // 压缩后是否删除源文件
+      threshold: 5120, // 体积大于 threshold 才会被压缩,单位 b
+      algorithm: 'gzip', // 压缩算法,可选 [ 'gzip' , 'brotliCompress' ,'deflate' , 'deflateRaw']
+      ext: '.gz' // 生成的压缩包后缀
+    })
   ]
 }
