@@ -3,7 +3,7 @@
  * @Description: 
  * @Date: 2024-07-24 18:36:42
  * @LastEditors: June
- * @LastEditTime: 2024-07-26 08:55:40
+ * @LastEditTime: 2024-10-13 01:18:22
  * @FilePath: \element-fabric-editor\src\views\template\index.vue
 -->
 <template>
@@ -70,16 +70,8 @@
         </div>
 
         <!-- grid布局 -->
-        <div
-          class="img-box grid"
-          id="imgBox"
-          v-masonry
-          transition-duration="0.3s"
-          :gutter="10"
-          item-selector=".grid-item"
-        >
+        <wc-waterfall :gap="10" :cols="5">
           <div
-            v-masonry-tile
             class="img-item grid-item"
             v-for="info in templList"
             :key="info.id"
@@ -88,7 +80,7 @@
               <img :src="info.src" :alt="info.name" @click="toInfo(info)" />
             </el-tooltip>
           </div>
-        </div>
+        </wc-waterfall>
         <Page
           class="page"
           :total="total"

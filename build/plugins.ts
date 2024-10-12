@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2024-07-24 17:38:29
  * @LastEditors: June
- * @LastEditTime: 2024-10-09 22:44:34
+ * @LastEditTime: 2024-10-13 01:05:31
  * @FilePath: \element-fabric-editor\build\plugins.ts
  */
 import Vue from '@vitejs/plugin-vue'
@@ -31,7 +31,11 @@ export const createVitePlugins = (
   const { APP_TITLE } = viteEnv
 
   return [
-    Vue(),
+    Vue({
+      template: {
+        compilerOptions: { isCustomElement: (tag) => tag.startsWith('wc-') }
+      }
+    }),
     UnoCSS(),
     // vue 可以使用 jsx/tsx 语法
     VueJsx(),

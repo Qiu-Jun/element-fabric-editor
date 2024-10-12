@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2024-07-24 17:26:12
  * @LastEditors: June
- * @LastEditTime: 2024-10-09 21:51:09
+ * @LastEditTime: 2024-10-13 01:11:53
  * @FilePath: \element-fabric-editor\src\main.ts
  */
 import '@/assets/fonts/font.css'
@@ -19,6 +19,7 @@ import App from './App.vue'
 import { setupI18n } from '@/locales'
 import { setupRouter, router } from './router'
 import { setupStore } from './store'
+import 'wc-waterfall'
 
 async function bootstrap() {
   const app = createApp(App)

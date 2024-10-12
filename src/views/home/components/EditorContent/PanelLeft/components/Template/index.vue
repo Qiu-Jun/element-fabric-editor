@@ -39,7 +39,7 @@
         :height="scrollHeight"
       >
         <!-- 列表 -->
-        <div class="list-box">
+        <wc-waterfall :gap="10" :cols="2">
           <el-tooltip
             :content="info.name"
             v-for="info in pageData"
@@ -56,7 +56,7 @@
               />
             </div>
           </el-tooltip>
-        </div>
+        </wc-waterfall>
 
         <el-divider v-if="isDownBottm">已经到底了</el-divider>
       </el-scrollbar>
@@ -180,13 +180,6 @@ onMounted(() => {
   .select {
     width: 100px;
   }
-}
-
-.list-box {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
 }
 
 .tmpl-img-box {
