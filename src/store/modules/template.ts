@@ -2,25 +2,31 @@
  * @Author: June
  * @Description:
  * @Date: 2024-09-30 17:20:34
- * @LastEditTime: 2024-10-03 11:28:45
+ * @LastEditTime: 2024-10-13 00:17:31
  * @LastEditors: June
  * @FilePath: \element-fabric-editor\src\store\modules\template.ts
  */
 import { defineStore } from 'pinia'
 import store from '@/store'
 import { fabric } from 'fabric'
-
+import type { Template } from '@/types/template'
 interface IState {
-  templateList: fabric.Object[]
-  curTempIdx: number
+  templateList: Template[] // 所有的模板
+  curTempIdx: number // 当前页面索引
 }
 export const useTemplateStore = defineStore({
   id: 'Template',
   state: (): IState => ({
     templateList: [],
-    curTempIdx: 0
+    curTempIdx: -1
   }),
   actions: {
+    addTemplate(template: Template | Template[]) {
+      const templates = Array.isArray(template) ? template : [template]
+      const addIndex = this.curTempIdx + 1
+      this.curTempIdx = addIndex
+      this.templateList = this.templateList.concat(templates)
+    },
     addCurTemplate(obj: fabric.Object) {
       this.templateList.push(obj)
       this.curTempIdx++

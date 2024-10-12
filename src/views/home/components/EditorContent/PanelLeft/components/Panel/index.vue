@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-12 09:52:22
- * @LastEditTime: 2024-10-03 12:43:41
+ * @LastEditTime: 2024-10-13 00:05:11
  * @LastEditors: June
  * @FilePath: \element-fabric-editor\src\views\home\components\Panel.vue
 -->
@@ -65,7 +65,7 @@
       </div>
     </div>
     <!-- 组件 -->
-    <div class="box-border px-10px">
+    <div>
       <KeepAlive>
         <component :is="comMap[curTab]"></component>
       </KeepAlive>
