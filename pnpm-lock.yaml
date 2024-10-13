@@ -77,9 +77,6 @@ importers:
       vue3-justified-layout:
         specifier: ^0.0.3
         version: 0.0.3(typescript@5.5.4)
-      vue3-lazyload:
-        specifier: ^0.3.8
-        version: 0.3.8(vue@3.4.33(typescript@5.5.4))
       wc-waterfall:
         specifier: ^0.1.3
         version: 0.1.3
@@ -3748,17 +3745,6 @@ packages:
       terser:
         optional: true
 
-  vue-demi@0.12.5:
-    resolution: {integrity: sha512-BREuTgTYlUr0zw0EZn3hnhC3I6gPWv+Kwh4MCih6QcAeaTlaIX0DwOVN0wHej7hSvDPecz4jygy/idsgKfW58Q==}
-    engines: {node: '>=12'}
-    hasBin: true
-    peerDependencies:
-      '@vue/composition-api': ^1.0.0-rc.1
-      vue: ^3.0.0-0 || ^2.6.0
-    peerDependenciesMeta:
-      '@vue/composition-api':
-        optional: true
-
   vue-demi@0.14.10:
     resolution: {integrity: sha512-nMZBOwuzabUO0nLgIcc6rycZEebF6eeUfaiQx9+WSk8e29IbLvPU9feI6tqW4kTo3hvoYAJkMh8n8D0fuISphg==}
     engines: {node: '>=12'}
@@ -3810,15 +3796,6 @@ packages:
   vue3-justified-layout@0.0.3:
     resolution: {integrity: sha512-JvSQscVkAc5egfn/NA6jxWRwBCEFHbKZJpy1bMwl78rJu25nnfrI82M4fqZBEiVXfTsVo+uWpTozgtXnm0vMUQ==}
     engines: {node: '>=16', pnpm: '>=9.0.2'}
-
-  vue3-lazyload@0.3.8:
-    resolution: {integrity: sha512-UiJHRT7mzry102WbhtrRgJh+f8Z8u4Z+H1RU4dvPmQeq7wFSDFxZB9iJOWGihH2FscXN/8rMGLDOQJAmjwqpCg==}
-    peerDependencies:
-      '@vue/composition-api': ^1.0.0-rc.1
-      vue: ^2.0.0 || >=3.0.0
-    peerDependenciesMeta:
-      '@vue/composition-api':
-        optional: true
 
   vue@3.4.33:
     resolution: {integrity: sha512-VdMCWQOummbhctl4QFMcW6eNtXHsFyDlX60O/tsSQuCcuDOnJ1qPOhhVla65Niece7xq/P2zyZReIO5mP+LGTQ==}
@@ -7986,10 +7963,6 @@ snapshots:
       sass: 1.77.8
       terser: 5.34.1
 
-  vue-demi@0.12.5(vue@3.4.33(typescript@5.5.4)):
-    dependencies:
-      vue: 3.4.33(typescript@5.5.4)
-
   vue-demi@0.14.10(vue@3.4.33(typescript@5.5.4)):
     dependencies:
       vue: 3.4.33(typescript@5.5.4)
@@ -8040,11 +8013,6 @@ snapshots:
       vue: 3.4.33(typescript@5.5.4)
     transitivePeerDependencies:
       - typescript
-
-  vue3-lazyload@0.3.8(vue@3.4.33(typescript@5.5.4)):
-    dependencies:
-      vue: 3.4.33(typescript@5.5.4)
-      vue-demi: 0.12.5(vue@3.4.33(typescript@5.5.4))
 
   vue@3.4.33(typescript@5.5.4):
     dependencies:

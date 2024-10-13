@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2024-07-24 17:26:12
  * @LastEditors: June
- * @LastEditTime: 2024-10-13 01:30:05
+ * @LastEditTime: 2024-10-13 22:32:39
  * @FilePath: \element-fabric-editor\src\main.ts
  */
 import '@/assets/fonts/font.css'
@@ -13,7 +13,6 @@ import '@/styles/reset.scss'
 import 'virtual:svg-icons-register'
 import 'virtual:uno.css'
 import { createApp } from 'vue'
-import VueLazyLoad from 'vue3-lazyload'
 import App from './App.vue'
 import { setupI18n } from '@/locales'
 import { setupRouter, router } from './router'
@@ -25,7 +24,6 @@ async function bootstrap() {
   await setupRouter(app)
   await setupStore(app)
   await setupI18n(app)
-  app.use(VueLazyLoad, {})
   await router.isReady()
   app.mount('#app')
 }
