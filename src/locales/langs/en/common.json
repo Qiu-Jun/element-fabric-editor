@@ -1,9 +1,9 @@
 {
   "selectPlaceholder": "Select",
-
   "okText": "OK",
   "closeText": "Close",
   "cancelText": "Cancel",
+  "tip": "Tip",
   "loadingText": "Loading...",
   "saveText": "Save",
   "delText": "Delete",

@@ -1,4 +1,7 @@
 {
+  "tip": {
+    "replaceTip": "您确定替换吗?"
+  },
   "color": "颜色",
   "width": "宽度",
   "background": "背景",

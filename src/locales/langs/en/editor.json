@@ -1,4 +1,7 @@
 {
+  "tip": {
+    "replaceTip": "Are you sure replace it?"
+  },
   "history": {
     "undo": "revocation",
     "redo": "redo"

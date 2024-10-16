@@ -106,11 +106,11 @@ typeValue.value = 4
 // 替换提示
 const beforeClearTip = (info) => {
   ElMessageBox({
-    title: t('tip'),
-    message: `${t('replaceTip')}`,
+    title: t('common.tip'),
+    message: `${t('editor.tip.replaceTip')}`,
     showCancelButton: true,
-    confirmButtonText: t('ok'),
-    cancelButtonText: t('cancel')
+    confirmButtonText: t('common.ok'),
+    cancelButtonText: t('common.cancel')
   }).then(() => getTempData(info))
 }
 
