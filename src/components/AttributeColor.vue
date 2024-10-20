@@ -1,11 +1,7 @@
 <template>
   <div
     class="box attr-item-box"
-    v-if="
-      mixinState.mSelectMode === 'one' &&
-      mixinState.mSelectOneType !== 'image' &&
-      mixinState.mSelectOneType !== 'group'
-    "
+    v-if="isOne && selectType !== 'image' && selectType !== 'group'"
   >
     <el-divider content-position="left"><h4>颜色</h4></el-divider>
     <!-- 通用属性 -->
@@ -35,11 +31,11 @@
 
 <script lang="ts" setup>
 import ColorPicker from '@/components/ColorPicker/index.vue'
-import { Selector } from '@/hooks/useSelectListen'
 import { useEditorStore } from '@/store/modules/editor'
 import { fabric } from 'fabric'
+import useSelect from '@/hooks/select'
 
-const mixinState = inject('mixinState') as Selector
+const { selectType, isOne } = useSelect()
 const editorStore = useEditorStore()
 const update = getCurrentInstance()
 const angleKey = 'gradientAngle'
@@ -53,7 +49,7 @@ const getObjectAttr = (e?: any) => {
   const activeObject: any = editorStore.canvas?.getActiveObject()
   // 不是当前obj，跳过
   if (e && e.target && e.target !== activeObject) return
-  if (activeObject && mixinState.mSelectMode === 'one') {
+  if (activeObject && isOne) {
     const fill = activeObject.get('fill')
     if (typeof fill === 'string') {
       baseAttr.fill = fill

@@ -10,6 +10,7 @@ declare module 'vue' {
     ActiveMenu: typeof import('./../src/components/ActiveMenu.vue')['default']
     Align: typeof import('./../src/components/Align.vue')['default']
     AngleHandle: typeof import('./../src/components/ColorPicker/comps/AngleHandle.vue')['default']
+    Attribute: typeof import('./../src/components/Attribute.vue')['default']
     AttributeBarcode: typeof import('./../src/components/AttributeBarcode.vue')['default']
     AttributeBorder: typeof import('./../src/components/AttributeBorder.vue')['default']
     AttributeColor: typeof import('./../src/components/AttributeColor.vue')['default']

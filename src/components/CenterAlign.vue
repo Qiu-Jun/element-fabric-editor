@@ -1,16 +1,19 @@
+<!--
+ * @Author: June
+ * @Description: Description
+ * @Date: 2024-08-19 12:53:30
+ * @LastEditTime: 2024-10-20 14:57:47
+ * @LastEditors: June
+-->
 <template>
-  <div class="attr-item-box" v-if="mixinState.mSelectMode">
+  <div class="attr-item-box" v-if="isSelect">
     <el-divider content-position="left">
       <h4>{{ $t('editor.attrSetting.centerAlign.name') }}</h4>
     </el-divider>
     <div class="bg-item">
       <!-- 水平集中 -->
       <el-tooltip :content="$t('editor.attrSetting.centerAlign.centerX')">
-        <el-button
-          :disabled="!mixinState.mSelectMode"
-          @click="position('centerH')"
-          link
-        >
+        <el-button @click="position('centerH')" link>
           <svg
             t="1650442559691"
             class="icon"
@@ -30,11 +33,7 @@
       </el-tooltip>
       <!-- 水平垂直居中 -->
       <el-tooltip :content="$t('editor.attrSetting.centerAlign.center')">
-        <el-button
-          :disabled="!mixinState.mSelectMode"
-          @click="position('center')"
-          link
-        >
+        <el-button @click="position('center')" link>
           <svg
             t="1650852784867"
             class="icon"
@@ -58,11 +57,7 @@
       </el-tooltip>
       <!-- 垂直居中 -->
       <el-tooltip :content="$t('editor.attrSetting.centerAlign.centerY')">
-        <el-button
-          :disabled="!mixinState.mSelectMode"
-          @click="position('centerV')"
-          link
-        >
+        <el-button @click="position('centerV')" link>
           <svg
             t="1650442510967"
             class="icon"
@@ -85,10 +80,10 @@
 </template>
 
 <script lang="ts" setup>
-import { Selector } from '@/hooks/useSelectListen'
 import { useEditorStore } from '@/store/modules/editor'
+import useSelect from '@/hooks/select'
 
-const mixinState = inject('mixinState') as Selector
+const { isSelect } = useSelect()
 const editorStore = useEditorStore()
 const position = (name: string) => {
   editorStore.editor.position(name)

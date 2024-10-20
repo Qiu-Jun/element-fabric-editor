@@ -15,11 +15,10 @@
 <script lang="ts" setup>
 import { useRoute } from 'vue-router'
 import { fabric } from 'fabric'
-import { debounce } from 'lodash-es'
 // hooks
-import useSelectListen from '@/hooks/useSelectListen'
 import { useI18n } from '@/hooks/useI18n'
 import { apiHost } from '@/constants/app'
+
 import Editor, {
   DringPlugin,
   AlignGuidLinePlugin,
@@ -134,10 +133,6 @@ onMounted(() => {
 })
 
 onUnmounted(() => canvasEditor.destory())
-
-const { mixinState } = useSelectListen(canvasEditor)
-
-provide('mixinState', mixinState)
 </script>
 
 <style lang="scss" scoped>

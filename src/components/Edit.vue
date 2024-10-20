@@ -2,15 +2,12 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-06 00:14:35
- * @LastEditTime: 2024-10-03 11:54:25
+ * @LastEditTime: 2024-10-20 15:15:51
  * @LastEditors: June
  * @FilePath: \ai-desing\src\views\editor\components\Edit.vue
 -->
 <template>
-  <el-tooltip
-    :content="$t('editor.quick.editPoly')"
-    v-if="mixinState.mSelectOneType === 'polygon'"
-  >
+  <el-tooltip :content="$t('editor.quick.editPoly')" v-if="isMatchType">
     <el-button @click="onEditPolygon" link>
       <SvgIcon extClass="text-20px" icon="editor-brush" />
     </el-button>
@@ -18,11 +15,11 @@
 </template>
 
 <script setup lang="ts">
-import { Selector } from '@/hooks/useSelectListen'
 import { useEditorStore } from '@/store/modules/editor'
+import useSelect from '@/hooks/select'
 
-const mixinState = inject('mixinState') as Selector
 const editorStore = useEditorStore()
+const { isMatchType } = useSelect(['polygon'])
 const onEditPolygon = () => {
   const obj = editorStore.editor.fabricCanvas?.getActiveObject()
   if (obj && obj.type === 'polygon') {

@@ -1,9 +1,55 @@
+<template>
+  <div class="box attr-item-box" v-if="isOne && isMatchType">
+    <!-- <h3>数据</h3> -->
+    <el-divider content-position="left"><h4>文本内容</h4></el-divider>
+
+    <el-form :label-width="40" class="form-wrap">
+      <el-form-item :label="$t('editor.attributes.id')">
+        <el-input
+          v-model="baseAttr.text"
+          @change="changeCommon('text', baseAttr.text)"
+          size="small"
+        />
+      </el-form-item>
+    </el-form>
+
+    <template v-if="baseAttr.showPathAttr">
+      <!-- <h3>数据</h3> -->
+      <el-divider content-position="left"><h4>文本路径</h4></el-divider>
+      <div>
+        <el-row :gutter="12">
+          <el-col flex="1">
+            <div class="ivu-col__box">
+              <span class="label">{{ $t('editor.color') }}</span>
+              <div class="content">
+                <el-color-picker
+                  v-model="baseAttr.stroke"
+                  @change="(value: any) => changeCommon('stroke', value)"
+                  show-alpha
+                />
+              </div>
+            </div>
+          </el-col>
+          <el-col flex="1">
+            <InputNumber
+              v-model="baseAttr.strokeWidth"
+              @on-change="(value) => changeCommon('strokeWidth', value)"
+              :append="$t('editor.width')"
+              :min="0"
+            ></InputNumber>
+          </el-col>
+        </el-row>
+      </div>
+    </template>
+  </div>
+</template>
+
 <script lang="ts" setup>
 import InputNumber from './InputNumber'
-import { Selector } from '@/hooks/useSelectListen'
 import { useEditorStore } from '@/store/modules/editor'
+import useSelect from '@/hooks/select'
 
-const mixinState = inject('mixinState') as Selector
+const { isOne, isMatchType } = useSelect(['i-text'])
 const editorStore = useEditorStore()
 const update = getCurrentInstance()
 const baseAttr: any = reactive({
@@ -58,58 +104,6 @@ onBeforeUnmount(() => {
   editorStore.canvas?.off('object:modified', getObjectAttr)
 })
 </script>
-
-<template>
-  <div
-    class="box attr-item-box"
-    v-if="
-      mixinState?.mSelectMode === 'one' &&
-      mixinState?.mSelectOneType === 'i-text'
-    "
-  >
-    <!-- <h3>数据</h3> -->
-    <el-divider content-position="left"><h4>文本内容</h4></el-divider>
-
-    <el-form :label-width="40" class="form-wrap">
-      <el-form-item :label="$t('editor.attributes.id')">
-        <el-input
-          v-model="baseAttr.text"
-          @change="changeCommon('text', baseAttr.text)"
-          size="small"
-        />
-      </el-form-item>
-    </el-form>
-
-    <template v-if="baseAttr.showPathAttr">
-      <!-- <h3>数据</h3> -->
-      <el-divider content-position="left"><h4>文本路径</h4></el-divider>
-      <div>
-        <el-row :gutter="12">
-          <el-col flex="1">
-            <div class="ivu-col__box">
-              <span class="label">{{ $t('editor.color') }}</span>
-              <div class="content">
-                <el-color-picker
-                  v-model="baseAttr.stroke"
-                  @change="(value: any) => changeCommon('stroke', value)"
-                  show-alpha
-                />
-              </div>
-            </div>
-          </el-col>
-          <el-col flex="1">
-            <InputNumber
-              v-model="baseAttr.strokeWidth"
-              @on-change="(value) => changeCommon('strokeWidth', value)"
-              :append="$t('editor.width')"
-              :min="0"
-            ></InputNumber>
-          </el-col>
-        </el-row>
-      </div>
-    </template>
-  </div>
-</template>
 
 <style scoped lang="scss">
 .color-bar {

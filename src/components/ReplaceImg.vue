@@ -2,15 +2,12 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-06 00:10:51
- * @LastEditTime: 2024-09-12 20:08:54
+ * @LastEditTime: 2024-10-20 15:28:38
  * @LastEditors: June
  * @FilePath: \element-fabric-editor\src\components\ReplaceImg.vue
 -->
 <template>
-  <div
-    v-if="mixinState.mSelectMode === 'one' && type === 'image'"
-    class="attr-item-box"
-  >
+  <div v-if="isOne && type === 'image'" class="attr-item-box">
     <div class="bg-item">
       <el-button @click="repleace" text>{{
         $t('editor.repleaceImg')
@@ -21,11 +18,11 @@
 
 <script lang="ts" setup>
 import { Utils } from '@/lib/core'
-import { Selector } from '@/hooks/useSelectListen'
 import { useEditorStore } from '@/store/modules/editor'
+import useSelect from '@/hooks/select'
 
-const mixinState = inject('mixinState') as Selector
 const editorStore = useEditorStore()
+const { isOne } = useSelect()
 const { getImgStr, selectFiles, insertImgFile } = Utils
 
 const update = getCurrentInstance()

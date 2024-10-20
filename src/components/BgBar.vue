@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!mixinState.mSelectMode">
+  <div v-if="!isSelect">
     <div class="attr-item-box">
       <el-divider content-position="left">
         <h4>{{ $t('editor.bgSeting.color') }}</h4>
@@ -31,13 +31,13 @@
 </template>
 
 <script lang="ts" setup>
-import { Selector } from '@/hooks/useSelectListen'
 import { useEditorStore } from '@/store/modules/editor'
 import { Utils } from '@/lib/core'
 import { debounce } from 'lodash-es'
 import { ElMessageBox } from 'element-plus'
+import useSelect from '@/hooks/select'
 
-const mixinState = inject('mixinState') as Selector
+const { isSelect } = useSelect()
 const editorStore = useEditorStore()
 const { getImgStr, selectFiles } = Utils
 const colorList = ref([

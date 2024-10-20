@@ -1,8 +1,5 @@
 <template>
-  <div
-    v-if="mixinState.mSelectMode === 'one' && isMatchType"
-    class="attr-item-box"
-  >
+  <div v-if="isOne && isMatchType" class="attr-item-box">
     <div class="flex-view">
       <div class="flex-item">
         <span class="label">{{ $t('editor.textFloat') }}</span>
@@ -22,10 +19,9 @@
 </template>
 
 <script lang="ts" setup>
-import { Selector } from '@/hooks/useSelectListen'
 import { useEditorStore } from '@/store/modules/editor'
+import useSelect from '@/hooks/select'
 
-const mixinState = inject('mixinState') as Selector
 const editorStore = useEditorStore()
 
 const baseAttr = reactive({
@@ -33,19 +29,13 @@ const baseAttr = reactive({
 })
 
 const matchType = ['i-text', 'textbox', 'text']
+const { isMatchType, isOne } = useSelect(matchType)
 
-const isMatchType = computed(() =>
-  matchType.includes(mixinState.mSelectOneType as string)
-)
 const getObjectAttr = (e?: any) => {
   const activeObject = editorStore.canvas?.getActiveObject() as any
   // 不是当前obj，跳过
   if (e && e.target && e.target !== activeObject) return
-  if (
-    activeObject &&
-    matchType.includes(activeObject.type as string) &&
-    activeObject?.text?.includes('.')
-  ) {
+  if (activeObject && isMatchType && activeObject?.text?.includes('.')) {
     // @ts-ignore
     baseAttr.verticalAlign = activeObject.get('verticalAlign')
   }

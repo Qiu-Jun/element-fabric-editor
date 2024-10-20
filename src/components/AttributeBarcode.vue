@@ -1,12 +1,6 @@
 <template>
-  <div
-    class="attr-item-box"
-    v-if="
-      mixinState.mSelectMode === 'one' &&
-      textType.includes(mixinState.mSelectOneType) &&
-      isBarcode
-    "
-  >
+  <div class="attr-item-box" v-if="isOne && isMatchType && isBarcode">
+    >
     <!-- <h3>字体属性</h3> -->
     <el-divider content-position="left"><h4>条形码属性</h4></el-divider>
     <div>
@@ -124,11 +118,11 @@
 
 <script setup lang="ts">
 import InputNumber from './InputNumber'
-import { Selector } from '@/hooks/useSelectListen'
 import { useEditorStore } from '@/store/modules/editor'
+import useSelect from '@/hooks/select'
 
-const mixinState = inject('mixinState') as Selector
 const editorStore = useEditorStore()
+const { isOne, isMatchType } = useSelect(['image'])
 const update = getCurrentInstance()
 
 // 文字元素
@@ -167,7 +161,7 @@ const getObjectAttr = (e?: any) => {
   extensionType.value = activeObject?.extensionType || ''
   if (
     activeObject &&
-    textType.includes(activeObject.type) &&
+    isMatchType &&
     activeObject?.extensionType === 'barcode'
   ) {
     baseAttr.value = activeObject.get('extension').value

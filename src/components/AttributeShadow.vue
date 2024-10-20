@@ -1,5 +1,5 @@
 <template>
-  <div class="box attr-item-box" v-if="mixinState.mSelectMode === 'one'">
+  <div class="box attr-item-box" v-if="isOne">
     <!-- <h3>阴影</h3> -->
     <el-divider content-position="left"><h4>阴影</h4></el-divider>
     <!-- 通用属性 -->
@@ -49,12 +49,12 @@
 
 <script lang="ts" setup>
 import InputNumber from './InputNumber'
-import { Selector } from '@/hooks/useSelectListen'
 import { useEditorStore } from '@/store/modules/editor'
 import { fabric } from 'fabric'
+import useSelect from '@/hooks/select'
 
-const mixinState = inject('mixinState') as Selector
 const editorStore = useEditorStore()
+const { isOne } = useSelect()
 const update = getCurrentInstance()
 
 // 属性值

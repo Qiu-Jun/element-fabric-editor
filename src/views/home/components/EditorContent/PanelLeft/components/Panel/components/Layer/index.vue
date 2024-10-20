@@ -35,7 +35,7 @@
       </div>
       <!-- 层级调整按钮 -->
       <div class="btn-box">
-        <el-button-group v-show="mixinState.mSelectMode === 'one'">
+        <el-button-group v-show="isOne">
           <el-button @click="up"
             ><span v-html="btnIconType('up')"></span
           ></el-button>
@@ -61,11 +61,11 @@
 import { fabric } from 'fabric'
 import { Lock, Unlock } from '@element-plus/icons-vue'
 import { uniqBy } from 'lodash-es'
-import { Selector } from '@/hooks/useSelectListen'
 import { useEditorStore } from '@/store/modules/editor'
+import useSelect from '@/hooks/select'
 
-const mixinState = inject('mixinState') as Selector
 const editorStore = useEditorStore()
+const { isOne, mixinState } = useSelect()
 
 const list: any = ref([])
 

@@ -2,12 +2,12 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-05 22:41:44
- * @LastEditTime: 2024-10-03 11:57:25
+ * @LastEditTime: 2024-10-20 15:42:54
  * @LastEditors: June
  * @FilePath: \ai-desing\src\views\editor\components\Align.vue
 -->
 <template>
-  <div class="attr-item-box" v-if="mixinState.mSelectMode === 'multiple'">
+  <div class="attr-item-box" v-if="isMultiple">
     <el-divider content-position="left">
       <h4>对齐</h4>
     </el-divider>
@@ -60,12 +60,12 @@
 </template>
 
 <script lang="ts" setup>
-import { Selector } from '@/hooks/useSelectListen'
 import { useEditorStore } from '@/store/modules/editor'
+import useSelect from '@/hooks/select'
 
-const mixinState = inject('mixinState') as Selector
+const { isMultiple } = useSelect()
 const editorStore = useEditorStore()
-
+console.log(isMultiple)
 // 左对齐
 const left = () => {
   editorStore.editor.left()

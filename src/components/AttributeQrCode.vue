@@ -1,12 +1,5 @@
 <template>
-  <div
-    class="box attr-item-box"
-    v-if="
-      mixinState.mSelectMode === 'one' &&
-      textType.includes(mixinState.mSelectOneType) &&
-      isQrcode
-    "
-  >
+  <div class="box attr-item-box" v-if="isOne && isMatchType && isQrcode">
     <!-- <h3>字体属性</h3> -->
     <el-divider content-position="left"><h4>二位码属性</h4></el-divider>
     <div>
@@ -174,15 +167,14 @@
 
 <script lang="ts" setup>
 import InputNumber from './InputNumber'
-import { Selector } from '@/hooks/useSelectListen'
 import { useEditorStore } from '@/store/modules/editor'
+import useSelect from '@/hooks/select'
 
-const mixinState = inject('mixinState') as Selector
 const editorStore = useEditorStore()
+const { isOne, isMatchType } = useSelect(['image'])
 const update = getCurrentInstance()
 
 // 文字元素
-const textType = ['image']
 const extensionType = ref('')
 
 const isQrcode = computed(() => extensionType.value === 'qrcode')
@@ -208,11 +200,7 @@ const getObjectAttr = (e: any) => {
   // 不是当前obj，跳过
   if (e && e.target && e.target !== activeObject) return
   extensionType.value = activeObject?.extensionType || ''
-  if (
-    activeObject &&
-    textType.includes(activeObject.type) &&
-    activeObject?.extensionType === 'qrcode'
-  ) {
+  if (activeObject && isMatchType && activeObject?.extensionType === 'qrcode') {
     const extension = activeObject.get('extension')
     Object.keys(extension).forEach((key) => {
       baseAttr[key] = extension[key]

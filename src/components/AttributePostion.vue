@@ -1,9 +1,9 @@
 <template>
-  <div class="box attr-item-box" v-if="mixinState.mSelectMode === 'one'">
+  <div class="box attr-item-box" v-if="isOne">
     <!-- <h3>位置信息</h3> -->
     <el-divider content-position="left"><h4>位置信息</h4></el-divider>
     <!-- 通用属性 -->
-    <div v-show="baseType.includes(mixinState.mSelectOneType as string)">
+    <div v-show="isMatchType">
       <el-row :gutter="10" style="margin-bottom: 10px">
         <el-col :span="12">
           <InputNumber
@@ -43,10 +43,9 @@
 
 <script lang="ts" setup>
 import InputNumber from './InputNumber'
-import { Selector } from '@/hooks/useSelectListen'
 import { useEditorStore } from '@/store/modules/editor'
+import useSelect from '@/hooks/select'
 
-const mixinState = inject('mixinState') as Selector
 const editorStore = useEditorStore()
 const update = getCurrentInstance()
 
@@ -65,7 +64,7 @@ const baseType = [
   'arrow',
   'thinTailArrow'
 ]
-
+const { isMatchType, isOne } = useSelect(baseType)
 // 属性值
 const baseAttr = reactive<Record<string, any>>({
   opacity: 0,
@@ -82,7 +81,7 @@ const getObjectAttr = (e?: any) => {
   // 不是当前obj，跳过
   if (e && e.target && e.target !== activeObject) return
   //@ts-ignore
-  if (activeObject && baseType.includes(activeObject.type)) {
+  if (activeObject && isMatchType) {
     baseAttr.opacity = (activeObject.get('opacity') ?? 0) * 100
     baseAttr.left = activeObject.get('left')
     baseAttr.top = activeObject.get('top')

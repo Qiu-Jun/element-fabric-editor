@@ -2,12 +2,12 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-05 23:00:59
- * @LastEditTime: 2024-09-06 11:18:24
+ * @LastEditTime: 2024-10-20 14:39:21
  * @LastEditors: June
  * @FilePath: \ai-desing\src\views\editor\components\AttributeId.vue
 -->
 <template>
-  <div class="mb-10px attr-item-box" v-if="mixinState.mSelectMode === 'one'">
+  <div class="mb-10px attr-item-box" v-if="isOne">
     <!-- <h3>数据</h3> -->
     <el-divider content-position="left"><h4>数据</h4></el-divider>
 
@@ -41,12 +41,11 @@
 </template>
 
 <script lang="ts" setup>
-import { Selector } from '@/hooks/useSelectListen'
 import { useEditorStore } from '@/store/modules/editor'
+import useSelect from '@/hooks/select'
 
-const mixinState = inject('mixinState') as Selector
 const editorStore = useEditorStore()
-
+const { isOne } = useSelect()
 const update = getCurrentInstance()
 
 // 属性值

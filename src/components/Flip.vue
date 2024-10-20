@@ -2,15 +2,15 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-05 23:16:20
- * @LastEditTime: 2024-09-06 11:37:53
+ * @LastEditTime: 2024-10-20 15:19:18
  * @LastEditors: June
  * @FilePath: \ai-desing\src\views\editor\components\Flip.vue
 -->
 <template>
-  <div v-if="mixinState.mSelectMode === 'one'" class="attr-item-box">
+  <div v-if="isOne" class="attr-item-box">
     <div class="bg-item">
       <el-tooltip :content="$t('editor.attrSetting.flip.x')">
-        <el-button :disabled="notSelectOneMode()" @click="flip('X')" link>
+        <el-button @click="flip('X')" link>
           <svg
             t="1650443094178"
             class="icon"
@@ -37,7 +37,7 @@
         </el-button>
       </el-tooltip>
       <el-tooltip :content="$t('editor.attrSetting.flip.y')">
-        <el-button :disabled="notSelectOneMode()" @click="flip('Y')" link>
+        <el-button @click="flip('Y')" link>
           <svg
             t="1650443104385"
             class="icon"
@@ -70,16 +70,12 @@
 </template>
 
 <script lang="ts" setup>
-import { Selector } from '@/hooks/useSelectListen'
 import { useEditorStore } from '@/store/modules/editor'
+import useSelect from '@/hooks/select'
 
-const mixinState = inject('mixinState') as Selector
 const editorStore = useEditorStore()
+const { isOne } = useSelect()
 
-// 非单选时，禁止镜像操作
-const notSelectOneMode = () => {
-  return mixinState.mSelectMode !== 'one'
-}
 const flip = (type: string) => {
   const activeObject: any = editorStore.canvas?.getActiveObject()
   activeObject.set(`flip${type}`, !activeObject[`flip${type}`]).setCoords()

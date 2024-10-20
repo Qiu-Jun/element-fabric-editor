@@ -2,18 +2,12 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-05 23:05:23
- * @LastEditTime: 2024-09-12 20:12:17
+ * @LastEditTime: 2024-10-20 14:45:47
  * @LastEditors: June
  * @FilePath: \element-fabric-editor\src\components\AttributeRounded.vue
 -->
 <template>
-  <div
-    class="box attr-item-box"
-    v-if="
-      mixinState.mSelectMode === 'one' &&
-      rectType.includes(mixinState.mSelectOneType as string)
-    "
-  >
+  <div class="box attr-item-box" v-if="isOne && isMatchType">
     <!-- <h3>圆角</h3> -->
     <el-divider content-position="left"><h4>圆角</h4></el-divider>
     <!-- 通用属性 -->
@@ -45,16 +39,14 @@
 
 <script lang="ts" setup>
 import InputNumber from './InputNumber'
-import { Selector } from '@/hooks/useSelectListen'
 import { useEditorStore } from '@/store/modules/editor'
+import useSelect from '@/hooks/select'
 
-const mixinState = inject('mixinState') as Selector
 const editorStore = useEditorStore()
 const update = getCurrentInstance()
 
 // 矩形元素
-const rectType = ['rect']
-
+const { isOne, isMatchType } = useSelect(['rect'])
 // 属性值
 const baseAttr = reactive({
   rx: 0,

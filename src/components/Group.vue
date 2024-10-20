@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-05 23:18:00
- * @LastEditTime: 2024-09-06 11:38:36
+ * @LastEditTime: 2024-10-20 15:20:23
  * @LastEditors: June
  * @FilePath: \ai-desing\src\views\editor\components\Group.vue
 -->
@@ -53,19 +53,12 @@
 </template>
 
 <script lang="ts" setup>
-import { Selector } from '@/hooks/useSelectListen'
 import { useEditorStore } from '@/store/modules/editor'
+import useSelect from '@/hooks/select'
 
-const mixinState = inject('mixinState') as Selector
 const editorStore = useEditorStore()
+const { isGroup, isMultiple } = useSelect()
 
-// 单选且等于组元素
-let isGroup = computed(
-  () =>
-    mixinState.mSelectMode === 'one' && mixinState.mSelectOneType === 'group'
-)
-// 是否为多选
-let isMultiple = computed(() => mixinState.mSelectMode === 'multiple')
 // 拆分组
 const unGroup = () => {
   editorStore.editor.unGroup()

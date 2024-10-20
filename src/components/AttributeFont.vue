@@ -1,11 +1,5 @@
 <template>
-  <div
-    class="box attr-item-box"
-    v-if="
-      mixinState.mSelectMode === 'one' &&
-      textType.includes(mixinState.mSelectOneType as string)
-    "
-  >
+  <div class="box attr-item-box" v-if="isOne && isMatchType">
     <el-divider content-position="left"><h4>字体属性</h4></el-divider>
     <div>
       <div class="flex-view">
@@ -150,15 +144,16 @@
 <script lang="ts" setup>
 import { ElLoading } from 'element-plus'
 import InputNumber from './InputNumber'
-import { Selector } from '@/hooks/useSelectListen'
 import { useEditorStore } from '@/store/modules/editor'
-
-const mixinState = inject('mixinState') as Selector
-const editorStore = useEditorStore()
-const update = getCurrentInstance()
+import useSelect from '@/hooks/select'
 
 // 文字元素
 const textType = ['i-text', 'textbox', 'text']
+
+const editorStore = useEditorStore()
+const { isMatchType, isOne } = useSelect(textType)
+const update = getCurrentInstance()
+
 // 属性值
 const baseAttr = reactive<Record<string, any>>({
   fontSize: 0,
@@ -195,7 +190,7 @@ const getObjectAttr = (e?: any) => {
   // 不是当前obj，跳过
   if (e && e.target && e.target !== activeObject) return
   // @ts-ignore
-  if (activeObject && textType.includes(activeObject.type)) {
+  if (activeObject && isMatchType) {
     // @ts-ignore
     baseAttr.fontSize = activeObject.get('fontSize')
     // @ts-ignore

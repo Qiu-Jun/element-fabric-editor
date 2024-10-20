@@ -1,8 +1,5 @@
 <template>
-  <div
-    v-if="mixinState.mSelectMode === 'one' && type === 'image'"
-    class="attr-item-box"
-  >
+  <div v-if="isOne && type === 'image'" class="attr-item-box">
     <div class="bg-item" style="margin-bottom: 10px">
       <el-dropdown style="width: 270px" @command="addClipPath">
         <el-button text>{{ $t('editor.createClip') }}</el-button>
@@ -28,12 +25,12 @@
 </template>
 
 <script lang="ts" setup>
-import { Selector } from '@/hooks/useSelectListen'
 import { useEditorStore } from '@/store/modules/editor'
 import { useI18n } from '@/hooks/useI18n'
+import useSelect from '@/hooks/select'
 
-const mixinState = inject('mixinState') as Selector
 const editorStore = useEditorStore()
+const { isOne } = useSelect()
 const update = getCurrentInstance()
 const { t } = useI18n()
 const type = ref('')

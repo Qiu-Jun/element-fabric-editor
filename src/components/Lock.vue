@@ -1,8 +1,12 @@
+<!--
+ * @Author: June
+ * @Description: Description
+ * @Date: 2024-08-19 12:53:30
+ * @LastEditTime: 2024-10-20 15:27:15
+ * @LastEditors: June
+-->
 <template>
-  <el-tooltip
-    :content="$t('quick.lock')"
-    v-if="mixinState.mSelectMode === 'one'"
-  >
+  <el-tooltip :content="$t('quick.lock')" v-if="isOne">
     <el-button
       v-if="isLock"
       @click="doLock(false)"
@@ -15,18 +19,18 @@
 
 <script lang="ts" setup>
 import { Lock, Unlock } from '@element-plus/icons-vue'
-import { Selector } from '@/hooks/useSelectListen'
 import { useEditorStore } from '@/store/modules/editor'
+import useSelect from '@/hooks/select'
 
-const mixinState = inject('mixinState') as Selector
 const editorStore = useEditorStore()
+const { isOne } = useSelect()
 
 const isLock = ref(false)
-const doLock = (isLock) => {
+const doLock = (isLock: boolean) => {
   isLock ? editorStore.editor?.lock() : editorStore.editor?.unLock()
 }
 
-const handleSelected = (items) => {
+const handleSelected = (items: any) => {
   isLock.value = !items[0].selectable
 }
 

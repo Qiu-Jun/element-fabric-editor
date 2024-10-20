@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-12 19:09:40
- * @LastEditTime: 2024-09-12 19:51:40
+ * @LastEditTime: 2024-10-20 15:56:44
  * @LastEditors: June
  * @FilePath: \element-fabric-editor\src\views\home\components\EditorContent\PanelRight\index.vue
 -->
@@ -83,10 +83,11 @@
 
 <script lang="ts" setup>
 import { useEditorStore } from '@/store/modules/editor'
+import useSelect from '@/hooks/select'
 
 const editorStore = useEditorStore()
+const { mixinState } = useSelect()
 const editor = computed(() => editorStore.editor)
-const mixinState = inject('mixinState') as any
 </script>
 
 <style lang="scss" scoped>

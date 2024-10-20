@@ -2,16 +2,12 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-05 23:18:42
- * @LastEditTime: 2024-09-05 23:54:16
+ * @LastEditTime: 2024-10-20 15:21:08
  * @LastEditors: June
  * @FilePath: \ai-desing\src\views\editor\components\Hide.vue
 -->
 <template>
-  <el-button
-    text
-    :content="$t('editor.quick.hide')"
-    v-if="mixinState.mSelectMode === 'one'"
-  >
+  <el-button text :content="$t('editor.quick.hide')" v-if="isOne">
     <el-button
       v-if="isHide"
       @click="doHide(false)"
@@ -24,11 +20,11 @@
 
 <script lang="ts" setup>
 import { View, Hide } from '@element-plus/icons-vue'
-import { Selector } from '@/hooks/useSelectListen'
 import { useEditorStore } from '@/store/modules/editor'
+import useSelect from '@/hooks/select'
 
-const mixinState = inject('mixinState') as Selector
 const editorStore = useEditorStore()
+const { isOne } = useSelect()
 const isHide = ref(false)
 
 const doHide = (hide: any) => {

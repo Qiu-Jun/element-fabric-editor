@@ -1,8 +1,5 @@
 <template>
-  <div
-    v-if="mixinState.mSelectMode === 'one' && state.type === 'image'"
-    class="box"
-  >
+  <div v-if="isOne && state.type === 'image'" class="box">
     <el-divider content-position="left">
       <h4>图片滤镜</h4>
     </el-divider>
@@ -19,6 +16,7 @@
             v-for="(value, key) in state.noParamsFilters"
             :key="key"
           >
+            {{ key }}
             <img
               :src="getImageUrl(key)"
               @click="changeFilters(key, !noParamsFilters[key])"
@@ -99,11 +97,11 @@
 
 <script lang="ts" setup>
 import { uiType, paramsFilters, combinationFilters } from '@/constants/filter'
-import { Selector } from '@/hooks/useSelectListen'
 import { useEditorStore } from '@/store/modules/editor'
 import { fabric } from 'fabric'
+import useSelect from '@/hooks/select'
 
-const mixinState = inject('mixinState') as Selector
+const { isOne } = useSelect()
 const editorStore = useEditorStore()
 const update = getCurrentInstance()
 // 无参数滤镜
@@ -211,7 +209,7 @@ onBeforeUnmount(() => {
 
 // 图片地址拼接
 function getImageUrl(name: any) {
-  return new URL(`../../../assets/filters/${name}.png`, import.meta.url).href
+  return new URL(`../assets/filters/${name}.png`, import.meta.url).href
 }
 
 // 设置滤镜值

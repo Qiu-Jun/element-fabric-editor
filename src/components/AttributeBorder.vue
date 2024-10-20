@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="attr-item-box"
-    v-if="mixinState.mSelectMode === 'one' && !isGroup"
-  >
+  <div class="attr-item-box" v-if="isOne && !isGroup">
     <!-- <h3>边框</h3> -->
     <el-divider content-position="left"><h4>边框</h4></el-divider>
     <!-- 通用属性 -->
@@ -60,16 +57,16 @@
 
 <script lang="ts" setup>
 import InputNumber from './InputNumber'
-import { Selector } from '@/hooks/useSelectListen'
 import { useEditorStore } from '@/store/modules/editor'
+import useSelect from '@/hooks/select'
 
-const mixinState = inject('mixinState') as Selector
+const { isOne, isGroup } = useSelect()
 const editorStore = useEditorStore()
 const update = getCurrentInstance()
 
 const groupType = ['group']
 // 属性值
-const baseAttr = reactive({
+const baseAttr: any = reactive({
   stroke: '#fff',
   strokeWidth: 0,
   strokeDashArray: []
@@ -150,7 +147,6 @@ const strokeDashList = [
   }
 ]
 
-const isGroup = computed(() => groupType.includes(mixinState.mSelectOneType))
 // 属性获取
 const getObjectAttr = (e) => {
   const activeObject = editorStore.canvas?.getActiveObject()
@@ -176,9 +172,10 @@ const getObjectAttr = (e) => {
 }
 
 // 通用属性改变
-const changeCommon = (key, value) => {
+const changeCommon = (key: string, value: any) => {
   const activeObject = editorStore.canvas?.getActiveObjects()[0]
   if (activeObject) {
+    // @ts-ignore
     activeObject.set(key, value)
     activeObject.set('strokeUniform', true)
     editorStore.canvas?.renderAll()
@@ -186,7 +183,7 @@ const changeCommon = (key, value) => {
 }
 
 // 边框设置
-const borderSet = (key) => {
+const borderSet = (key: string) => {
   const activeObject = editorStore.canvas?.getActiveObjects()[0]
   if (activeObject) {
     const stroke = strokeDashList.find((item) => item.label === key)

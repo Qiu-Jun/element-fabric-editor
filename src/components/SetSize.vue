@@ -2,12 +2,12 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-05 23:19:31
- * @LastEditTime: 2024-09-06 11:40:54
+ * @LastEditTime: 2024-10-20 15:29:46
  * @LastEditors: June
  * @FilePath: \ai-desing\src\views\editor\components\SetSize.vue
 -->
 <template>
-  <div v-if="!mixinState.mSelectMode" class="attr-item-box">
+  <div v-if="!isSelect" class="attr-item-box">
     <el-divider content-position="left">
       <h4>{{ $t('editor.bgSeting.size') }}</h4>
     </el-divider>
@@ -47,12 +47,11 @@
 <script lang="ts" setup>
 import { Edit } from '@element-plus/icons-vue'
 import ModalSize from './ModalSize.vue'
-import { Selector } from '@/hooks/useSelectListen'
 import { useEditorStore } from '@/store/modules/editor'
+import useSelect from '@/hooks/select'
 
-const mixinState = inject('mixinState') as Selector
 const editorStore = useEditorStore()
-
+const { isSelect } = useSelect()
 const DefaultSize = {
   width: 900,
   height: 1200
