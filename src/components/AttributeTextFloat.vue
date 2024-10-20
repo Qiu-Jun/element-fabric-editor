@@ -38,14 +38,13 @@ const isMatchType = computed(() =>
   matchType.includes(mixinState.mSelectOneType as string)
 )
 const getObjectAttr = (e?: any) => {
-  const activeObject = editorStore.canvas?.getActiveObject()
+  const activeObject = editorStore.canvas?.getActiveObject() as any
   // 不是当前obj，跳过
   if (e && e.target && e.target !== activeObject) return
   if (
     activeObject &&
     matchType.includes(activeObject.type as string) &&
-    // @ts-ignore
-    activeObject.text.includes('.')
+    activeObject?.text?.includes('.')
   ) {
     // @ts-ignore
     baseAttr.verticalAlign = activeObject.get('verticalAlign')
