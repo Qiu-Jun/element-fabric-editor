@@ -2,7 +2,7 @@
  * @Author: June
  * @Description:
  * @Date: 2024-08-07 15:41:56
- * @LastEditTime: 2024-10-09 23:02:35
+ * @LastEditTime: 2024-11-02 22:24:06
  * @LastEditors: June
  * @FilePath: \element-fabric-editor\src\locales\index.ts
  */
@@ -43,7 +43,7 @@ async function createI18nOptions() {
     missingWarn: false,
     silentFallbackWarn: true
   }
-  i18n = createI18n(options)
+  i18n = await createI18n(options)
 }
 
 createI18nOptions()

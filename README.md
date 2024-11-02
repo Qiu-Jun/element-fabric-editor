@@ -3,7 +3,7 @@
  * @Author: June
  * @Date: 2024-04-24 09:32:13
  * @FilePath: \element-fabric-editor\README.md
- * @LastEditTime: 2024-10-20 16:01:22
+ * @LastEditTime: 2024-11-02 22:28:42
  * @LastEditors: June
 -->
 
@@ -15,7 +15,7 @@
 + <span style="color: red">pnpm commit</span>(必须)
 
 #### 同步情况
-+ docs: add License link  ba4d092b843cd716f06e94d45976d8e0e07e3b21
++ History  e134fc09fceb540dbe490b005c6de08ad68f09d1
 
 #### 使用
 
