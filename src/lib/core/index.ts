@@ -2,7 +2,7 @@
  * @Author: 秦少卫
  * @Date: 2023-02-03 23:29:34
  * @LastEditors: June
- * @LastEditTime: 2024-09-30 17:12:15
+ * @LastEditTime: 2024-11-02 22:19:36
  * @Description: 核心入口文件
  */
 import Editor from './Editor'
@@ -45,3 +45,5 @@ import CustomRect from './objects/CustomRect'
 import CustomTextbox from './objects/CustomTextbox'
 export { EventType, Utils, CustomRect, CustomTextbox }
 export default Editor
+
+export * from '@/interface/Editor'
