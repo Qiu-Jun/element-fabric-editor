@@ -103,7 +103,6 @@ declare module 'vue' {
     TabPanel: typeof import('./../src/components/ColorPicker/comps/TabPanel.vue')['default']
     Tabs: typeof import('./../src/components/ColorPicker/comps/Tabs.vue')['default']
     TypeList: typeof import('./../src/components/common/TypeList.vue')['default']
-    Workspace: typeof import('./../src/components/Workspace.vue')['default']
     Zoom: typeof import('./../src/components/Zoom.vue')['default']
   }
   export interface ComponentCustomProperties {
