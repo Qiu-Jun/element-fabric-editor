@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-09-12 20:07:29
- * @LastEditTime: 2024-10-09 20:59:39
+ * @LastEditTime: 2024-11-03 09:44:59
  * @LastEditors: June
  */
 export { default as Download } from './Download.vue'
@@ -17,7 +17,6 @@ export { default as Clear } from './Clear.vue'
 export { default as History } from './History.vue'
 // @ts-ignore
 export { default as ActiveMenu } from './ActiveMenu.vue'
-export { default as Workspace } from './Workspace.vue'
 export { default as Zoom } from './Zoom.vue'
 export { default as ModalSize } from './ModalSize.vue'
 export { default as Align } from './Align.vue'
