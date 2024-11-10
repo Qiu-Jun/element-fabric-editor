@@ -93,6 +93,10 @@
     "undo": "撤销",
     "redo": "重做"
   },
+  "flip": {
+    "x": "水平翻转",
+    "y": "垂直翻转"
+  },
   "attrSetting": {
     "group": "成组",
     "unGroup": "拆分组",

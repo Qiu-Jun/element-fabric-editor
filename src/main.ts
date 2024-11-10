@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2024-07-24 17:26:12
  * @LastEditors: June
- * @LastEditTime: 2024-10-13 22:32:39
+ * @LastEditTime: 2024-11-10 11:09:00
  * @FilePath: \element-fabric-editor\src\main.ts
  */
 import '@/assets/fonts/font.css'
@@ -21,9 +21,9 @@ import 'wc-waterfall'
 
 async function bootstrap() {
   const app = createApp(App)
+  await setupI18n(app)
   await setupRouter(app)
   await setupStore(app)
-  await setupI18n(app)
   await router.isReady()
   app.mount('#app')
 }

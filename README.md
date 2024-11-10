@@ -3,7 +3,7 @@
  * @Author: June
  * @Date: 2024-04-24 09:32:13
  * @FilePath: \element-fabric-editor\README.md
- * @LastEditTime: 2024-11-03 09:40:17
+ * @LastEditTime: 2024-11-10 11:36:04
  * @LastEditors: June
 -->
 
@@ -15,7 +15,7 @@
 + <span style="color: red">pnpm commit</span>(必须)
 
 #### 同步情况
-+ History  e134fc09fceb540dbe490b005c6de08ad68f09d1
++ Historfix(AddBaseTypePlugin) 897c53b9b65970db3f3fdbc9ac0c966e5d5e9d1b
 
 #### 使用
 

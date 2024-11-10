@@ -1,8 +1,13 @@
 /*
  * @Author: June
  * @Description:
+<<<<<<< HEAD
  * @Date: 2024-08-07 15:41:56
- * @LastEditTime: 2024-11-03 09:33:34
+ * @LastEditTime: 2024-11-10 11:36:46
+=======
+ * @Date: 2024-08-07 1ptions)5:41:56
+ * @LastEditTime: 2024-11-10 11:18:11
+>>>>>>> e8c1c4a (fix: 🐛 修复部分问题)
  * @LastEditors: June
  * @FilePath: \element-fabric-editor\src\locales\index.ts
  */
@@ -17,10 +22,12 @@ export let i18n: any = null
 
 // setup i18n instance with global
 export async function setupI18n(app: App) {
-  !i18n && (await createI18nOptions(app))
+  const _i18n = await createI18nOptions()
+  i18n = _i18n
+  app.use(_i18n)
 }
 
-async function createI18nOptions(app: App) {
+async function createI18nOptions() {
   const localeStore = useLocaleStoreWithOut()
   const locale = localeStore.getLocale
   const defaultLocal = await import(`./langs/${locale}.ts`)
@@ -42,6 +49,5 @@ async function createI18nOptions(app: App) {
     missingWarn: false,
     silentFallbackWarn: true
   }
-  i18n = await createI18n(options)
-  app.use(i18n)
+  return await createI18n(options)
 }
