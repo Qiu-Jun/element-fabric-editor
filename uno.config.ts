@@ -15,6 +15,11 @@ import {
 import transformerCompileClass from '@unocss/transformer-compile-class' // 将一组类编译为一个类
 
 export default defineConfig({
+   content: {
+    pipeline: {
+      exclude: ["node_modules", "dist", ".git", ".husky", ".vscode", "public", "build"]
+    }
+  },
   transformers: [transformerDirectives(), transformerCompileClass()],
   presets: [presetUno(), presetAttributify()],
   shortcuts: [
