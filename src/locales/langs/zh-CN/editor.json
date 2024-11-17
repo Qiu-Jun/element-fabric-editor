@@ -7,6 +7,7 @@
   "background": "背景",
   "textFloat": "小数",
   "repleaceImg": "替换图片",
+  "cropImg": "裁剪图片",
   "createClip": "添加裁切",
   "removeClip": "移除裁切",
   "setSizeTip": "调整画布尺寸",

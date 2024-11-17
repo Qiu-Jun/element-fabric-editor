@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-12 19:09:40
- * @LastEditTime: 2024-10-20 15:56:44
+ * @LastEditTime: 2024-11-17 11:26:40
  * @LastEditors: June
  * @FilePath: \element-fabric-editor\src\views\home\components\EditorContent\PanelRight\index.vue
 -->
@@ -42,6 +42,8 @@
       <CenterAlign />
       <!-- 替换图片 -->
       <ReplaceImg />
+      <!-- 图片裁剪 -->
+      <CropImage />
       <!-- 图片裁切 -->
       <ClipImage />
       <!-- 翻转 -->

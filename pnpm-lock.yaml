@@ -68,6 +68,9 @@ importers:
       vue:
         specifier: ^3.4.33
         version: 3.4.33(typescript@5.5.4)
+      vue-cropper:
+        specifier: ^0.6.5
+        version: 0.6.5
       vue-i18n:
         specifier: ^9.13.1
         version: 9.13.1(vue@3.4.33(typescript@5.5.4))
@@ -3744,6 +3747,9 @@ packages:
         optional: true
       terser:
         optional: true
+
+  vue-cropper@0.6.5:
+    resolution: {integrity: sha512-lSvY6IpeA/Tv/iPZ/FOkMHVRBPSlm7t57nuHEZFBMRNOH8ElvfqVlnHGDOAMlvPhh9gHiddiQoASS+fY0MFX0g==}
 
   vue-demi@0.14.10:
     resolution: {integrity: sha512-nMZBOwuzabUO0nLgIcc6rycZEebF6eeUfaiQx9+WSk8e29IbLvPU9feI6tqW4kTo3hvoYAJkMh8n8D0fuISphg==}
@@ -7962,6 +7968,8 @@ snapshots:
       fsevents: 2.3.3
       sass: 1.77.8
       terser: 5.34.1
+
+  vue-cropper@0.6.5: {}
 
   vue-demi@0.14.10(vue@3.4.33(typescript@5.5.4)):
     dependencies:

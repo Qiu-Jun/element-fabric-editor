@@ -7,3 +7,4 @@
  * @FilePath: /element-fabric-editor/typings/modules.d.ts
  */
 declare module 'vue3-lazyload'
+declare module 'vue-cropper'
