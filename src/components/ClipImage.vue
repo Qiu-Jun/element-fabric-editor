@@ -1,5 +1,12 @@
+<!--
+ * @Author: June
+ * @Description: Description
+ * @Date: 2024-08-19 12:53:30
+ * @LastEditTime: 2024-11-17 11:16:56
+ * @LastEditors: June
+-->
 <template>
-  <div v-if="isOne && type === 'image'" class="attr-item-box">
+  <div v-if="isOne && type === 'image'" class="attr-item-box mt-8px">
     <div class="bg-item" style="margin-bottom: 10px">
       <el-dropdown style="width: 270px" @command="addClipPath">
         <el-button text>{{ $t('editor.createClip') }}</el-button>
@@ -36,35 +43,35 @@ const { t } = useI18n()
 const type = ref('')
 const options = [
   {
-    label: t('edotpr.polygonClip'),
+    label: t('editor.polygonClip'),
     value: 'polygon'
   },
   {
-    label: t('edotpr.rectClip'),
+    label: t('editor.rectClip'),
     value: 'rect'
   },
   {
-    label: t('edotpr.circleClip'),
+    label: t('editor.circleClip'),
     value: 'circle'
   },
   {
-    label: t('edotpr.triangleClip'),
+    label: t('editor.triangleClip'),
     value: 'triangle'
   },
   {
-    label: t('edotpr.polygonClipInverted'),
+    label: t('editor.polygonClipInverted'),
     value: 'polygon-inverted'
   },
   {
-    label: t('edotpr.rectClipInverted'),
+    label: t('editor.rectClipInverted'),
     value: 'rect-inverted'
   },
   {
-    label: t('edotpr.circleClipInverted'),
+    label: t('editor.circleClipInverted'),
     value: 'circle-inverted'
   },
   {
-    label: t('edotpr.triangleClipInverted'),
+    label: t('editor.triangleClipInverted'),
     value: 'triangle-inverted'
   }
 ]
@@ -83,7 +90,9 @@ const init = () => {
 }
 
 onMounted(() => {
-  editorStore.editor?.on('selectOne', init)
+  nextTick(() => {
+    editorStore.editor?.on('selectOne', init)
+  })
 })
 
 onBeforeUnmount(() => {
@@ -93,8 +102,5 @@ onBeforeUnmount(() => {
 <style lang="scss" scoped>
 :deep(.el-button) {
   width: 100%;
-}
-.attr-item-box {
-  margin-top: 8px;
 }
 </style>
