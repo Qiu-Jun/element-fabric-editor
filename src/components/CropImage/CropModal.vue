@@ -120,13 +120,13 @@
           <el-input
             v-model="cropperWidth"
             type="number"
-            @change="changeCropperSize('width', Number($event.target.value))"
+            @change="changeCropperSize('width', Number($event))"
           />
           <span class="mx-2">X</span>
           <el-input
             v-model="cropperHeight"
             type="number"
-            @change="changeCropperSize('height', Number($event.target.value))"
+            @change="changeCropperSize('height', Number($event))"
           />
         </div>
       </div>
@@ -199,6 +199,7 @@ const cropperWidth = ref(0)
 const cropperHeight = ref(0)
 
 function changeCropperSize(type: 'width' | 'height', value: number) {
+  console.log(value)
   if (fixed.value) {
     if (type === 'width') {
       cropperHeight.value = (value * fixedRatio.value[1]) / fixedRatio.value[0]
