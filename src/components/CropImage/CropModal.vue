@@ -1,13 +1,13 @@
 <template>
-  <Modal
+  <el-dialog
     v-model="visible"
-    @on-ok="onOk"
-    @on-cancel="onCancel"
+    @close="onCancel"
     title="图片裁剪"
     width="80%"
+    destroy-on-close
     style="height: 80%"
   >
-    <div class="main">
+    <div class="main max-h-90v overflow-y-auto">
       <el-loading size="large" fix :show="loading">图片加载中...</el-loading>
       <div class="options">
         <label>裁剪比例</label>
@@ -165,7 +165,13 @@
         <div class="title">预览</div>
       </div>
     </div>
-  </Modal>
+    <template #footer>
+      <div class="dialog-footer">
+        <el-button @click="onCancel">取消</el-button>
+        <el-button type="primary" @click="onOk"> 确认 </el-button>
+      </div>
+    </template>
+  </el-dialog>
 </template>
 
 <script lang="ts" setup>
@@ -268,7 +274,7 @@ defineExpose({
 .main {
   display: flex;
   align-items: stretch;
-  min-height: 600px;
+  min-height: 480px;
   position: relative;
 }
 
@@ -290,6 +296,7 @@ defineExpose({
   flex: 1;
   min-height: 100%;
   padding: 0 16px;
+  overflow-y: auto;
 }
 
 .title {
