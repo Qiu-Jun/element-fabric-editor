@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-05 22:41:44
- * @LastEditTime: 2024-10-20 15:42:54
+ * @LastEditTime: 2024-11-17 10:24:00
  * @LastEditors: June
  * @FilePath: \ai-desing\src\views\editor\components\Align.vue
 -->
@@ -65,7 +65,7 @@ import useSelect from '@/hooks/select'
 
 const { isMultiple } = useSelect()
 const editorStore = useEditorStore()
-console.log(isMultiple)
+
 // 左对齐
 const left = () => {
   editorStore.editor.left()

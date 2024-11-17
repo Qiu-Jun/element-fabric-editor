@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2024-07-24 17:38:29
  * @LastEditors: June
- * @LastEditTime: 2024-10-13 01:05:31
+ * @LastEditTime: 2024-11-17 09:16:09
  * @FilePath: \element-fabric-editor\build\plugins.ts
  */
 import Vue from '@vitejs/plugin-vue'
@@ -25,7 +25,7 @@ import { isDev } from './getEnv'
  */
 export const createVitePlugins = (
   mode: string,
-  viteEnv: ViteEnv
+  viteEnv: any
 ): (PluginOption | PluginOption[])[] => {
   const _isProd = isProd(mode)
   const { APP_TITLE } = viteEnv

@@ -148,7 +148,7 @@ const strokeDashList = [
 ]
 
 // 属性获取
-const getObjectAttr = (e) => {
+const getObjectAttr = (e?: any) => {
   const activeObject = editorStore.canvas?.getActiveObject()
 
   // 不是当前obj，跳过
@@ -187,6 +187,7 @@ const borderSet = (key: string) => {
   const activeObject = editorStore.canvas?.getActiveObjects()[0]
   if (activeObject) {
     const stroke = strokeDashList.find((item) => item.label === key)
+    // @ts-ignore
     activeObject.set(stroke.value)
     editorStore.canvas?.renderAll()
   }
