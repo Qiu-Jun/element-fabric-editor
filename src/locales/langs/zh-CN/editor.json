@@ -154,6 +154,6 @@
     "offset_y": "Y轴",
     "borderRadiusX": "圆角水平半径",
     "borderRadiusY": "圆角垂直半径",
-    "rx_ry": "半径"
+    "radius": "半径"
   }
 }

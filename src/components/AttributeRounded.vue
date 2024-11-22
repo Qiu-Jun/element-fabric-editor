@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-05 23:05:23
- * @LastEditTime: 2024-10-20 14:45:47
+ * @LastEditTime: 2024-11-22 08:53:09
  * @LastEditors: June
  * @FilePath: \element-fabric-editor\src\components\AttributeRounded.vue
 -->
@@ -15,7 +15,7 @@
       <el-row :gutter="10">
         <el-col :span="18" flex="1">
           <el-form :label-width="40" class="form-wrap">
-            <el-form-item :label="$t('attributes.rx_ry')">
+            <el-form-item :label="$t('editor.attributes.radius')">
               <el-slider
                 v-model="baseAttr.rx"
                 :max="300"

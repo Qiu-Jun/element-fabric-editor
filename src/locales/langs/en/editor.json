@@ -32,5 +32,8 @@
       "center": "水平垂直居中",
       "centerY": "垂直居中"
     }
+  },
+  "attributes": {
+    "radius": "半径"
   }
 }
