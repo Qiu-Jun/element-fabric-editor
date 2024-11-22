@@ -16,7 +16,6 @@
 import { useRoute } from 'vue-router'
 import { fabric } from 'fabric'
 // hooks
-import { useI18n } from '@/hooks/useI18n'
 import { apiHost } from '@/constants/app'
 
 import Editor, {
@@ -54,16 +53,15 @@ import Editor, {
 } from '@/lib/core'
 import EditorHeader from './components/EditorHeader/index.vue'
 import EditorContent from './components/EditorContent/index.vue'
-import { editorTabs, panels } from '@/enums/editor'
 import { useEditorStore } from '@/store/modules/editor'
-
-// 暂放
-import Layer from '@/views/home/components/EditorContent/PanelLeft/components/Panel/Layer.vue'
+import { useTemplate } from '@/hooks/useTemplate'
+import { useTemplateStore } from '@/store/modules/template'
 
 defineOptions({
   name: 'Home'
 })
 
+const templateStore = useTemplateStore()
 const editorStore = useEditorStore()
 const APIHOST = apiHost
 // 创建编辑器
@@ -130,6 +128,9 @@ onMounted(() => {
   if (route?.query?.id) {
     // menuActive.value = 'MyMaterial'
   }
+
+  const { createTemplate } = useTemplate()
+  templateStore.addTemplate(createTemplate())
 })
 
 onUnmounted(() => canvasEditor.destory())

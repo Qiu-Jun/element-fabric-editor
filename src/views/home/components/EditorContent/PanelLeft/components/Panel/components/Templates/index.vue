@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-10-03 12:34:51
- * @LastEditTime: 2024-10-13 00:49:25
+ * @LastEditTime: 2024-11-22 15:09:17
  * @LastEditors: June
 -->
 <template>
@@ -14,8 +14,12 @@
           ? 'border-10px border-solid border-[var(--el-color-primary)]'
           : ''
       ]"
+      :style="{
+        height: height + 'px'
+      }"
       v-for="(item, idx) in templateList"
       :key="idx"
+      @click="handleChangeTemplate(idx)"
     >
       <div
         class="relative w-full border-1px border-solid border-[var(--bg-gray)] rounded-8px"
@@ -44,6 +48,7 @@
 import { useTemplateStore } from '@/store/modules/template'
 import { storeToRefs } from 'pinia'
 import { useEditorStore } from '@/store/modules/editor'
+import { debounce } from 'lodash-es'
 import type { Template } from '@/types/template'
 
 const props = defineProps({
@@ -53,9 +58,27 @@ const props = defineProps({
   }
 })
 const editorStore = useEditorStore()
-const { curTempIdx, templateList } = storeToRefs(useTemplateStore())
+const templateStore = useTemplateStore()
+const { curTempIdx, templateList, curTemplate } = storeToRefs(templateStore)
 
-console.log(curTempIdx, templateList)
+console.log(
+  curTempIdx,
+  templateList,
+  curTemplate,
+  '000000000000000000000000000000000'
+)
+
+const height = computed(() => {
+  const _curTemplate = unref(curTemplate)
+  const direction = props.direction
+  const size = direction === 'vertical' ? 176 : 64
+  const radio = (_curTemplate.height || 0) / _curTemplate.width
+  return size * radio
+})
+
+const handleChangeTemplate = debounce(function (idx: number) {
+  templateStore.setTemplateIndex(idx)
+}, 250)
 
 onMounted(() => {
   editorStore.canvas?.on('object:modified', updateBlobImg)

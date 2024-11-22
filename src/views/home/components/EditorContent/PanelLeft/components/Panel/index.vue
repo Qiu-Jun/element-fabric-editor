@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-12 09:52:22
- * @LastEditTime: 2024-10-13 00:05:11
+ * @LastEditTime: 2024-11-22 15:07:40
  * @LastEditors: June
  * @FilePath: \element-fabric-editor\src\views\home\components\Panel.vue
 -->
@@ -38,7 +38,7 @@
           <el-button
             v-if="curTab === 'canvas'"
             text
-            @click="createTemplate"
+            @click="hadleCreateTemplate"
             style="padding: 0; width: 32px; border-radius: 6px"
           >
             <el-icon style="font-size: 20px">
@@ -80,9 +80,12 @@ import { Plus, Search } from '@element-plus/icons-vue'
 import { panels } from '@/enums/editor'
 import { debounce } from 'lodash-es'
 import { Layer, Templates } from './components'
+import { useTemplate } from '@/hooks/useTemplate'
+import { useTemplateStore } from '@/store/modules/template'
 
 type ITab = 'canvas' | 'layer'
 const editorStore = useEditorStore()
+const templateStore = useTemplateStore()
 const { panelType } = storeToRefs(editorStore)
 const comMap = {
   canvas: Templates,
@@ -112,6 +115,11 @@ const onChangePanel = debounce(function (type: ITab) {
 
 const handleShowSearch = debounce(function () {
   showSearch.value = true
+}, 250)
+
+const hadleCreateTemplate = debounce(function () {
+  const { createTemplate } = useTemplate()
+  templateStore.addTemplate(createTemplate())
 }, 250)
 
 watch(
