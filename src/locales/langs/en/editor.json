@@ -34,6 +34,28 @@
     }
   },
   "attributes": {
-    "radius": "半径"
+    "id": "ID",
+    "linkData": "linkData",
+    "font": "Font",
+    "align": "Align",
+    "bold": "Bold:",
+    "italic": "Italic:",
+    "underline": "Underline:",
+    "stroke": "Stroke:",
+    "swipe_up": "Swipe UP:",
+    "line_height": "Line height",
+    "char_spacing": "Spacing",
+    "exterior": "Exterior",
+    "angle": "Angle",
+    "left": "Left",
+    "top": "Top",
+    "opacity": "Opacity",
+    "shadow": "Shadow",
+    "blur": "Blur",
+    "offset_x": "X",
+    "offset_y": "Y",
+    "borderRadiusX": "radiusX",
+    "borderRadiusY": "radiusY",
+    "radius": "Rounded"
   }
 }
