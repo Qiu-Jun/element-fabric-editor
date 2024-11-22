@@ -2,12 +2,12 @@
  * @Author: 秦少卫
  * @Date: 2024-05-11 13:23:48
  * @LastEditors: June
- * @LastEditTime: 2024-11-03 08:58:47
+ * @LastEditTime: 2024-11-22 08:08:25
  * @Description: 文件名称
 -->
 
 <template>
-  <div style="display: inline-block" v-if="route?.query?.id">
+  <div class="inline-block" v-if="route?.query?.id">
     <el-input
       v-model="fileName"
       placeholder="请输入文件名称"
@@ -134,11 +134,3 @@ onMounted(() => {
   editorStore.canvas?.on('object:modified', changeFileName)
 })
 </script>
-<style scoped lang="scss">
-h3 {
-  margin-bottom: 10px;
-}
-.divider {
-  margin-top: 0;
-}
-</style>

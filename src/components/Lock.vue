@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-08-19 12:53:30
- * @LastEditTime: 2024-10-20 15:27:15
+ * @LastEditTime: 2024-11-22 08:11:31
  * @LastEditors: June
 -->
 <template>
@@ -49,12 +49,8 @@ onBeforeUnmount(() => {
 h3 {
   margin: 40px 0 0;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
-}
+
 li {
-  display: inline-block;
   margin: 0 10px;
 }
 a {

@@ -1,10 +1,10 @@
 <template>
-  <div class="box" v-if="isOne && isImage">
+  <div class="box mb-20px" v-if="isOne && isImage">
     <el-divider content-position="left">
       <h4>图像描边</h4>
     </el-divider>
     <div class="hd-wrap">
-      <div class="hd">
+      <div class="hd flex-1">
         <span>启用图像描边</span>
         <el-popover trigger="hover" content="只支持png透明图像">
           <template #reference>
@@ -115,7 +115,7 @@ const closeImgStroke = () => {
   updateStroke()
 }
 
-const onSwitchChange = async (val: boolean) => {
+const onSwitchChange = async (val: any) => {
   if (val) {
     unref(strokeWidth) === 0 && (strokeWidth.value = 5)
     setOrigin()
@@ -125,12 +125,14 @@ const onSwitchChange = async (val: boolean) => {
   }
 }
 
-const onSliderChange = (val: number) => {
+const onSliderChange = (val: any) => {
+  if (!val) return
   strokeWidth.value = val
   updateStroke()
 }
 
-const onColorChange = (val: string) => {
+const onColorChange = (val: string | null) => {
+  if (!val) return
   strokeColor.value = val
   updateStroke()
 }
@@ -152,26 +154,16 @@ onBeforeUnmount(() => {
 
 <style lang="scss" scoped>
 .box {
-  margin-bottom: 20px;
   .hd-wrap {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
+    @apply flex justify-between mb-10px;
     .hd {
-      flex: 1;
       & > span {
         margin-right: 5px;
       }
     }
   }
   .operation {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    .slide-wrap {
-      width: 100%;
-    }
+    @apply flex justify-between items-center;
   }
 }
 </style>

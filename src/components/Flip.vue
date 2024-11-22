@@ -2,12 +2,12 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-05 23:16:20
- * @LastEditTime: 2024-11-17 09:38:33
+ * @LastEditTime: 2024-11-22 08:17:13
  * @LastEditors: June
  * @FilePath: \ai-desing\src\views\editor\components\Flip.vue
 -->
 <template>
-  <div v-if="isOne" class="attr-item-box">
+  <div v-if="isOne" class="attr-item-box mt-8px">
     <div class="bg-item">
       <el-tooltip :content="$t('editor.attrSetting.flip.x')">
         <el-button @click="flip('X')" link>
@@ -47,9 +47,5 @@ const flip = (type: string) => {
       opacity: 0.2;
     }
   }
-}
-
-.attr-item-box {
-  margin-top: 8px;
 }
 </style>

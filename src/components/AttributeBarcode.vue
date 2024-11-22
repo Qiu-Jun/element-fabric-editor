@@ -209,55 +209,18 @@ onBeforeUnmount(() => {
   width: 88px;
 }
 
-.font-selector {
-  .font-item {
-    height: 40px;
-    width: 330px;
-    background-size: auto 40px;
-    background-repeat: no-repeat;
+.flex-item {
+  @apply flex-1 inline-flex box-border;
+  .label {
+    @apply w-32px h-32px leading-32px inline-block text-14px;
   }
-}
-
-.flex-view {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  margin-bottom: 10px;
-  padding: 5px;
-  display: inline-flex;
-  justify-content: space-between;
-  border-radius: 5px;
-  background: #f6f7f9;
-  .flex-item {
-    display: inline-flex;
+  .content {
     flex: 1;
-    .label {
-      width: 32px;
-      height: 32px;
-      line-height: 32px;
-      display: inline-block;
-      font-size: 14px;
-    }
-    .content {
-      flex: 1;
-      align-content: center;
-    }
-    .button-group {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      .el-radio-button {
-        flex: 1;
-        :deep(.el-radio-button__inner) {
-          width: 100%;
-        }
-      }
-    }
-    .slider-box {
-      width: calc(100% - 50px);
-      margin-left: 10px;
-    }
+    // width: 60px;
+  }
+  .slider-box {
+    width: calc(100% - 50px);
+    @apply mb-10px;
   }
 }
 </style>

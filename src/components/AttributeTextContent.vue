@@ -104,38 +104,3 @@ onBeforeUnmount(() => {
   editorStore.canvas?.off('object:modified', getObjectAttr)
 })
 </script>
-
-<style scoped lang="scss">
-.color-bar {
-  // width: 30px;
-  height: 30px;
-  cursor: pointer;
-  border: 2px solid #f6f7f9;
-}
-.ivu-row {
-  margin-bottom: 8px;
-  .ivu-col {
-    position: inherit;
-    &__box {
-      display: flex;
-      align-items: center;
-      background: #f8f8f8;
-      border-radius: 4px;
-      gap: 8px;
-    }
-  }
-
-  .label {
-    padding-left: 8px;
-  }
-  .content {
-    flex: 1;
-    :deep(.--input),
-    :deep(.ivu-select-selection) {
-      background-color: transparent;
-      border: none !important;
-      box-shadow: none !important;
-    }
-  }
-}
-</style>

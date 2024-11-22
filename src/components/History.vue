@@ -3,12 +3,12 @@
  * @Description: 
  * @Date: 2024-07-22 21:18:05
  * @LastEditors: June
- * @LastEditTime: 2024-10-03 11:56:44
+ * @LastEditTime: 2024-11-22 08:15:11
  * @FilePath: \ai-desing\src\views\editor\components\History.vue
 -->
 
 <template>
-  <div style="display: inline-block">
+  <div class="inline-block">
     <!-- 后退 -->
     <el-tooltip :content="$t('editor.history.undo') + `(${canUndo})`">
       <el-button @click="undo" link size="small" :disabled="!canUndo">
@@ -60,15 +60,3 @@ onMounted(() => {
   })
 })
 </script>
-
-<style scoped lang="scss">
-span.active {
-  svg.icon {
-    fill: #2d8cf0;
-  }
-}
-
-.time {
-  color: #c1c1c1;
-}
-</style>

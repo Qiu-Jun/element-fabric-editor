@@ -2,12 +2,12 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-06 00:10:51
- * @LastEditTime: 2024-10-20 15:28:38
+ * @LastEditTime: 2024-11-22 08:05:58
  * @LastEditors: June
  * @FilePath: \element-fabric-editor\src\components\ReplaceImg.vue
 -->
 <template>
-  <div v-if="isOne && type === 'image'" class="attr-item-box">
+  <div v-if="isOne && type === 'image'" class="attr-item-box mt-8px">
     <div class="bg-item">
       <el-button @click="repleace" text>{{
         $t('editor.repleaceImg')
@@ -75,8 +75,5 @@ onBeforeUnmount(() => {
 <style lang="scss" scoped>
 :deep(.el-button) {
   width: 100%;
-}
-.attr-item-box {
-  margin-top: 8px;
 }
 </style>

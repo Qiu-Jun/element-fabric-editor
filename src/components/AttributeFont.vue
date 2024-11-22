@@ -289,54 +289,35 @@ onBeforeUnmount(() => {
 
 <style scoped lang="scss">
 :deep(.el-color-picker) {
-  width: 100%;
+  @apply w-full;
 }
 :deep(.el-color-picker__trigger) {
-  width: 100%;
+  @apply w-full;
 }
 :deep(.el-color-picker__color-inner) {
-  justify-content: flex-end;
+  @apply justify-end;
 }
 .right {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
+  @apply flex justify-end items-center;
   & > span {
     flex: 0 0 36px;
   }
 }
-.asa-number-warp {
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  span {
-    font-size: var(--el-form-label-font-size);
-    color: var(--el-text-color-regular);
-  }
-}
+
 .button-group {
-  width: 100%;
+  @apply w-full;
   :deep(.el-radio-button) {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @apply f-center flex-1;
     .el-radio-button__inner {
-      flex: 1;
+      @apply flex-1;
     }
   }
 }
 .font-selector {
-  :deep(.ivu-select-item) {
-    padding: 1px 4px;
-  }
-
   .font-item {
-    height: 40px;
-    width: 280px;
     background-size: auto 28px;
     background-repeat: no-repeat;
+    @apply w-280px h-40px;
   }
 }
 
@@ -353,15 +334,9 @@ onBeforeUnmount(() => {
   background: #f6f7f9;
 }
 .flex-item {
-  display: inline-flex;
-  flex: 1;
+  @apply flex-1 inline-flex box-border;
   .label {
-    width: 32px;
-    height: 32px;
-    line-height: 32px;
-    display: inline-block;
-    font-size: 14px;
-    // color: #333333;
+    @apply w-32px h-32px leading-32px inline-block text-14px;
   }
   .content {
     flex: 1;
@@ -369,17 +344,7 @@ onBeforeUnmount(() => {
   }
   .slider-box {
     width: calc(100% - 50px);
-    margin-left: 10px;
-  }
-  .left {
-    flex: 1;
-  }
-  .right {
-    flex: 1;
-    margin-left: 10px;
-    & > span {
-      flex: 0 0 48px;
-    }
+    @apply mb-10px;
   }
 }
 </style>

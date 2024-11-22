@@ -3,7 +3,7 @@
     <div class="flex-view">
       <div class="flex-item">
         <span class="label">{{ $t('editor.textFloat') }}</span>
-        <div class="content">
+        <div class="flex-1">
           <el-select
             v-model="baseAttr.verticalAlign"
             @change="(value: any) => changeCommon('verticalAlign', value)"
@@ -90,41 +90,14 @@ onBeforeUnmount(() => {
 
 <style scoped lang="scss">
 .flex-view {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  margin-bottom: 5px;
-  padding: 5px;
-  display: inline-flex;
-  justify-content: space-between;
-  border-radius: 5px;
   background: #f6f7f9;
+  @apply rounded-5px inline-block relative z-1 w-full mb-5px p-5px justify-between;
 }
 .flex-item {
-  display: inline-flex;
-  flex: 1;
+  @apply inline-flex flex-1;
   .label {
-    width: 32px;
-    height: 32px;
-    line-height: 32px;
-    display: inline-block;
-    font-size: 14px;
+    @apply w-32px h-32px leading-32px inline-block text-14px;
     // color: #333333;
-  }
-  .content {
-    flex: 1;
-    // width: 60px;
-  }
-  .slider-box {
-    width: calc(100% - 50px);
-    margin-left: 10px;
-  }
-  .left {
-    flex: 1;
-  }
-  .right {
-    flex: 1;
-    margin-left: 10px;
   }
 }
 </style>

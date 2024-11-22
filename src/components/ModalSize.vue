@@ -3,8 +3,8 @@
     <h3>
       {{ $t('editor.importFiles.createDesign.customSize') }}
     </h3>
-    <section class="asa-size-wrap">
-      <div class="asa-size-wrap-item">
+    <section class="size-wrap">
+      <div class="size-wrap-item">
         <span>宽度</span>
         <el-input-number
           style="width: 70%"
@@ -14,7 +14,7 @@
           controls-position="right"
         ></el-input-number>
       </div>
-      <div class="asa-size-wrap-item">
+      <div class="size-wrap-item">
         <span>高度</span>
         <el-input-number
           style="width: 70%"
@@ -34,7 +34,7 @@
     <h3>
       {{ $t('editor.importFiles.createDesign.systemSize') }}
     </h3>
-    <section class="cell-wrap">
+    <section class="cell-wrap box-border">
       <div
         :key="item.name"
         v-for="item in sizeList"
@@ -101,41 +101,26 @@ defineExpose({
 })
 </script>
 <style scoped lang="scss">
-.asa-size-wrap {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  .asa-size-wrap-item {
-    display: inline-block;
-    margin-right: 10px;
+.size-wrap {
+  @apply f-center;
+  .size-wrap-item {
+    @apply inline-block mr-10px;
     & > span {
-      margin-right: 10px;
+      @apply mr-10px;
     }
   }
 }
-h3 {
-  padding: 0;
-  margin: 0;
-}
-.divider {
-  margin-top: 0;
-}
 .cell-wrap {
-  box-sizing: border-box;
   .cell-main {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     vertical-align: middle;
-    margin-bottom: 10px;
+    @apply flex justify-between items-center mb-10px;
     .cell-name {
-      line-height: 24px;
-      font-size: 14px;
+      @apply leading-24px text-14px;
     }
     .cell-label {
       line-height: 1.2;
-      font-size: 12px;
       color: #808695;
+      @apply text-12px;
     }
   }
 }

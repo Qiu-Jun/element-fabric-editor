@@ -6,7 +6,7 @@
     <div>
       <el-row :gutter="12" style="margin-right: 10px">
         <el-col :span="12">
-          <div class="asa-number-warp">
+          <div class="number-warp">
             <span class="label" style="margin-right: 10px">{{
               $t('editor.color')
             }}</span>
@@ -29,7 +29,7 @@
         </el-col>
       </el-row>
 
-      <div class="asa-number-warp">
+      <div class="number-warp">
         <span
           style="
             flex: 0 0 48px;
@@ -222,25 +222,17 @@ onBeforeUnmount(() => {
   background: #f8f8f9;
   box-shadow: none;
 }
-.asa-number-warp {
-  box-sizing: border-box;
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+.number-warp {
   background: #f6f7f9;
-  border-radius: 5px;
   padding: 0 15px 0 10px;
-  margin-bottom: 10px;
-  position: relative;
-  z-index: 1;
+  @apply box-border w-full flex justify-start items-center rounded-5px mb-10px relative z-1;
   .label {
     flex: 0 0 32px;
     font-size: var(--el-form-label-font-size);
     color: var(--el-text-color-regular);
   }
   .content {
-    width: 100%;
+    @apply w-full;
   }
 }
 </style>

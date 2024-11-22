@@ -2,7 +2,7 @@
  * @Author: 秦少卫
  * @Date: 2024-04-24 12:51:24
  * @LastEditors: June
- * @LastEditTime: 2024-10-03 11:56:26
+ * @LastEditTime: 2024-11-22 08:11:08
  * @Description: 登录
 -->
 
@@ -252,14 +252,9 @@ const switchTab = () => {
 </script>
 <style scoped lang="scss">
 .box {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @apply f-center;
 }
 .form-box {
-  padding-top: 10px;
-}
-h3 {
-  margin: 0;
+  @apply pt-10px;
 }
 </style>

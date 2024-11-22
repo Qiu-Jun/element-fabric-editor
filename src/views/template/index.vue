@@ -3,7 +3,7 @@
  * @Description: 
  * @Date: 2024-07-24 18:36:42
  * @LastEditors: June
- * @LastEditTime: 2024-10-13 01:18:22
+ * @LastEditTime: 2024-11-22 08:04:17
  * @FilePath: \element-fabric-editor\src\views\template\index.vue
 -->
 <template>
@@ -230,17 +230,11 @@ const toInfo = (info) => {
 
 // 流布局
 .img-box {
-  display: grid;
-  width: 1200px;
-  margin: 0 auto;
+  @apply grid w-1200px mx-auto;
   .grid-item {
-    width: 232px;
-    cursor: pointer;
-    margin-bottom: 5px;
-
+    @apply w-232px cursor-pointer mb-5px;
     img {
-      width: 100%;
-      border-radius: 10px;
+      @apply w-full rounded-10px;
       &:hover {
         // animation: 3s linear 1s slidein;
         transform: scale(1.02);
@@ -251,7 +245,6 @@ const toInfo = (info) => {
 
 // 分页
 .page {
-  margin: 20px auto;
-  text-align: center;
+  @apply my-20px mx-auto text-center;
 }
 </style>

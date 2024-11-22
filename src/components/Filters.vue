@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isOne && state.type === 'image'" class="box">
+  <div v-if="isOne && state.type === 'image'" class="mb-12px">
     <el-divider content-position="left">
       <h4>图片滤镜</h4>
     </el-divider>
@@ -9,7 +9,7 @@
           {{ $t('editor.filters.simple') }}
         </template>
 
-        <div class="filter-box">
+        <div class="filter-box overflow-hidden">
           <!-- 无参数滤镜 -->
           <div
             class="filter-item"
@@ -317,10 +317,8 @@ function _getFabricFilterType(type: any) {
   border-bottom: none;
 }
 :deep(.el-collapse-item__header) {
-  padding-left: 10px;
   background: #f6f7f9;
-  position: relative;
-  z-index: 1;
+  @apply z-1 relative pl-10px;
 }
 :deep(.el-collapse-item) {
   &:first-child {
@@ -331,12 +329,9 @@ function _getFabricFilterType(type: any) {
   }
 }
 .filter-box {
-  overflow: hidden;
   .filter-item {
     float: left;
-    cursor: pointer;
-    width: 50%;
-    margin-bottom: 10px;
+    @apply w-50% cursor-pointer mb-10px;
     img {
       width: 90%;
       height: auto;
@@ -344,15 +339,10 @@ function _getFabricFilterType(type: any) {
   }
 }
 .has-params {
-  display: inline-block;
-  margin-bottom: 10px;
-  width: 50%;
+  @apply inline-block mb-10px w-50%;
   cursor: none;
   .content {
     width: 90%;
   }
-}
-.box {
-  margin-bottom: 12px;
 }
 </style>

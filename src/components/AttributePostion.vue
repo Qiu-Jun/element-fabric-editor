@@ -21,7 +21,7 @@
         </el-col>
       </el-row>
 
-      <div class="asa-number-warp">
+      <div class="number-warp">
         <span>{{ $t('editor.attributes.angle') }}</span>
         <el-slider
           v-model="baseAttr.angle"
@@ -30,7 +30,7 @@
         ></el-slider>
       </div>
 
-      <div class="asa-number-warp">
+      <div class="number-warp">
         <span>{{ $t('editor.attributes.opacity') }}</span>
         <el-slider
           v-model="baseAttr.opacity"
@@ -132,23 +132,14 @@ onBeforeUnmount(() => {
 </script>
 
 <style lang="scss" scoped>
-.asa-number-warp {
-  box-sizing: border-box;
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+.number-warp {
   background: #f6f7f9;
-  border-radius: 5px;
   padding: 0 15px 0 10px;
-  margin-bottom: 10px;
-  position: relative;
-  z-index: 1;
+  @apply w-full box-border flex justify-start items-center rounded-5px mb-10px relative z-1;
   span {
-    display: inline-block;
-    width: 56px;
     font-size: var(--el-form-label-font-size);
     color: var(--el-text-color-regular);
+    @apply w-56px inline-block;
   }
 }
 </style>

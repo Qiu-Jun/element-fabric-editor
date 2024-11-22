@@ -146,9 +146,7 @@ onBeforeUnmount(() => {
 
 <style scoped lang="scss">
 .color-bar {
-  width: 100%;
-  height: 30px;
-  cursor: pointer;
   border: 2px solid #f6f7f9;
+  @apply w-full h-30px cursor-pointer;
 }
 </style>

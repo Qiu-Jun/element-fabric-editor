@@ -6,7 +6,7 @@
       <div class="flex-view">
         <div class="flex-item">
           <span class="label">内容</span>
-          <div class="content">
+          <div class="flex-1">
             <el-input v-model="baseAttr.data" @change="changeCommon" />
           </div>
         </div>
@@ -250,45 +250,17 @@ onBeforeUnmount(() => {
   width: 88px;
 }
 .number-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.font-selector {
-  :deep(.ivu-select-item) {
-    padding: 1px 4px;
-  }
-
-  .font-item {
-    height: 40px;
-    width: 330px;
-    background-size: auto 40px;
-    background-repeat: no-repeat;
-  }
+  @apply f-center;
 }
 
 .flex-view {
-  width: 100%;
-  margin-bottom: 10px;
-  padding: 5px;
-  display: inline-flex;
-  justify-content: space-between;
-  border-radius: 5px;
   background: #f6f7f9;
-  position: relative;
-  z-index: 1;
+  @apply relative z-1 rounded-5px flex justify-between w-full mb-10px p-5px;
 }
 .flex-item {
-  box-sizing: border-box;
-  display: inline-flex;
-  flex: 1;
+  @apply flex-1 inline-flex box-border;
   .label {
-    width: 32px;
-    height: 32px;
-    line-height: 32px;
-    display: inline-block;
-    font-size: 14px;
-    // color: #333333;
+    @apply w-32px h-32px leading-32px inline-block text-14px;
   }
   .content {
     flex: 1;
@@ -296,14 +268,7 @@ onBeforeUnmount(() => {
   }
   .slider-box {
     width: calc(100% - 50px);
-    margin-left: 10px;
-  }
-  .left {
-    flex: 1;
-  }
-  .right {
-    flex: 1;
-    margin-left: 10px;
+    @apply mb-10px;
   }
 }
 </style>
