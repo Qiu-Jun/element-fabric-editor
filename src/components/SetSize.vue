@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-05 23:19:31
- * @LastEditTime: 2024-10-20 15:29:46
+ * @LastEditTime: 2024-11-22 14:20:23
  * @LastEditors: June
  * @FilePath: \ai-desing\src\views\editor\components\SetSize.vue
 -->
@@ -59,14 +59,22 @@ const DefaultSize = {
 
 const modalSizeRef = ref(null)
 
-let width = ref(DefaultSize.width)
-let height = ref(DefaultSize.height)
+const width = ref(DefaultSize.width)
+const height = ref(DefaultSize.height)
 
 onMounted(() => {
-  editorStore.editor?.setSize(width.value, height.value)
-  editorStore.editor?.on('sizeChange', (w: number, h: number) => {
-    width.value = w
-    height.value = h
+  nextTick(() => {
+    const { width: w, height: h } = editorStore.editor?.getWorkspaceSize() || {
+      width: 0,
+      height: 0
+    }
+    w > 0 && (width.value = w)
+    h > 0 && (height.value = h)
+    editorStore.editor?.setSize(width.value, height.value)
+    editorStore.editor?.on('sizeChange', (w: number, h: number) => {
+      width.value = w
+      height.value = h
+    })
   })
 })
 
