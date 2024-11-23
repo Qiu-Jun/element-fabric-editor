@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-12 18:51:45
- * @LastEditTime: 2024-11-23 13:40:06
+ * @LastEditTime: 2024-11-23 13:51:32
  * @LastEditors: June
  * @FilePath: \element-fabric-editor\src\views\home\components\EditorHeader\index.vue
 -->
@@ -58,15 +58,7 @@
 </template>
 
 <script lang="ts" setup>
-import {
-  Logo,
-  Clear,
-  History,
-  Preview,
-  Save,
-  Login,
-  MyTemplName
-} from './components'
+import { Clear, History, Preview, Save, MyTemplName } from './components'
 import { useEditorStore } from '@/store/modules/editor'
 
 const editorStore = useEditorStore()
