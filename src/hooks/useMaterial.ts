@@ -9,7 +9,7 @@ import {
 } from '@/api/user'
 import { ElMessageBox } from 'element-plus'
 import { useEditorStoreWithOut } from '@/store/modules/editor'
-import { useI18n } from '@/hooks/useI18n'
+import { useI18n } from 'vue-i18n'
 
 const editorStore = useEditorStoreWithOut()
 export default function useMaterial() {

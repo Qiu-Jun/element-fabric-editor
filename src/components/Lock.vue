@@ -2,11 +2,11 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-08-19 12:53:30
- * @LastEditTime: 2024-11-22 08:11:31
+ * @LastEditTime: 2024-11-23 11:30:25
  * @LastEditors: June
 -->
 <template>
-  <el-tooltip :content="$t('quick.lock')" v-if="isOne">
+  <el-tooltip :content="$t('editor.quick.lock')" v-if="isOne">
     <el-button
       v-if="isLock"
       @click="doLock(false)"

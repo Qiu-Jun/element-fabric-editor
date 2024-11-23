@@ -2,37 +2,37 @@ import { editorTabs, texts, shapes, codes, files } from '@/enums/editor'
 
 export const tabList = [
   {
-    name: '添加',
+    name: 'editor.tab.add',
     icon: 'add',
     type: editorTabs.create
   },
   {
-    name: '模板',
+    name: 'editor.tab.template',
     icon: 'template',
     type: editorTabs.template
   },
   {
-    name: '元素',
+    name: 'editor.tab.element',
     icon: 'element',
     type: editorTabs.element
   },
   {
-    name: '文字',
+    name: 'editor.tab.text',
     icon: 'text',
     type: editorTabs.text
   },
   {
-    name: '素材',
+    name: 'editor.tab.material',
     icon: 'img',
     type: editorTabs.material
   },
   {
-    name: 'AI',
+    name: 'editor.tab.ai',
     icon: 'ai',
     type: editorTabs.ai
   },
   {
-    name: '我的',
+    name: 'editor.tab.mine',
     icon: 'mine',
     type: editorTabs.mine
   }

@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-08-19 12:53:30
- * @LastEditTime: 2024-11-17 11:16:56
+ * @LastEditTime: 2024-11-23 11:01:17
  * @LastEditors: June
 -->
 <template>
@@ -33,7 +33,7 @@
 
 <script lang="ts" setup>
 import { useEditorStore } from '@/store/modules/editor'
-import { useI18n } from '@/hooks/useI18n'
+import { useI18n } from 'vue-i18n'
 import useSelect from '@/hooks/select'
 
 const editorStore = useEditorStore()

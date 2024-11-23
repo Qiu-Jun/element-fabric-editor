@@ -7,7 +7,7 @@
  * @FilePath: \element-fabric-editor\src\hooks\select.ts
  */
 import Editor, { EventType } from '@/lib/core'
-import { useI18n } from '@/hooks/useI18n'
+import { useI18n } from 'vue-i18n'
 import { useEditorStoreWithOut } from '@/store/modules/editor'
 
 const { SelectMode, SelectEvent } = EventType

@@ -32,7 +32,7 @@ import { ArrowDown } from '@element-plus/icons-vue'
 import useMaterial from '@/hooks/useMaterial'
 import { ElMessage } from 'element-plus'
 import ModalSize from './ModalSize.vue'
-import { useI18n } from '@/hooks/useI18n'
+import { useI18n } from 'vue-i18n'
 import { useEditorStore } from '@/store/modules/editor'
 
 const editorStore = useEditorStore()

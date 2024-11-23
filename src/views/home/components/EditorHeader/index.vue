@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-12 18:51:45
- * @LastEditTime: 2024-09-13 11:29:12
+ * @LastEditTime: 2024-11-23 08:50:37
  * @LastEditors: June
  * @FilePath: \element-fabric-editor\src\views\home\components\EditorHeader\index.vue
 -->
@@ -45,6 +45,8 @@
           alt="element-fbric-editor"
         />
       </a>
+      <Lang />
+      <el-divider direction="vertical" />
       <PreviewCurrent />
       <el-divider direction="vertical" />
       <Save />

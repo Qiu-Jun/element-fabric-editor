@@ -44,7 +44,7 @@
 <script setup name="ImportTmpl">
 import { Plus } from '@element-plus/icons-vue'
 import useMaterial from '@/hooks/useMaterial'
-import { useI18n } from '@/hooks/useI18n'
+import { useI18n } from 'vue-i18n'
 import { getUserFileTypeTree, updataTempl } from '@/api/user'
 import { ElMessageBox, ElLoading, ElMessage } from 'element-plus'
 import { useEditorStore } from '@/store/modules/editor'

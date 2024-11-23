@@ -46,7 +46,7 @@ import {
 import { fabric } from 'fabric'
 import { v4 as uuid } from 'uuid'
 import { ElLoading } from 'element-plus'
-import { useI18n } from '@/hooks/useI18n'
+import { useI18n } from 'vue-i18n'
 import { useEditorStore } from '@/store/modules/editor'
 
 const editorStore = useEditorStore()

@@ -92,7 +92,7 @@
 
 <script setup name="Tools">
 import { getPolygonVertices } from '@/utils/math'
-import { useI18n } from '@/hooks/useI18n'
+import { useI18n } from 'vue-i18n'
 import { fabric } from 'fabric'
 import { useEditorStore } from '@/store/modules/editor'
 

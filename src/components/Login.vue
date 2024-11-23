@@ -2,7 +2,7 @@
  * @Author: 秦少卫
  * @Date: 2024-04-24 12:51:24
  * @LastEditors: June
- * @LastEditTime: 2024-11-22 08:11:08
+ * @LastEditTime: 2024-11-23 11:31:17
  * @Description: 登录
 -->
 
@@ -26,10 +26,10 @@
 
     <!-- 登录注册弹框 -->
     <el-dialog v-model="modal" width="500px" footer-hide>
-      <h3>{{ $t('login.title') }}</h3>
+      <h3>{{ $t('editor.login.title') }}</h3>
       <el-tabs :animated="false" @on-click="switchTab">
         <!-- 登录 -->
-        <el-tab-pane :label="$t('login.login')">
+        <el-tab-pane :label="$t('editor.login.login')">
           <el-form
             ref="loginForm"
             :model="formInline"
@@ -40,7 +40,7 @@
               <el-input
                 type="text"
                 v-model="formInline.identifier"
-                :placeholder="$t('login.identifier')"
+                :placeholder="$t('editor.login.identifier')"
               >
                 <template #prepend>
                   <el-button text :icon="User" />
@@ -51,7 +51,7 @@
               <el-input
                 type="password"
                 v-model="formInline.password"
-                :placeholder="$t('login.password')"
+                :placeholder="$t('editor.login.password')"
               >
                 <template #prepend>
                   <el-button text :icon="Lock" />
@@ -64,14 +64,14 @@
                 type="primary"
                 @click="loginHandle"
               >
-                {{ $t('login.login') }}
+                {{ $t('editor.login.login') }}
               </el-button>
             </el-form-item>
           </el-form>
         </el-tab-pane>
 
         <!-- 注册 -->
-        <el-tab-pane :label="$t('login.register')">
+        <el-tab-pane :label="$t('editor.login.register')">
           <el-form
             ref="registerForm"
             :model="registerFormInline"
@@ -82,7 +82,7 @@
               <el-input
                 type="text"
                 v-model="registerFormInline.username"
-                :placeholder="$t('login.username')"
+                :placeholder="$t('editor.login.username')"
               >
                 <template #prepend>
                   <el-button text :icon="User" />
@@ -93,7 +93,7 @@
               <el-input
                 type="text"
                 v-model="registerFormInline.email"
-                :placeholder="$t('login.email')"
+                :placeholder="$t('editor.login.email')"
               >
                 <template #prepend>
                   <el-button text :icon="Message" />
@@ -105,7 +105,7 @@
               <el-input
                 type="password"
                 v-model="registerFormInline.password"
-                :placeholder="$t('login.password')"
+                :placeholder="$t('editor.login.password')"
               >
                 <template #prepend>
                   <el-button text :icon="Lock" />
@@ -119,7 +119,7 @@
                 long
                 @click="registerHandle"
               >
-                {{ $t('login.register') }}
+                {{ $t('editor.login.register') }}
               </el-button>
             </el-form-item>
           </el-form>
@@ -130,7 +130,7 @@
 </template>
 
 <script setup name="Login">
-import { useI18n } from '@/hooks/useI18n'
+import { useI18n } from 'vue-i18n'
 import { getUserInfo, setToken, login, register, logout } from '@/api/user'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { User, Lock, Message } from '@element-plus/icons-vue'

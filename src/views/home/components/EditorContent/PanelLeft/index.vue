@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-12 19:09:28
- * @LastEditTime: 2024-10-07 21:25:01
+ * @LastEditTime: 2024-11-23 11:44:23
  * @LastEditors: June
  * @FilePath: \element-fabric-editor\src\views\home\components\EditorContent\PanelLeft\index.vue
 -->
@@ -31,7 +31,7 @@
         <span
           class="text-12px"
           :class="[currentTab === tab.type ? 'font-bold' : '']"
-          >{{ tab.name }}</span
+          >{{ $t(tab.name) }}</span
         >
       </li>
     </ul>

@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2024-07-24 17:59:22
  * @LastEditors: June
- * @LastEditTime: 2024-07-24 18:12:02
+ * @LastEditTime: 2024-11-23 09:05:22
  * @FilePath: /element-fabric-editor/typings/global.d.ts
  */
 import type {
@@ -31,7 +31,6 @@ declare global {
   }
 }
 
-/* Vite */
 declare type Recordable<T = any> = Record<string, T>
 
 declare interface ViteEnv {

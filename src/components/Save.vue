@@ -48,7 +48,7 @@
 import { ArrowDown } from '@element-plus/icons-vue'
 import useMaterial from '@/hooks/useMaterial'
 import { debounce } from 'lodash-es'
-import { useI18n } from '@/hooks/useI18n'
+import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
 import { useEditorStore } from '@/store/modules/editor'
 

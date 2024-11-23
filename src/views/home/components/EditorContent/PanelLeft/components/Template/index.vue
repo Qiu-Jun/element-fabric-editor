@@ -67,7 +67,7 @@
 <script name="ImportTmpl" setup>
 import usePageList from '@/hooks/pageList'
 import { ElLoading, ElMessageBox } from 'element-plus'
-import { useI18n } from '@/hooks/useI18n'
+import { useI18n } from 'vue-i18n'
 import { useRouter, useRoute } from 'vue-router'
 import { debounce, throttle } from 'lodash-es'
 import { useEditorStore } from '@/store/modules/editor'
