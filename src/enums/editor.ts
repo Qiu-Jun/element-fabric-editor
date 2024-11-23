@@ -2,14 +2,13 @@
  * @Author: June
  * @Description:
  * @Date: 2024-09-12 09:43:14
- * @LastEditTime: 2024-09-21 09:03:36
+ * @LastEditTime: 2024-11-23 16:53:30
  * @LastEditors: June
  * @FilePath: \element-fabric-editor\src\enums\editor.ts
  */
 export enum editorTabs {
   create = 'CGRATE',
   template = 'TEMPLATE',
-  element = 'ELEMENT',
   text = 'TEXT',
   material = 'Material',
   ai = 'AI',
@@ -48,4 +47,12 @@ export enum files {
   json = 'JSON',
   svg = 'SVG',
   psd = 'PSD'
+}
+
+export enum DrawTypes {
+  line = 'Line',
+  arrow = 'Arrow',
+  thinTailArrow = 'ThinTailArrow',
+  polygon = 'Polygon',
+  freeDraw = 'FreeDraw'
 }

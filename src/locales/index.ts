@@ -2,7 +2,7 @@
  * @Author: June
  * @Description:
  * @Date: 2024-08-07 1ptions)5:41:56
- * @LastEditTime: 2024-11-23 13:19:37
+ * @LastEditTime: 2024-11-23 16:23:29
  * @LastEditors: June
  * @FilePath: \element-fabric-editor\src\locales\index.ts
  */
@@ -46,7 +46,8 @@ async function createI18nOptions() {
     globalInjection: true, // 全局注册$t方法
     silentTranslationWarn: true, // true - warning off
     missingWarn: false,
-    silentFallbackWarn: true
+    silentFallbackWarn: true,
+    fallbackWarn: false
   }
   return await createI18n(options)
 }

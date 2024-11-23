@@ -35,6 +35,9 @@
     "psd": "插入PSD",
     "json": "插入JSON"
   },
+  "draw": {
+    "title": "绘制元素"
+  },
   "header": {
     "allTemplate": "全部模板",
     "preview": "预览",

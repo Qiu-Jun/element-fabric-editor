@@ -1,10 +1,9 @@
 <!--
  * @Author: June
- * @Description: 
+ * @Description: Description
  * @Date: 2024-09-12 19:09:28
- * @LastEditTime: 2024-11-23 11:44:23
+ * @LastEditTime: 2024-11-23 16:52:32
  * @LastEditors: June
- * @FilePath: \element-fabric-editor\src\views\home\components\EditorContent\PanelLeft\index.vue
 -->
 <template>
   <section class="flex justify-start max-w-384px basis-72px">
@@ -67,16 +66,7 @@
 import { debounce } from 'lodash-es'
 import { tabList } from '@/constants/editor'
 import { editorTabs, panels } from '@/enums/editor'
-import {
-  Create,
-  Element,
-  Template,
-  Material,
-  Ai,
-  Text,
-  Mine,
-  Panel
-} from './components'
+import { Create, Template, Material, Ai, Text, Mine, Panel } from './components'
 import { useEditorStore } from '@/store/modules/editor'
 import { storeToRefs } from 'pinia'
 
@@ -86,7 +76,6 @@ const { panelType, showPanel, tabType, panelPositoin } =
 const tabComMap: Record<editorTabs, any> = {
   [editorTabs.create]: Create,
   [editorTabs.template]: Template,
-  [editorTabs.element]: Element,
   [editorTabs.ai]: Ai,
   [editorTabs.text]: Text,
   [editorTabs.material]: Material,

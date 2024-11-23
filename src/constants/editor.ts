@@ -1,4 +1,11 @@
-import { editorTabs, texts, shapes, codes, files } from '@/enums/editor'
+import {
+  editorTabs,
+  texts,
+  shapes,
+  codes,
+  files,
+  DrawTypes
+} from '@/enums/editor'
 
 export const tabList = [
   {
@@ -10,11 +17,6 @@ export const tabList = [
     name: 'editor.tab.template',
     icon: 'template',
     type: editorTabs.template
-  },
-  {
-    name: 'editor.tab.element',
-    icon: 'element',
-    type: editorTabs.element
   },
   {
     name: 'editor.tab.text',
@@ -161,5 +163,28 @@ export const filesList = [
     name: 'editor.insert.json',
     icon: 'json-file',
     type: files.json
+  }
+]
+
+export const drawList = [
+  {
+    name: 'NotImportant',
+    icon: 'tool-draw1',
+    type: DrawTypes.line
+  },
+  {
+    name: 'NotImportant',
+    icon: 'tool-draw2',
+    type: DrawTypes.arrow
+  },
+  {
+    name: 'NotImportant',
+    icon: 'tool-draw3',
+    type: DrawTypes.thinTailArrow
+  },
+  {
+    name: 'NotImportant',
+    icon: 'editor-brush',
+    type: DrawTypes.freeDraw
   }
 ]

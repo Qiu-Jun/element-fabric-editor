@@ -264,6 +264,8 @@ const drawingLineModeSwitch = (type) => {
     state.isDrawingLineMode = true
     state.lineType = type
   }
+
+  console.log(state.isDrawingLineMode, type, 'element')
   editorStore.editor.setMode(state.isDrawingLineMode)
   editorStore.editor.setLineType(type)
   ensureObjectSelEvStatus(!state.isDrawingLineMode, !state.isDrawingLineMode)

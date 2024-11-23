@@ -35,6 +35,9 @@
     "psd": "InsertPSD",
     "json": "InsertJSON"
   },
+  "draw": {
+    "title": "DrawElement"
+  },
   "header": {
     "allTemplate": "AllTemplate",
     "preview": "Preview",

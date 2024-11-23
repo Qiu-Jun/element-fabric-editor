@@ -2,11 +2,12 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-10-03 11:37:38
- * @LastEditTime: 2024-11-23 12:57:27
+ * @LastEditTime: 2024-11-23 16:51:53
  * @LastEditors: June
 -->
 <template>
-  <div class="w-full h-fullr">
+  <div class="w-full h-full overflow-y-auto">
+    <!-- 插入 -->
     <section>
       <div class="h-36px leading-36px font-bold ml-10px">
         {{ $t('editor.insert.title') }}
@@ -23,6 +24,7 @@
         </li>
       </ul>
     </section>
+    <!-- 文本 -->
     <section class="-mt-10px">
       <div class="h-36px leading-36px font-bold ml-10px">
         {{ $t('editor.text.title') }}
@@ -39,6 +41,7 @@
         </li>
       </ul>
     </section>
+    <!-- 形状 -->
     <section class="-mt-10px">
       <div class="h-36px leading-36px font-bold ml-10px">
         {{ $t('editor.shape.title') }}
@@ -54,6 +57,25 @@
         </li>
       </ul>
     </section>
+    <section class="-mt-10px">
+      <div class="h-36px leading-36px font-bold ml-10px">
+        {{ $t('editor.draw.title') }}
+      </div>
+      <ul class="flex justify-start items-center flex-wrap min-h-40px">
+        <li
+          class="f-center flex-col p-10px select-none cursor-pointer w-88px h-full ml-10px mb-10px bg-#f1f2f4 rounded-12px editor-item"
+          :class="{
+            drawActive: drawItem.type === curDrawType
+          }"
+          v-for="drawItem in drawList"
+          :key="drawItem.type"
+          @click="handleDraw(drawItem.type)"
+        >
+          <SvgIcon extClass="text-20px" :icon="drawItem.icon" />
+        </li>
+      </ul>
+    </section>
+    <!-- 条码图片 -->
     <section class="-mt-10px">
       <div class="h-36px leading-36px font-bold ml-10px">
         {{ $t('editor.codes.title') }}
@@ -80,8 +102,14 @@
 </template>
 
 <script lang="ts" setup>
-import { textList, shapeList, codesList, filesList } from '@/constants/editor'
-import { texts, shapes, codes, files } from '@/enums/editor'
+import {
+  textList,
+  shapeList,
+  codesList,
+  filesList,
+  drawList
+} from '@/constants/editor'
+import { texts, shapes, codes, files, DrawTypes } from '@/enums/editor'
 import { debounce } from 'lodash-es'
 import { useEditorStore } from '@/store/modules/editor'
 import { fabric } from 'fabric'
@@ -92,8 +120,6 @@ import ModalSize from '@/components/ModalSize.vue'
 
 const { getImgStr, selectFiles } = Utils
 const editorStore = useEditorStore()
-
-const showSize = ref(false)
 
 const customSizeCreate = async (w: number, h: number) => {
   editorStore.editor.clear()
@@ -264,6 +290,64 @@ const handleAddCode = debounce(function (type: codes) {
   }
 }, 250)
 
+// 绘制元素相关
+const curDrawType = ref<DrawTypes | ''>('')
+const isDrawingLineMode = ref(false)
+const state = reactive({
+  isDrawingLineMode: false,
+  lineType: false
+})
+const handleDraw = debounce(function (type: DrawTypes) {
+  if (unref(curDrawType) === type) {
+    curDrawType.value = ''
+    isDrawingLineMode.value = false
+    type === DrawTypes.freeDraw && editorStore.editor.endDraw()
+    type === DrawTypes.polygon && editorStore.editor.discardPolygon()
+    return
+  } else {
+    isDrawingLineMode.value = true
+    curDrawType.value = type
+  }
+
+  switch (type) {
+    case DrawTypes.line:
+      drawingLineModeSwitch()
+      break
+    case DrawTypes.arrow:
+      drawingLineModeSwitch()
+      break
+    case DrawTypes.thinTailArrow:
+      drawingLineModeSwitch()
+      break
+    case DrawTypes.freeDraw:
+      endConflictTools()
+      endDrawingLineMode()
+      curDrawType.value = type
+      editorStore.editor.startDraw({ width: 20 })
+      break
+    default:
+      break
+  }
+}, 250)
+
+function drawingLineModeSwitch() {
+  const _curDrawType = unref(curDrawType)
+  const _isDrawingLineMode = unref(isDrawingLineMode)
+  editorStore.editor.setMode(_isDrawingLineMode)
+  editorStore.editor.setLineType(_curDrawType)
+}
+function endConflictTools() {
+  editorStore.editor.discardPolygon()
+  editorStore.editor.endDraw()
+  editorStore.editor.endTextPathDraw()
+}
+function endDrawingLineMode() {
+  isDrawingLineMode.value = false
+  curDrawType.value = ''
+  editorStore.editor.setMode(unref(isDrawingLineMode))
+  editorStore.editor.setLineType(unref(isDrawingLineMode))
+}
+
 // 插入图片文件
 function insertImgFile(file: any) {
   if (!file) throw new Error('file is undefined')
@@ -294,4 +378,24 @@ function insertSvgFile(svgFile: any) {
     })
   })
 }
+
+// 退出绘制状态
+const cancelDraw = () => {
+  if (!unref(isDrawingLineMode)) return
+  isDrawingLineMode.value = false
+  curDrawType.value = ''
+  editorStore.editor.setMode(false)
+  endConflictTools()
+}
+
+onDeactivated(() => {
+  console.log('onDeactivated, 触发')
+  cancelDraw()
+})
 </script>
+
+<style lang="scss" setup>
+.drawActive {
+  @apply bg-[var(--el-color-primary)] text-#fff;
+}
+</style>

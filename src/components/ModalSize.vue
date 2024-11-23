@@ -1,5 +1,5 @@
 <template>
-  <el-dialog v-model="modal" :title="props.title" footer-hide>
+  <el-dialog v-model="show" destroy-on-close :title="props.title" footer-hide>
     <h3>
       {{ $t('editor.importFiles.createDesign.customSize') }}
     </h3>
@@ -67,7 +67,7 @@ const props = defineProps({
     default: ''
   }
 })
-const modal = ref(false)
+const show = ref(false)
 const width = ref(null)
 const height = ref(null)
 const sizeList = ref([])
@@ -78,7 +78,7 @@ const showSetSize = (w, h) => {
   editorStore.editor.getSizeList().then((res) => {
     sizeList.value = res
   })
-  modal.value = true
+  show.value = true
 }
 const setSize = (itemString) => {
   const [w, h] = itemString.split('x')
@@ -89,7 +89,7 @@ const setSize = (itemString) => {
 const customSizeCreate = async () => {
   if (width.value && height.value) {
     emit('set', width.value, height.value)
-    modal.value = false
+    show.value = false
   } else {
     ElMessage.warning('请检查尺寸')
   }
