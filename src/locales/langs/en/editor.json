@@ -8,6 +8,53 @@
     "ai": "AI",
     "mine": "Mine"
   },
+  "text": {
+    "title": "TEXT",
+    "headline": "Headline",
+    "subHeadline": "SubHeadline",
+    "text": "Text"
+  },
+  "shape": {
+    "title": "SHAPE",
+    "rect": "Rect",
+    "triangle": "Triangle",
+    "around": "Around",
+    "polygon": "Polygon",
+    "line": "Line"
+  },
+  "codes": {
+    "title": "CODEIMAGE",
+    "qrCode": "QrCode",
+    "barCode": "BarCode"
+  },
+  "insert": {
+    "title": "INSET",
+    "template": "NewTemplate",
+    "image": "InsertImage",
+    "svg": "InsertSVG",
+    "psd": "InsertPSD",
+    "json": "InsertJSON"
+  },
+  "header": {
+    "allTemplate": "AllTemplate",
+    "preview": "Preview",
+    "clear": "Clear",
+    "save": {
+      "download": "Download",
+      "save_my_spase": "SaveToCloud",
+      "save_as_picture": "SaveAsPicture",
+      "save_as_svg": "SaveAsSvg",
+      "save_as_json": "SaveAsJson",
+      "copy_to_clipboard": "CopyToClipboard",
+      "copy_to_clipboardstr": "CopyToClipboardString"
+    },
+    "ruler": "Ruler",
+    "history": {
+      "undo": "Undo",
+      "redo": "Redo"
+    }
+  },
+
   "templates": "Templates",
   "elements": "Elements",
   "background": "Background",
@@ -111,7 +158,7 @@
     "averageX": "averageX",
     "averageY": "averageY"
   },
-  "insert": "Insert",
+
   "insertFile": {
     "insert": "insert",
     "insert_picture": "Insert picture",
@@ -121,10 +168,7 @@
     "insert_SVGStr_placeholder": "Please enter SVG String",
     "modal_tittle": "Please enter"
   },
-  "history": {
-    "revocation": "revocation",
-    "redo": "redo"
-  },
+
   "select_image": "Select image",
   "upload_background": "Upload background",
   "mouseMenu": {

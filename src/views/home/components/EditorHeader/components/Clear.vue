@@ -1,5 +1,14 @@
+<!--
+ * @Author: June
+ * @Description: Description
+ * @Date: 2024-09-12 20:07:29
+ * @LastEditTime: 2024-11-23 13:12:53
+ * @LastEditors: June
+-->
 <template>
-  <el-button @click="handleClear">清空</el-button>
+  <el-button link type="primary" @click="handleClear">
+    {{ $t('editor.header.clear') }}
+  </el-button>
 </template>
 
 <script lang="ts" setup>

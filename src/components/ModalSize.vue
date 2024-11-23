@@ -67,7 +67,6 @@ const props = defineProps({
     default: ''
   }
 })
-
 const modal = ref(false)
 const width = ref(null)
 const height = ref(null)

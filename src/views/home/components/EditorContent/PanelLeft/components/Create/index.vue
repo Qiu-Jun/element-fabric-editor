@@ -2,13 +2,15 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-10-03 11:37:38
- * @LastEditTime: 2024-10-09 21:00:11
+ * @LastEditTime: 2024-11-23 12:57:27
  * @LastEditors: June
 -->
 <template>
   <div class="w-full h-fullr">
     <section>
-      <div class="h-36px leading-36px font-bold ml-10px">图片</div>
+      <div class="h-36px leading-36px font-bold ml-10px">
+        {{ $t('editor.insert.title') }}
+      </div>
       <ul class="flex justify-start items-center flex-wrap min-h-40px">
         <li
           class="f-center flex-col p-10px select-none cursor-pointer w-88px h-88px ml-10px mb-10px bg-#f1f2f4 rounded-12px editor-item"
@@ -17,12 +19,14 @@
           @click="handleInsertFile(file.type)"
         >
           <SvgIcon extClass="text-24px" :icon="file.icon" color="#333" />
-          <span class="text-12px mt-10px">{{ file.name }}</span>
+          <span class="text-12px mt-10px">{{ $t(file.name) }}</span>
         </li>
       </ul>
     </section>
     <section class="-mt-10px">
-      <div class="h-36px leading-36px font-bold ml-10px">文字</div>
+      <div class="h-36px leading-36px font-bold ml-10px">
+        {{ $t('editor.text.title') }}
+      </div>
       <ul class="flex justify-start items-center flex-wrap min-h-40px">
         <li
           class="f-center flex-col p-10px select-none cursor-pointer w-88px h-88px ml-10px mb-10px bg-#f1f2f4 rounded-12px editor-item"
@@ -31,12 +35,14 @@
           @click="handleAddText(text.type)"
         >
           <SvgIcon extClass="text-24px" :icon="text.icon" color="#333" />
-          <span class="text-12px mt-10px">{{ text.name }}</span>
+          <span class="text-12px mt-10px">{{ $t(text.name) }}</span>
         </li>
       </ul>
     </section>
     <section class="-mt-10px">
-      <div class="h-36px leading-36px font-bold ml-10px">形状</div>
+      <div class="h-36px leading-36px font-bold ml-10px">
+        {{ $t('editor.shape.title') }}
+      </div>
       <ul class="flex justify-start items-center flex-wrap min-h-40px">
         <li
           class="f-center flex-col p-10px select-none cursor-pointer w-88px h-full ml-10px mb-10px bg-#f1f2f4 rounded-12px editor-item"
@@ -49,7 +55,9 @@
       </ul>
     </section>
     <section class="-mt-10px">
-      <div class="h-36px leading-36px font-bold ml-10px">条码图片</div>
+      <div class="h-36px leading-36px font-bold ml-10px">
+        {{ $t('editor.codes.title') }}
+      </div>
       <ul class="flex justify-start items-center flex-wrap min-h-40px">
         <li
           class="f-center flex-col p-10px select-none cursor-pointer w-88px h-full ml-10px mb-10px bg-#f1f2f4 rounded-12px editor-item"
@@ -65,7 +73,7 @@
     <!-- 新建设计 -->
     <ModalSize
       title="新建设计"
-      v-model:show="showSize"
+      ref="modalSizeRef"
       @set="customSizeCreate"
     ></ModalSize>
   </div>
@@ -96,16 +104,7 @@ const customSizeCreate = async (w: number, h: number) => {
 // 默认属性
 const defaultPosition = { shadow: '', fontFamily: 'arial' }
 
-const handleAddImg = debounce(function () {
-  selectFiles({ accept: 'image/*', multiple: true }).then((fileList: any) => {
-    Array.from(fileList).forEach((item: any) => {
-      getImgStr(item).then((file: any) => {
-        insertImgFile(file)
-      })
-    })
-  })
-}, 250)
-
+const modalSizeRef = ref()
 const handleInsertFile = debounce(async function (type: files) {
   const loading = ElLoading.service({
     lock: true,
@@ -114,7 +113,8 @@ const handleInsertFile = debounce(async function (type: files) {
   try {
     switch (type) {
       case files.design:
-        showSize.value = true
+        loading.close()
+        modalSizeRef.value?.showSetSize()
         break
       case files.img:
         selectFiles({ accept: 'image/*', multiple: true }).then(
@@ -142,6 +142,7 @@ const handleInsertFile = debounce(async function (type: files) {
         editorStore.editor.insert()
         break
       case files.psd:
+        loading.close()
         await editorStore.editor.insertPSD()
         break
       default:

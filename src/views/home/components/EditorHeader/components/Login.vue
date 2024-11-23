@@ -2,7 +2,7 @@
  * @Author: 秦少卫
  * @Date: 2024-04-24 12:51:24
  * @LastEditors: June
- * @LastEditTime: 2024-11-23 11:31:17
+ * @LastEditTime: 2024-11-23 13:33:12
  * @Description: 登录
 -->
 
@@ -17,7 +17,9 @@
 
       <template #dropdown>
         <el-dropdown-menu>
-          <el-dropdown-item command="logout">退出登录</el-dropdown-item>
+          <el-dropdown-item command="logout">{{
+            $t('common.login.logout')
+          }}</el-dropdown-item>
         </el-dropdown-menu>
       </template>
     </el-dropdown>
@@ -25,11 +27,11 @@
     <el-button v-else shape="circle" text :icon="User" @click="modal = true" />
 
     <!-- 登录注册弹框 -->
-    <el-dialog v-model="modal" width="500px" footer-hide>
-      <h3>{{ $t('editor.login.title') }}</h3>
+    <el-dialog v-model="modal" destroy-on-close width="500px" footer-hide>
+      <h3>{{ $t('common.login.title') }}</h3>
       <el-tabs :animated="false" @on-click="switchTab">
         <!-- 登录 -->
-        <el-tab-pane :label="$t('editor.login.login')">
+        <el-tab-pane :label="$t('common.login.login')">
           <el-form
             ref="loginForm"
             :model="formInline"
@@ -40,7 +42,7 @@
               <el-input
                 type="text"
                 v-model="formInline.identifier"
-                :placeholder="$t('editor.login.identifier')"
+                :placeholder="$t('common.login.identifier')"
               >
                 <template #prepend>
                   <el-button text :icon="User" />
@@ -51,7 +53,7 @@
               <el-input
                 type="password"
                 v-model="formInline.password"
-                :placeholder="$t('editor.login.password')"
+                :placeholder="$t('common.login.password')"
               >
                 <template #prepend>
                   <el-button text :icon="Lock" />
@@ -64,14 +66,14 @@
                 type="primary"
                 @click="loginHandle"
               >
-                {{ $t('editor.login.login') }}
+                {{ $t('common.login.login') }}
               </el-button>
             </el-form-item>
           </el-form>
         </el-tab-pane>
 
         <!-- 注册 -->
-        <el-tab-pane :label="$t('editor.login.register')">
+        <el-tab-pane :label="$t('common.login.register')">
           <el-form
             ref="registerForm"
             :model="registerFormInline"
@@ -82,7 +84,7 @@
               <el-input
                 type="text"
                 v-model="registerFormInline.username"
-                :placeholder="$t('editor.login.username')"
+                :placeholder="$t('common.login.username')"
               >
                 <template #prepend>
                   <el-button text :icon="User" />
@@ -93,7 +95,7 @@
               <el-input
                 type="text"
                 v-model="registerFormInline.email"
-                :placeholder="$t('editor.login.email')"
+                :placeholder="$t('common.login.email')"
               >
                 <template #prepend>
                   <el-button text :icon="Message" />
@@ -105,7 +107,7 @@
               <el-input
                 type="password"
                 v-model="registerFormInline.password"
-                :placeholder="$t('editor.login.password')"
+                :placeholder="$t('common.login.password')"
               >
                 <template #prepend>
                   <el-button text :icon="Lock" />
@@ -119,7 +121,7 @@
                 long
                 @click="registerHandle"
               >
-                {{ $t('editor.login.register') }}
+                {{ $t('common.login.register') }}
               </el-button>
             </el-form-item>
           </el-form>
@@ -155,9 +157,9 @@ const reloadPage = () => {
 // 退出
 const logoutHandle = (command) => {
   if (command === 'logout') {
-    ElMessageBox.confirm(t('login.logoutTip')).then(() => {
+    ElMessageBox.confirm(t('common.login.logoutTip')).then(() => {
       logout()
-      ElMessage.success(t('login.logoutSuccessTip'))
+      ElMessage.success(t('common.login.logoutSuccessTip'))
       reloadPage()
     })
   }
@@ -169,14 +171,22 @@ const formInline = reactive({
 })
 const ruleInline = reactive({
   identifier: [
-    { required: true, message: t('login.identifierValidate'), trigger: 'blur' }
+    {
+      required: true,
+      message: t('common.login.identifierValidate'),
+      trigger: 'blur'
+    }
   ],
   password: [
-    { required: true, message: t('login.passwordValidate'), trigger: 'blur' },
+    {
+      required: true,
+      message: t('common.login.passwordValidate'),
+      trigger: 'blur'
+    },
     {
       type: 'string',
       min: 6,
-      message: t('login.passwordValidate'),
+      message: t('common.login.passwordValidate'),
       trigger: 'blur'
     }
   ]
@@ -189,7 +199,7 @@ const loginHandle = () => {
       login(formInline)
         .then((res) => {
           setToken(res.data.jwt)
-          ElMessage.success(t('login.welcome'))
+          ElMessage.success(t('common.login.welcome'))
           reloadPage()
         })
         .catch((res) => {
@@ -207,22 +217,34 @@ const registerFormInline = reactive({
 })
 const registerRuleInline = reactive({
   username: [
-    { required: true, message: t('login.identifierValidate'), trigger: 'blur' }
+    {
+      required: true,
+      message: t('common.login.identifierValidate'),
+      trigger: 'blur'
+    }
   ],
   password: [
-    { required: true, message: t('login.passwordValidate'), trigger: 'blur' },
+    {
+      required: true,
+      message: t('common.login.passwordValidate'),
+      trigger: 'blur'
+    },
     {
       type: 'string',
       min: 6,
-      message: t('login.passwordValidate'),
+      message: t('common.login.passwordValidate'),
       trigger: 'blur'
     }
   ],
   email: [
-    { required: true, message: t('login.emailValidate'), trigger: 'blur' },
+    {
+      required: true,
+      message: t('common.login.emailValidate'),
+      trigger: 'blur'
+    },
     {
       type: 'email',
-      message: t('login.emailValidate'),
+      message: t('common.login.emailValidate'),
       trigger: 'blur'
     }
   ]
@@ -235,7 +257,7 @@ const registerHandle = () => {
       register(registerFormInline)
         .then((res) => {
           setToken(res.data.jwt)
-          ElMessage.success(t('login.welcome'))
+          ElMessage.success(t('common.login.welcome'))
           reloadPage()
         })
         .catch((res) => {

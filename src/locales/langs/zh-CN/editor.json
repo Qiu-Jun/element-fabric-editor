@@ -8,6 +8,53 @@
     "ai": "AI",
     "mine": "我的"
   },
+  "text": {
+    "title": "文本",
+    "headline": "标题",
+    "subHeadline": "副标题",
+    "text": "正文"
+  },
+  "shape": {
+    "title": "形状",
+    "rect": "矩形",
+    "triangle": "三角形",
+    "around": "圆形",
+    "polygon": "多边形",
+    "line": "直线"
+  },
+  "codes": {
+    "title": "图片码",
+    "qrCode": "二维码",
+    "barCode": "条形码"
+  },
+  "insert": {
+    "title": "插入",
+    "template": "新建模板",
+    "image": "插入图片",
+    "svg": "插入SVG",
+    "psd": "插入PSD",
+    "json": "插入JSON"
+  },
+  "header": {
+    "allTemplate": "全部模板",
+    "preview": "预览",
+    "clear": "清空",
+    "save": {
+      "download": "下载",
+      "save_my_spase": "保存到我的空间",
+      "save_as_picture": "PNG图片",
+      "save_as_svg": "SVG图片",
+      "copy_to_clipboard": "复制到剪切板",
+      "copy_to_clipboardstr": "复制字符串剪切板",
+      "save_as_json": "保存为JSON"
+    },
+    "ruler": "标尺",
+    "history": {
+      "undo": "撤销",
+      "redo": "重做"
+    }
+  },
+
   "bgSeting": {
     "size": "尺寸",
     "color": "颜色",
@@ -176,10 +223,7 @@
     "insert_SVGStr_placeholder": "请输入SVG字符串",
     "modal_tittle": "请输入"
   },
-  "history": {
-    "revocation": "撤销",
-    "redo": "重做"
-  },
+
   "upload_background": "上传背景",
   "mouseMenu": {
     "layer": "图层管理",
@@ -239,21 +283,6 @@
   "ok": "确认",
   "cancel": "取消",
   "cleanUp": "清除",
-  "login": {
-    "title": "欢迎使用",
-    "welcome": "欢迎使用快图",
-    "login": "登录",
-    "register": "注册",
-    "identifier": "用户名",
-    "username": "用户名",
-    "password": "密码",
-    "email": "邮箱",
-    "identifierValidate": "请输入用户名",
-    "passwordValidate": "请输入6位以上的密码",
-    "emailValidate": "请输入正确的邮箱地址",
-    "logoutTip": "确定要退出吗？",
-    "logoutSuccessTip": "退出成功"
-  },
   "myMaterial": {
     "uploadBtn": "上传素材"
   },

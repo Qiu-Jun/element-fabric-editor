@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-12 18:51:45
- * @LastEditTime: 2024-11-23 08:50:37
+ * @LastEditTime: 2024-11-23 13:40:06
  * @LastEditors: June
  * @FilePath: \element-fabric-editor\src\views\home\components\EditorHeader\index.vue
 -->
@@ -10,13 +10,12 @@
   <div class="w-full flex justify-between items-center">
     <div class="flex justify-start items-center">
       <Logo />
-      <el-divider direction="vertical" />
-      <ImportJson />
-      <el-divider direction="vertical" />
-      <ImportFile />
+
       <el-divider direction="vertical" />
       <router-link custom v-slot="{ navigate }" to="/editor/template">
-        <el-button text @click="navigate">全部模板</el-button>
+        <el-button text @click="navigate">{{
+          $t('editor.header.allTemplate')
+        }}</el-button>
       </router-link>
       <el-divider direction="vertical" />
       <MyTemplName />
@@ -26,8 +25,8 @@
         size="large"
         class="ml-10px"
         inline-prompt
-        active-text="标尺"
-        inactive-text="标尺"
+        :active-text="$t('editor.header.ruler')"
+        :inactive-text="$t('editor.header.ruler')"
         @change="onRulerEnable"
       />
 
@@ -42,12 +41,14 @@
       >
         <img
           src="https://img.shields.io/badge/GitHub-ElementFbricEditor-blue"
-          alt="element-fbric-editor"
+          alt="element-fabric-editor"
         />
       </a>
       <Lang />
       <el-divider direction="vertical" />
-      <PreviewCurrent />
+      <Preview />
+      <el-divider direction="vertical" />
+      <Clear />
       <el-divider direction="vertical" />
       <Save />
       <el-divider direction="vertical" />
@@ -57,6 +58,15 @@
 </template>
 
 <script lang="ts" setup>
+import {
+  Logo,
+  Clear,
+  History,
+  Preview,
+  Save,
+  Login,
+  MyTemplName
+} from './components'
 import { useEditorStore } from '@/store/modules/editor'
 
 const editorStore = useEditorStore()

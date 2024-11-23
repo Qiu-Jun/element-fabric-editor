@@ -2,7 +2,7 @@
  * @Author: June
  * @Description:
  * @Date: 2024-08-07 1ptions)5:41:56
- * @LastEditTime: 2024-11-23 11:20:18
+ * @LastEditTime: 2024-11-23 13:19:37
  * @LastEditors: June
  * @FilePath: \element-fabric-editor\src\locales\index.ts
  */
@@ -37,7 +37,7 @@ async function createI18nOptions() {
       messages[name] = modules[path].default?.message ?? {}
     }
   }
-  console.log(messages)
+
   options = {
     locale,
     legacy: false, // 如果要支持compositionAPI，此项必须设置为false;

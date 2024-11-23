@@ -2,7 +2,7 @@
  * @Author: 秦少卫
  * @Date: 2022-09-03 19:16:55
  * @LastEditors: June
- * @LastEditTime: 2024-09-13 01:04:24
+ * @LastEditTime: 2024-11-23 13:14:12
  * @LastEditors: 秦少卫
  * @LastEditTime: 2023-04-10 14:33:18
  * @Description: 保存文件
@@ -10,33 +10,30 @@
 
 <template>
   <div class="f-center pr-10px">
-    <el-button class="ml-10px" link type="primary" @click="beforeClear">
-      {{ $t('editor.save.empty') }}
-    </el-button>
     <el-dropdown class="ml-10px" @command="saveWith">
       <el-button type="primary">
-        {{ $t('editor.save.download') }}
+        {{ $t('editor.header.save.download') }}
         <el-icon class="el-icon--right"><ArrowDown /></el-icon>
       </el-button>
       <template #dropdown>
         <el-dropdown-menu>
           <el-dropdown-item command="saveMyClould">{{
-            $t('editor.save.save_my_spase')
+            $t('editor.header.save.save_my_spase')
           }}</el-dropdown-item>
           <el-dropdown-item command="saveImg" divided>{{
-            $t('editor.save.save_as_picture')
+            $t('editor.header.save.save_as_picture')
           }}</el-dropdown-item>
           <el-dropdown-item command="saveSvg">{{
-            $t('editor.save.save_as_svg')
+            $t('editor.header.save.save_as_svg')
           }}</el-dropdown-item>
           <el-dropdown-item command="clipboard" divided>{{
-            $t('editor.save.copy_to_clipboard')
+            $t('editor.header.save.copy_to_clipboard')
           }}</el-dropdown-item>
           <el-dropdown-item command="clipboardBase64">{{
-            $t('editor.save.copy_to_clipboardstr')
+            $t('editor.header.save.copy_to_clipboardstr')
           }}</el-dropdown-item>
           <el-dropdown-item command="saveJson" divided>{{
-            $t('editor.save.save_as_json')
+            $t('editor.header.save.save_as_json')
           }}</el-dropdown-item>
         </el-dropdown-menu>
       </template>
@@ -113,14 +110,5 @@ const clear = () => {
   editorStore.editor?.clear()
   editorStore.canvas.clearHistory()
   editorStore.editor?.historyUpdate()
-}
-
-const beforeClear = () => {
-  ElMessageBox.confirm(`${t('clearTip')}`, 'Warning', {
-    title: t('tip'),
-    type: 'warning',
-    confirmButtonText: 'ok',
-    cancelButtonText: t('cancel')
-  }).then(clear)
 }
 </script>

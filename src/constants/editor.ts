@@ -40,17 +40,17 @@ export const tabList = [
 
 export const textList = [
   {
-    name: '标题',
+    name: 'editor.text.headline',
     icon: 'text-h1',
     type: texts.h1
   },
   {
-    name: '副标题',
+    name: 'editor.text.subHeadline',
     icon: 'text-h2',
     type: texts.h2
   },
   {
-    name: '正文',
+    name: 'editor.text.text',
     icon: 'text-normal',
     type: texts.normal
   }
@@ -58,27 +58,27 @@ export const textList = [
 
 export const shapeList = [
   {
-    name: '矩形',
+    name: 'editor.shape.rect',
     icon: '<svg role="img" aria-label="shape-rectangle" focusable="false" data-icon="shape-rectangle" aria-hidden="true" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="gd_design_icon gd_design_icon-shape-rectangle"><path fill-rule="evenodd" clip-rule="evenodd" d="M19.5 19V5C19.5 4.72386 19.2761 4.5 19 4.5L5 4.5C4.72386 4.5 4.5 4.72386 4.5 5L4.5 19C4.5 19.2761 4.72386 19.5 5 19.5H19C19.2761 19.5 19.5 19.2761 19.5 19ZM21 5C21 3.89543 20.1046 3 19 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V5Z" fill="currentColor"></path></svg>',
     type: shapes.react
   },
   {
-    name: '三角形',
+    name: 'editor.shape.triangle',
     icon: '<svg role="img" aria-label="shape-polygon" focusable="false" data-icon="shape-polygon" aria-hidden="true" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="gd_design_icon gd_design_icon-shape-polygon"><path fill-rule="evenodd" clip-rule="evenodd" d="M20.7949 19.1828L12.1881 3.46617C12.1068 3.31769 11.8936 3.31768 11.8122 3.46617L3.20553 19.1828C3.12732 19.3256 3.23066 19.5 3.39347 19.5H20.6069C20.7697 19.5 20.8731 19.3256 20.7949 19.1828ZM13.5038 2.74569C12.8533 1.55784 11.1471 1.55784 10.4966 2.74569L1.88988 18.4623C1.26427 19.6047 2.09097 21 3.39347 21H20.6069C21.9094 21 22.7361 19.6047 22.1105 18.4623L13.5038 2.74569Z" fill="currentColor"></path></svg>',
     type: shapes.triangle
   },
   {
-    name: '圆形',
+    name: 'editor.shape.around',
     icon: '<svg role="img" aria-label="shape-circle" focusable="false" data-icon="shape-circle" aria-hidden="true" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="gd_design_icon gd_design_icon-shape-circle"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 20.5C16.6944 20.5 20.5 16.6944 20.5 12C20.5 7.30558 16.6944 3.5 12 3.5C7.30558 3.5 3.5 7.30558 3.5 12C3.5 16.6944 7.30558 20.5 12 20.5ZM12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" fill="currentColor"></path></svg>',
     type: shapes.around
   },
   {
-    name: '多边形',
+    name: 'editor.shape.polygon',
     icon: '<svg data-v-1eb84746="" t="1650874633978" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2032" width="26" height="26"><path data-v-1eb84746="" d="M161.152 398.016l134.016 412.416h433.664l134.016-412.416L512 143.104 161.152 398.08zM512 64l426.048 309.568-162.752 500.864H248.704L85.952 373.568 512 64z" p-id="2033"></path></svg>',
     type: shapes.polygon
   },
   {
-    name: '直线',
+    name: 'editor.shape.line',
     icon: '<svg role="img" aria-label="shape-line" focusable="false" data-icon="shape-line" aria-hidden="true" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="gd_design_icon gd_design_icon-shape-line"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.46967 20.5303C3.17678 20.2374 3.17678 19.7626 3.46967 19.4697L19.4697 3.46967C19.7626 3.17678 20.2374 3.17678 20.5303 3.46967C20.8232 3.76256 20.8232 4.23744 20.5303 4.53033L4.53033 20.5303C4.23744 20.8232 3.76256 20.8232 3.46967 20.5303Z" fill="currentColor"></path></svg>',
     type: shapes.line
   }
@@ -86,7 +86,7 @@ export const shapeList = [
 
 export const codesList = [
   {
-    name: '二维码',
+    name: 'editor.codes.qrcode',
     icon: `<svg
           t="1717679888665"
           class="icon"
@@ -116,7 +116,7 @@ export const codesList = [
     type: codes.qrcode
   },
   {
-    name: '条码',
+    name: 'editor.code.barCode',
     icon: `<svg
           t="1717679973041"
           class="icon"
@@ -138,27 +138,27 @@ export const codesList = [
 
 export const filesList = [
   {
-    name: '新建模板',
+    name: 'editor.insert.template',
     icon: 'template',
     type: files.design
   },
   {
-    name: '插入图片',
+    name: 'editor.insert.image',
     icon: 'img',
     type: files.img
   },
   {
-    name: '插入SVG',
+    name: 'editor.insert.svg',
     icon: 'svg-file',
     type: files.svg
   },
   {
-    name: '插入PSD',
+    name: 'editor.insert.psd',
     icon: 'psd-file',
     type: files.psd
   },
   {
-    name: '插入JSON',
+    name: 'editor.insert.json',
     icon: 'json-file',
     type: files.json
   }

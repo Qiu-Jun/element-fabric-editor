@@ -1,4 +1,21 @@
 {
+  "login": {
+    "title": "Welcome",
+    "logout": "Logout",
+    "welcome": "Welcome",
+    "login": "Login",
+    "register": "Register",
+    "identifier": "Identifier",
+    "username": "Username",
+    "password": "Password",
+    "email": "Email",
+    "identifierValidate": "Please enter Identifier",
+    "passwordValidate": "Please enter a password of more than 6 characters",
+    "emailValidate": "Please enter the correct email address",
+    "logoutTip": "Are you sure you want logout?",
+    "logoutSuccessTip": "Exit successfully"
+  },
+
   "selectPlaceholder": "Select",
   "okText": "OK",
   "closeText": "Close",

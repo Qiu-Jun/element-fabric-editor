@@ -3,14 +3,14 @@
  * @Description: 
  * @Date: 2024-07-22 21:18:05
  * @LastEditors: June
- * @LastEditTime: 2024-11-22 08:15:11
+ * @LastEditTime: 2024-11-23 13:39:22
  * @FilePath: \ai-desing\src\views\editor\components\History.vue
 -->
 
 <template>
   <div class="inline-block">
     <!-- 后退 -->
-    <el-tooltip :content="$t('editor.history.undo') + `(${canUndo})`">
+    <el-tooltip :content="$t('editor.header.history.undo') + `(${canUndo})`">
       <el-button @click="undo" link size="small" :disabled="!canUndo">
         <SvgIcon
           extClass="text-20px"
@@ -21,7 +21,7 @@
     </el-tooltip>
 
     <!-- 重做 -->
-    <el-tooltip :content="$t('editor.history.redo') + `(${canRedo})`">
+    <el-tooltip :content="$t('editor.header.history.redo') + `(${canRedo})`">
       <el-button @click="redo" link size="small" :disabled="!canRedo">
         <SvgIcon
           extClass="text-20px"
@@ -41,11 +41,11 @@ const canUndo = ref(0)
 const canRedo = ref(0)
 // 后退
 const undo = () => {
-  editorStore.editor.undo()
+  editorStore.editor.header.undo()
 }
 // 重做
 const redo = () => {
-  editorStore.editor.redo()
+  editorStore.editor.header.redo()
 }
 
 onMounted(() => {

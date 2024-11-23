@@ -1,6 +1,13 @@
+<!--
+ * @Author: June
+ * @Description: Description
+ * @Date: 2024-08-19 12:53:30
+ * @LastEditTime: 2024-11-23 13:08:44
+ * @LastEditors: June
+-->
 <template>
   <el-button link type="primary" @click="preview">
-    {{ $t('editor.preview') }}
+    {{ $t('editor.header.preview') }}
   </el-button>
 
   <el-image-viewer v-if="showImageViewer" :url-list="url" @close="close" />
