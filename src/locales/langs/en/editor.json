@@ -57,10 +57,21 @@
       "redo": "Redo"
     }
   },
-
-  "templates": "Templates",
-  "elements": "Elements",
+  "basics": "Basics",
+  "recommend": "Recommend",
   "background": "Background",
+  "container": "Container",
+  "element": "Element",
+  "tempalte": "Tempalte",
+  "image": "Image",
+  "panel": {
+    "title": "Panel"
+  },
+  "layer": {
+    "title": "Layer"
+  },
+  "drag": "Drag",
+
   "placeholder": "Please input",
   "size": "Size",
   "width": "Width",

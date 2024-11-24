@@ -2,22 +2,22 @@
  * @Author: 秦少卫
  * @Date: 2024-04-25 15:30:54
  * @LastEditors: June
- * @LastEditTime: 2024-09-12 10:36:56
+ * @LastEditTime: 2024-11-24 09:35:57
  * @Description: 我的素材
 -->
 
 <template>
   <div class="box-border p-10px my-material" v-if="isLogin">
     <el-tabs v-model="type">
-      <el-tab-pane label="模板" name="templ">
+      <el-tab-pane :label="$t('editor.template')" name="templ">
         <myTempl v-if="type === 'templ'"></myTempl>
       </el-tab-pane>
-      <el-tab-pane label="图片" name="img">
+      <el-tab-pane :label="$t('editor.image')" name="img">
         <uploadMaterial v-if="type === 'img'"></uploadMaterial>
       </el-tab-pane>
     </el-tabs>
   </div>
-  <div class="tip" v-else>请先登录</div>
+  <div class="tip" v-else>{{ $t('common.login.tips.loginFirst') }}</div>
 </template>
 
 <script setup name="ImportTmpl">

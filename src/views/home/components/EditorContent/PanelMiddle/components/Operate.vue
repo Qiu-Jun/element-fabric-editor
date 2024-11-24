@@ -9,11 +9,7 @@
             class="f-center p-5px rounded-4px cursor-pointer bg-#fff"
             @click.stop="changePanelType(panels.layer)"
           >
-            <SvgIcon
-              :style="{ width: '24px', height: '24px' }"
-              color="#333"
-              name="editor-layer"
-            />
+            <SvgIcon icon="editor-layer" color="#333" extClass="text-24px" />
           </div>
           <!-- <div
             class="ml-4px f-center p-4px rounded-4px cursor-pointer bg-#fff panel-canvas"

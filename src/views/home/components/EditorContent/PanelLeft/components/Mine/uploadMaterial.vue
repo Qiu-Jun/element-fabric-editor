@@ -2,7 +2,7 @@
  * @Author: 秦少卫
  * @Date: 2024-04-25 15:30:54
  * @LastEditors: June
- * @LastEditTime: 2024-09-13 00:49:30
+ * @LastEditTime: 2024-11-24 09:38:15
  * @Description: 我的素材
 -->
 
@@ -15,7 +15,7 @@
       long
       type="primary"
     >
-      {{ $t('myMaterial.uploadBtn') }}
+      {{ $t('common.upload.title') }}
     </el-button>
     <div class="img-group flex justify-start flex-wrap" v-if="fileList.length">
       <el-tooltip
@@ -42,7 +42,7 @@
         </div>
       </el-tooltip>
     </div>
-    <div class="tip" v-else>暂无素材</div>
+    <div class="tip" v-else>{{ $t('common.nomore') }}</div>
   </div>
 </template>
 

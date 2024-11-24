@@ -1,3 +1,10 @@
+<!--
+ * @Author: June
+ * @Description: Description
+ * @Date: 2024-10-03 11:48:10
+ * @LastEditTime: 2024-11-24 09:55:33
+ * @LastEditors: June
+-->
 <template>
   <div class="w-full absolute left-0 right-0 bottom-0">
     <div class="main-bottom relative bottom-0">
@@ -14,7 +21,7 @@
             @click="changePanelType(panels.canvas)"
           >
             <div class="text-14px h-24px leading-24px">
-              <span class="mr-4px">画板</span>
+              <span class="mr-4px">{{ $t('editor.panel.title') }}</span>
               <span>1/1</span>
             </div>
 
@@ -43,7 +50,7 @@
         <!-- 比例 -->
 
         <div class="flex justify-end items-center">
-          <DragMode />
+          <Drag />
           <Zoom />
           <!-- <div
             class="f-center p-4px rounded-6px cursor-pointer bg-#fff flex justify-center items-center h-32px panel-zoom"
@@ -93,6 +100,7 @@ import { debounce } from 'lodash-es'
 import { panels } from '@/enums/editor'
 import { Plus, Minus } from '@element-plus/icons-vue'
 import { useEditorStore } from '@/store/modules/editor'
+import { Drag, Zoom } from './components'
 
 const editorStore = useEditorStore()
 const { panelPositoin, showPanel, panelType } = storeToRefs(editorStore)

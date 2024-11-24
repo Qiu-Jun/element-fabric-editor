@@ -2,7 +2,7 @@
  * @Author: 秦少卫
  * @Date: 2022-09-03 19:16:55
  * @LastEditors: June
- * @LastEditTime: 2024-09-13 01:07:52
+ * @LastEditTime: 2024-11-24 09:36:57
  * @Description: 导入模板
 -->
 
@@ -19,15 +19,19 @@
         <el-button type="primary" :icon="Plus"></el-button>
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item command="file">新建设计</el-dropdown-item>
-            <el-dropdown-item command="fileType">新建文件夹</el-dropdown-item>
+            <el-dropdown-item command="file">
+              {{ $t('editor.insert.template') }}
+            </el-dropdown-item>
+            <el-dropdown-item command="fileType">{{
+              $t('editor.insert.folder')
+            }}</el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
 
       <el-input
         class="input"
-        placeholder="请输入关键词"
+        :placeholder="$t('common.placeholder.input')"
         v-model="filters.name.$contains"
         search
         :disabled="pageLoading"
@@ -75,7 +79,9 @@
             @change="startGetList"
           ></file>
         </div>
-        <el-divider plain v-if="isDownBottom">已经到底了</el-divider>
+        <el-divider plain v-if="isDownBottom">{{
+          $t('common.nomore')
+        }}</el-divider>
       </el-scrollbar>
     </div>
 

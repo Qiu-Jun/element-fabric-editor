@@ -29,11 +29,12 @@
   },
   "insert": {
     "title": "插入",
-    "template": "新建模板",
+    "template": "新建设计",
     "image": "插入图片",
     "svg": "插入SVG",
     "psd": "插入PSD",
-    "json": "插入JSON"
+    "json": "插入JSON",
+    "folder": "新建文件夹"
   },
   "draw": {
     "title": "绘制元素"
@@ -57,6 +58,20 @@
       "redo": "重做"
     }
   },
+  "basics": "基础",
+  "recommend": "推荐",
+  "background": "背景",
+  "container": "容器",
+  "element": "元素",
+  "tempalte": "模板",
+  "image": "图片",
+  "panel": {
+    "title": "面板"
+  },
+  "layer": {
+    "title": "图层"
+  },
+  "drag": "拖曳",
 
   "bgSeting": {
     "size": "尺寸",
@@ -100,7 +115,6 @@
   "templates": "模板",
   "elements": "元素",
   "font_style": "文字",
-  "background": "背景",
   "grid": "网格",
   "placeholder": "请输入",
   "common_elements": "基础要素",

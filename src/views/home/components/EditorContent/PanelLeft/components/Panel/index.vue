@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-12 09:52:22
- * @LastEditTime: 2024-11-22 15:07:40
+ * @LastEditTime: 2024-11-24 09:47:17
  * @LastEditors: June
  * @FilePath: \element-fabric-editor\src\views\home\components\Panel.vue
 -->
@@ -24,14 +24,14 @@
             ]"
             @click="onChangePanel('canvas')"
           >
-            画板
+            {{ $t('editor.panel.title') }}
           </li>
           <li
             class="h-full f-center cursor-pointer select-none"
             :class="[curTab === 'layer' ? 'text-#333 font-500 tab-active' : '']"
             @click="onChangePanel('layer')"
           >
-            图层
+            {{ $t('editor.panel.layer') }}
           </li>
         </ul>
         <div class="flex">
@@ -82,11 +82,13 @@ import { debounce } from 'lodash-es'
 import { Layer, Templates } from './components'
 import { useTemplate } from '@/hooks/useTemplate'
 import { useTemplateStore } from '@/store/modules/template'
+import { useI18n } from 'vue-i18n'
 
 type ITab = 'canvas' | 'layer'
 const editorStore = useEditorStore()
 const templateStore = useTemplateStore()
 const { panelType } = storeToRefs(editorStore)
+const { t } = useI18n()
 const comMap = {
   canvas: Templates,
   layer: Layer
@@ -98,10 +100,10 @@ const searchPlaceholder = computed(() => {
   let placeholderText = ''
   switch (unref(curTab)) {
     case 'canvas':
-      placeholderText = '搜索画板'
+      placeholderText = `${t('common.placeholder.input') + t('editor.panel.title')}`
       break
     case 'layer':
-      placeholderText = '搜索图层'
+      placeholderText = `${t('common.placeholder.input') + t('editor.layer.title')}`
       break
     default:
       break

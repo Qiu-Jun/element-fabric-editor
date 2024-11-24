@@ -13,7 +13,20 @@
     "passwordValidate": "Please enter a password of more than 6 characters",
     "emailValidate": "Please enter the correct email address",
     "logoutTip": "Are you sure you want logout?",
-    "logoutSuccessTip": "Exit successfully"
+    "logoutSuccessTip": "Exit successfully",
+    "tips": {
+      "loginFirst": "Please Login First"
+    }
+  },
+  "loadmore": "LoadMore",
+  "nomore": "No More",
+  "all": "All",
+  "upload": {
+    "title": "Upload"
+  },
+  "placeholder": {
+    "input": "Please Input",
+    "select": "Please Select"
   },
 
   "selectPlaceholder": "Select",
