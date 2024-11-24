@@ -3,7 +3,7 @@
  * @Author: June
  * @Date: 2024-04-24 09:32:13
  * @FilePath: \element-fabric-editor\README.md
- * @LastEditTime: 2024-11-24 10:18:54
+ * @LastEditTime: 2024-11-24 10:33:01
  * @LastEditors: June
 -->
 
@@ -28,7 +28,14 @@
 
 ## 简介
 
-`快图设计`的`ElementPlus`版本， 由于甲方需要`ElementPlus`作为项目的UI库，因此创建而单独维护，功能基本与`快图设计`一致。 `vue-fabric-editor` 是一款基于 fabric.js 和 Vue 开发的图片编辑器，可自定义字体、素材、设计模板、右键菜单、快捷键。
+快图设计，`vue-fabric-editor` 是一款基于 fabric.js 和 Vue 开发的图片编辑器，可自定义字体、素材、设计模板、右键菜单、快捷键。
+
+`Element Fabric Editor`是由于一个单子甲方需要`ElementPlus`作为组件库，因此诞生而单独维护，`Element Fabric Editor`功能是和`vue-fabric-editor`上是一致的，但在组件划分上`Element Fabric Editor`会更细致，因为`Element Fabric Editor`不考虑`SDK`的打包，所以在组件抽离会更细致
+
+未来`Element Fabric Editor`会把`lib/core`插件化去除，使用hooks+store替换
+
+另外此项目也是[electron-fabric-editor](https://github.com/Qiu-Jun/electron-fabric-editor)的`Render`进程
+
  
 [动图介绍](https://juejin.cn/post/7222141882515128375) · [介绍视频](https://www.bilibili.com/video/BV1US421A7TU/?spm_id_from=333.999.0.0)  · [预览地址](https://qiu-jun.github.io/element-fabric-editor/#/)
 
