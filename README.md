@@ -3,7 +3,7 @@
  * @Author: June
  * @Date: 2024-04-24 09:32:13
  * @FilePath: \element-fabric-editor\README.md
- * @LastEditTime: 2024-11-24 10:16:17
+ * @LastEditTime: 2024-11-24 10:18:54
  * @LastEditors: June
 -->
 
@@ -40,8 +40,7 @@ npm install pnpm -g
 
 pnpm install
 
-# 启动uniapp
-pnpm dev:weapp
+pnpm dev
 
 # 提交代码
 git add . # 添加需要提交的文件
