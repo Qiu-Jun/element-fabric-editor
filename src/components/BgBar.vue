@@ -24,10 +24,10 @@
 
       <div class="f-center">
         <el-button @click="handleRmoveBgImg">
-          {{ $t('editor.bgSetting.addBgImage') }}
+          {{ $t('editor.bgSetting.removeBgImage') }}
         </el-button>
         <el-button @click="handleSetBgImg">
-          {{ $t('editor.bgSetting.removeBgImage') }}
+          {{ $t('editor.bgSetting.addBgImage') }}
         </el-button>
       </div>
     </div>
