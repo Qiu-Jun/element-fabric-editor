@@ -3,7 +3,7 @@
  * @Author: June
  * @Date: 2024-04-24 09:32:13
  * @FilePath: \element-fabric-editor\README.md
- * @LastEditTime: 2024-11-29 11:40:57
+ * @LastEditTime: 2024-11-29 19:17:08
  * @LastEditors: June
 -->
 
@@ -85,7 +85,7 @@ pnpm commit # 使用此命令编写commit
 + <span style="color: red">pnpm commit</span>(必须, 不接受非规范的commit)
 
 #### 同步情况
-+ Historfix(AddBaseTypePlugin) 897c53b9b65970db3f3fdbc9ac0c966e5d5e9d1b
++ perf: 优化setSize组件和workspace插件宽高默认值问题 89eead9104ae6824d4dfb9754b13a5790ef79a95
 
 #### undo
 - [x] 首页拆分组件
