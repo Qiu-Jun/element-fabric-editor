@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2024-07-24 17:34:22
  * @LastEditors: June
- * @LastEditTime: 2024-10-09 23:04:44
+ * @LastEditTime: 2024-11-29 12:07:04
  * @FilePath: /element-fabric-editor/vite.config.mts
  */
 

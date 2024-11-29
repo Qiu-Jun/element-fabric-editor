@@ -3,7 +3,7 @@
  * @Description: 
  * @Date: 2024-07-24 17:22:41
  * @LastEditors: June
- * @LastEditTime: 2024-11-20 21:35:41
+ * @LastEditTime: 2024-11-29 12:08:41
  * @FilePath: /element-fabric-editor/index.html
 -->
 <!doctype html>
@@ -40,51 +40,100 @@
         background: rgba(0, 0, 0, 0.1);
       }
 
-      html,
-      body,
-      #app {
-        width: 100%;
-        height: 100%;
-      }
-      .loading {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        animation: heart infinite 0.85s linear;
+      .first-loading-wrp {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 90vh;
+        min-height: 90vh;
       }
 
-      .loading:before,
-      .loading:after {
-        position: absolute;
-        top: -30px;
-        left: 30px;
-        width: 30px;
-        height: 50px;
-        content: '';
-        transform: rotate(-45deg);
-        transform-origin: 0 100%;
-        border-radius: 30px 30px 0 0;
-        background: #f34250;
+      .first-loading-wrp > h1 {
+        font-size: 30px;
+        font-weight: bolder;
       }
 
-      .loading:after {
-        left: 0;
+      .first-loading-wrp .loading-wrp {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 98px;
+      }
+
+      .dot {
+        position: relative;
+        box-sizing: border-box;
+        display: inline-block;
+        width: 64px;
+        height: 64px;
+        font-size: 64px;
         transform: rotate(45deg);
-        transform-origin: 100% 100%;
+        animation: antRotate 1.2s infinite linear;
       }
 
-      @keyframes heart {
-        0% {
-          transform: scale(0.8);
-        }
+      .dot i {
+        position: absolute;
+        display: block;
+        width: 24px;
+        height: 24px;
+        background-color: #1890ff;
+        border-radius: 100%;
+        opacity: 0.3;
+        transform: scale(0.75);
+        transform-origin: 50% 50%;
+        animation: antSpinMove 1s infinite linear alternate;
+      }
 
-        50% {
-          transform: scale(1);
-        }
+      .dot i:nth-child(1) {
+        top: 0;
+        left: 0;
+      }
 
-        100% {
-          transform: scale(0.8);
+      .dot i:nth-child(2) {
+        top: 0;
+        right: 0;
+        -webkit-animation-delay: 0.4s;
+        animation-delay: 0.4s;
+      }
+
+      .dot i:nth-child(3) {
+        right: 0;
+        bottom: 0;
+        -webkit-animation-delay: 0.8s;
+        animation-delay: 0.8s;
+      }
+
+      .dot i:nth-child(4) {
+        bottom: 0;
+        left: 0;
+        -webkit-animation-delay: 1.2s;
+        animation-delay: 1.2s;
+      }
+
+      @keyframes antRotate {
+        to {
+          -webkit-transform: rotate(405deg);
+          transform: rotate(405deg);
+        }
+      }
+
+      @-webkit-keyframes antRotate {
+        to {
+          -webkit-transform: rotate(405deg);
+          transform: rotate(405deg);
+        }
+      }
+
+      @keyframes antSpinMove {
+        to {
+          opacity: 1;
+        }
+      }
+
+      @-webkit-keyframes antSpinMove {
+        to {
+          opacity: 1;
         }
       }
     </style>
@@ -92,7 +141,16 @@
 
   <body>
     <div id="app">
-      <div class="loading"></div>
+      <div class="first-loading-wrp">
+        <div class="loading-wrp">
+          <span class="dot dot-spin">
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+          </span>
+        </div>
+      </div>
     </div>
     <script type="module" src="./src/main.ts"></script>
   </body>
