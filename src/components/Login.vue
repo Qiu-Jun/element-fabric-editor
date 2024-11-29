@@ -2,7 +2,7 @@
  * @Author: 秦少卫
  * @Date: 2024-04-24 12:51:24
  * @LastEditors: June
- * @LastEditTime: 2024-11-23 13:33:12
+ * @LastEditTime: 2024-11-29 12:16:11
  * @Description: 登录
 -->
 
@@ -40,7 +40,7 @@
           >
             <el-form-item prop="identifier">
               <el-input
-                type="text"
+                link
                 v-model="formInline.identifier"
                 :placeholder="$t('common.login.identifier')"
               >
@@ -82,7 +82,7 @@
           >
             <el-form-item prop="username">
               <el-input
-                type="text"
+                link
                 v-model="registerFormInline.username"
                 :placeholder="$t('common.login.username')"
               >
@@ -93,7 +93,7 @@
             </el-form-item>
             <el-form-item prop="email">
               <el-input
-                type="text"
+                link
                 v-model="registerFormInline.email"
                 :placeholder="$t('common.login.email')"
               >

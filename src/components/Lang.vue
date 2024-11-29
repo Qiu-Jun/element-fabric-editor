@@ -4,11 +4,11 @@
  * @Author: June
  * @Date: 2023-05-20 09:18:28
  * @LastEditors: June
- * @LastEditTime: 2024-11-23 11:20:46
+ * @LastEditTime: 2024-11-29 12:15:33
 -->
 <template>
   <el-dropdown placement="bottom-end" @command="setLang">
-    <el-button text>
+    <el-button link>
       {{ lang }}
     </el-button>
     <template #dropdown>
