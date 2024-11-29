@@ -2,17 +2,17 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-05 23:19:31
- * @LastEditTime: 2024-11-22 14:20:23
+ * @LastEditTime: 2024-11-28 13:52:55
  * @LastEditors: June
  * @FilePath: \ai-desing\src\views\editor\components\SetSize.vue
 -->
 <template>
   <div v-if="!isSelect" class="attr-item-box">
     <el-divider content-position="left">
-      <h4>{{ $t('editor.bgSeting.size') }}</h4>
+      <h4>{{ $t('editor.bgSetting.size') }}</h4>
     </el-divider>
-    <el-form :label-width="40" inline class="flex">
-      <el-form-item :label="$t('editor.bgSeting.width')" prop="name">
+    <el-form :label-width="50" inline class="flex">
+      <el-form-item :label="$t('editor.bgSetting.width')" prop="name">
         <el-input
           style="width: 60px"
           disabled
@@ -20,7 +20,7 @@
           readonly
         ></el-input>
       </el-form-item>
-      <el-form-item :label="$t('editor.bgSeting.height')" prop="name">
+      <el-form-item :label="$t('editor.bgSetting.height')" prop="name">
         <el-input
           style="width: 60px"
           disabled
@@ -34,14 +34,14 @@
         </el-button>
       </el-form-item>
     </el-form>
-
-    <!-- 修改尺寸 -->
-    <ModalSize
-      :title="$t('editor.setSizeTip')"
-      ref="modalSizeRef"
-      @set="handleConfirm"
-    ></ModalSize>
   </div>
+
+  <!-- 修改尺寸 -->
+  <ModalSize
+    :title="$t('editor.setSizeTip')"
+    ref="modalSizeRef"
+    @set="handleConfirm"
+  ></ModalSize>
 </template>
 
 <script lang="ts" setup>

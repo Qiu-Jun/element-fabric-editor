@@ -2,29 +2,29 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-08-19 12:53:30
- * @LastEditTime: 2024-11-17 09:37:00
+ * @LastEditTime: 2024-11-29 10:12:24
  * @LastEditors: June
 -->
 <template>
   <div class="attr-item-box" v-if="isSelect">
     <el-divider content-position="left">
-      <h4>{{ $t('editor.attrSetting.centerAlign.name') }}</h4>
+      <h4>{{ $t('editor.attrSetting.group.centerAlign.name') }}</h4>
     </el-divider>
     <div class="bg-item">
       <!-- 水平集中 -->
-      <el-tooltip :content="$t('editor.attrSetting.centerAlign.centerX')">
+      <el-tooltip :content="$t('editor.attrSetting.group.centerAlign.centerX')">
         <el-button @click="position('centerH')" link>
           <SvgIcon extClass="text-20px" color="#fff" icon="center-x" />
         </el-button>
       </el-tooltip>
       <!-- 水平垂直居中 -->
-      <el-tooltip :content="$t('editor.attrSetting.centerAlign.center')">
+      <el-tooltip :content="$t('editor.attrSetting.group.centerAlign.center')">
         <el-button @click="position('center')" link>
           <SvgIcon extClass="text-20px" color="#fff" icon="center-v" />
         </el-button>
       </el-tooltip>
       <!-- 垂直居中 -->
-      <el-tooltip :content="$t('editor.attrSetting.centerAlign.centerY')">
+      <el-tooltip :content="$t('editor.attrSetting.group.centerAlign.centerY')">
         <el-button @click="position('centerV')" link>
           <SvgIcon extClass="text-20px" color="#fff" icon="center-y" />
         </el-button>

@@ -28,13 +28,16 @@
     "input": "Please Input",
     "select": "Please Select"
   },
-
-  "selectPlaceholder": "Select",
-  "okText": "OK",
+  "enable": "Enable",
+  "close": "Close",
+  "yes": "Yes",
+  "no": "No",
+  "okText": "Confirm",
   "closeText": "Close",
   "cancelText": "Cancel",
   "tip": "Tip",
   "loadingText": "Loading...",
+
   "saveText": "Save",
   "delText": "Delete",
   "resetText": "Reset",

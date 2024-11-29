@@ -1,11 +1,13 @@
 <template>
   <div class="box attr-item-box" v-if="isOne && isMatchType && isQrcode">
     <!-- <h3>字体属性</h3> -->
-    <el-divider content-position="left"><h4>二位码属性</h4></el-divider>
+    <el-divider content-position="left">
+      <h4>{{ $t('editor.qrCode.name') }}</h4>
+    </el-divider>
     <div>
       <div class="flex-view">
         <div class="flex-item">
-          <span class="label">内容</span>
+          <span class="label">{{ $t('editor.qrCode.content') }}</span>
           <div class="flex-1">
             <el-input v-model="baseAttr.data" @change="changeCommon" />
           </div>
@@ -18,7 +20,7 @@
             <InputNumber
               v-model="baseAttr.width"
               @on-change="changeCommon"
-              append="宽度"
+              :append="$t('editor.width')"
               :min="1"
             ></InputNumber>
           </div>
@@ -28,7 +30,7 @@
             <InputNumber
               v-model="baseAttr.margin"
               @on-change="changeCommon"
-              append="边距"
+              :append="$t('editor.qrCode.space')"
               :min="1"
             ></InputNumber>
           </div>
@@ -37,7 +39,7 @@
 
       <div class="flex-view">
         <div class="flex-item">
-          <span class="label">散点</span>
+          <span class="label">{{ $t('editor.qrCode.splashes') }}</span>
           <div class="content">
             <el-color-picker
               id="dotsColor"
@@ -48,7 +50,9 @@
           </div>
         </div>
         <div class="flex-item">
-          <span class="label" style="margin-left: 10px">类型</span>
+          <span class="label" style="margin-left: 10px">{{
+            $t('editor.type')
+          }}</span>
           <div class="content">
             <el-select
               v-model="baseAttr.dotsType"
@@ -69,7 +73,7 @@
 
       <div class="flex-view">
         <div class="flex-item">
-          <span class="label">外角</span>
+          <span class="label">{{ $t('editor.qrCode.outAngle') }}</span>
           <div class="content">
             <el-color-picker
               id="cornersSquareColor"
@@ -80,7 +84,9 @@
           </div>
         </div>
         <div class="flex-item">
-          <span class="label" style="margin-left: 10px">类型</span>
+          <span class="label" style="margin-left: 10px">{{
+            $t('editor.type')
+          }}</span>
           <div class="content">
             <el-select
               v-model="baseAttr.cornersSquareType"
@@ -100,7 +106,7 @@
       </div>
       <div class="flex-view">
         <div class="flex-item">
-          <span class="label">内角</span>
+          <span class="label">{{ $t('editor.qrCode.inAngle') }}</span>
           <div class="content">
             <el-color-picker
               id="cornersDotColor"
@@ -111,7 +117,9 @@
           </div>
         </div>
         <div class="flex-item">
-          <span class="label" style="margin-left: 10px">类型</span>
+          <span class="label" style="margin-left: 10px">{{
+            $t('editor.type')
+          }}</span>
           <div class="content">
             <el-select
               v-model="baseAttr.cornersDotType"
@@ -132,7 +140,7 @@
 
       <div class="flex-view">
         <div class="flex-item">
-          <span class="label">背景</span>
+          <span class="label">{{ $t('editor.qrCode.background') }}</span>
           <div class="content">
             <el-color-picker
               id="background"
@@ -143,7 +151,9 @@
           </div>
         </div>
         <div class="flex-item">
-          <span class="label" style="margin-left: 10px">容错</span>
+          <span class="label" style="margin-left: 10px">
+            {{ $t('editor.qrCode.fault') }}
+          </span>
           <div class="content">
             <el-select
               v-model="baseAttr.errorCorrectionLevel"

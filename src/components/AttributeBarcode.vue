@@ -1,11 +1,13 @@
 <template>
   <div class="attr-item-box" v-if="isOne && isMatchType && isBarcode">
     <!-- <h3>字体属性</h3> -->
-    <el-divider content-position="left"><h4>条形码属性</h4></el-divider>
+    <el-divider content-position="left">
+      <h4>{{ $t('editor.barCode.name') }}</h4>
+    </el-divider>
     <div>
       <div class="flex-view">
         <div class="flex-item">
-          <span class="label">代码</span>
+          <span class="label">{{ $t('editor.barCode.content') }}</span>
           <div class="content">
             <el-input v-model="baseAttr.value" @change="changeCommon" />
           </div>
@@ -14,7 +16,7 @@
 
       <div class="flex-view" v-if="baseAttr.displayValue">
         <div class="flex-item">
-          <span class="label">文字</span>
+          <span class="label">{{ $t('editor.barCode.text') }}</span>
           <div class="content">
             <el-input v-model="baseAttr.text" @change="changeCommon" />
           </div>
@@ -23,13 +25,13 @@
 
       <div class="flex-view">
         <div class="flex-item">
-          <span class="label">显示</span>
+          <span class="label">{{ $t('editor.barCode.show') }}</span>
           <div class="content">
             <el-switch v-model="baseAttr.displayValue" @change="changeCommon" />
           </div>
         </div>
         <div class="flex-item" v-if="baseAttr.displayValue">
-          <span class="label">垂直</span>
+          <span class="label">{{ $t('editor.barCode.position') }}</span>
           <div class="content">
             <el-select v-model="baseAttr.textPosition" @change="changeCommon">
               <el-option value="bottom">bottom</el-option>
@@ -64,7 +66,7 @@
 
       <div class="flex-view">
         <div :span="12" class="flex-item">
-          <span class="label">条码</span>
+          <span class="label">{{ $t('editor.barCode.color') }}</span>
           <div class="content">
             <el-color-picker
               v-model="baseAttr.lineColor"
@@ -78,7 +80,7 @@
             <InputNumber
               v-model="baseAttr.fontSize"
               @on-change="changeCommon"
-              append="字号"
+              :append="$t('editor.barCode.size')"
               :min="1"
             />
           </div>
@@ -86,7 +88,7 @@
       </div>
       <div class="flex-view">
         <div class="flex-item">
-          <span class="label">背景</span>
+          <span class="label">{{ $t('editor.barCode.background') }}</span>
           <div class="content">
             <el-color-picker
               v-model="baseAttr.background"
@@ -96,7 +98,7 @@
           </div>
         </div>
         <div class="flex-item">
-          <span class="label mr-10px">类型</span>
+          <span class="label mr-10px">{{ $t('editor.type') }}</span>
           <div class="content">
             <el-select
               v-model="baseAttr.format"

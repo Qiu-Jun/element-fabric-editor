@@ -2,15 +2,24 @@
   <div v-if="isOne && isMatchType" class="attr-item-box">
     <div class="flex-view">
       <div class="flex-item">
-        <span class="label">{{ $t('editor.textFloat') }}</span>
+        <span class="label">{{ $t('editor.attrSetting.font.decimals') }}</span>
         <div class="flex-1">
           <el-select
             v-model="baseAttr.verticalAlign"
             @change="(value: any) => changeCommon('verticalAlign', value)"
           >
-            <el-option label="无" value="null"></el-option>
-            <el-option label="下标" value="bottom"></el-option>
-            <el-option label="上标" value="top"></el-option>
+            <el-option
+              :label="$t('editor.attrSetting.font.decimalsOptions.none')"
+              value="null"
+            ></el-option>
+            <el-option
+              :label="$t('editor.attrSetting.font.decimalsOptions.bottom')"
+              value="bottom"
+            ></el-option>
+            <el-option
+              :label="$t('editor.attrSetting.font.decimalsOptions.top')"
+              value="top"
+            ></el-option>
           </el-select>
         </div>
       </div>

@@ -2,12 +2,12 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-05 23:13:23
- * @LastEditTime: 2024-10-20 15:13:01
+ * @LastEditTime: 2024-11-28 14:21:44
  * @LastEditors: June
  * @FilePath: \ai-desing\src\views\editor\components\Clone.vue
 -->
 <template>
-  <el-tooltip v-if="isOne" :content="$t('editor.quick.copy')">
+  <el-tooltip v-if="isOne" :content="$t('editor.quickOperation.copy')">
     <el-button @click="clone" :icon="CopyDocument" link></el-button>
   </el-tooltip>
 </template>

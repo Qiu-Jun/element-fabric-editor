@@ -1,11 +1,11 @@
 <template>
   <div class="box mb-20px" v-if="isOne && isImage">
     <el-divider content-position="left">
-      <h4>图像描边</h4>
+      <h4>{{ $t('editor.imageSetting.stroke.title') }}</h4>
     </el-divider>
     <div class="hd-wrap">
       <div class="hd flex-1">
-        <span>启用图像描边</span>
+        <span>{{ $t('editor.imageSetting.stroke.enable') }}</span>
         <el-popover trigger="hover" content="只支持png透明图像">
           <template #reference>
             <el-icon color="#f34250"><WarningFilled /></el-icon>
@@ -18,8 +18,8 @@
         size="large"
         inline-prompt
         class="switch"
-        active-text="开启"
-        inactive-text="关闭"
+        :active-text="$t('common.enable')"
+        :inactive-text="$t('common.close')"
         @change="onSwitchChange"
       />
     </div>
@@ -27,7 +27,7 @@
     <template v-if="openImgStroke">
       <div class="hd-wrap">
         <div class="hd">
-          <span>是否只显示描边</span>
+          <span>{{ $t('editor.imageSetting.stroke.show') }}</span>
         </div>
 
         <el-switch
@@ -35,14 +35,14 @@
           v-model="isOnlyStroke"
           size="large"
           class="switch"
-          active-text="是"
-          inactive-text="否"
+          :active-text="$t('common.yes')"
+          :inactive-text="$t('common.no')"
           @change="updateStroke"
         />
       </div>
       <div class="operation">
         <div class="hd" style="flex-basis: 98px">
-          <span>描边大小</span>
+          <span>{{ $t('editor.imageSetting.stroke.size') }}</span>
         </div>
         <div style="width: 100%">
           <el-slider v-model="strokeWidth" :max="50" @change="onSliderChange" />
@@ -51,7 +51,7 @@
 
       <div class="operation" style="justify-content: space-between">
         <div class="hd">
-          <span>描边颜色</span>
+          <span>{{ $t('editor.imageSetting.stroke.color') }}</span>
         </div>
 
         <div>

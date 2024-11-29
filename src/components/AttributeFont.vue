@@ -1,6 +1,8 @@
 <template>
   <div class="box attr-item-box" v-if="isOne && isMatchType">
-    <el-divider content-position="left"><h4>字体属性</h4></el-divider>
+    <el-divider content-position="left"
+      ><h4>{{ $t('editor.attrSetting.font.title') }}</h4></el-divider
+    >
     <div>
       <div class="flex-view">
         <div class="flex-item">
@@ -27,7 +29,7 @@
             <InputNumber
               v-model="baseAttr.fontSize"
               @on-change="(value) => changeCommon('fontSize', value)"
-              append="字号"
+              :append="$t('editor.attrSetting.font.fontSize')"
               :min="1"
             ></InputNumber>
           </div>
@@ -109,21 +111,23 @@
             v-model="baseAttr.lineHeight"
             @on-change="(value) => changeCommon('lineHeight', value)"
             :step="0.1"
-            :append="$t('editor.attributes.line_height')"
+            :append="$t('editor.attrSetting.font.lineHeight')"
           ></InputNumber>
         </div>
         <div class="right">
           <InputNumber
             v-model="baseAttr.charSpacing"
             @on-change="(value) => changeCommon('charSpacing', value)"
-            :append="$t('editor.attributes.char_spacing')"
+            :append="$t('editor.attrSetting.font.space')"
           ></InputNumber>
         </div>
       </div>
 
       <div class="flex-view">
         <div class="flex-item">
-          <span class="label">{{ $t('editor.background') }}</span>
+          <span class="label">{{
+            $t('editor.attrSetting.font.background')
+          }}</span>
           <div class="content">
             <el-color-picker
               v-model="baseAttr.textBackgroundColor"

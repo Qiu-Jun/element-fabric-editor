@@ -2,14 +2,14 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-08-19 12:53:30
- * @LastEditTime: 2024-11-23 11:01:17
+ * @LastEditTime: 2024-11-28 16:19:59
  * @LastEditors: June
 -->
 <template>
   <div v-if="isOne && type === 'image'" class="attr-item-box mt-8px">
     <div class="bg-item" style="margin-bottom: 10px">
       <el-dropdown style="width: 270px" @command="addClipPath">
-        <el-button text>{{ $t('editor.createClip') }}</el-button>
+        <el-button text>{{ $t('editor.imageSetting.crop.create') }}</el-button>
         <template #dropdown>
           <el-dropdown-menu>
             <el-dropdown-item
@@ -24,9 +24,9 @@
       </el-dropdown>
     </div>
     <div class="bg-item">
-      <el-button @click="removeClip" text>{{
-        $t('editor.removeClip')
-      }}</el-button>
+      <el-button @click="removeClip" text>
+        {{ $t('editor.imageSetting.crop.remove') }}
+      </el-button>
     </div>
   </div>
 </template>

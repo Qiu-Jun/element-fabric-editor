@@ -3,7 +3,9 @@
     class="box attr-item-box"
     v-if="isOne && selectType !== 'image' && selectType !== 'group'"
   >
-    <el-divider content-position="left"><h4>颜色</h4></el-divider>
+    <el-divider content-position="left"
+      ><h4>{{ $t('editor.attrSetting.color') }}</h4></el-divider
+    >
     <!-- 通用属性 -->
     <div class="bg-item">
       <el-popover

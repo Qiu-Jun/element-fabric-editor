@@ -109,15 +109,15 @@ const beforeClearTip = (info) => {
     title: t('common.tip'),
     message: `${t('editor.tip.replaceTip')}`,
     showCancelButton: true,
-    confirmButtonText: t('common.ok'),
-    cancelButtonText: t('common.cancel')
+    confirmButtonText: t('common.okText'),
+    cancelButtonText: t('common.cancelText')
   }).then(() => getTempData(info))
 }
 
 // 获取模板数据
 const getTempData = async (info) => {
   const loadingInstance = ElLoading.service({
-    text: t('alert.loading_data')
+    text: t('common.loadingText')
   })
   const infoRes = await getInfo(info.id)
   if (route.query.admin) {
@@ -137,7 +137,7 @@ const getTemplInfo = async () => {
   if (route.query.tempId) {
     try {
       const loadingInstance = ElLoading.service({
-        text: t('alert.loading_data')
+        text: t('common.loadingText')
       })
       const infoRes = await getInfo(route.query.tempId)
       editorStore.editor.loadJSON(

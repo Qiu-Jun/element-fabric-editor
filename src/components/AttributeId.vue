@@ -2,17 +2,19 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-05 23:00:59
- * @LastEditTime: 2024-10-20 14:39:21
+ * @LastEditTime: 2024-11-28 16:05:40
  * @LastEditors: June
  * @FilePath: \ai-desing\src\views\editor\components\AttributeId.vue
 -->
 <template>
   <div class="mb-10px attr-item-box" v-if="isOne">
     <!-- <h3>数据</h3> -->
-    <el-divider content-position="left"><h4>数据</h4></el-divider>
+    <el-divider content-position="left">
+      <h4>{{ $t('editor.attrSetting.data.title') }}</h4>
+    </el-divider>
 
     <el-form :label-width="40" class="form-wrap">
-      <el-form-item :label="$t('editor.attributes.id')">
+      <el-form-item :label="$t('editor.attrSetting.data.id')">
         <el-input
           v-model="baseAttr.id"
           @change="changeCommon('id', baseAttr.id)"
@@ -27,6 +29,7 @@
           v-model="baseAttr.linkData[0]"
           filterable
           allow-create
+          :placeholder="$t('common.placeholder.select')"
           @change="changeCommon('linkData', baseAttr.linkData)"
         >
           <el-option value="src"></el-option>
@@ -34,7 +37,10 @@
         </el-select>
       </el-col>
       <el-col :span="12">
-        <el-input v-model="baseAttr.linkData[1]" placeholder="请输入" />
+        <el-input
+          v-model="baseAttr.linkData[1]"
+          :placeholder="$t('common.placeholder.input')"
+        />
       </el-col>
     </el-row>
   </div>

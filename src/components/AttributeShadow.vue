@@ -1,12 +1,14 @@
 <template>
   <div class="box attr-item-box" v-if="isOne">
     <!-- <h3>阴影</h3> -->
-    <el-divider content-position="left"><h4>阴影</h4></el-divider>
+    <el-divider content-position="left">
+      <h4>{{ $t('editor.attrSetting.shadow.title') }}</h4>
+    </el-divider>
     <!-- 通用属性 -->
     <el-row :gutter="12" style="margin-bottom: 10px">
       <el-col :span="12">
         <div class="f-center rounded-4px" style="background: #f8f8f9">
-          <span class="label">{{ $t('editor.color') }}</span>
+          <span class="label">{{ $t('editor.attrSetting.color') }}</span>
           <div class="content">
             <el-color-picker
               v-model="baseAttr.shadow.color"
@@ -21,7 +23,7 @@
           v-model="baseAttr.shadow.blur"
           :defaultValue="0"
           @on-change="changeCommon"
-          :append="$t('editor.attributes.blur')"
+          :append="$t('editor.attrSetting.shadow.blur')"
           :min="0"
         ></InputNumber>
       </el-col>
@@ -32,7 +34,7 @@
           v-model="baseAttr.shadow.offsetX"
           :defaultValue="0"
           @on-change="changeCommon"
-          :append="$t('editor.attributes.offset_x')"
+          :append="$t('editor.attrSetting.shadow.x')"
         ></InputNumber>
       </el-col>
       <el-col :span="12">
@@ -40,7 +42,7 @@
           v-model="baseAttr.shadow.offsetY"
           :defaultValue="0"
           @on-change="changeCommon"
-          :append="$t('editor.attributes.offset_y')"
+          :append="$t('editor.attrSetting.shadow.y')"
         ></InputNumber>
       </el-col>
     </el-row>

@@ -2,12 +2,15 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-06 00:14:35
- * @LastEditTime: 2024-10-20 15:15:51
+ * @LastEditTime: 2024-11-28 14:24:37
  * @LastEditors: June
  * @FilePath: \ai-desing\src\views\editor\components\Edit.vue
 -->
 <template>
-  <el-tooltip :content="$t('editor.quick.editPoly')" v-if="isMatchType">
+  <el-tooltip
+    :content="$t('editor.quickOperation.editPoly')"
+    v-if="isMatchType"
+  >
     <el-button @click="onEditPolygon" link>
       <SvgIcon extClass="text-20px" icon="editor-brush" />
     </el-button>

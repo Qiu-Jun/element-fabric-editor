@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-12 19:09:40
- * @LastEditTime: 2024-11-17 11:26:40
+ * @LastEditTime: 2024-11-28 16:09:01
  * @LastEditors: June
  * @FilePath: \element-fabric-editor\src\views\home\components\EditorContent\PanelRight\index.vue
 -->
@@ -27,16 +27,9 @@
 
     <div v-show="mixinState.mSelectMode === 'one'" class="attr-item-box">
       <Group />
-      <el-divider content-position="left">
-        <h4>快捷操作</h4>
-      </el-divider>
-      <div class="bg-item" v-show="mixinState.mSelectMode">
-        <Lock />
-        <Delete />
-        <Clone />
-        <Hide />
-        <Edit />
-      </div>
+
+      <!-- 快捷操作 -->
+      <QuickOperation />
 
       <!-- 居中对齐 -->
       <CenterAlign />
@@ -76,9 +69,9 @@
       <AttributeId />
 
       <!-- 新增字体样式使用 -->
-      <el-button @click="editor.getFontJson()" size="small"
-        >获取元素数据</el-button
-      >
+      <el-button @click="editor.getFontJson()" size="small">
+        {{ $t('editor.attrSetting.data.getFontStyle') }}
+      </el-button>
     </div>
   </section>
 </template>

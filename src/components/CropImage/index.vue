@@ -2,14 +2,14 @@
  * @Author: June
  * @Description: Description
  * @Date: 2024-11-17 10:30:49
- * @LastEditTime: 2024-11-17 11:35:53
+ * @LastEditTime: 2024-11-28 16:19:18
  * @LastEditors: June
 -->
 <template>
   <div v-if="isOne && type === 'image'" class="attr-item-box mt-8px">
     <div class="bg-item">
       <el-button class="w-full" @click="cropper" text>
-        {{ $t('editor.cropImg') }}
+        {{ $t('editor.imageSetting.crop.title') }}
       </el-button>
     </div>
   </div>

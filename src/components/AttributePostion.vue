@@ -1,28 +1,30 @@
 <template>
   <div class="box attr-item-box" v-if="isOne">
     <!-- <h3>位置信息</h3> -->
-    <el-divider content-position="left"><h4>位置信息</h4></el-divider>
+    <el-divider content-position="left">
+      <h4>{{ $t('editor.attrSetting.position.title') }}</h4>
+    </el-divider>
     <!-- 通用属性 -->
     <div v-show="isMatchType">
       <el-row :gutter="10" style="margin-bottom: 10px">
         <el-col :span="12">
           <InputNumber
             v-model="baseAttr.left"
-            :append="$t('editor.attributes.left')"
+            :append="$t('editor.attrSetting.position.x')"
             @on-change="(value) => changeCommon('left', value)"
           />
         </el-col>
         <el-col :span="12">
           <InputNumber
             v-model="baseAttr.left"
-            :append="$t('editor.attributes.top')"
+            :append="$t('editor.attrSetting.position.y')"
             @on-change="(value) => changeCommon('top', value)"
           />
         </el-col>
       </el-row>
 
       <div class="number-warp">
-        <span>{{ $t('editor.attributes.angle') }}</span>
+        <span>{{ $t('editor.attrSetting.position.rotate') }}</span>
         <el-slider
           v-model="baseAttr.angle"
           :max="360"
@@ -31,7 +33,7 @@
       </div>
 
       <div class="number-warp">
-        <span>{{ $t('editor.attributes.opacity') }}</span>
+        <span>{{ $t('editor.attrSetting.position.opacity') }}</span>
         <el-slider
           v-model="baseAttr.opacity"
           @input="(value: any) => changeCommon('opacity', value)"

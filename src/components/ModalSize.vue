@@ -5,28 +5,28 @@
     </h3>
     <section class="size-wrap">
       <div class="size-wrap-item">
-        <span>宽度</span>
+        <span>{{ $t('editor.width') }}</span>
         <el-input-number
           style="width: 70%"
           v-model="width"
           :min="1"
-          placeholder="请输入"
+          :placeholder="$t('common.placeholder.input')"
           controls-position="right"
         ></el-input-number>
       </div>
       <div class="size-wrap-item">
-        <span>高度</span>
+        <span>{{ $t('editor.height') }}</span>
         <el-input-number
           style="width: 70%"
           v-model="height"
           :min="1"
-          placeholder="请输入"
+          :placeholder="$t('common.placeholder.input')"
           controls-position="right"
         ></el-input-number>
       </div>
       <div :label-width="0">
         <el-button type="primary" @click="customSizeCreate">
-          {{ $t('editor.importFiles.createDesign.create') }}
+          {{ $t('common.okText') }}
         </el-button>
       </div>
     </section>

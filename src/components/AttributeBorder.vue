@@ -1,14 +1,16 @@
 <template>
   <div class="attr-item-box" v-if="isOne && !isGroup">
     <!-- <h3>边框</h3> -->
-    <el-divider content-position="left"><h4>边框</h4></el-divider>
+    <el-divider content-position="left">
+      <h4>{{ $t('editor.attrSetting.border.title') }}</h4>
+    </el-divider>
     <!-- 通用属性 -->
     <div>
       <el-row :gutter="12" style="margin-right: 10px">
         <el-col :span="12">
           <div class="number-warp">
             <span class="label" style="margin-right: 10px">{{
-              $t('editor.color')
+              $t('editor.attrSetting.color')
             }}</span>
             <div style="flex: 1">
               <el-color-picker
@@ -23,7 +25,7 @@
           <InputNumber
             v-model="baseAttr.strokeWidth"
             @on-change="(value) => changeCommon('strokeWidth', value)"
-            :append="$t('editor.width')"
+            :append="$t('editor.attrSetting.border.width')"
             :min="0"
           ></InputNumber>
         </el-col>
@@ -36,7 +38,7 @@
             font-size: var(--el-form-label-font-size);
             color: var(--el-text-color-regular);
           "
-          >{{ $t('editor.attributes.stroke') }}</span
+          >{{ $t('editor.attrSetting.border.stroke') }}</span
         >
         <div class="content">
           <el-select v-model="baseAttr.strokeDashArray" @change="borderSet">

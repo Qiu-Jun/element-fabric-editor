@@ -2,13 +2,13 @@
   <div v-if="!isSelect">
     <div class="attr-item-box">
       <el-divider content-position="left">
-        <h4>{{ $t('editor.bgSeting.color') }}</h4>
+        <h4>{{ $t('editor.bgSetting.color') }}</h4>
       </el-divider>
       <el-color-picker v-model="color" @change="setThisColor" show-alpha />
     </div>
     <div class="attr-item-box">
       <el-divider content-position="left">
-        <h4>{{ $t('editor.bgSeting.colorMacthing') }}</h4>
+        <h4>{{ $t('editor.bgSetting.colorMacthing') }}</h4>
       </el-divider>
       <div class="color-list">
         <template v-for="(item, i) in colorList" :key="item + i">
@@ -19,12 +19,16 @@
 
     <div class="attr-item-box">
       <el-divider content-position="left">
-        <h4>背景图</h4>
+        <h4>{{ $t('editor.bgSetting.bgImage') }}</h4>
       </el-divider>
 
       <div class="f-center">
-        <el-button @click="handleRmoveBgImg"> 移除背景图 </el-button>
-        <el-button @click="handleSetBgImg"> 设置背景图 </el-button>
+        <el-button @click="handleRmoveBgImg">
+          {{ $t('editor.bgSetting.addBgImage') }}
+        </el-button>
+        <el-button @click="handleSetBgImg">
+          {{ $t('editor.bgSetting.removeBgImage') }}
+        </el-button>
       </div>
     </div>
   </div>

@@ -1,12 +1,12 @@
 <template>
   <div v-if="isOne && state.type === 'image'" class="mb-12px">
     <el-divider content-position="left">
-      <h4>图片滤镜</h4>
+      <h4>{{ $t('editor.imageSetting.filters.title') }}</h4>
     </el-divider>
     <el-collapse>
       <el-collapse-item name="1">
         <template #title>
-          {{ $t('editor.filters.simple') }}
+          {{ $t('editor.imageSetting.filters.simple') }}
         </template>
 
         <div class="filter-box overflow-hidden">
@@ -25,14 +25,17 @@
               v-model="state.noParamsFilters[key]"
               @change="(val: any) => changeFilters(key, val)"
             >
-              {{ $t('editor.filters.' + key) }}
+              {{ $t('editor.imageSetting.filters.' + key) }}
             </el-checkbox>
           </div>
         </div>
       </el-collapse-item>
-      <el-collapse-item name="2" :title="$t('editor.filters.complex')">
+      <el-collapse-item
+        name="2"
+        :title="$t('editor.imageSetting.filters.complex')"
+      >
         <!-- 有参数滤镜与组合参数滤镜 -->
-        <div>
+        <div class="flex justify-start flex-wrap">
           <div
             class="filter-item has-params"
             v-for="item in [
@@ -45,14 +48,10 @@
               v-model="item.status"
               @change="changeFiltersByParams(item.type)"
             >
-              {{ $t('editor.filters.' + item.type) }}
+              {{ $t('editor.imageSetting.filters.' + item.type) }}
             </el-checkbox>
             <div v-if="item.status" class="content">
-              <div
-                class="content slider-box"
-                v-for="info in item.params"
-                :key="info"
-              >
+              <div v-for="info in item.params" :key="info">
                 <div v-if="info.uiType === uiType.SELECT">
                   <el-radio-group
                     v-model="info.value"
@@ -64,7 +63,12 @@
                       :key="listItem"
                     >
                       {{
-                        $t('editor.filters.' + item.type + 'List.' + listItem)
+                        $t(
+                          'editor.imageSetting.filters.' +
+                            item.type +
+                            'List.' +
+                            listItem
+                        )
                       }}
                     </el-radio>
                   </el-radio-group>
@@ -75,7 +79,8 @@
                     :max="info.max"
                     :min="info.min"
                     :step="info.step"
-                    @on-input="changeFiltersByParams(item.type)"
+                    size="small"
+                    @change="changeFiltersByParams(item.type)"
                   ></el-slider>
                 </div>
                 <div v-if="info.uiType === uiType.COLOR">
@@ -343,6 +348,7 @@ function _getFabricFilterType(type: any) {
   cursor: none;
   .content {
     width: 90%;
+    @apply box-border px-4px;
   }
 }
 </style>

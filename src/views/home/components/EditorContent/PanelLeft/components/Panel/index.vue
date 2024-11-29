@@ -2,7 +2,7 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-12 09:52:22
- * @LastEditTime: 2024-11-24 09:47:17
+ * @LastEditTime: 2024-11-28 14:07:18
  * @LastEditors: June
  * @FilePath: \element-fabric-editor\src\views\home\components\Panel.vue
 -->
@@ -31,7 +31,7 @@
             :class="[curTab === 'layer' ? 'text-#333 font-500 tab-active' : '']"
             @click="onChangePanel('layer')"
           >
-            {{ $t('editor.panel.layer') }}
+            {{ $t('editor.layer.title') }}
           </li>
         </ul>
         <div class="flex">

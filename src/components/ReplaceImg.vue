@@ -2,16 +2,16 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-06 00:10:51
- * @LastEditTime: 2024-11-22 08:05:58
+ * @LastEditTime: 2024-11-28 16:14:15
  * @LastEditors: June
  * @FilePath: \element-fabric-editor\src\components\ReplaceImg.vue
 -->
 <template>
   <div v-if="isOne && type === 'image'" class="attr-item-box mt-8px">
     <div class="bg-item">
-      <el-button @click="repleace" text>{{
-        $t('editor.repleaceImg')
-      }}</el-button>
+      <el-button @click="repleace" text>
+        {{ $t('editor.imageSetting.repleaceImg') }}
+      </el-button>
     </div>
   </div>
 </template>

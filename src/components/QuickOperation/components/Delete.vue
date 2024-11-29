@@ -7,7 +7,7 @@
  * @FilePath: \element-fabric-editor\src\components\Delete.vue
 -->
 <template>
-  <el-tooltip v-if="isSelect" :content="$t('editor.quick.del')">
+  <el-tooltip v-if="isSelect" :content="$t('editor.quickOperation.delete')">
     <el-button @click="del" :icon="Delete" link></el-button>
   </el-tooltip>
 </template>

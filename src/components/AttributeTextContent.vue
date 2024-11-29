@@ -1,7 +1,9 @@
 <template>
   <div class="box attr-item-box" v-if="isOne && isMatchType">
     <!-- <h3>数据</h3> -->
-    <el-divider content-position="left"><h4>文本内容</h4></el-divider>
+    <el-divider content-position="left">
+      <h4>{{ $t('editor.attrSetting.text.content') }}</h4>
+    </el-divider>
 
     <el-form :label-width="40" class="form-wrap">
       <el-form-item :label="$t('editor.attributes.id')">
@@ -15,7 +17,9 @@
 
     <template v-if="baseAttr.showPathAttr">
       <!-- <h3>数据</h3> -->
-      <el-divider content-position="left"><h4>文本路径</h4></el-divider>
+      <el-divider content-position="left">
+        <h4>{{ $t('editor.attrSetting.text.path') }}</h4>
+      </el-divider>
       <div>
         <el-row :gutter="12">
           <el-col flex="1">

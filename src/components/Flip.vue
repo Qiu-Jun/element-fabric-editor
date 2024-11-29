@@ -2,19 +2,19 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-05 23:16:20
- * @LastEditTime: 2024-11-22 08:17:13
+ * @LastEditTime: 2024-11-28 15:13:49
  * @LastEditors: June
  * @FilePath: \ai-desing\src\views\editor\components\Flip.vue
 -->
 <template>
   <div v-if="isOne" class="attr-item-box mt-8px">
     <div class="bg-item">
-      <el-tooltip :content="$t('editor.attrSetting.flip.x')">
+      <el-tooltip :content="$t('editor.flip.x')">
         <el-button @click="flip('X')" link>
           <SvgIcon extClass="text-20px" color="#fff" icon="flip-x" />
         </el-button>
       </el-tooltip>
-      <el-tooltip :content="$t('editor.attrSetting.flip.y')">
+      <el-tooltip :content="$t('editor.flip.y')">
         <el-button @click="flip('Y')" link>
           <SvgIcon extClass="text-20px" color="#fff" icon="flip-y" />
         </el-button>

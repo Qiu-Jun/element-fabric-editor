@@ -2,20 +2,22 @@
  * @Author: June
  * @Description: 
  * @Date: 2024-09-05 23:05:23
- * @LastEditTime: 2024-11-22 08:53:09
+ * @LastEditTime: 2024-11-29 11:14:28
  * @LastEditors: June
  * @FilePath: \element-fabric-editor\src\components\AttributeRounded.vue
 -->
 <template>
   <div class="box attr-item-box" v-if="isOne && isMatchType">
     <!-- <h3>圆角</h3> -->
-    <el-divider content-position="left"><h4>圆角</h4></el-divider>
+    <el-divider content-position="left">
+      <h4>{{ $t('editor.attrSetting.radius.name') }}</h4>
+    </el-divider>
     <!-- 通用属性 -->
     <div>
       <el-row :gutter="10">
         <el-col :span="18" flex="1">
           <el-form :label-width="40" class="form-wrap">
-            <el-form-item :label="$t('editor.attributes.radius')">
+            <el-form-item :label="$t('editor.attrSetting.radius.radius')">
               <el-slider
                 v-model="baseAttr.rx"
                 :max="300"
