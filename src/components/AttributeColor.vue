@@ -8,31 +8,22 @@
     >
     <!-- 通用属性 -->
     <div class="bg-item">
-      <el-popover
-        width="280px"
-        placement="top-start"
-        effect="light"
-        trigger="hover"
-      >
+      <el-popover width="340px" effect="light" trigger="hover">
         <template #reference>
           <div class="color-bar" :style="{ background: baseAttr.fill }"></div>
         </template>
 
-        <div style="width: 100%; box-sizing: border-box; padding: 10px">
-          <ColorPicker
-            v-model:value="baseAttr.fill"
-            :modes="['渐变', '纯色']"
-            @change="colorChange"
-            @nativePick="dropColor"
-          ></ColorPicker>
-        </div>
+        <ColorPicker
+          v-model:value="baseAttr.fill"
+          @change="colorChange"
+        ></ColorPicker>
       </el-popover>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import ColorPicker from '@/components/ColorPicker/index.vue'
+import { ColorPicker } from 'color-gradient-picker-vue3'
 import { useEditorStore } from '@/store/modules/editor'
 import { fabric } from 'fabric'
 import useSelect from '@/hooks/select'
@@ -45,6 +36,16 @@ const angleKey = 'gradientAngle'
 const baseAttr: any = reactive({
   fill: ''
 })
+
+watch(
+  () => baseAttr.fill,
+  (val) => {
+    console.log('vasssssssssssssssssssssssssssssssss', val)
+  },
+  {
+    immediate: true
+  }
+)
 
 // 属性获取
 const getObjectAttr = (e?: any) => {
@@ -64,18 +65,23 @@ const getObjectAttr = (e?: any) => {
 const colorChange = (value: any) => {
   const activeObject: any = editorStore.canvas?.getActiveObjects()[0]
   if (activeObject) {
-    const color = String(value.color).replace('NaN', '')
-    if (value.mode === '纯色') {
+    console.log(value)
+    const { color, mode, gradientColors, degrees } = value
+    if (mode === 'solid') {
       activeObject.set('fill', color)
-    } else if (value.mode === '渐变') {
+    } else if (mode === 'gradient') {
       const currentGradient = cssToFabricGradient(
-        toRaw(value.stops),
+        gradientColors.map((i: any) => ({
+          color: i.color,
+          offset: i.left / 100
+        })),
         activeObject.width,
         activeObject.height,
-        value.angle
+        degrees
       )
-      activeObject.set('fill', currentGradient, value.angle)
-      activeObject.set(angleKey, value.angle)
+      console.log(currentGradient)
+      activeObject.set('fill', currentGradient, degrees)
+      activeObject.set(angleKey, degrees)
     }
     editorStore.canvas?.renderAll()
   }
