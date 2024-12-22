@@ -21,8 +21,8 @@ importers:
         specifier: ^1.7.2
         version: 1.7.2
       color-gradient-picker-vue3:
-        specifier: ^3.0.2
-        version: 3.0.2
+        specifier: ^3.0.6
+        version: 3.0.6
       dayjs:
         specifier: ^1.11.12
         version: 1.11.12
@@ -1465,8 +1465,8 @@ packages:
     resolution: {integrity: sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==}
     engines: {node: '>=7.0.0'}
 
-  color-gradient-picker-vue3@3.0.2:
-    resolution: {integrity: sha512-9bRmzwBMh+FXXpfvs/sRVLLhjqYl6gjYGNiwFlgA5qRgiHQKO1CtYfFh7MDRcPves+eFvugRAuSAVJHoA8BoWQ==}
+  color-gradient-picker-vue3@3.0.6:
+    resolution: {integrity: sha512-9kv1x5qbkVLd6ebT9hCJpHgPenoqkyBIZFMmJNA2a1A10zirHALzHGE2LgvQNl5eoTbXdsONt4sudW+TgDkyBA==}
 
   color-name@1.1.3:
     resolution: {integrity: sha512-72fSenhMw2HZMTVHeCA9KCmpEIbzWiQsjN+BHcBbS9vr1mtt+vJjPdksIBNUmKAW8TFUDPJK5SUU3QhE9NEXDw==}
@@ -5477,7 +5477,7 @@ snapshots:
     dependencies:
       color-name: 1.1.4
 
-  color-gradient-picker-vue3@3.0.2:
+  color-gradient-picker-vue3@3.0.6:
     dependencies:
       lodash-es: 4.17.21
       tinycolor2: 1.6.0
