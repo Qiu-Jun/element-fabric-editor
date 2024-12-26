@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2024-07-24 17:34:22
  * @LastEditors: June
- * @LastEditTime: 2024-11-29 12:07:04
+ * @LastEditTime: 2024-12-26 14:13:40
  * @FilePath: /element-fabric-editor/vite.config.mts
  */
 
@@ -33,6 +33,10 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
           target: 'https://github.com/',
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/fontFile/, '')
+        },
+        '/api': {
+          target: 'https://www.kuaitu.cc/',
+          changeOrigin: true
         }
       }
     },
