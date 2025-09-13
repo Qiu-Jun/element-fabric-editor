@@ -101,7 +101,7 @@ const {
   fields: ['name']
 })
 
-typeValue.value = 20
+typeValue.value = ''
 
 // 替换提示
 const beforeClearTip = (info) => {

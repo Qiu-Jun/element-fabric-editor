@@ -8,12 +8,13 @@
     >
     <!-- 通用属性 -->
     <div class="bg-item">
-      <el-popover width="340px" effect="light" trigger="hover">
+      <el-popover width="340px" effect="light" trigger="hover" @show="onShow">
         <template #reference>
           <div class="color-bar" :style="{ background: baseAttr.fill }"></div>
         </template>
 
         <ColorPicker
+          v-if="showColorPicker"
           v-model:value="baseAttr.fill"
           @change="colorChange"
         ></ColorPicker>
@@ -37,15 +38,12 @@ const baseAttr: any = reactive({
   fill: ''
 })
 
-watch(
-  () => baseAttr.fill,
-  (val) => {
-    console.log('vasssssssssssssssssssssssssssssssss', val)
-  },
-  {
-    immediate: true
-  }
-)
+const showColorPicker = ref(false)
+const onShow = () => {
+  nextTick(() => {
+    showColorPicker.value = true
+  })
+}
 
 // 属性获取
 const getObjectAttr = (e?: any) => {
