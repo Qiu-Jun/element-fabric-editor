@@ -139,8 +139,6 @@ class ServersPlugin {
             typeof this.editor.updateDrawStatus === 'function' &&
             this.editor.updateDrawStatus(!!temp['overlayImage'])
           this.canvas.renderAll()
-          callback && callback()
-          this.canvas.renderAll()
           const tempObj = JSON.parse(jsonFile)
           this.canvas.toCanvasElement(1).toBlob((blob) => {
             if (blob) {
@@ -149,6 +147,7 @@ class ServersPlugin {
             templateStore.addTemplate(tempObj)
           })
           this.editor.emit('loadJson')
+          callback && callback()
         })
       })
     })
