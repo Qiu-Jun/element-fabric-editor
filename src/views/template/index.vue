@@ -91,9 +91,6 @@
           show-sizer
         />
       </el-main>
-      <!-- <el-footer class="layout-footer-center">
-        2024 &copy; 北京迅单科技有限公司 京ICP备2022034407号-2
-      </el-footer> -->
     </el-container>
   </div>
 </template>

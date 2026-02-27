@@ -47,6 +47,7 @@ const repleace = async () => {
     activeObject.setSrc(imgEl.src, () => {
       activeObject.set('scaleX', (width * scaleX) / imgEl.width)
       activeObject.set('scaleY', (height * scaleY) / imgEl.height)
+      activeObject.set('originSrc', imgEl.src)
       editorStore.canvas?.renderAll()
     })
     imgEl.remove()

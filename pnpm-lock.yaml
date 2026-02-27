@@ -21,8 +21,8 @@ importers:
         specifier: ^1.7.2
         version: 1.7.2
       color-gradient-picker-vue3:
-        specifier: ^3.1.6
-        version: 3.1.6(vue@3.4.33(typescript@5.5.4))
+        specifier: ^3.1.7
+        version: 3.1.7(vue@3.4.33(typescript@5.5.4))
       dayjs:
         specifier: ^1.11.12
         version: 1.11.12
@@ -128,7 +128,7 @@ importers:
         version: 4.0.0(vite@5.3.4(@types/node@20.14.12)(sass@1.77.8)(terser@5.34.1))(vue@3.4.33(typescript@5.5.4))
       autoprefixer:
         specifier: ^10.4.19
-        version: 10.4.19(postcss@8.4.39)
+        version: 10.4.19(postcss@5.2.18)
       cross-env:
         specifier: ~7.0.3
         version: 7.0.3
@@ -176,7 +176,7 @@ importers:
         version: 5.5.4
       unocss:
         specifier: ^0.58.0
-        version: 0.58.9(postcss@8.4.39)(rollup@4.19.0)(vite@5.3.4(@types/node@20.14.12)(sass@1.77.8)(terser@5.34.1))
+        version: 0.58.9(postcss@5.2.18)(rollup@4.19.0)(vite@5.3.4(@types/node@20.14.12)(sass@1.77.8)(terser@5.34.1))
       unplugin-auto-import:
         specifier: ^0.16.7
         version: 0.16.7(@vueuse/core@10.11.0(vue@3.4.33(typescript@5.5.4)))(rollup@4.19.0)
@@ -1469,8 +1469,8 @@ packages:
     resolution: {integrity: sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==}
     engines: {node: '>=7.0.0'}
 
-  color-gradient-picker-vue3@3.1.6:
-    resolution: {integrity: sha512-E6vjRxejZZR+5g1YD3y9rrKJW9YiMcT6v6AVUoAjkvJvNS0+adra1VDnwdAbB4W30vYB3jSO0rtgUzrx2as4cg==}
+  color-gradient-picker-vue3@3.1.7:
+    resolution: {integrity: sha512-oak6poQNJZXTivneE+OwLJYisY4JpKV62xLFLBL04XyKIJg8nRbMJAy5VIiATwFNnZZwwCMftzuh2FCDDJu9Tg==}
     engines: {node: '>=16.0.0', npm: '>=8.0.0'}
     peerDependencies:
       vue: ^3.0.0
@@ -4798,7 +4798,7 @@ snapshots:
       gzip-size: 6.0.0
       sirv: 2.0.4
 
-  '@unocss/postcss@0.58.9(postcss@8.4.39)':
+  '@unocss/postcss@0.58.9(postcss@5.2.18)':
     dependencies:
       '@unocss/config': 0.58.9
       '@unocss/core': 0.58.9
@@ -4806,7 +4806,7 @@ snapshots:
       css-tree: 2.3.1
       fast-glob: 3.3.2
       magic-string: 0.30.10
-      postcss: 8.4.39
+      postcss: 5.2.18
 
   '@unocss/preset-attributify@0.58.9':
     dependencies:
@@ -5284,14 +5284,14 @@ snapshots:
 
   atob@2.1.2: {}
 
-  autoprefixer@10.4.19(postcss@8.4.39):
+  autoprefixer@10.4.19(postcss@5.2.18):
     dependencies:
       browserslist: 4.23.2
       caniuse-lite: 1.0.30001643
       fraction.js: 4.3.7
       normalize-range: 0.1.2
       picocolors: 1.0.1
-      postcss: 8.4.39
+      postcss: 5.2.18
       postcss-value-parser: 4.2.0
 
   available-typed-arrays@1.0.7:
@@ -5499,7 +5499,7 @@ snapshots:
     dependencies:
       color-name: 1.1.4
 
-  color-gradient-picker-vue3@3.1.6(vue@3.4.33(typescript@5.5.4)):
+  color-gradient-picker-vue3@3.1.7(vue@3.4.33(typescript@5.5.4)):
     dependencies:
       html2canvas: 1.4.1
       lodash-es: 4.17.21
@@ -7870,13 +7870,13 @@ snapshots:
 
   universalify@2.0.1: {}
 
-  unocss@0.58.9(postcss@8.4.39)(rollup@4.19.0)(vite@5.3.4(@types/node@20.14.12)(sass@1.77.8)(terser@5.34.1)):
+  unocss@0.58.9(postcss@5.2.18)(rollup@4.19.0)(vite@5.3.4(@types/node@20.14.12)(sass@1.77.8)(terser@5.34.1)):
     dependencies:
       '@unocss/astro': 0.58.9(rollup@4.19.0)(vite@5.3.4(@types/node@20.14.12)(sass@1.77.8)(terser@5.34.1))
       '@unocss/cli': 0.58.9(rollup@4.19.0)
       '@unocss/core': 0.58.9
       '@unocss/extractor-arbitrary-variants': 0.58.9
-      '@unocss/postcss': 0.58.9(postcss@8.4.39)
+      '@unocss/postcss': 0.58.9(postcss@5.2.18)
       '@unocss/preset-attributify': 0.58.9
       '@unocss/preset-icons': 0.58.9
       '@unocss/preset-mini': 0.58.9

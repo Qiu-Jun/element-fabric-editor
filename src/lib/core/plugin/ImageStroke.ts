@@ -6,27 +6,30 @@
  * @FilePath: \vue-fabric-editor\packages\core\plugin\ImageStroke.ts
  * @Description: 图像描边
  */
-import { fabric } from 'fabric';
-import Editor from '../Editor';
+import { fabric } from 'fabric'
+import Editor from '../Editor'
 
-type IEditor = Editor;
+type IEditor = Editor
 type IStrokeOps = {
-  enabled: boolean;
-  width: number;
-  color: string;
-  type: 'destination-out' | 'source-over' | 'source-in';
-};
+  enabled: boolean
+  width: number
+  color: string
+  type: 'destination-out' | 'source-over' | 'source-in'
+}
 interface IExtendImage {
-  [x: string]: any;
-  originWidth?: number;
-  originHeight?: number;
-  originSrc?: string;
+  [x: string]: any
+  originWidth?: number
+  originHeight?: number
+  originSrc?: string
 }
 class ImageStrokePlugin implements IPluginTempl {
-  static pluginName = 'ImageStroke';
-  static apis = ['imageStrokeDraw'];
+  static pluginName = 'ImageStroke'
+  static apis = ['imageStrokeDraw']
   //   public options: Required<IStrokeOps>;
-  constructor(public canvas: fabric.Canvas, public editor: IEditor) {
+  constructor(
+    public canvas: fabric.Canvas,
+    public editor: IEditor
+  ) {
     // this.options = Object.assign(
     //   {
     //     enabled: false,
@@ -40,12 +43,12 @@ class ImageStrokePlugin implements IPluginTempl {
 
   private addImage(src: string): Promise<HTMLImageElement | undefined> {
     return new Promise((resolve, reject) => {
-      const img = new Image();
-      img.crossOrigin = 'anonymous';
-      img.onload = () => resolve(img);
-      img.onerror = () => reject();
-      img.src = src;
-    });
+      const img = new Image()
+      img.crossOrigin = 'anonymous'
+      img.onload = () => resolve(img)
+      img.onerror = () => reject()
+      img.src = src
+    })
   }
 
   //   imageStrokeEnable() {
@@ -60,30 +63,45 @@ class ImageStrokePlugin implements IPluginTempl {
   //     this.options[key] = val;
   //   }
 
-  async imageStrokeDraw(stroke: string, strokeWidth: number, type = 'source-over') {
-    const activeObject = this.canvas.getActiveObject() as (fabric.Image & IExtendImage) | undefined;
-    if (!activeObject) return;
+  async imageStrokeDraw(
+    stroke: string,
+    strokeWidth: number,
+    type = 'source-over'
+  ) {
+    const activeObject = this.canvas.getActiveObject() as
+      | (fabric.Image & IExtendImage)
+      | undefined
+    if (!activeObject) return
     const w = activeObject.originWidth || 0,
       h = activeObject.originHeight || 0,
-      src = activeObject?.originSrc || activeObject.getSrc();
-    let canvas: HTMLCanvasElement | null = document.createElement('canvas');
-    const ctx = canvas!.getContext('2d');
-    if (!ctx) return;
+      src = activeObject?.originSrc || activeObject.getSrc()
+    let canvas: HTMLCanvasElement | null = document.createElement('canvas')
+    const ctx = canvas!.getContext('2d')
+    if (!ctx) return
     // 描边等于0 说明关闭了开关或者不需要描边  直接从原图绘制
     if (strokeWidth === 0) {
+      const { scaleX, scaleY, width, height } = activeObject
       activeObject.setSrc(src, () => {
-        activeObject.canvas?.renderAll();
-      });
-      return;
+        activeObject.set(
+          'scaleX',
+          (width! * scaleX!) / (activeObject.width || 1)
+        )
+        activeObject.set(
+          'scaleY',
+          (height! * scaleY!) / (activeObject.height || 1)
+        )
+        activeObject.canvas?.renderAll()
+      })
+      return
     }
-    ctx.save();
-    ctx.clearRect(0, 0, canvas!.width, canvas!.height);
-    ctx.restore();
-    canvas!.width = w + strokeWidth * 2;
-    canvas!.height = h + strokeWidth * 2;
-    const dArr = [-1, -1, 0, -1, 1, -1, -1, 0, 1, 0, -1, 1, 0, 1, 1, 1];
-    const img = await this.addImage(src);
-    if (!img) return;
+    ctx.save()
+    ctx.clearRect(0, 0, canvas!.width, canvas!.height)
+    ctx.restore()
+    canvas!.width = w + strokeWidth * 2
+    canvas!.height = h + strokeWidth * 2
+    const dArr = [-1, -1, 0, -1, 1, -1, -1, 0, 1, 0, -1, 1, 0, 1, 1, 1]
+    const img = await this.addImage(src)
+    if (!img) return
     for (let i = 0; i < dArr.length; i += 2) {
       ctx.drawImage(
         img,
@@ -91,19 +109,25 @@ class ImageStrokePlugin implements IPluginTempl {
         strokeWidth + dArr[i + 1] * strokeWidth,
         w,
         h
-      );
+      )
     }
-    ctx.globalCompositeOperation = 'source-in';
-    ctx.fillStyle = stroke;
-    ctx.fillRect(0, 0, w + strokeWidth * 2, h + strokeWidth * 2);
-    ctx.globalCompositeOperation = type as any;
-    ctx.drawImage(img, strokeWidth, strokeWidth, w, h);
-    const res = canvas?.toDataURL();
-    canvas = null;
-    if (!res) return;
+    ctx.globalCompositeOperation = 'source-in'
+    ctx.fillStyle = stroke
+    ctx.fillRect(0, 0, w + strokeWidth * 2, h + strokeWidth * 2)
+    ctx.globalCompositeOperation = type as any
+    ctx.drawImage(img, strokeWidth, strokeWidth, w, h)
+    const res = canvas?.toDataURL()
+    canvas = null
+    if (!res) return
+    const { scaleX, scaleY, width, height } = activeObject
     activeObject.setSrc(res, () => {
-      activeObject.canvas?.renderAll();
-    });
+      activeObject.set('scaleX', (width! * scaleX!) / (activeObject.width || 1))
+      activeObject.set(
+        'scaleY',
+        (height! * scaleY!) / (activeObject.height || 1)
+      )
+      activeObject.canvas?.renderAll()
+    })
   }
 
   destroy() {
@@ -111,4 +135,4 @@ class ImageStrokePlugin implements IPluginTempl {
   }
 }
 
-export default ImageStrokePlugin;
+export default ImageStrokePlugin
