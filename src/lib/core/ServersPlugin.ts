@@ -11,7 +11,7 @@ import Editor from './Editor'
 import { SelectEvent, SelectMode } from './eventType'
 import { clipboardText, downFile, selectFiles } from './utils/utils'
 import { useTemplateStoreWithOut } from '@/store/modules/template'
-import { blob } from 'stream/consumers'
+import type { Template } from '@/types/template'
 type IEditor = Editor
 
 const templateStore = useTemplateStoreWithOut()
@@ -110,7 +110,11 @@ class ServersPlugin {
     })
   }
 
-  async loadJSON(jsonFile: string | object, callback?: () => void) {
+  async loadJSON(
+    jsonFile: string | object,
+    callback?: () => void,
+    options?: { addToTemplate?: boolean }
+  ) {
     // 确保元素存在id
     const temp = typeof jsonFile === 'string' ? JSON.parse(jsonFile) : jsonFile
     const textPaths: Record<'id' | 'path', any>[] = []
@@ -139,18 +143,39 @@ class ServersPlugin {
             typeof this.editor.updateDrawStatus === 'function' &&
             this.editor.updateDrawStatus(!!temp['overlayImage'])
           this.canvas.renderAll()
-          const tempObj = JSON.parse(jsonFile)
-          this.canvas.toCanvasElement(1).toBlob((blob) => {
-            if (blob) {
-              tempObj.image = URL.createObjectURL(blob)
-            }
-            templateStore.addTemplate(tempObj)
-          })
+          // 导入流程才追加页面；页面切换走 addToTemplate: false 跳过
+          if (options?.addToTemplate !== false) {
+            this.canvas.toCanvasElement(1).toBlob((blob) => {
+              templateStore.addTemplate(
+                this.normalizeTemplate(
+                  jsonFile,
+                  blob ? URL.createObjectURL(blob) : undefined
+                )
+              )
+            })
+          }
           this.editor.emit('loadJson')
           callback && callback()
         })
       })
     })
+  }
+
+  // 画布JSON归一化为页面对象,宽高从画板矩形提取
+  normalizeTemplate(jsonValue: object | string, image?: string): Template {
+    const parsed =
+      typeof jsonValue === 'string' ? JSON.parse(jsonValue) : jsonValue
+    const ws = parsed.objects?.find((o: any) => o.id === 'workspace')
+    const fallback = this.editor.getWorkspaceSize?.() || {}
+    return {
+      id: uuid(),
+      version: parsed.version || fabric.version,
+      zoom: this.editor.getScale?.() || 1,
+      width: ws?.width ?? fallback.width ?? 0,
+      height: ws?.height ?? fallback.height ?? 0,
+      json: JSON.stringify(parsed),
+      image
+    }
   }
 
   async _transform(json: any) {
@@ -297,7 +322,6 @@ class ServersPlugin {
       fontEntry[font] = item.file
     }
 
-    console.log('_getSaveSvgOption', fontEntry)
     const { left, top, width, height } = workspace as fabric.Object
     return {
       fontOption: fontEntry,

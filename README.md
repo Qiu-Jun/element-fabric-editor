@@ -91,7 +91,7 @@ pnpm commit # 使用此命令编写commit
 - [x] 首页拆分组件
 - [x] 使用store 替换 home的provide
 - [x] i18n模块化
-- [ ] 多画布
+- [x] 多画布
 - [x] 样式优化(对旧的样式，全部使用unocss)
 - [ ] history重构
 - [ ] layer图层重构

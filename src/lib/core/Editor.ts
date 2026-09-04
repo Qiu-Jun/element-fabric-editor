@@ -9,6 +9,12 @@ class Editor extends EventEmitter {
   private canvas: fabric.Canvas | null = null
   contextMenu: ContextMenu | null = null;
   [key: string]: any
+
+  constructor() {
+    super()
+    // 属性栏组件随选中动态挂载卸载,合理监听数可能超过默认上限10
+    this.setMaxListeners(50)
+  }
   private pluginMap: {
     [propName: string]: IPluginTempl
   } = {}

@@ -65,7 +65,7 @@ export default function useSelect(matchType?: Array<string>) {
     })
   })
 
-  onBeforeMount(() => {
+  onBeforeUnmount(() => {
     editorStore.editor?.off(SelectEvent.ONE, selectOne)
     editorStore.editor?.off(SelectEvent.MULTI, selectMulti)
     editorStore.editor?.off(SelectEvent.CANCEL, selectCancel)

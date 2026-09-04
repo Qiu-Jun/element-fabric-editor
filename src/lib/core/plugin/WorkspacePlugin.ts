@@ -59,7 +59,10 @@ class WorkspacePlugin implements IPluginTempl {
         workspace.set('hasControls', false)
         workspace.set('evented', false)
         if (workspace.width && workspace.height) {
-          this.setSize(workspace.width, workspace.height)
+          // 加载内容时不重置背景,底色以页面json为准
+          this.setSize(workspace.width, workspace.height, {
+            resetBackground: false
+          })
           this.editor.emit('sizeChange', workspace.width, workspace.height)
         }
       }
@@ -74,13 +77,15 @@ class WorkspacePlugin implements IPluginTempl {
     })
   }
 
-  // 初始化背景
-  _initBackground() {
-    this.canvas.backgroundImage = ''
-    this.canvas.setBackgroundColor(
-      '#ffffff',
-      this.canvas.renderAll.bind(this.canvas)
-    )
+  // 初始化背景;resetBackground为false时保留画布背景(加载页面内容时底色以json为准)
+  _initBackground(resetBackground = true) {
+    if (resetBackground) {
+      this.canvas.backgroundImage = ''
+      this.canvas.setBackgroundColor(
+        '#ffffff',
+        this.canvas.renderAll.bind(this.canvas)
+      )
+    }
     this.canvas.setWidth(this.workspaceEl.offsetWidth)
     this.canvas.setHeight(this.workspaceEl.offsetHeight)
   }
@@ -151,8 +156,12 @@ class WorkspacePlugin implements IPluginTempl {
     this.resizeObserver.observe(this.workspaceEl)
   }
 
-  setSize(width: number, height: number) {
-    this._initBackground()
+  setSize(
+    width: number,
+    height: number,
+    options?: { resetBackground?: boolean }
+  ) {
+    this._initBackground(options?.resetBackground ?? true)
     this.option.width = width
     this.option.height = height
     // 重新设置workspace

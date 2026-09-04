@@ -49,7 +49,8 @@ import Editor, {
   ImageStroke,
   ResizePlugin,
   LockPlugin,
-  AddBaseTypePlugin
+  AddBaseTypePlugin,
+  PreviewPlugin
 } from '@/lib/core'
 import EditorHeader from './components/EditorHeader/index.vue'
 import EditorContent from './components/EditorContent/index.vue'
@@ -115,6 +116,7 @@ onMounted(() => {
     .use(ResizePlugin)
     .use(LockPlugin)
     .use(AddBaseTypePlugin)
+    .use(PreviewPlugin)
 
   editorStore.setEditor(canvasEditor)
   editorStore.setCanvas(canvas)
@@ -133,7 +135,11 @@ onMounted(() => {
   templateStore.addTemplate(createTemplate())
 })
 
-onUnmounted(() => canvasEditor.destory())
+onUnmounted(() => {
+  // 释放所有页面缩略图的blob URL,防止路由切换后内存泄漏
+  templateStore.resetTemplate()
+  canvasEditor.destory()
+})
 </script>
 
 <style lang="scss" scoped>
