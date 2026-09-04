@@ -52,6 +52,22 @@
       "copy_to_clipboardstr": "CopyToClipboardString"
     },
     "ruler": "Ruler",
+    "waterMark": {
+      "title": "Watermark",
+      "text": "Text",
+      "textPlaceholder": "Enter watermark text",
+      "position": "Position",
+      "posLt": "TopLeft",
+      "posRt": "TopRight",
+      "posLb": "BottomLeft",
+      "posRb": "BottomRight",
+      "posFull": "Tile",
+      "size": "Size",
+      "color": "Color",
+      "rotate": "Rotate",
+      "apply": "Apply",
+      "clear": "Clear"
+    },
     "history": {
       "undo": "Undo",
       "redo": "Redo"

@@ -10,6 +10,7 @@ import { fabric } from 'fabric'
 import Editor from '../Editor'
 type IEditor = Editor
 import axios from 'axios'
+import type { IPluginOption } from '@/interface/Editor'
 import qs from 'qs'
 
 class MaterialPlugin implements IPluginTempl {
@@ -26,12 +27,14 @@ class MaterialPlugin implements IPluginTempl {
   constructor(
     public canvas: fabric.Canvas,
     public editor: IEditor,
-    config: { repoSrc: string }
+    // 与 IPluginClass 约定对齐：第 3 参数可选
+    config?: IPluginOption
   ) {
-    this.repoSrc = config.repoSrc
+    const repoSrc = (config?.repoSrc as string) || ''
+    this.repoSrc = repoSrc
     this.apiMapUrl = {
-      template: config.repoSrc + '/template/type.json',
-      svg: config.repoSrc + '/svg/type.json'
+      template: repoSrc + '/template/type.json',
+      svg: repoSrc + '/svg/type.json'
     }
   }
   // 获取模板分类

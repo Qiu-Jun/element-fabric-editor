@@ -50,7 +50,8 @@ import Editor, {
   ResizePlugin,
   LockPlugin,
   AddBaseTypePlugin,
-  PreviewPlugin
+  PreviewPlugin,
+  WaterMarkPlugin
 } from '@/lib/core'
 import EditorHeader from './components/EditorHeader/index.vue'
 import EditorContent from './components/EditorContent/index.vue'
@@ -117,6 +118,7 @@ onMounted(() => {
     .use(LockPlugin)
     .use(AddBaseTypePlugin)
     .use(PreviewPlugin)
+    .use(WaterMarkPlugin)
 
   editorStore.setEditor(canvasEditor)
   editorStore.setCanvas(canvas)

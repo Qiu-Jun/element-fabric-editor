@@ -12,6 +12,7 @@ import FontFaceObserver from 'fontfaceobserver'
 import Editor from '../Editor'
 import axios from 'axios'
 import { downFile } from '../utils/utils'
+import type { IPluginOption } from '@/interface/Editor'
 
 type IEditor = Editor
 
@@ -36,9 +37,10 @@ class FontPlugin implements IPluginTempl {
   constructor(
     public canvas: fabric.Canvas,
     public editor: IEditor,
-    config: { repoSrc: string }
+    // 与 IPluginClass 约定对齐：第 3 参数可选
+    config?: IPluginOption
   ) {
-    this.repoSrc = config.repoSrc
+    this.repoSrc = (config?.repoSrc as string) || ''
     this.cacheList = []
     this.tempPromise = null
     // 本地兜底字体按需注册，避免 3MB 字体文件进入首屏关键路径
