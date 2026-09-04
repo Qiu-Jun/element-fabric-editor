@@ -38,6 +38,20 @@ export const useTemplateStore = defineStore({
       useEditorStoreWithOut().editor?.capturePreview?.()
     },
 
+    // 导入内容落到当前页(替换),仅手动"+"才新增页面,避免自动追加产生多余空白页
+    applyToCurrent(template: Template) {
+      const cur = this.templateList[this.curTempIdx]
+      if (cur?.image?.startsWith('blob:')) {
+        URL.revokeObjectURL(cur.image)
+      }
+      if (cur) {
+        this.templateList[this.curTempIdx] = template
+      } else {
+        this.templateList = [template]
+        this.curTempIdx = 0
+      }
+    },
+
     // 把当前画布序列化写回当前页面
     saveCurrentPage() {
       const tpl = this.templateList[this.curTempIdx]

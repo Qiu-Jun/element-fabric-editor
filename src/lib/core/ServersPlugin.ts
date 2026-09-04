@@ -143,10 +143,10 @@ class ServersPlugin {
             typeof this.editor.updateDrawStatus === 'function' &&
             this.editor.updateDrawStatus(!!temp['overlayImage'])
           this.canvas.renderAll()
-          // 导入流程才追加页面；页面切换走 addToTemplate: false 跳过
+          // 导入内容落到当前页；页面切换走 addToTemplate: false 跳过
           if (options?.addToTemplate !== false) {
             this.canvas.toCanvasElement(1).toBlob((blob) => {
-              templateStore.addTemplate(
+              templateStore.applyToCurrent(
                 this.normalizeTemplate(
                   jsonFile,
                   blob ? URL.createObjectURL(blob) : undefined

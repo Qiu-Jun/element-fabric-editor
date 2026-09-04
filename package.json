@@ -83,6 +83,9 @@
         "@typescript-eslint",
         "postcss"
       ]
+    },
+    "patchedDependencies": {
+      "fabric@5.3.0": "patches/fabric@5.3.0.patch"
     }
   },
   "config": {
