@@ -152,7 +152,7 @@ class PolygonModifyPlugin implements IPluginTempl {
       this._ensureEvent(poly)
       if (poly.points == null) return
       const lastControl = poly.points.length - 1
-      const This = this
+      const _this = this
       poly.controls = poly.points.reduce<Record<string, PointIndexControl>>(
         function (acc, point, index) {
           acc['p' + index] = <PointIndexControl>new fabric.Control({
@@ -162,7 +162,7 @@ class PolygonModifyPlugin implements IPluginTempl {
               actionHandler
             ),
             actionName: 'modifyPolygon',
-            render: (...args) => renderIconEdge(...args, This.img)
+            render: (...args) => renderIconEdge(...args, _this.img)
           })
           Object.defineProperty(acc['p' + index], 'pointIndex', {
             value: index

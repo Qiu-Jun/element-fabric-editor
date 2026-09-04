@@ -42,7 +42,7 @@ class AlignGuidLinePlugin implements IPluginTempl {
     const ctx = canvas.getSelectionContext()
     const aligningLineOffset = 5
     const aligningLineMargin = 4
-    const This = this
+    const _this = this
     let viewportTransform: number[] | undefined
     let zoom = 1
 
@@ -323,8 +323,8 @@ class AlignGuidLinePlugin implements IPluginTempl {
     canvas.on('after:render', () => {
       ctx.save()
       ctx.beginPath()
-      ctx.lineWidth = This.defautOption.width
-      ctx.strokeStyle = This.defautOption.color
+      ctx.lineWidth = _this.defautOption.width
+      ctx.strokeStyle = _this.defautOption.color
       for (let i = verticalLines.length; i--; ) {
         drawVerticalLine(verticalLines[i])
       }
