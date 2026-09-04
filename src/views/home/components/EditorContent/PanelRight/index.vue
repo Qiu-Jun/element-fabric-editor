@@ -10,13 +10,13 @@
   <!-- 属性区域 380-->
   <section class="right-bar flex-basis-304px box-border overflow-hidden p-10px">
     <!-- 未选择元素时 展示背景设置 -->
-    <div v-show="!mixinState.mSelectMode">
+    <div v-if="!mixinState.mSelectMode">
       <SetSize />
       <BgBar />
     </div>
 
     <!-- 多选时展示 -->
-    <div v-show="mixinState.mSelectMode === 'multiple'">
+    <div v-if="mixinState.mSelectMode === 'multiple'">
       <!-- 分组 -->
       <Group />
       <!-- 组对齐方式 -->
@@ -25,7 +25,8 @@
       <CenterAlign />
     </div>
 
-    <div v-show="mixinState.mSelectMode === 'one'" class="attr-item-box">
+    <!-- 单选时按需挂载，避免 20+ 面板常驻监听选中事件 -->
+    <div v-if="mixinState.mSelectMode === 'one'" class="attr-item-box">
       <Group />
 
       <!-- 快捷操作 -->
@@ -35,7 +36,7 @@
       <CenterAlign />
       <!-- 替换图片 -->
       <ReplaceImg />
-      <!-- 图片裁剪 -->
+      <!-- 图片裁剪（内部含裁剪库，异步加载） -->
       <CropImage />
       <!-- 图片裁切 -->
       <ClipImage />
@@ -83,6 +84,11 @@ import useSelect from '@/hooks/select'
 const editorStore = useEditorStore()
 const { mixinState } = useSelect()
 const editor = computed(() => editorStore.editor)
+
+// 局部异步组件优先于全局注册，使裁剪库进入懒加载分包
+const CropImage = defineAsyncComponent(
+  () => import('@/components/CropImage/index.vue')
+)
 </script>
 
 <style lang="scss" scoped>

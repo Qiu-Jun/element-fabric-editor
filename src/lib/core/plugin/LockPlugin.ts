@@ -61,7 +61,7 @@ export default class LockPlugin implements IPluginTempl {
       ctx.restore()
     }
 
-    function unLockObject(eventData: any, transform: any): boolean {
+    function unLockObject(_eventData: any, _transform: any): boolean {
       that.unLock()
       return true
     }
@@ -218,7 +218,5 @@ export default class LockPlugin implements IPluginTempl {
     }
   }
 
-  destroy() {
-    console.log('pluginDestroy')
-  }
+  destroy() {}
 }

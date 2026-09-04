@@ -7,23 +7,26 @@
       <div class="flex-view">
         <div class="flex-item">
           <div class="left font-selector">
-            <el-select v-model="baseAttr.fontFamily" @change="changeFontFamily">
-              <el-option
-                v-for="item in fontsList"
-                :value="item.name"
-                :label="item.name"
-                :key="`font-${item.name}`"
-              >
+            <!-- 虚拟滚动下拉，避免一次性渲染上百个带预览图的选项 -->
+            <el-select-v2
+              v-model="baseAttr.fontFamily"
+              :options="fontOptions"
+              popper-class="font-select-popper"
+              @change="changeFontFamily"
+            >
+              <template #item="{ item }">
                 <div
                   class="font-item"
-                  :style="`background-image:url('${item.img}');height: 100%;background-size: 100% 100%;`"
+                  :style="
+                    item.img
+                      ? `background-image:url('${item.img}');background-size: 100% 100%;`
+                      : ''
+                  "
                 >
-                  {{ !item.img ? item : '' }}
-                  <!-- 解决无法选中问题 -->
-                  <span style="display: none">{{ item.name }}</span>
+                  {{ item.label }}
                 </div>
-              </el-option>
-            </el-select>
+              </template>
+            </el-select-v2>
           </div>
           <div class="right">
             <InputNumber
@@ -175,6 +178,14 @@ const fontsList: any = ref([])
 editorStore.editor?.getFontList().then((list: any) => {
   fontsList.value = list
 })
+// el-select-v2 需要 { value, label } 结构
+const fontOptions = computed(() =>
+  fontsList.value.map((item: any) => ({
+    value: item.name,
+    label: item.name,
+    img: item.img
+  }))
+)
 
 // 字体对齐方式
 const textAlignList = ['left', 'center', 'right', 'justify']
@@ -191,30 +202,23 @@ const getObjectAttr = (e?: any) => {
   const activeObject = editorStore.canvas?.getActiveObject()
   // 不是当前obj，跳过
   if (e && e.target && e.target !== activeObject) return
-  // @ts-ignore
-  if (activeObject && isMatchType) {
-    // @ts-ignore
-    baseAttr.fontSize = activeObject.get('fontSize')
-    // @ts-ignore
-    baseAttr.fontFamily = activeObject.get('fontFamily')
-    // @ts-ignore
-    baseAttr.lineHeight = activeObject.get('lineHeight')
-    // @ts-ignore
-    baseAttr.textAlign = activeObject.get('textAlign')
-    // @ts-ignore
-    baseAttr.underline = activeObject.get('underline')
-    // @ts-ignore
-    baseAttr.linethrough = activeObject.get('linethrough')
-    // @ts-ignore
-    baseAttr.charSpacing = activeObject.get('charSpacing')
-    // @ts-ignore
-    baseAttr.overline = activeObject.get('overline')
-    // @ts-ignore
-    baseAttr.fontStyle = activeObject.get('fontStyle')
-    // @ts-ignore
-    baseAttr.textBackgroundColor = activeObject.get('textBackgroundColor')
-    // @ts-ignore
-    baseAttr.fontWeight = activeObject.get('fontWeight')
+  if (activeObject && unref(isMatchType)) {
+    const keys = [
+      'fontSize',
+      'fontFamily',
+      'lineHeight',
+      'textAlign',
+      'underline',
+      'linethrough',
+      'charSpacing',
+      'overline',
+      'fontStyle',
+      'textBackgroundColor',
+      'fontWeight'
+    ]
+    keys.forEach((key) => {
+      baseAttr[key] = activeObject.get(key)
+    })
   }
 }
 
@@ -349,6 +353,16 @@ onBeforeUnmount(() => {
   .slider-box {
     width: calc(100% - 50px);
     @apply mb-10px;
+  }
+}
+</style>
+
+<style lang="scss">
+/* 字体下拉弹层挂在 body 下，需全局样式控制选项高度 */
+.font-select-popper {
+  .el-select-dropdown__item {
+    height: 40px;
+    line-height: 40px;
   }
 }
 </style>

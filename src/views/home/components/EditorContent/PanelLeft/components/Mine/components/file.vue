@@ -45,7 +45,7 @@
 import { Plus } from '@element-plus/icons-vue'
 import useMaterial from '@/hooks/useMaterial'
 import { useI18n } from 'vue-i18n'
-import { getUserFileTypeTree, updataTempl } from '@/api/user'
+import { getUserFileTypeTree, updateTempl } from '@/api/user'
 import { ElMessageBox, ElLoading, ElMessage } from 'element-plus'
 import { useEditorStore } from '@/store/modules/editor'
 
@@ -156,7 +156,7 @@ const transfer = async () => {
 
 const transferRequest = async () => {
   const parentId = fileTypeId.value === 'root' ? '' : fileTypeId.value
-  await updataTempl(props.itemId, {
+  await updateTempl(props.itemId, {
     data: {
       parentId: String(parentId)
     }

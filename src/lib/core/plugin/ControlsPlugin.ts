@@ -263,9 +263,7 @@ class ControlsPlugin implements IPluginTempl {
     // fabric.Textbox.prototype.controls = fabric.Object.prototype.controls;
   }
 
-  destroy() {
-    console.log('pluginDestroy')
-  }
+  destroy() {}
 }
 
 export default ControlsPlugin

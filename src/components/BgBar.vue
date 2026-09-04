@@ -83,7 +83,6 @@ function setColor(_color: string) {
   //   ?.getObjects()
   //   .find((item: any) => item.id === 'workspace')
   // workspace.set('fill', c)
-  console.log(editorStore.canvas)
   editorStore.canvas?.setBackgroundColor(
     _color,
     editorStore.canvas.renderAll.bind(editorStore.canvas)

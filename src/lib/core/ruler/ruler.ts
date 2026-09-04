@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Canvas, Point, IEvent } from 'fabric/fabric-impl'
 import { fabric } from 'fabric'
 import {
@@ -462,7 +461,6 @@ class CanvasRuler {
    */
   // private calcCalibration() {
   //   if (this.startCalibration) return;
-  //   // console.log('calcCalibration');
   //   const workspace = this.options.canvas.getObjects().find((item: any) => {
   //     return item.id === 'workspace';
   //   });

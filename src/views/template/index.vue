@@ -19,12 +19,7 @@
         </div>
 
         <div class="right">
-          <router-link
-            custom
-            v-slot="{ navigate }"
-            to="/design/editor"
-            target="_blank"
-          >
+          <router-link custom v-slot="{ navigate }" to="/">
             <el-button link @click="navigate">新建设计</el-button>
           </router-link>
 
@@ -164,7 +159,7 @@ const getTmplListHandel = async () => {
       src: getMaterialPreviewUrl(item.attributes.img)
     }))
   } catch (error) {
-    console.log(error)
+    // 错误已忽略，不影响主流程
   }
   loadingInstance.close()
 }
@@ -182,7 +177,6 @@ const toInfo = (info) => {
       tempId: info.id
     }
   })
-  console.log(href, 1111)
   // 点击事件
   window.open(href.href, '_blank')
 }

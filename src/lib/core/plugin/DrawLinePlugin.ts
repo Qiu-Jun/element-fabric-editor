@@ -159,9 +159,7 @@ class DrawLinePlugin implements IPluginTempl {
     })
   }
 
-  destroy() {
-    console.log('pluginDestroy')
-  }
+  destroy() {}
 }
 
 export default DrawLinePlugin

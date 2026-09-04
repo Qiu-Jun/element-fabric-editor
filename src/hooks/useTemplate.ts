@@ -11,8 +11,9 @@ import { fabric } from 'fabric'
 import { useEditorStoreWithOut } from '@/store/modules/editor'
 import type { Template } from '@/types/template'
 
-const editorStore = useEditorStoreWithOut()
 export function useTemplate() {
+  // 在函数内取 store，避免 import 时提前初始化
+  const editorStore = useEditorStoreWithOut()
   // 新建空白页:只保留画板矩形,尺寸与当前画板一致
   const createTemplate = (): Template => {
     const json = editorStore.editor.getJson()

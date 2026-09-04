@@ -11,10 +11,11 @@ import { useI18n } from 'vue-i18n'
 import { useEditorStoreWithOut } from '@/store/modules/editor'
 
 const { SelectMode, SelectEvent } = EventType
-const editorStore = useEditorStoreWithOut()
 
 export default function useSelect(matchType?: Array<string>) {
   const { t } = useI18n()
+  // 在函数内取 store，避免 import 时提前初始化
+  const editorStore = useEditorStoreWithOut()
 
   const state = reactive({
     mSelectMode: SelectMode.EMPTY,
@@ -28,7 +29,8 @@ export default function useSelect(matchType?: Array<string>) {
     state.mSelectMode = SelectMode.ONE
     const [item] = arr
     if (item) {
-      state.mSelectActive = [item]
+      // markRaw 避免 fabric 对象被深层代理
+      state.mSelectActive = [markRaw(item)]
       state.mSelectId = item.id
       state.mSelectOneType = item.type
       state.mSelectIds = [item.id]

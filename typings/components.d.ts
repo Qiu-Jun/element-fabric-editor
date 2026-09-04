@@ -7,7 +7,6 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    ActiveMenu: typeof import('./../src/components/ActiveMenu.vue')['default']
     Align: typeof import('./../src/components/Align.vue')['default']
     Attribute: typeof import('./../src/components/Attribute.vue')['default']
     AttributeBarcode: typeof import('./../src/components/AttributeBarcode.vue')['default']
@@ -28,7 +27,6 @@ declare module 'vue' {
     CropImage: typeof import('./../src/components/CropImage/index.vue')['default']
     CropModal: typeof import('./../src/components/CropImage/CropModal.vue')['default']
     Delete: typeof import('./../src/components/QuickOperation/components/Delete.vue')['default']
-    Download: typeof import('./../src/components/Download.vue')['default']
     Edit: typeof import('./../src/components/QuickOperation/components/Edit.vue')['default']
     ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
     ElBreadcrumbItem: typeof import('element-plus/es')['ElBreadcrumbItem']
@@ -65,6 +63,7 @@ declare module 'vue' {
     ElRow: typeof import('element-plus/es')['ElRow']
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
     ElSelect: typeof import('element-plus/es')['ElSelect']
+    ElSelectV2: typeof import('element-plus/es')['ElSelectV2']
     ElSlider: typeof import('element-plus/es')['ElSlider']
     ElSwitch: typeof import('element-plus/es')['ElSwitch']
     ElTabPane: typeof import('element-plus/es')['ElTabPane']

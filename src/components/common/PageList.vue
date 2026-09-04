@@ -101,7 +101,6 @@ const onScroll = throttle(function (options) {
   // 判断滚动到底部
   if (options.scrollTop + 2 >= poor) {
     _scrollTop.value = options.scrollTop
-    console.log('daozdaozi dafjdakfj ')
     nextPage()
   }
 }, 300)

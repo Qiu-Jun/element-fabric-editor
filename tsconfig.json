@@ -4,7 +4,7 @@
     "module": "esnext",
     "strict": true,
     "jsx": "preserve",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "esModuleInterop": true,
     "sourceMap": true,
     "skipLibCheck": true,
@@ -14,10 +14,9 @@
     "resolveJsonModule": true,
     "lib": ["esnext", "dom"],
     "types": ["node", "vite/client"],
-    "baseUrl": "./",
     "paths": {
-      "@": ["src"],
-      "@/*": ["src/*"]
+      "@": ["./src"],
+      "@/*": ["./src/*"]
     }
   },
   "exclude": ["node_modules", "dist", "**/*.js"],

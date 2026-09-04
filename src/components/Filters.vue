@@ -51,7 +51,7 @@
               {{ $t('editor.imageSetting.filters.' + item.type) }}
             </el-checkbox>
             <div v-if="item.status" class="content">
-              <div v-for="info in item.params" :key="info">
+              <div v-for="info in item.params" :key="info.key">
                 <div v-if="info.uiType === uiType.SELECT">
                   <el-radio-group
                     v-model="info.value"

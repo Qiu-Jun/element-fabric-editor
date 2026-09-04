@@ -18,7 +18,7 @@
           : 'border-transparent'
       ]"
       v-for="(item, idx) in templateList"
-      :key="idx"
+      :key="item.id"
       @click="handleChangeTemplate(idx)"
     >
       <div

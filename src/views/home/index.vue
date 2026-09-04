@@ -138,7 +138,7 @@ onMounted(() => {
 onUnmounted(() => {
   // 释放所有页面缩略图的blob URL,防止路由切换后内存泄漏
   templateStore.resetTemplate()
-  canvasEditor.destory()
+  canvasEditor.destroy()
 })
 </script>
 

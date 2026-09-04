@@ -6,7 +6,6 @@
  * @LastEditTime: 2024-12-10 14:56:56
  * @FilePath: \element-fabric-editor\src\main.ts
  */
-import '@/assets/fonts/font.css'
 import '@/styles/index.scss'
 // 自定义字体文件
 import '@/styles/reset.scss'

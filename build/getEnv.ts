@@ -6,9 +6,20 @@
  * @LastEditTime: 2024-07-24 18:21:50
  * @FilePath: /element-fabric-editor/build/getEnv.ts
  */
-import dotenv from "dotenv"
+import dotenv from 'dotenv'
 import fs from 'node:fs'
 import path from 'path'
+
+// 通用索引类型
+interface Recordable<T = any> {
+  [key: string]: T
+}
+
+// 项目环境变量结构
+interface ViteEnv {
+  APP_TITLE: string
+  [key: string]: any
+}
 
 export function isDev(mode: string): boolean {
   return mode === 'development'
@@ -45,12 +56,11 @@ export function getRootPath(...dir: string[]) {
   return path.resolve(process.cwd(), ...dir)
 }
 
-
 export function loadEnv(mode: string, envDir: string) {
   const envPath = `${envDir}/.env`
   const localEnvPath = `${envDir}/.env.${mode}`
 
-  const _loadEnv = (envPath) => {
+  const _loadEnv = (envPath: string) => {
     const env = dotenv.config({ path: envPath })
     if (env.error) {
       throw new Error(`Failed to load env from ${envPath}: ${env.error}`)

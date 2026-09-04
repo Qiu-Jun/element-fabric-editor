@@ -67,9 +67,24 @@ class Editor extends EventEmitter {
     return this
   }
 
-  destory() {
-    this.canvas = null
+  destroy() {
+    // 逆序销毁插件，释放各自注册的监听/定时器
+    Object.keys(this.pluginMap)
+      .reverse()
+      .forEach((pluginName) => {
+        try {
+          this.pluginMap[pluginName].destroy?.()
+        } catch (error) {
+          // 单个插件销毁失败不阻断整体销毁流程
+        }
+      })
+    // 解绑所有全局快捷键，避免重复进入编辑器后叠加触发
+    hotkeys.unbind()
+    // 卸载右键菜单及其 window 监听
+    this.contextMenu?.uninstall()
     this.contextMenu = null
+    this.removeAllListeners()
+    this.canvas = null
     this.pluginMap = {}
     this.customEvents = []
     this.customApis = []
@@ -111,8 +126,6 @@ class Editor extends EventEmitter {
         this.hooksEntity[hookName].tapPromise(
           plugin.pluginName + hookName,
           function () {
-            // console.log(hookName, ...arguments);
-            // eslint-disable-next-line prefer-rest-params
             const result = hook.apply(plugin, [...arguments])
             // hook 兼容非 Promise 返回值
             return result instanceof Promise ? result : Promise.resolve(result)
@@ -143,7 +156,6 @@ class Editor extends EventEmitter {
     const { apis = [] } = (pluginRunTime.constructor as any) || {}
     apis.forEach((apiName: string) => {
       this[apiName] = function () {
-        // eslint-disable-next-line prefer-rest-params
         return pluginRunTime[apiName].apply(pluginRunTime, [...arguments])
       }
     })

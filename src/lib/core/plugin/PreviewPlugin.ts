@@ -80,15 +80,19 @@ export default class PreviewPlugin implements IPluginTempl {
     if (prevImage) {
       URL.revokeObjectURL(prevImage)
     }
-    el.toBlob((blob: Blob | null) => {
-      if (!blob) return
-      const url = URL.createObjectURL(blob)
-      if (target.image !== prevImage) {
-        URL.revokeObjectURL(url)
-        return
-      }
-      target.image = url
-    })
+    try {
+      el.toBlob((blob: Blob | null) => {
+        if (!blob) return
+        const url = URL.createObjectURL(blob)
+        if (target.image !== prevImage) {
+          URL.revokeObjectURL(url)
+          return
+        }
+        target.image = url
+      })
+    } catch (error) {
+      // 画布被污染(跨域图片未带CORS)等场景截图失败,忽略且不影响主流程
+    }
   }
 
   destroy() {

@@ -1,9 +1,7 @@
-const include = [
+const include: string[] = [
   'vue',
-  'sass',
   'axios',
   'dayjs',
-  'unocss',
   'vue-router',
   'vue-i18n',
   'lodash-es',
@@ -63,18 +61,8 @@ const include = [
   'element-plus/es/components/dropdown-menu/style/css',
   'element-plus/es/components/dropdown-item/style/css',
   'element-plus/es/components/skeleton/style/css',
-  'element-plus/es/components/skeleton/style/css',
-  'element-plus/es/components/backtop/style/css',
-  'element-plus/es/components/menu/style/css',
-  'element-plus/es/components/sub-menu/style/css',
-  'element-plus/es/components/menu-item/style/css',
-  'element-plus/es/components/dropdown/style/css',
   'element-plus/es/components/tree/style/css',
-  'element-plus/es/components/dropdown-menu/style/css',
-  'element-plus/es/components/dropdown-item/style/css',
   'element-plus/es/components/badge/style/css',
-  'element-plus/es/components/breadcrumb/style/css',
-  'element-plus/es/components/breadcrumb-item/style/css',
   'element-plus/es/components/image/style/css',
   'element-plus/es/components/collapse-transition/style/css',
   'element-plus/es/components/timeline/style/css',
@@ -85,6 +73,6 @@ const include = [
   'element-plus/es/components/text/style/css'
 ]
 
-const exclude = []
+const exclude: string[] = []
 
 export { include, exclude }

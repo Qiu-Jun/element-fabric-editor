@@ -1,4 +1,4 @@
-name: NodeJS with Webpack
+name: Build and Deploy
 
 on:
   push:
@@ -24,10 +24,18 @@ jobs:
           node-version: '22'
           cache: 'pnpm'
 
-      - name: Build
+      - name: Lint
         run: |
           pnpm install
-          pnpm run build
+          pnpm run lint
+
+      # 存量类型错误较多（vendor 代码），先非阻塞展示，后续逐步清零
+      - name: Typecheck
+        run: pnpm run typecheck
+        continue-on-error: true
+
+      - name: Build
+        run: pnpm run build
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4.1.0

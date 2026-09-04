@@ -58,7 +58,7 @@
           </el-tooltip>
         </wc-waterfall>
 
-        <el-divider v-if="isDownBottm">已经到底了</el-divider>
+        <el-divider v-if="isDownBottom">已经到底了</el-divider>
       </el-scrollbar>
     </div>
   </div>
@@ -85,7 +85,7 @@ const {
   pageLoading,
   pageData,
   searchKeyWord,
-  isDownBottm,
+  isDownBottom,
   startGetList,
   nextPage,
   showScroll,
@@ -145,7 +145,7 @@ const getTemplInfo = async () => {
         loadingInstance?.close()
       )
     } catch (error) {
-      console.log(error)
+      // 错误已忽略，不影响主流程
     }
   }
 }

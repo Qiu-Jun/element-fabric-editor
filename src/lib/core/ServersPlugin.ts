@@ -14,8 +14,6 @@ import { useTemplateStoreWithOut } from '@/store/modules/template'
 import type { Template } from '@/types/template'
 type IEditor = Editor
 
-const templateStore = useTemplateStoreWithOut()
-
 function transformText(objects: any) {
   if (!objects) return
   objects.forEach((item: any) => {
@@ -110,6 +108,16 @@ class ServersPlugin {
     })
   }
 
+  // 递归给图片元素补 crossOrigin，避免画布被污染导致截图/导出失败
+  _ensureImageCrossOrigin(objects: any[]) {
+    objects?.forEach((item) => {
+      if (item.type === 'image' && !item.crossOrigin) {
+        item.crossOrigin = 'anonymous'
+      }
+      item.objects && this._ensureImageCrossOrigin(item.objects)
+    })
+  }
+
   async loadJSON(
     jsonFile: string | object,
     callback?: () => void,
@@ -126,6 +134,8 @@ class ServersPlugin {
         item.path = null
       }
     })
+    // 历史模板里的图片可能没有 crossOrigin，补上避免画布被污染
+    this._ensureImageCrossOrigin(temp.objects)
 
     // hookTransform遍历
     const tempTransform = await this._transform(temp)
@@ -146,7 +156,8 @@ class ServersPlugin {
           // 导入内容落到当前页；页面切换走 addToTemplate: false 跳过
           if (options?.addToTemplate !== false) {
             this.canvas.toCanvasElement(1).toBlob((blob) => {
-              templateStore.applyToCurrent(
+              // 在使用处获取 store，避免模块 import 时提前初始化
+              useTemplateStoreWithOut().applyToCurrent(
                 this.normalizeTemplate(
                   jsonFile,
                   blob ? URL.createObjectURL(blob) : undefined
@@ -366,9 +377,7 @@ class ServersPlugin {
     this.canvas.renderAll()
   }
 
-  destroy() {
-    console.log('pluginDestroy')
-  }
+  destroy() {}
 }
 
 export default ServersPlugin

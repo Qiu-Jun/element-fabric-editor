@@ -63,7 +63,6 @@ const getObjectAttr = (e?: any) => {
 const colorChange = (value: any) => {
   const activeObject: any = editorStore.canvas?.getActiveObjects()[0]
   if (activeObject) {
-    console.log(value)
     const { color, mode, gradientColors, degrees } = value
     if (mode === 'solid') {
       activeObject.set('fill', color)
@@ -77,7 +76,6 @@ const colorChange = (value: any) => {
         activeObject.height,
         degrees
       )
-      console.log(currentGradient)
       activeObject.set('fill', currentGradient, degrees)
       activeObject.set(angleKey, degrees)
     }
