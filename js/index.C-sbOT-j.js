@@ -1,0 +1,1 @@
+import{d as r}from"./index.C0HKbAYN.js";import{aN as o,aO as s}from"./vendor.B4BSiMeK.js";import"./vue.BuGiNv1T.js";import"./fabric.C7reU-MU.js";const t={class:"box-border p-10px"};const a=r({},[["render",function(r,a){return o(),s("div",t,"私聊定制")}]]);export{a as default};
